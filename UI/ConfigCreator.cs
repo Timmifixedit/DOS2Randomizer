@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
@@ -27,10 +28,15 @@ namespace DOS2Randomizer.UI {
 
             using var fileChooser = new SaveFileDialog {DefaultExt = ".json", AddExtension = true};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                using var file = fileChooser.OpenFile();
-                using var writer = new StreamWriter(file);
-                // @TODO serialize config and save
-                writer.Write("Hello");
+                try {
+                    using var file = fileChooser.OpenFile();
+                    using var writer = new StreamWriter(file);
+                    // @TODO serialize config and save
+                } catch (IOException exception) {
+                    MessageBox.Show("Error saving config: " + exception.Message);
+                } catch (UnauthorizedAccessException) {
+                    MessageBox.Show("Access denied for file " + fileChooser.FileName);
+                }
             }
         }
     }
