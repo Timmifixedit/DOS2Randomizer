@@ -1,4 +1,4 @@
-﻿namespace DOS2Randomizer {
+﻿namespace DOS2Randomizer.UI {
     partial class Menu {
         /// <summary>
         ///  Required designer variable.
@@ -65,6 +65,7 @@
             this.CreateConfig.TabIndex = 1;
             this.CreateConfig.Text = "Create Config";
             this.CreateConfig.UseVisualStyleBackColor = true;
+            this.CreateConfig.Click += new System.EventHandler(this.CreateConfig_Click);
             // 
             // centerLayout
             // 

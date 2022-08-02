@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DOS2Randomizer.UI;
 
 namespace DOS2Randomizer {
     static class Program {
