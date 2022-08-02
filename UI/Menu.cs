@@ -8,6 +8,8 @@ namespace DOS2Randomizer.UI {
         }
 
         private void CreateConfig_Click(object sender, EventArgs e) {
+            var configurator = new ConfigCreator {Visible = true};
+            configurator.Activate();
         }
     }
 }
