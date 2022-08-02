@@ -26,15 +26,24 @@ namespace DOS2Randomizer.UI {
         private void InitializeComponent() {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.general = new System.Windows.Forms.TabPage();
+            this.generalLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.generalSplitLayout = new System.Windows.Forms.TableLayoutPanel();
             this.SaveButton = new System.Windows.Forms.Button();
             this.ConfigNameLayout = new System.Windows.Forms.TableLayoutPanel();
             this.ConfigNameLabel = new System.Windows.Forms.Label();
             this.ConfigNameText = new System.Windows.Forms.TextBox();
+            this.nChooseKLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.n = new DOS2Randomizer.UI.NamedValue();
+            this.k = new DOS2Randomizer.UI.NamedValue();
+            this.memSlots = new DOS2Randomizer.UI.NamedValue();
             this.levelSpecific = new System.Windows.Forms.TabPage();
             this.spells = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.general.SuspendLayout();
+            this.generalLayout.SuspendLayout();
+            this.generalSplitLayout.SuspendLayout();
             this.ConfigNameLayout.SuspendLayout();
+            this.nChooseKLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -51,8 +60,7 @@ namespace DOS2Randomizer.UI {
             // 
             // general
             // 
-            this.general.Controls.Add(this.SaveButton);
-            this.general.Controls.Add(this.ConfigNameLayout);
+            this.general.Controls.Add(this.generalLayout);
             this.general.Location = new System.Drawing.Point(4, 24);
             this.general.Name = "general";
             this.general.Padding = new System.Windows.Forms.Padding(3);
@@ -61,11 +69,44 @@ namespace DOS2Randomizer.UI {
             this.general.Text = "General";
             this.general.UseVisualStyleBackColor = true;
             // 
+            // generalLayout
+            // 
+            this.generalLayout.ColumnCount = 1;
+            this.generalLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.generalLayout.Controls.Add(this.generalSplitLayout, 0, 0);
+            this.generalLayout.Controls.Add(this.nChooseKLayout, 0, 2);
+            this.generalLayout.Controls.Add(this.memSlots, 0, 1);
+            this.generalLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.generalLayout.Location = new System.Drawing.Point(3, 3);
+            this.generalLayout.Name = "generalLayout";
+            this.generalLayout.RowCount = 3;
+            this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.04348F));
+            this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.47826F));
+            this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.47826F));
+            this.generalLayout.Size = new System.Drawing.Size(786, 416);
+            this.generalLayout.TabIndex = 9;
+            // 
+            // generalSplitLayout
+            // 
+            this.generalSplitLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.generalSplitLayout.ColumnCount = 2;
+            this.generalSplitLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
+            this.generalSplitLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.generalSplitLayout.Controls.Add(this.SaveButton, 1, 0);
+            this.generalSplitLayout.Controls.Add(this.ConfigNameLayout, 0, 0);
+            this.generalSplitLayout.Location = new System.Drawing.Point(3, 3);
+            this.generalSplitLayout.Name = "generalSplitLayout";
+            this.generalSplitLayout.RowCount = 1;
+            this.generalSplitLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.generalSplitLayout.Size = new System.Drawing.Size(780, 48);
+            this.generalSplitLayout.TabIndex = 10;
+            // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(506, 162);
+            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveButton.Location = new System.Drawing.Point(560, 12);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.Size = new System.Drawing.Size(217, 23);
             this.SaveButton.TabIndex = 3;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -73,17 +114,18 @@ namespace DOS2Randomizer.UI {
             // 
             // ConfigNameLayout
             // 
+            this.ConfigNameLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ConfigNameLayout.ColumnCount = 2;
             this.ConfigNameLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.66667F));
             this.ConfigNameLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.33333F));
             this.ConfigNameLayout.Controls.Add(this.ConfigNameLabel, 0, 0);
             this.ConfigNameLayout.Controls.Add(this.ConfigNameText, 1, 0);
-            this.ConfigNameLayout.Location = new System.Drawing.Point(163, 20);
+            this.ConfigNameLayout.Location = new System.Drawing.Point(3, 11);
             this.ConfigNameLayout.Name = "ConfigNameLayout";
             this.ConfigNameLayout.RowCount = 1;
             this.ConfigNameLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ConfigNameLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.ConfigNameLayout.Size = new System.Drawing.Size(468, 25);
+            this.ConfigNameLayout.Size = new System.Drawing.Size(551, 25);
             this.ConfigNameLayout.TabIndex = 2;
             // 
             // ConfigNameLabel
@@ -92,7 +134,7 @@ namespace DOS2Randomizer.UI {
             this.ConfigNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ConfigNameLabel.Location = new System.Drawing.Point(3, 0);
             this.ConfigNameLabel.Name = "ConfigNameLabel";
-            this.ConfigNameLabel.Size = new System.Drawing.Size(189, 25);
+            this.ConfigNameLabel.Size = new System.Drawing.Size(223, 25);
             this.ConfigNameLabel.TabIndex = 1;
             this.ConfigNameLabel.Text = "Configuration Name";
             this.ConfigNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,10 +142,59 @@ namespace DOS2Randomizer.UI {
             // ConfigNameText
             // 
             this.ConfigNameText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ConfigNameText.Location = new System.Drawing.Point(198, 3);
+            this.ConfigNameText.Location = new System.Drawing.Point(232, 3);
             this.ConfigNameText.Name = "ConfigNameText";
-            this.ConfigNameText.Size = new System.Drawing.Size(267, 23);
+            this.ConfigNameText.Size = new System.Drawing.Size(316, 23);
             this.ConfigNameText.TabIndex = 0;
+            // 
+            // nChooseKLayout
+            // 
+            this.nChooseKLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.nChooseKLayout.ColumnCount = 2;
+            this.nChooseKLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.nChooseKLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.nChooseKLayout.Controls.Add(this.n, 0, 0);
+            this.nChooseKLayout.Controls.Add(this.k, 1, 0);
+            this.nChooseKLayout.Location = new System.Drawing.Point(3, 308);
+            this.nChooseKLayout.Name = "nChooseKLayout";
+            this.nChooseKLayout.RowCount = 1;
+            this.nChooseKLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.nChooseKLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.nChooseKLayout.Size = new System.Drawing.Size(780, 33);
+            this.nChooseKLayout.TabIndex = 8;
+            // 
+            // n
+            // 
+            this.n.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.n.Label = "From";
+            this.n.Location = new System.Drawing.Point(3, 3);
+            this.n.Name = "n";
+            this.n.Size = new System.Drawing.Size(384, 27);
+            this.n.SplitPercentage = 71;
+            this.n.TabIndex = 6;
+            this.n.Value = 0;
+            // 
+            // k
+            // 
+            this.k.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.k.Label = "spells choose";
+            this.k.Location = new System.Drawing.Point(393, 3);
+            this.k.Name = "k";
+            this.k.Size = new System.Drawing.Size(384, 27);
+            this.k.SplitPercentage = 71;
+            this.k.TabIndex = 7;
+            this.k.Value = 0;
+            // 
+            // memSlots
+            // 
+            this.memSlots.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.memSlots.Label = "Maximum number of memory slots";
+            this.memSlots.Location = new System.Drawing.Point(3, 131);
+            this.memSlots.Name = "memSlots";
+            this.memSlots.Size = new System.Drawing.Size(780, 26);
+            this.memSlots.SplitPercentage = 50;
+            this.memSlots.TabIndex = 5;
+            this.memSlots.Value = 0;
             // 
             // levelSpecific
             // 
@@ -134,8 +225,11 @@ namespace DOS2Randomizer.UI {
             this.Text = "Create Match Config";
             this.tabControl.ResumeLayout(false);
             this.general.ResumeLayout(false);
+            this.generalLayout.ResumeLayout(false);
+            this.generalSplitLayout.ResumeLayout(false);
             this.ConfigNameLayout.ResumeLayout(false);
             this.ConfigNameLayout.PerformLayout();
+            this.nChooseKLayout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -150,5 +244,11 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel ConfigNameLayout;
         private System.Windows.Forms.Label ConfigNameLabel;
         private System.Windows.Forms.Button SaveButton;
+        private NamedValue memSlots;
+        private NamedValue k;
+        private NamedValue n;
+        private System.Windows.Forms.TableLayoutPanel nChooseKLayout;
+        private System.Windows.Forms.TableLayoutPanel generalLayout;
+        private System.Windows.Forms.TableLayoutPanel generalSplitLayout;
     }
 }
