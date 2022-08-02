@@ -55,11 +55,11 @@ namespace DOS2Randomizer.UI {
             this.name.Size = new System.Drawing.Size(188, 15);
             this.name.TabIndex = 0;
             this.name.Text = "name";
-            this.name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.name.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // value
             // 
-            this.value.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.value.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.value.Location = new System.Drawing.Point(197, 9);
             this.value.Name = "value";
             this.value.Size = new System.Drawing.Size(72, 23);
