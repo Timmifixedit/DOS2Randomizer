@@ -158,7 +158,8 @@ namespace DOS2Randomizer.UI {
             // 
             this.spellDesignPanel1.Location = new System.Drawing.Point(3, 138);
             this.spellDesignPanel1.Name = "spellDesignPanel1";
-            this.spellDesignPanel1.Size = new System.Drawing.Size(505, 243);
+            this.spellDesignPanel1.Size = new System.Drawing.Size(574, 216);
+            this.spellDesignPanel1.Spell = null;
             this.spellDesignPanel1.TabIndex = 6;
             // 
             // SpellConfigurator

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
-using Attribute = DOS2Randomizer.DataStructures.Attribute;
 
 namespace DOS2Randomizer.UI {
     public partial class SpellDesignPanel : UserControl {
@@ -27,7 +26,10 @@ namespace DOS2Randomizer.UI {
         }
 
         private void RefreshUi() {
-
+            name.Value = _spell.Name;
+            level.Value = _spell.Level;
+            schoolBox.Value = _spell.SchoolType;
+            attributeBox.Value = _spell.Scaling;
         }
     }
 }
