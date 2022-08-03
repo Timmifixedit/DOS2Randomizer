@@ -16,7 +16,8 @@ namespace DOS2Randomizer.DataStructures {
             Warfare,
             Poly,
             Huntsman,
-            Necro
+            Necro,
+            Summoning
         }
 
         public enum Type {
@@ -29,6 +30,7 @@ namespace DOS2Randomizer.DataStructures {
         public Spell(string name, string imagePath) {
             Name = name;
             ImagePath = imagePath;
+            Level = 1;
         }
 
         public string Name { get; set; }

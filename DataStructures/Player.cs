@@ -5,6 +5,7 @@
         Finesse,
         Con,
         Mem,
-        Wit
+        Wit,
+        None
     }
 }
