@@ -19,6 +19,16 @@ namespace DOS2Randomizer.UI {
             set => this.value.Value = value;
         }
 
+        public int Max {
+            get => Convert.ToInt32(value.Maximum);
+            set => this.value.Maximum = value;
+        }
+
+        public int Min{
+            get => Convert.ToInt32(value.Minimum);
+            set => this.value.Minimum = value;
+        }
+
         public int SplitPercentage {
             get {
                 var styles = layout.ColumnStyles;
