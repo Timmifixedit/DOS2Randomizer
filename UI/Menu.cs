@@ -11,5 +11,10 @@ namespace DOS2Randomizer.UI {
             var configurator = new ConfigCreator {Visible = true};
             configurator.Activate();
         }
+
+        private void spellConfigurator_Click(object sender, EventArgs e) {
+            var configurator = new SpellConfigurator {Visible = true};
+            configurator.Activate();
+        }
     }
 }

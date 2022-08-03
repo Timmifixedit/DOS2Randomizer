@@ -27,6 +27,7 @@
             this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CreateConfig = new System.Windows.Forms.Button();
             this.centerLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.spellConfigurator = new System.Windows.Forms.Button();
             this.layoutPanel.SuspendLayout();
             this.centerLayout.SuspendLayout();
             this.SuspendLayout();
@@ -34,9 +35,9 @@
             // LoadConfig
             // 
             this.LoadConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoadConfig.Location = new System.Drawing.Point(3, 9);
+            this.LoadConfig.Location = new System.Drawing.Point(3, 10);
             this.LoadConfig.Name = "LoadConfig";
-            this.LoadConfig.Size = new System.Drawing.Size(628, 56);
+            this.LoadConfig.Size = new System.Drawing.Size(628, 42);
             this.LoadConfig.TabIndex = 0;
             this.LoadConfig.Text = "Load Config";
             this.LoadConfig.UseVisualStyleBackColor = true;
@@ -47,21 +48,23 @@
             this.layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutPanel.Controls.Add(this.CreateConfig, 0, 1);
             this.layoutPanel.Controls.Add(this.LoadConfig, 0, 0);
+            this.layoutPanel.Controls.Add(this.spellConfigurator, 0, 2);
             this.layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutPanel.Location = new System.Drawing.Point(83, 152);
+            this.layoutPanel.Location = new System.Drawing.Point(83, 131);
             this.layoutPanel.Name = "layoutPanel";
-            this.layoutPanel.RowCount = 2;
-            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.92744F));
-            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.07256F));
-            this.layoutPanel.Size = new System.Drawing.Size(634, 143);
+            this.layoutPanel.RowCount = 3;
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.layoutPanel.Size = new System.Drawing.Size(634, 186);
             this.layoutPanel.TabIndex = 1;
             // 
             // CreateConfig
             // 
             this.CreateConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreateConfig.Location = new System.Drawing.Point(3, 82);
+            this.CreateConfig.Location = new System.Drawing.Point(3, 72);
             this.CreateConfig.Name = "CreateConfig";
-            this.CreateConfig.Size = new System.Drawing.Size(628, 52);
+            this.CreateConfig.Size = new System.Drawing.Size(628, 42);
             this.CreateConfig.TabIndex = 1;
             this.CreateConfig.Text = "Create Config";
             this.CreateConfig.UseVisualStyleBackColor = true;
@@ -78,11 +81,22 @@
             this.centerLayout.Location = new System.Drawing.Point(0, 0);
             this.centerLayout.Name = "centerLayout";
             this.centerLayout.RowCount = 3;
-            this.centerLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.centerLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.centerLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.centerLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.centerLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.85715F));
+            this.centerLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.centerLayout.Size = new System.Drawing.Size(800, 450);
             this.centerLayout.TabIndex = 2;
+            // 
+            // spellConfigurator
+            // 
+            this.spellConfigurator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellConfigurator.Location = new System.Drawing.Point(3, 134);
+            this.spellConfigurator.Name = "spellConfigurator";
+            this.spellConfigurator.Size = new System.Drawing.Size(628, 42);
+            this.spellConfigurator.TabIndex = 2;
+            this.spellConfigurator.Text = "Configure Spells";
+            this.spellConfigurator.UseVisualStyleBackColor = true;
+            this.spellConfigurator.Click += new System.EventHandler(this.spellConfigurator_Click);
             // 
             // Menu
             // 
@@ -104,6 +118,7 @@
         private System.Windows.Forms.TableLayoutPanel layoutPanel;
         private System.Windows.Forms.Button CreateConfig;
         private System.Windows.Forms.TableLayoutPanel centerLayout;
+        private System.Windows.Forms.Button spellConfigurator;
     }
 }
 
