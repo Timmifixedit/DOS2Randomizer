@@ -24,24 +24,28 @@ namespace DOS2Randomizer.UI {
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
         private void InitializeComponent() {
-            this.layout = new System.Windows.Forms.FlowLayoutPanel();
+            this.layout = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // layout
             // 
-            this.layout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.layout.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layout.HideSelection = false;
             this.layout.Location = new System.Drawing.Point(0, 0);
+            this.layout.MultiSelect = false;
             this.layout.Name = "layout";
+            this.layout.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.layout.Size = new System.Drawing.Size(405, 208);
             this.layout.TabIndex = 0;
+            this.layout.UseCompatibleStateImageBehavior = false;
             // 
-            // ImageList
+            // SpellList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layout);
-            this.Name = "ImageList";
+            this.Name = "SpellList";
             this.Size = new System.Drawing.Size(405, 208);
             this.ResumeLayout(false);
 
@@ -49,6 +53,6 @@ namespace DOS2Randomizer.UI {
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel layout;
+        private System.Windows.Forms.ListView layout;
     }
 }

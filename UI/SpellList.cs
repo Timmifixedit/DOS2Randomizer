@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -24,27 +25,30 @@ namespace DOS2Randomizer.UI {
             } 
         }
 
-        private void HandleClick(int index) {
+        private void HandleSelect(int index) {   
             OnImageClick?.Invoke(_spells[index]);
         }
 
         private void RefreshImages() {
-            layout.Controls.Clear();
+            layout.Clear();
+            var images = _spells.Select(spell => Image.FromFile(spell.ImagePath)).ToArray();
+            var imageList = new ImageList{ImageSize = images[0].Size};
+            imageList.Images.AddRange(images);
+            layout.View = View.LargeIcon;
+            layout.LargeImageList = imageList;
             for (int index = 0; index < _spells.Length; ++index) {
-                var picture = new PictureBox {Image = Image.FromFile(_spells[index].ImagePath), SizeMode = PictureBoxSizeMode.AutoSize};
-                var i = index;
-                picture.Click += (sender, args) => {
-                    HandleClick(i);
-                };
-
-                layout.Controls.Add(picture);
+                layout.Items.Add(_spells[index].Name, index);
             }
-
-            layout.Refresh();
         }
 
         public SpellList() {
             InitializeComponent();
+            layout.Click += (sender, args) => HandleSelect(layout.SelectedIndices[0]);
+            layout.KeyDown += (sender, args) => {
+                if (args.KeyCode == Keys.Enter && layout.SelectedIndices.Count != 0) {
+                    HandleSelect(layout.SelectedIndices[0]);
+                }
+            };
         }
     }
 }
