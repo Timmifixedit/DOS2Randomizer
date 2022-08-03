@@ -13,7 +13,7 @@ namespace DOS2Randomizer.UI {
     public partial class SpellConfigurator : Form {
         public SpellConfigurator() {
             InitializeComponent();
-            spellList.OnImageClick += spell => MessageBox.Show(spell.Name);
+            spellList.OnImageClick += spell => { spellDesignPanel1.Spell = spell; };
         }
 
         private void import_Click(object sender, EventArgs e) {

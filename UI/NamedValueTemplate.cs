@@ -7,26 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
-    public partial class NamedValue : UserControl {
+    public partial class NamedValueTemplate : UserControl {
 
+        public TableLayoutPanel Layout => layout;
         public string Label {
             get => name.Text;
             set => name.Text = value;
-        }
-
-        public int Value {
-            get => Convert.ToInt32(value.Value);
-            set => this.value.Value = value;
-        }
-
-        public int Max {
-            get => Convert.ToInt32(value.Maximum);
-            set => this.value.Maximum = value;
-        }
-
-        public int Min{
-            get => Convert.ToInt32(value.Minimum);
-            set => this.value.Minimum = value;
         }
 
         public int SplitPercentage {
@@ -56,8 +42,7 @@ namespace DOS2Randomizer.UI {
                 (styles[0].Width, styles[1].Width) = (value, 100 - value);
             }
         }
-
-        public NamedValue() {
+        public NamedValueTemplate() {
             InitializeComponent();
         }
     }

@@ -1,6 +1,6 @@
 ﻿
 namespace DOS2Randomizer.UI {
-    partial class NamedValue {
+    partial class NamedValueTemplate {
         /// <summary> 
         /// Erforderliche Designervariable.
         /// </summary>
@@ -26,9 +26,7 @@ namespace DOS2Randomizer.UI {
         private void InitializeComponent() {
             this.layout = new System.Windows.Forms.TableLayoutPanel();
             this.name = new System.Windows.Forms.Label();
-            this.value = new System.Windows.Forms.NumericUpDown();
             this.layout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.value)).BeginInit();
             this.SuspendLayout();
             // 
             // layout
@@ -37,44 +35,33 @@ namespace DOS2Randomizer.UI {
             this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
             this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.layout.Controls.Add(this.name, 0, 0);
-            this.layout.Controls.Add(this.value, 1, 0);
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout.Location = new System.Drawing.Point(0, 0);
             this.layout.Name = "layout";
             this.layout.RowCount = 1;
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layout.Size = new System.Drawing.Size(272, 41);
-            this.layout.TabIndex = 0;
+            this.layout.Size = new System.Drawing.Size(150, 150);
+            this.layout.TabIndex = 1;
             // 
             // name
             // 
             this.name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.name.AutoSize = true;
-            this.name.Location = new System.Drawing.Point(3, 13);
+            this.name.Location = new System.Drawing.Point(3, 67);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(188, 15);
+            this.name.Size = new System.Drawing.Size(101, 15);
             this.name.TabIndex = 0;
             this.name.Text = "name";
             this.name.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // value
-            // 
-            this.value.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.value.Location = new System.Drawing.Point(197, 9);
-            this.value.Name = "value";
-            this.value.Size = new System.Drawing.Size(72, 23);
-            this.value.TabIndex = 1;
-            // 
-            // NamedValue
+            // NamedValueTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layout);
-            this.Name = "NamedValue";
-            this.Size = new System.Drawing.Size(272, 41);
+            this.Name = "NamedValueTemplate";
             this.layout.ResumeLayout(false);
             this.layout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.value)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -83,6 +70,5 @@ namespace DOS2Randomizer.UI {
 
         private System.Windows.Forms.TableLayoutPanel layout;
         private System.Windows.Forms.Label name;
-        private System.Windows.Forms.NumericUpDown value;
     }
 }

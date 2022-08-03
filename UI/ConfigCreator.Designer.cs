@@ -33,13 +33,13 @@ namespace DOS2Randomizer.UI {
             this.ConfigNameLabel = new System.Windows.Forms.Label();
             this.ConfigNameText = new System.Windows.Forms.TextBox();
             this.nChooseKLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.n = new DOS2Randomizer.UI.NamedValue();
-            this.k = new DOS2Randomizer.UI.NamedValue();
-            this.memSlots = new DOS2Randomizer.UI.NamedValue();
+            this.memSlots = new DOS2Randomizer.UI.LabeledValue();
             this.levelSpecific = new System.Windows.Forms.TabPage();
             this.levelSpecificPanel = new System.Windows.Forms.Panel();
             this.levelSpecificTable = new DOS2Randomizer.UI.LevelSpecificTable();
             this.spells = new System.Windows.Forms.TabPage();
+            this.n = new DOS2Randomizer.UI.LabeledValue();
+            this.k = new DOS2Randomizer.UI.LabeledValue();
             this.tabControl.SuspendLayout();
             this.general.SuspendLayout();
             this.generalLayout.SuspendLayout();
@@ -80,7 +80,6 @@ namespace DOS2Randomizer.UI {
             this.generalLayout.Controls.Add(this.generalSplitLayout, 0, 0);
             this.generalLayout.Controls.Add(this.nChooseKLayout, 0, 2);
             this.generalLayout.Controls.Add(this.memSlots, 0, 1);
-            this.generalLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.generalLayout.Location = new System.Drawing.Point(3, 3);
             this.generalLayout.Name = "generalLayout";
             this.generalLayout.RowCount = 3;
@@ -167,37 +166,17 @@ namespace DOS2Randomizer.UI {
             this.nChooseKLayout.Size = new System.Drawing.Size(780, 33);
             this.nChooseKLayout.TabIndex = 8;
             // 
-            // n
-            // 
-            this.n.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.n.Label = "From";
-            this.n.Location = new System.Drawing.Point(3, 3);
-            this.n.Name = "n";
-            this.n.Size = new System.Drawing.Size(384, 27);
-            this.n.SplitPercentage = 71;
-            this.n.TabIndex = 6;
-            this.n.Value = 0;
-            // 
-            // k
-            // 
-            this.k.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.k.Label = "spells choose";
-            this.k.Location = new System.Drawing.Point(393, 3);
-            this.k.Name = "k";
-            this.k.Size = new System.Drawing.Size(384, 27);
-            this.k.SplitPercentage = 71;
-            this.k.TabIndex = 7;
-            this.k.Value = 0;
-            // 
             // memSlots
             // 
             this.memSlots.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.memSlots.Label = "Maximum number of memory slots";
-            this.memSlots.Location = new System.Drawing.Point(3, 131);
+            this.memSlots.Location = new System.Drawing.Point(3, 69);
+            this.memSlots.Max = 100;
+            this.memSlots.Min = 0;
             this.memSlots.Name = "memSlots";
-            this.memSlots.Size = new System.Drawing.Size(780, 26);
+            this.memSlots.Size = new System.Drawing.Size(780, 150);
             this.memSlots.SplitPercentage = 50;
-            this.memSlots.TabIndex = 5;
+            this.memSlots.TabIndex = 11;
             this.memSlots.Value = 0;
             // 
             // levelSpecific
@@ -237,6 +216,32 @@ namespace DOS2Randomizer.UI {
             this.spells.Text = "Spells";
             this.spells.UseVisualStyleBackColor = true;
             // 
+            // n
+            // 
+            this.n.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.n.Label = "From";
+            this.n.Location = new System.Drawing.Point(237, 3);
+            this.n.Max = 100;
+            this.n.Min = 0;
+            this.n.Name = "n";
+            this.n.Size = new System.Drawing.Size(150, 27);
+            this.n.SplitPercentage = 71;
+            this.n.TabIndex = 0;
+            this.n.Value = 0;
+            // 
+            // k
+            // 
+            this.k.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.k.Label = "spells choose";
+            this.k.Location = new System.Drawing.Point(393, 3);
+            this.k.Max = 100;
+            this.k.Min = 0;
+            this.k.Name = "k";
+            this.k.Size = new System.Drawing.Size(150, 27);
+            this.k.SplitPercentage = 71;
+            this.k.TabIndex = 1;
+            this.k.Value = 0;
+            // 
             // ConfigCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -268,13 +273,13 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel ConfigNameLayout;
         private System.Windows.Forms.Label ConfigNameLabel;
         private System.Windows.Forms.Button SaveButton;
-        private NamedValue memSlots;
-        private NamedValue k;
-        private NamedValue n;
         private System.Windows.Forms.TableLayoutPanel nChooseKLayout;
         private System.Windows.Forms.TableLayoutPanel generalLayout;
         private System.Windows.Forms.TableLayoutPanel generalSplitLayout;
         private LevelSpecificTable levelSpecificTable;
         private System.Windows.Forms.Panel levelSpecificPanel;
+        private LabeledValue memSlots;
+        private LabeledValue n;
+        private LabeledValue k;
     }
 }
