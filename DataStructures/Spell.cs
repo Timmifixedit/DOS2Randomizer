@@ -4,14 +4,41 @@ using System.IO;
 using System.Text;
 
 namespace DOS2Randomizer.DataStructures {
+
     public class Spell {
+
+        public enum School {
+            Aero,
+            Hydro,
+            Pyro,
+            Geo,
+            Scoundrel,
+            Warfare,
+            Poly,
+            Huntsman,
+            Necro
+        }
+
+        public enum Type {
+            Util,
+            Dmg,
+            Cc,
+            Heal
+        }
 
         public Spell(string name, string imagePath) {
             Name = name;
             ImagePath = imagePath;
         }
-        public string Name { get; }
+
+        public string Name { get; set; }
         public string ImagePath { get; }
+        public int Level { get; set; }
+        public Spell[] Dependencies { get; set; }
+        public School SchoolType { get; set; }
+        public Type[] Types { get; set; }
+        public Attribute Scaling { get; set; }
+
 
         // @TODO
     }
