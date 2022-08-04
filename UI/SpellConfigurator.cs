@@ -23,8 +23,8 @@ namespace DOS2Randomizer.UI {
             if (fileChooser.ShowDialog() == DialogResult.OK) {
                 Spell[] spells = null;
                 try {
-                    var file = fileChooser.OpenFile();
-                    var reader = new StreamReader(file);
+                    using var file = fileChooser.OpenFile();
+                    using var reader = new StreamReader(file);
                     spells = JsonConvert.DeserializeObject<Spell[]>(reader.ReadToEnd());
                 } catch (JsonException) {
                     MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileChooser.FileName));
