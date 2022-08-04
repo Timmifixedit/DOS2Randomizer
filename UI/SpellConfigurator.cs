@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using Newtonsoft.Json;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace DOS2Randomizer.UI {
     public partial class SpellConfigurator : Form {
@@ -33,6 +35,25 @@ namespace DOS2Randomizer.UI {
 
         private void previous_Click(object sender, EventArgs e) {
             spellList.SelectPrevious();
+        }
+
+        private void save_Click(object sender, EventArgs e) {
+            if (spellList.Spells is null) {
+                MessageBox.Show(Resources.ErrorMessages.NoSpells);
+                return;
+            }
+
+            using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = ".json"};
+            if (fileChooser.ShowDialog() == DialogResult.OK) {
+                try {
+                    using var file = fileChooser.OpenFile();
+                    using var writer = new StreamWriter(file);
+                    var json = JsonConvert.SerializeObject(spellList.Spells);
+                    writer.Write(json);
+                } catch (IOException exception) {
+                    MessageBox.Show(Resources.ErrorMessages.SaveError + exception.Message);
+                }
+            }
         }
     }
 }

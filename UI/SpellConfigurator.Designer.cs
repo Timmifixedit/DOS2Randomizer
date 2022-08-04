@@ -82,6 +82,7 @@ namespace DOS2Randomizer.UI {
             this.save.TabIndex = 3;
             this.save.Text = "Save";
             this.save.UseVisualStyleBackColor = true;
+            this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // spellList
             // 
