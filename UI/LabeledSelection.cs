@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    class LabeledSelection<T> : NamedValueTemplate<T[]> {
+    class LabeledSelection<T> : NamedValueTemplate<IEnumerable<T>> {
         private CheckedListBox _listBox;
-        private T[] _items;
+        private IEnumerable<T> _items;
 
-        public override T[] Value {
+        public override IEnumerable<T> Value {
             get {
-                T[] ret = new T[_listBox.CheckedItems.Count];
-                int index = 0;
-                foreach (var checkedItem in _listBox.CheckedItems) {
-                    ret[index++] = (T) checkedItem;
+                var ret = new List<T>();
+                foreach (T checkedItem in _listBox.CheckedItems) {
+                    ret.Add(checkedItem);
                 }
 
                 return ret;
@@ -30,7 +31,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public T[] Data {
+        public IEnumerable<T> Data {
             get => _items;
             set {
                 _items = value;
@@ -39,25 +40,24 @@ namespace DOS2Randomizer.UI {
         }
 
         private void HandleCheck(ItemCheckEventArgs e) {
-            var checkedItems = new List<T>();
-            foreach (T item in _listBox.CheckedItems) {
-                checkedItems.Add(item);
+            if (OnValueChanged == null || OnValueChanged.GetInvocationList().Length == 0) {
+                return;
             }
 
+            var checkedItems = _listBox.CheckedItems.Cast<T>().ToList();
             if (e.NewValue == CheckState.Checked) {
                 checkedItems.Add((T) _listBox.Items[e.Index]);
             } else {
                 checkedItems.Remove((T) _listBox.Items[e.Index]);
             }
 
-            OnValueChanged?.Invoke(checkedItems.ToArray());
+            OnValueChanged(checkedItems.ToArray());
         }
 
         public LabeledSelection() {
             _listBox = new CheckedListBox {CheckOnClick = true, Dock = DockStyle.Fill};
             _listBox.ItemCheck += (sender, args) => HandleCheck(args);
-
-                LayoutPanel.Controls.Add(_listBox, 1, 0);
+            LayoutPanel.Controls.Add(_listBox, 1, 0);
         }
     }
 
