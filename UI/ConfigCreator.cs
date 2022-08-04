@@ -33,7 +33,7 @@ namespace DOS2Randomizer.UI {
                     using var writer = new StreamWriter(file);
                     // @TODO serialize config and save
                 } catch (IOException exception) {
-                    MessageBox.Show("Error saving config: " + exception.Message);
+                    MessageBox.Show(Resources.ErrorMessages.SaveError + exception.Message);
                 } catch (UnauthorizedAccessException) {
                     MessageBox.Show("Access denied for file " + fileChooser.FileName);
                 }
