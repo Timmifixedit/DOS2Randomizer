@@ -13,7 +13,7 @@ namespace DOS2Randomizer.UI {
     public partial class SpellConfigurator : Form {
         public SpellConfigurator() {
             InitializeComponent();
-            spellList.OnImageClick += spell => { spellDesignPanel1.Spell = spell; };
+            spellList.OnImageClick += spell => { spellDesignPanel.Spell = spell; };
         }
 
         private void import_Click(object sender, EventArgs e) {
@@ -23,6 +23,7 @@ namespace DOS2Randomizer.UI {
                 System.Diagnostics.Debug.WriteLine("Found the following png files");
                 var spells = files.Select(imageFile => new Spell("<unknown>", imageFile)).ToArray();
                 spellList.Spells = spells;
+                spellDesignPanel.AllSpells = spells;
             }
         }
     }

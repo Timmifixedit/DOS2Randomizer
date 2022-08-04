@@ -33,7 +33,7 @@ namespace DOS2Randomizer.UI {
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.spellDesignPanel1 = new DOS2Randomizer.UI.SpellDesignPanel();
+            this.spellDesignPanel = new DOS2Randomizer.UI.SpellDesignPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -144,7 +144,7 @@ namespace DOS2Randomizer.UI {
             this.mainLayout.ColumnCount = 1;
             this.mainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.mainLayout.Controls.Add(this.tableLayoutPanel1, 0, 0);
-            this.mainLayout.Controls.Add(this.spellDesignPanel1, 0, 1);
+            this.mainLayout.Controls.Add(this.spellDesignPanel, 0, 1);
             this.mainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainLayout.Location = new System.Drawing.Point(0, 0);
             this.mainLayout.Name = "mainLayout";
@@ -154,13 +154,14 @@ namespace DOS2Randomizer.UI {
             this.mainLayout.Size = new System.Drawing.Size(800, 450);
             this.mainLayout.TabIndex = 6;
             // 
-            // spellDesignPanel1
+            // spellDesignPanel
             // 
-            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 138);
-            this.spellDesignPanel1.Name = "spellDesignPanel1";
-            this.spellDesignPanel1.Size = new System.Drawing.Size(574, 216);
-            this.spellDesignPanel1.Spell = null;
-            this.spellDesignPanel1.TabIndex = 6;
+            this.spellDesignPanel.AllSpells = null;
+            this.spellDesignPanel.Location = new System.Drawing.Point(3, 138);
+            this.spellDesignPanel.Name = "spellDesignPanel";
+            this.spellDesignPanel.Size = new System.Drawing.Size(440, 234);
+            this.spellDesignPanel.Spell = null;
+            this.spellDesignPanel.TabIndex = 6;
             // 
             // SpellConfigurator
             // 
@@ -189,6 +190,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel mainLayout;
-        private SpellDesignPanel spellDesignPanel1;
+        private SpellDesignPanel spellDesignPanel;
     }
 }
