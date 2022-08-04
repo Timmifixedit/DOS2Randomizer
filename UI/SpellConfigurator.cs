@@ -19,7 +19,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void import_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog();
+            using var fileChooser = new OpenFileDialog{Filter = "json files (*.json) | *.json"};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
                 Spell[] spells = null;
                 try {
@@ -66,7 +66,6 @@ namespace DOS2Randomizer.UI {
                     System.Diagnostics.Debug.WriteLine(file);
                 }
 
-                System.Diagnostics.Debug.WriteLine(files.ToString());
                 var spells = files.Select(imageFile => new Spell("<unknown>", imageFile)).ToArray();
                 spellList.Spells = spells;
                 spellDesignPanel.AllSpells = spells;
