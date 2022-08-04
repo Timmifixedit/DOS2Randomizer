@@ -1,6 +1,6 @@
 ﻿
 namespace DOS2Randomizer.UI {
-    partial class NamedValueTemplate {
+    partial class NamedValueTemplate<T> {
         /// <summary> 
         /// Erforderliche Designervariable.
         /// </summary>

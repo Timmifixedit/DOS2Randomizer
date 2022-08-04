@@ -13,10 +13,21 @@ namespace DOS2Randomizer.UI {
         private Spell _spell;
         public SpellDesignPanel() {
             InitializeComponent();
-            name.OnValueChanged += value => UpdateSpell();
-            level.OnValueChanged += value => UpdateSpell();
-            schoolBox.OnValueChanged += value => UpdateSpell();
-            attributeBox.OnValueChanged += value => UpdateSpell();
+            SubscribeToControls();
+        }
+
+        private void SubscribeToControls() {
+            name.OnValueChanged = value => UpdateSpell();
+            level.OnValueChanged = value => UpdateSpell();
+            schoolBox.OnValueChanged = value => UpdateSpell();
+            attributeBox.OnValueChanged = value => UpdateSpell();
+        }
+
+        private void UnsubscribeFromControls() {
+            level.OnValueChanged = null;
+            name.OnValueChanged = null;
+            schoolBox.OnValueChanged = null;
+            attributeBox.OnValueChanged = null;
         }
 
         private void UpdateSpell() {
@@ -35,7 +46,9 @@ namespace DOS2Randomizer.UI {
             set {
                 _spell = value;
                 if (_spell != null) {
+                    UnsubscribeFromControls();
                     RefreshUi();
+                    SubscribeToControls();
                 }
             }
         }

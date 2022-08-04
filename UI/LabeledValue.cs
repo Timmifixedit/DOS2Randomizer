@@ -7,12 +7,11 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
-    public partial class LabeledValue : NamedValueTemplate {
+    public partial class LabeledValue : NamedValueTemplate<int> {
 
         private NumericUpDown _val;
 
-        public ValueChangedEvent<int> OnValueChanged;
-        public int Value {
+        public override int Value {
             get => Convert.ToInt32(_val.Value);
             set => _val.Value = value;
         }
@@ -27,15 +26,11 @@ namespace DOS2Randomizer.UI {
             set => _val.Minimum = value;
         }
 
-        private void HandelValueChanged() {
-            OnValueChanged?.Invoke(Value);
-        }
-
         public LabeledValue() {
             InitializeComponent();
             _val = new NumericUpDown{Anchor = AnchorStyles.Left}; 
-            Layout.Controls.Add(_val, 1, 0);
-            _val.ValueChanged += (sender, args) => HandelValueChanged();
+            LayoutPanel.Controls.Add(_val, 1, 0);
+            _val.ValueChanged += (sender, args) => HandleValueChanged();
         }
     }
 }

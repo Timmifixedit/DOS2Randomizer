@@ -7,17 +7,11 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
-    public partial class LabeledString : NamedValueTemplate {
+    public partial class LabeledString : NamedValueTemplate<string> {
 
         private TextBox _text;
 
-        public ValueChangedEvent<string> OnValueChanged;
-
-        private void HandleValueChanged() {
-            OnValueChanged?.Invoke(Value);
-        }
-
-        public string Value {
+        public override string Value {
             get => _text.Text;
             set => _text.Text = value;
         }
@@ -25,7 +19,7 @@ namespace DOS2Randomizer.UI {
         public LabeledString() {
             InitializeComponent();
             _text = new TextBox {Anchor = (AnchorStyles.Left | AnchorStyles.Right)};
-            Layout.Controls.Add(_text, 1, 0);
+            LayoutPanel.Controls.Add(_text, 1, 0);
             _text.TextChanged += (sender, args) => HandleValueChanged();
         }
     }
