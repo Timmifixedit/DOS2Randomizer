@@ -7,19 +7,19 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    class LabeledSelection<T> : NamedValueTemplate<IEnumerable<T>> {
+    class LabeledSelection<T> : NamedValueTemplate<T[]> {
         private CheckedListBox _listBox;
-        private IEnumerable<T> _items;
+        private T[] _items;
         private string _displayMember;
 
-        public override IEnumerable<T> Value {
+        public override T[] Value {
             get {
                 var ret = new List<T>();
                 foreach (T checkedItem in _listBox.CheckedItems) {
                     ret.Add(checkedItem);
                 }
 
-                return ret;
+                return ret.ToArray();
             }
             set {
                 if (value is null) {
@@ -32,7 +32,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public IEnumerable<T> Data {
+        public T[] Data {
             get => _items;
             set {
                 _items = value;
