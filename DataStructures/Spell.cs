@@ -25,7 +25,8 @@ namespace DOS2Randomizer.DataStructures {
             Util,
             Dmg,
             Cc,
-            Heal
+            Heal,
+            BuffDebuff
         }
 
         public Spell(string name, string imagePath) {
