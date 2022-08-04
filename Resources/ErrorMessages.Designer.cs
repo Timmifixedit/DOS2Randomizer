@@ -70,6 +70,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid values in config:  ähnelt.
+        /// </summary>
+        internal static string InvalidConfigValues {
+            get {
+                return ResourceManager.GetString("InvalidConfigValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Failed to read config file &apos;{0}&apos; ähnelt.
         /// </summary>
         internal static string JsonParseFailed {

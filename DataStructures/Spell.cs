@@ -33,11 +33,12 @@ namespace DOS2Randomizer.DataStructures {
             Name = name;
             ImagePath = imagePath;
             Level = 1;
+            MemorySlots = 1;
         }
         
         [JsonConstructor]
         public Spell(string name, string imagePath, int level, Spell[] dependencies, School schoolType, Type[] types,
-            Attribute scaling, int memorySlots) {
+            Attribute scaling, int memorySlots, int loadoutCost) {
             Name = name;
             ImagePath = imagePath;
             Level = level;
@@ -46,6 +47,7 @@ namespace DOS2Randomizer.DataStructures {
             Types = types;
             Scaling = scaling;
             MemorySlots = memorySlots;
+            LoadoutCost = loadoutCost;
         }
 
         public string Name { get; set; }
@@ -56,5 +58,6 @@ namespace DOS2Randomizer.DataStructures {
         public Type[] Types { get; set; }
         public Attribute Scaling { get; set; }
         public int MemorySlots { get; set; }
+        public int LoadoutCost{ get; set; }
     }
 }

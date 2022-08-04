@@ -34,6 +34,7 @@ namespace DOS2Randomizer.UI {
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.memSlots = new DOS2Randomizer.UI.LabeledValue();
             this.flowLayoutSelections = new System.Windows.Forms.FlowLayoutPanel();
+            this.cost = new DOS2Randomizer.UI.LabeledValue();
             this.mainLayout.SuspendLayout();
             this.flowLayout.SuspendLayout();
             this.flowLayoutSelections.SuspendLayout();
@@ -127,6 +128,7 @@ namespace DOS2Randomizer.UI {
             this.flowLayout.Controls.Add(this.schoolBox);
             this.flowLayout.Controls.Add(this.attributeBox);
             this.flowLayout.Controls.Add(this.memSlots);
+            this.flowLayout.Controls.Add(this.cost);
             this.flowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayout.Location = new System.Drawing.Point(3, 3);
             this.flowLayout.Name = "flowLayout";
@@ -155,6 +157,18 @@ namespace DOS2Randomizer.UI {
             this.flowLayoutSelections.Size = new System.Drawing.Size(402, 212);
             this.flowLayoutSelections.TabIndex = 1;
             // 
+            // cost
+            // 
+            this.cost.Label = "Cost in loadout";
+            this.cost.Location = new System.Drawing.Point(3, 183);
+            this.cost.Max = 100;
+            this.cost.Min = 0;
+            this.cost.Name = "cost";
+            this.cost.Size = new System.Drawing.Size(191, 30);
+            this.cost.SplitPercentage = 50;
+            this.cost.TabIndex = 5;
+            this.cost.Value = 0;
+            // 
             // SpellDesignPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -181,5 +195,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.FlowLayoutPanel flowLayout;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutSelections;
         private LabeledValue memSlots;
+        private LabeledValue cost;
     }
 }

@@ -54,6 +54,11 @@ namespace DOS2Randomizer.UI {
                     _spell.MemorySlots = value;
                 }
             };
+            cost.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.LoadoutCost = value;
+                }
+            };
         }
 
         private void UnsubscribeFromControls() {
@@ -64,6 +69,7 @@ namespace DOS2Randomizer.UI {
             typeSelection.OnValueChanged = null;
             dependencies.OnValueChanged = null;
             memSlots.OnValueChanged = null;
+            cost.OnValueChanged = null;
         }
 
         public Spell Spell {
@@ -87,13 +93,18 @@ namespace DOS2Randomizer.UI {
         }
 
         private void RefreshUi() {
-            name.Value = _spell.Name;
-            level.Value = _spell.Level;
-            schoolBox.Value = _spell.SchoolType;
-            attributeBox.Value = _spell.Scaling;
-            typeSelection.Value = _spell.Types;
-            dependencies.Value = _spell.Dependencies;
-            memSlots.Value = _spell.MemorySlots;
+            try {
+                name.Value = _spell.Name;
+                level.Value = _spell.Level;
+                schoolBox.Value = _spell.SchoolType;
+                attributeBox.Value = _spell.Scaling;
+                typeSelection.Value = _spell.Types;
+                dependencies.Value = _spell.Dependencies;
+                memSlots.Value = _spell.MemorySlots;
+                cost.Value = _spell.LoadoutCost;
+            } catch (ArgumentException e) {
+                MessageBox.Show(Resources.ErrorMessages.InvalidConfigValues + e.Message);
+            }
         }
     }
 }
