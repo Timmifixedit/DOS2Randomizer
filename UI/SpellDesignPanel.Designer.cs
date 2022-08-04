@@ -32,6 +32,7 @@ namespace DOS2Randomizer.UI {
             this.dependencies = new DOS2Randomizer.UI.LabeledSpellSelection();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.memSlots = new DOS2Randomizer.UI.LabeledValue();
             this.flowLayoutSelections = new System.Windows.Forms.FlowLayoutPanel();
             this.mainLayout.SuspendLayout();
             this.flowLayout.SuspendLayout();
@@ -41,11 +42,11 @@ namespace DOS2Randomizer.UI {
             // level
             // 
             this.level.Label = "Level";
-            this.level.Location = new System.Drawing.Point(3, 51);
+            this.level.Location = new System.Drawing.Point(3, 39);
             this.level.Max = 20;
             this.level.Min = 1;
             this.level.Name = "level";
-            this.level.Size = new System.Drawing.Size(191, 42);
+            this.level.Size = new System.Drawing.Size(191, 30);
             this.level.SplitPercentage = 50;
             this.level.TabIndex = 0;
             this.level.Value = 1;
@@ -55,7 +56,7 @@ namespace DOS2Randomizer.UI {
             this.name.Label = "Spell name";
             this.name.Location = new System.Drawing.Point(3, 3);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(191, 42);
+            this.name.Size = new System.Drawing.Size(191, 30);
             this.name.SplitPercentage = 40;
             this.name.TabIndex = 1;
             this.name.Value = "";
@@ -63,9 +64,9 @@ namespace DOS2Randomizer.UI {
             // schoolBox
             // 
             this.schoolBox.Label = "School";
-            this.schoolBox.Location = new System.Drawing.Point(3, 99);
+            this.schoolBox.Location = new System.Drawing.Point(3, 75);
             this.schoolBox.Name = "schoolBox";
-            this.schoolBox.Size = new System.Drawing.Size(191, 26);
+            this.schoolBox.Size = new System.Drawing.Size(191, 30);
             this.schoolBox.SplitPercentage = 50;
             this.schoolBox.TabIndex = 2;
             this.schoolBox.Value = DOS2Randomizer.DataStructures.Spell.School.Aero;
@@ -73,9 +74,9 @@ namespace DOS2Randomizer.UI {
             // attributeBox
             // 
             this.attributeBox.Label = "Scales with";
-            this.attributeBox.Location = new System.Drawing.Point(3, 131);
+            this.attributeBox.Location = new System.Drawing.Point(3, 111);
             this.attributeBox.Name = "attributeBox";
-            this.attributeBox.Size = new System.Drawing.Size(191, 33);
+            this.attributeBox.Size = new System.Drawing.Size(191, 30);
             this.attributeBox.SplitPercentage = 50;
             this.attributeBox.TabIndex = 3;
             this.attributeBox.Value = DOS2Randomizer.DataStructures.Attribute.Strength;
@@ -125,11 +126,24 @@ namespace DOS2Randomizer.UI {
             this.flowLayout.Controls.Add(this.level);
             this.flowLayout.Controls.Add(this.schoolBox);
             this.flowLayout.Controls.Add(this.attributeBox);
+            this.flowLayout.Controls.Add(this.memSlots);
             this.flowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayout.Location = new System.Drawing.Point(3, 3);
             this.flowLayout.Name = "flowLayout";
             this.flowLayout.Size = new System.Drawing.Size(285, 212);
             this.flowLayout.TabIndex = 0;
+            // 
+            // memSlots
+            // 
+            this.memSlots.Label = "Memory Slots";
+            this.memSlots.Location = new System.Drawing.Point(3, 147);
+            this.memSlots.Max = 3;
+            this.memSlots.Min = 1;
+            this.memSlots.Name = "memSlots";
+            this.memSlots.Size = new System.Drawing.Size(191, 30);
+            this.memSlots.SplitPercentage = 50;
+            this.memSlots.TabIndex = 4;
+            this.memSlots.Value = 1;
             // 
             // flowLayoutSelections
             // 
@@ -166,5 +180,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel mainLayout;
         private System.Windows.Forms.FlowLayoutPanel flowLayout;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutSelections;
+        private LabeledValue memSlots;
     }
 }

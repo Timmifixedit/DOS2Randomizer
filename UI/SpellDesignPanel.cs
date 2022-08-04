@@ -49,6 +49,11 @@ namespace DOS2Randomizer.UI {
                     _spell.Dependencies = value;
                 }
             };
+            memSlots.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.MemorySlots = value;
+                }
+            };
         }
 
         private void UnsubscribeFromControls() {
@@ -58,6 +63,7 @@ namespace DOS2Randomizer.UI {
             attributeBox.OnValueChanged = null;
             typeSelection.OnValueChanged = null;
             dependencies.OnValueChanged = null;
+            memSlots.OnValueChanged = null;
         }
 
         public Spell Spell {
@@ -87,6 +93,7 @@ namespace DOS2Randomizer.UI {
             attributeBox.Value = _spell.Scaling;
             typeSelection.Value = _spell.Types;
             dependencies.Value = _spell.Dependencies;
+            memSlots.Value = _spell.MemorySlots;
         }
     }
 }
