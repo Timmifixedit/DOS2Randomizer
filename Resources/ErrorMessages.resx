@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FileOpenFailed" xml:space="preserve">
+    <value>Failed to open file ''{0}'</value>
+  </data>
+  <data name="JsonParseFailed" xml:space="preserve">
+    <value>Failed to read config file '{0}'</value>
+  </data>
   <data name="NoSpells" xml:space="preserve">
     <value>No spells are loaded.</value>
   </data>

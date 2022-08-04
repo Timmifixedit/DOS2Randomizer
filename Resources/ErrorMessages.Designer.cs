@@ -61,6 +61,24 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Failed to open file &apos;&apos;{0}&apos; ähnelt.
+        /// </summary>
+        internal static string FileOpenFailed {
+            get {
+                return ResourceManager.GetString("FileOpenFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Failed to read config file &apos;{0}&apos; ähnelt.
+        /// </summary>
+        internal static string JsonParseFailed {
+            get {
+                return ResourceManager.GetString("JsonParseFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No spells are loaded. ähnelt.
         /// </summary>
         internal static string NoSpells {
