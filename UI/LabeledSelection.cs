@@ -13,22 +13,18 @@ namespace DOS2Randomizer.UI {
         private string _displayMember;
 
         public override T[] Value {
-            get {
-                var ret = new List<T>();
-                foreach (T checkedItem in _listBox.CheckedItems) {
-                    ret.Add(checkedItem);
-                }
-
-                return ret.ToArray();
-            }
+            get => _listBox.CheckedItems.Cast<T>().ToArray();
             set {
                 if (value is null) {
-                    return;
+                    for (int i = 0; i < _listBox.Items.Count; i++) {
+                        _listBox.SetItemChecked(i, false);
+                    }
+                } else {
+                    foreach (var val in value) {
+                        _listBox.SetItemChecked(_listBox.Items.IndexOf(val), true);
+                    }
                 }
 
-                foreach (var val in value) {
-                    _listBox.SetItemChecked(_listBox.Items.IndexOf(val), true);
-                }
             }
         }
 
