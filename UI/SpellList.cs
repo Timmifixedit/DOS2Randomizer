@@ -51,6 +51,10 @@ namespace DOS2Randomizer.UI {
 
         private void RefreshImages() {
             layout.Clear();
+            if (_spells.Length == 0) {
+                return;
+            }
+
             var images = _spells.Select(spell => Image.FromFile(spell.ImagePath)).ToArray();
             var imageList = new ImageList{ImageSize = images[0].Size};
             imageList.Images.AddRange(images);
