@@ -16,6 +16,20 @@ namespace DOS2Randomizer.UI {
         public ImageClickEvent OnImageClick;
         private int? _lastIndex;
 
+        public void SelectNext() {
+            if (_lastIndex.HasValue && _lastIndex.Value < layout.Items.Count - 1) {
+                layout.Items[_lastIndex.Value + 1].Selected = true;
+                HandleSelect(_lastIndex.Value + 1);
+            }
+        }
+
+        public void SelectPrevious() {
+            if (_lastIndex.HasValue && _lastIndex.Value > 0) {
+                layout.Items[_lastIndex.Value - 1].Selected = true;
+                HandleSelect(_lastIndex.Value - 1);
+            }
+        }
+
         public DataStructures.Spell[] Spells {
             get => _spells;
             set {

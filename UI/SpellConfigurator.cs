@@ -26,5 +26,13 @@ namespace DOS2Randomizer.UI {
                 spellDesignPanel.AllSpells = spells;
             }
         }
+
+        private void next_Click(object sender, EventArgs e) {
+            spellList.SelectNext();
+        }
+
+        private void previous_Click(object sender, EventArgs e) {
+            spellList.SelectPrevious();
+        }
     }
 }

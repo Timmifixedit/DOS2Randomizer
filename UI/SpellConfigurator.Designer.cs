@@ -60,6 +60,7 @@ namespace DOS2Randomizer.UI {
             this.previous.TabIndex = 1;
             this.previous.Text = "Previous";
             this.previous.UseVisualStyleBackColor = true;
+            this.previous.Click += new System.EventHandler(this.previous_Click);
             // 
             // next
             // 
@@ -70,6 +71,7 @@ namespace DOS2Randomizer.UI {
             this.next.TabIndex = 2;
             this.next.Text = "Next";
             this.next.UseVisualStyleBackColor = true;
+            this.next.Click += new System.EventHandler(this.next_Click);
             // 
             // save
             // 
