@@ -19,12 +19,36 @@ namespace DOS2Randomizer.UI {
         }
 
         private void SubscribeToControls() {
-            name.OnValueChanged = value => UpdateSpell();
-            level.OnValueChanged = value => UpdateSpell();
-            schoolBox.OnValueChanged = value => UpdateSpell();
-            attributeBox.OnValueChanged = value => UpdateSpell();
-            typeSelection.OnValueChanged = value => UpdateSpell();
-            dependencies.OnValueChanged = value => UpdateSpell();
+            name.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.Name = value;
+                }    
+            };
+            level.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.Level = value;
+                }
+            };
+            schoolBox.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.SchoolType = value;
+                }
+            };
+            attributeBox.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.Scaling= value;
+                }
+            };
+            typeSelection.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.Types = value;
+                }
+            };
+            dependencies.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.Dependencies = value;
+                }
+            };
         }
 
         private void UnsubscribeFromControls() {
@@ -34,19 +58,6 @@ namespace DOS2Randomizer.UI {
             attributeBox.OnValueChanged = null;
             typeSelection.OnValueChanged = null;
             dependencies.OnValueChanged = null;
-        }
-
-        private void UpdateSpell() {
-            if (_spell is null) {
-                return;
-            }
-
-            _spell.Level = level.Value;
-            _spell.Name = name.Value;
-            _spell.SchoolType = schoolBox.Value;
-            _spell.Scaling = attributeBox.Value;
-            _spell.Types = typeSelection.Value;
-            _spell.Dependencies = dependencies.Value;
         }
 
         public Spell Spell {
