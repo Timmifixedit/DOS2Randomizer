@@ -11,6 +11,7 @@ namespace DOS2Randomizer.UI {
 
         private NumericUpDown _val;
 
+        public ValueChangedEvent<int> OnValueChanged;
         public int Value {
             get => Convert.ToInt32(_val.Value);
             set => _val.Value = value;
@@ -26,10 +27,15 @@ namespace DOS2Randomizer.UI {
             set => _val.Minimum = value;
         }
 
+        private void HandelValueChanged() {
+            OnValueChanged?.Invoke(Value);
+        }
+
         public LabeledValue() {
             InitializeComponent();
             _val = new NumericUpDown{Anchor = AnchorStyles.Left}; 
-            Layout.Controls.Add(_val, 1, 0);   
+            Layout.Controls.Add(_val, 1, 0);
+            _val.ValueChanged += (sender, args) => HandelValueChanged();
         }
     }
 }

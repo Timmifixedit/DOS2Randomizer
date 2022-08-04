@@ -11,6 +11,12 @@ namespace DOS2Randomizer.UI {
 
         private TextBox _text;
 
+        public ValueChangedEvent<string> OnValueChanged;
+
+        private void HandleValueChanged() {
+            OnValueChanged?.Invoke(Value);
+        }
+
         public string Value {
             get => _text.Text;
             set => _text.Text = value;
@@ -20,6 +26,7 @@ namespace DOS2Randomizer.UI {
             InitializeComponent();
             _text = new TextBox {Anchor = (AnchorStyles.Left | AnchorStyles.Right)};
             Layout.Controls.Add(_text, 1, 0);
+            _text.TextChanged += (sender, args) => HandleValueChanged();
         }
     }
 }
