@@ -1,16 +1,21 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
+using DOS2Randomizer.DataStructures;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
     public partial class ConfigCreator : Form {
         #region Fields
 
+        private Spell[] _spells;
+
         #endregion
         public ConfigCreator() {
             InitializeComponent();
             spellList.OnImageClick = spell => spellDesignPanel1.Spell = spell;
+            spellSearch.OnValueChanged = LimitSpellSelection;
         }
 
         /// <summary>
@@ -20,6 +25,11 @@ namespace DOS2Randomizer.UI {
         /// <returns>true if all fields are set correctly</returns>
         private bool CheckValues() {
             return true;
+        }
+
+        private void LimitSpellSelection(string searchString) {
+            var selection = _spells?.Where(spell => spell.Name.StartsWith(searchString));
+            spellList.Spells = selection?.ToArray();
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e) {
@@ -45,9 +55,9 @@ namespace DOS2Randomizer.UI {
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                var spells = FileIo.ImportSpells(fileChooser.FileName);
-                spellList.Spells = spells;
-                spellDesignPanel1.AllSpells = spells;
+                _spells = FileIo.ImportSpells(fileChooser.FileName);
+                spellList.Spells = _spells;
+                spellDesignPanel1.AllSpells = _spells;
             }
         }
     }
