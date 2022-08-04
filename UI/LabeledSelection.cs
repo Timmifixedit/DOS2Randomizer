@@ -15,11 +15,11 @@ namespace DOS2Randomizer.UI {
         public override T[] Value {
             get => _listBox.CheckedItems.Cast<T>().ToArray();
             set {
-                if (value is null) {
-                    for (int i = 0; i < _listBox.Items.Count; i++) {
-                        _listBox.SetItemChecked(i, false);
-                    }
-                } else {
+                for (int i = 0; i < _listBox.Items.Count; i++) {
+                    _listBox.SetItemChecked(i, false);
+                }
+
+                if (value != null) {
                     foreach (var val in value) {
                         _listBox.SetItemChecked(_listBox.Items.IndexOf(val), true);
                     }
