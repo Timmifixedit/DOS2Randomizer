@@ -21,10 +21,12 @@ namespace DOS2Randomizer.UI {
 
                 if (value != null) {
                     foreach (var val in value) {
-                        _listBox.SetItemChecked(_listBox.Items.IndexOf(val), true);
+                        int index = _listBox.Items.IndexOf(val);
+                        if (index != -1) {
+                            _listBox.SetItemChecked(index, true);
+                        }
                     }
                 }
-
             }
         }
 

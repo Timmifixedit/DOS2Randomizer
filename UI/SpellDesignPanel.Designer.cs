@@ -33,11 +33,14 @@ namespace DOS2Randomizer.UI {
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.memSlots = new DOS2Randomizer.UI.LabeledValue();
-            this.flowLayoutSelections = new System.Windows.Forms.FlowLayoutPanel();
             this.cost = new DOS2Randomizer.UI.LabeledValue();
+            this.flowLayoutSelections = new System.Windows.Forms.FlowLayoutPanel();
+            this.dependenciesLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.search = new DOS2Randomizer.UI.LabeledString();
             this.mainLayout.SuspendLayout();
             this.flowLayout.SuspendLayout();
             this.flowLayoutSelections.SuspendLayout();
+            this.dependenciesLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // level
@@ -98,10 +101,11 @@ namespace DOS2Randomizer.UI {
             // 
             this.dependencies.Data = null;
             this.dependencies.DisplayMember = "Name";
+            this.dependencies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dependencies.Label = "Dependencies";
-            this.dependencies.Location = new System.Drawing.Point(167, 3);
+            this.dependencies.Location = new System.Drawing.Point(3, 3);
             this.dependencies.Name = "dependencies";
-            this.dependencies.Size = new System.Drawing.Size(224, 150);
+            this.dependencies.Size = new System.Drawing.Size(194, 96);
             this.dependencies.SplitPercentage = 40;
             this.dependencies.TabIndex = 5;
             this.dependencies.Value = new DOS2Randomizer.DataStructures.Spell[0];
@@ -147,16 +151,6 @@ namespace DOS2Randomizer.UI {
             this.memSlots.TabIndex = 4;
             this.memSlots.Value = 1;
             // 
-            // flowLayoutSelections
-            // 
-            this.flowLayoutSelections.Controls.Add(this.typeSelection);
-            this.flowLayoutSelections.Controls.Add(this.dependencies);
-            this.flowLayoutSelections.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutSelections.Location = new System.Drawing.Point(294, 3);
-            this.flowLayoutSelections.Name = "flowLayoutSelections";
-            this.flowLayoutSelections.Size = new System.Drawing.Size(402, 212);
-            this.flowLayoutSelections.TabIndex = 1;
-            // 
             // cost
             // 
             this.cost.Label = "Cost in loadout";
@@ -169,6 +163,41 @@ namespace DOS2Randomizer.UI {
             this.cost.TabIndex = 5;
             this.cost.Value = 0;
             // 
+            // flowLayoutSelections
+            // 
+            this.flowLayoutSelections.Controls.Add(this.typeSelection);
+            this.flowLayoutSelections.Controls.Add(this.dependenciesLayout);
+            this.flowLayoutSelections.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutSelections.Location = new System.Drawing.Point(294, 3);
+            this.flowLayoutSelections.Name = "flowLayoutSelections";
+            this.flowLayoutSelections.Size = new System.Drawing.Size(402, 212);
+            this.flowLayoutSelections.TabIndex = 1;
+            // 
+            // dependenciesLayout
+            // 
+            this.dependenciesLayout.ColumnCount = 1;
+            this.dependenciesLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.dependenciesLayout.Controls.Add(this.dependencies, 0, 0);
+            this.dependenciesLayout.Controls.Add(this.search, 0, 1);
+            this.dependenciesLayout.Location = new System.Drawing.Point(167, 3);
+            this.dependenciesLayout.Name = "dependenciesLayout";
+            this.dependenciesLayout.RowCount = 2;
+            this.dependenciesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.91304F));
+            this.dependenciesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.08696F));
+            this.dependenciesLayout.Size = new System.Drawing.Size(200, 138);
+            this.dependenciesLayout.TabIndex = 6;
+            // 
+            // search
+            // 
+            this.search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.search.Label = "Search";
+            this.search.Location = new System.Drawing.Point(3, 105);
+            this.search.Name = "search";
+            this.search.Size = new System.Drawing.Size(194, 30);
+            this.search.SplitPercentage = 30;
+            this.search.TabIndex = 6;
+            this.search.Value = "";
+            // 
             // SpellDesignPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -179,6 +208,7 @@ namespace DOS2Randomizer.UI {
             this.mainLayout.ResumeLayout(false);
             this.flowLayout.ResumeLayout(false);
             this.flowLayoutSelections.ResumeLayout(false);
+            this.dependenciesLayout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -196,5 +226,7 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.FlowLayoutPanel flowLayoutSelections;
         private LabeledValue memSlots;
         private LabeledValue cost;
+        private System.Windows.Forms.TableLayoutPanel dependenciesLayout;
+        private LabeledString search;
     }
 }
