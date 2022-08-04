@@ -29,6 +29,8 @@ namespace DOS2Randomizer.UI {
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.schoolBox = new DOS2Randomizer.UI.LabeledSchoolType();
             this.attributeBox = new DOS2Randomizer.UI.LabeledAttribute();
+            this.typeSelection = new DOS2Randomizer.UI.LabeledSpellTypeSelection();
+            this.dependencies = new DOS2Randomizer.UI.LabeledSpellSelection();
             this.flowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,10 +62,12 @@ namespace DOS2Randomizer.UI {
             this.flowLayoutPanel.Controls.Add(this.level);
             this.flowLayoutPanel.Controls.Add(this.schoolBox);
             this.flowLayoutPanel.Controls.Add(this.attributeBox);
+            this.flowLayoutPanel.Controls.Add(this.typeSelection);
+            this.flowLayoutPanel.Controls.Add(this.dependencies);
             this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(505, 243);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(440, 234);
             this.flowLayoutPanel.TabIndex = 2;
             // 
             // schoolBox
@@ -86,13 +90,37 @@ namespace DOS2Randomizer.UI {
             this.attributeBox.TabIndex = 3;
             this.attributeBox.Value = DOS2Randomizer.DataStructures.Attribute.Strength;
             // 
+            // typeSelection
+            // 
+            this.typeSelection.Data = null;
+            this.typeSelection.DisplayMember = null;
+            this.typeSelection.Label = "Type(s)";
+            this.typeSelection.Location = new System.Drawing.Point(3, 90);
+            this.typeSelection.Name = "typeSelection";
+            this.typeSelection.Size = new System.Drawing.Size(158, 150);
+            this.typeSelection.SplitPercentage = 35;
+            this.typeSelection.TabIndex = 4;
+            this.typeSelection.Value = new DOS2Randomizer.DataStructures.Spell.Type[0];
+            // 
+            // dependencies
+            // 
+            this.dependencies.Data = null;
+            this.dependencies.DisplayMember = "Name";
+            this.dependencies.Label = "Dependencies";
+            this.dependencies.Location = new System.Drawing.Point(167, 90);
+            this.dependencies.Name = "dependencies";
+            this.dependencies.Size = new System.Drawing.Size(224, 150);
+            this.dependencies.SplitPercentage = 40;
+            this.dependencies.TabIndex = 5;
+            this.dependencies.Value = new DOS2Randomizer.DataStructures.Spell[0];
+            // 
             // SpellDesignPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel);
             this.Name = "SpellDesignPanel";
-            this.Size = new System.Drawing.Size(505, 243);
+            this.Size = new System.Drawing.Size(440, 234);
             this.flowLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -105,5 +133,7 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
         private LabeledSchoolType schoolBox;
         private LabeledAttribute attributeBox;
+        private LabeledSpellTypeSelection typeSelection;
+        private LabeledSpellSelection dependencies;
     }
 }
