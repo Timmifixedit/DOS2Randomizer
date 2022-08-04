@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.Util;
 using Newtonsoft.Json;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -21,18 +22,7 @@ namespace DOS2Randomizer.UI {
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = "json files (*.json) | *.json"};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                Spell[] spells = null;
-                try {
-                    using var file = fileChooser.OpenFile();
-                    using var reader = new StreamReader(file);
-                    spells = JsonConvert.DeserializeObject<Spell[]>(reader.ReadToEnd());
-                } catch (JsonException) {
-                    MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileChooser.FileName));
-                } catch (IOException exception) {
-                    MessageBox.Show(String.Format(Resources.ErrorMessages.FileOpenFailed, fileChooser.FileName) +
-                                    Environment.NewLine + exception.Message);
-                }
-
+                var spells = FileIO.ImportSpells(fileChooser.FileName);
                 spellList.Spells = spells;
                 spellDesignPanel.AllSpells = spells;
             }
