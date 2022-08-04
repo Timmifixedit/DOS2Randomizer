@@ -157,9 +157,10 @@ namespace DOS2Randomizer.UI {
             // spellDesignPanel
             // 
             this.spellDesignPanel.AllSpells = null;
+            this.spellDesignPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spellDesignPanel.Location = new System.Drawing.Point(3, 138);
             this.spellDesignPanel.Name = "spellDesignPanel";
-            this.spellDesignPanel.Size = new System.Drawing.Size(440, 234);
+            this.spellDesignPanel.Size = new System.Drawing.Size(794, 309);
             this.spellDesignPanel.Spell = null;
             this.spellDesignPanel.TabIndex = 6;
             // 
