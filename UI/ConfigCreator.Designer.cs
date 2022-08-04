@@ -38,6 +38,11 @@ namespace DOS2Randomizer.UI {
             this.levelSpecificPanel = new System.Windows.Forms.Panel();
             this.levelSpecificTable = new DOS2Randomizer.UI.LevelSpecificTable();
             this.spells = new System.Windows.Forms.TabPage();
+            this.spellList = new DOS2Randomizer.UI.SpellList();
+            this.import = new System.Windows.Forms.Button();
+            this.spellMainLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.spellListLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.spellDesignPanel1 = new DOS2Randomizer.UI.SpellDesignPanel();
             this.tabControl.SuspendLayout();
             this.general.SuspendLayout();
             this.generalLayout.SuspendLayout();
@@ -45,6 +50,9 @@ namespace DOS2Randomizer.UI {
             this.nChooseKLayout.SuspendLayout();
             this.levelSpecific.SuspendLayout();
             this.levelSpecificPanel.SuspendLayout();
+            this.spells.SuspendLayout();
+            this.spellMainLayout.SuspendLayout();
+            this.spellListLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -208,12 +216,73 @@ namespace DOS2Randomizer.UI {
             // 
             // spells
             // 
+            this.spells.Controls.Add(this.spellMainLayout);
             this.spells.Location = new System.Drawing.Point(4, 24);
             this.spells.Name = "spells";
             this.spells.Size = new System.Drawing.Size(792, 422);
             this.spells.TabIndex = 2;
             this.spells.Text = "Spells";
             this.spells.UseVisualStyleBackColor = true;
+            // 
+            // spellList
+            // 
+            this.spellList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellList.Location = new System.Drawing.Point(221, 3);
+            this.spellList.Name = "spellList";
+            this.spellList.Size = new System.Drawing.Size(562, 115);
+            this.spellList.Spells = null;
+            this.spellList.TabIndex = 0;
+            // 
+            // import
+            // 
+            this.import.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.import.Location = new System.Drawing.Point(140, 49);
+            this.import.Name = "import";
+            this.import.Size = new System.Drawing.Size(75, 23);
+            this.import.TabIndex = 1;
+            this.import.Text = "Import";
+            this.import.UseVisualStyleBackColor = true;
+            this.import.Click += new System.EventHandler(this.import_Click);
+            // 
+            // spellMainLayout
+            // 
+            this.spellMainLayout.ColumnCount = 1;
+            this.spellMainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.spellMainLayout.Controls.Add(this.spellListLayout, 0, 0);
+            this.spellMainLayout.Controls.Add(this.spellDesignPanel1, 0, 1);
+            this.spellMainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spellMainLayout.Location = new System.Drawing.Point(0, 0);
+            this.spellMainLayout.Name = "spellMainLayout";
+            this.spellMainLayout.RowCount = 2;
+            this.spellMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.09479F));
+            this.spellMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.90521F));
+            this.spellMainLayout.Size = new System.Drawing.Size(792, 422);
+            this.spellMainLayout.TabIndex = 2;
+            // 
+            // spellListLayout
+            // 
+            this.spellListLayout.ColumnCount = 2;
+            this.spellListLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80083F));
+            this.spellListLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19917F));
+            this.spellListLayout.Controls.Add(this.spellList, 1, 0);
+            this.spellListLayout.Controls.Add(this.import, 0, 0);
+            this.spellListLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spellListLayout.Location = new System.Drawing.Point(3, 3);
+            this.spellListLayout.Name = "spellListLayout";
+            this.spellListLayout.RowCount = 1;
+            this.spellListLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.spellListLayout.Size = new System.Drawing.Size(786, 121);
+            this.spellListLayout.TabIndex = 0;
+            // 
+            // spellDesignPanel1
+            // 
+            this.spellDesignPanel1.AllSpells = null;
+            this.spellDesignPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 130);
+            this.spellDesignPanel1.Name = "spellDesignPanel1";
+            this.spellDesignPanel1.Size = new System.Drawing.Size(786, 289);
+            this.spellDesignPanel1.Spell = null;
+            this.spellDesignPanel1.TabIndex = 1;
             // 
             // ConfigCreator
             // 
@@ -230,6 +299,9 @@ namespace DOS2Randomizer.UI {
             this.nChooseKLayout.ResumeLayout(false);
             this.levelSpecific.ResumeLayout(false);
             this.levelSpecificPanel.ResumeLayout(false);
+            this.spells.ResumeLayout(false);
+            this.spellMainLayout.ResumeLayout(false);
+            this.spellListLayout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -250,5 +322,10 @@ namespace DOS2Randomizer.UI {
         private LabeledValue n;
         private LabeledValue k;
         private LabeledString configName;
+        private SpellList spellList;
+        private System.Windows.Forms.Button import;
+        private System.Windows.Forms.TableLayoutPanel spellMainLayout;
+        private System.Windows.Forms.TableLayoutPanel spellListLayout;
+        private SpellDesignPanel spellDesignPanel1;
     }
 }

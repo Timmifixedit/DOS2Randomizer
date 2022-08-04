@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
     public partial class ConfigCreator : Form {
@@ -9,6 +10,7 @@ namespace DOS2Randomizer.UI {
         #endregion
         public ConfigCreator() {
             InitializeComponent();
+            spellList.OnImageClick = spell => spellDesignPanel1.Spell = spell;
         }
 
         /// <summary>
@@ -37,6 +39,15 @@ namespace DOS2Randomizer.UI {
                 } catch (UnauthorizedAccessException) {
                     MessageBox.Show("Access denied for file " + fileChooser.FileName);
                 }
+            }
+        }
+
+        private void import_Click(object sender, EventArgs e) {
+            using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
+            if (fileChooser.ShowDialog() == DialogResult.OK) {
+                var spells = FileIo.ImportSpells(fileChooser.FileName);
+                spellList.Spells = spells;
+                spellDesignPanel1.AllSpells = spells;
             }
         }
     }

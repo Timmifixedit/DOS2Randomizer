@@ -20,9 +20,9 @@ namespace DOS2Randomizer.UI {
         }
 
         private void import_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog{Filter = "json files (*.json) | *.json"};
+            using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                var spells = FileIO.ImportSpells(fileChooser.FileName);
+                var spells = FileIo.ImportSpells(fileChooser.FileName);
                 spellList.Spells = spells;
                 spellDesignPanel.AllSpells = spells;
             }
