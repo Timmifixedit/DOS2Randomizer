@@ -10,6 +10,7 @@ namespace DOS2Randomizer.UI {
     class LabeledSelection<T> : NamedValueTemplate<IEnumerable<T>> {
         private CheckedListBox _listBox;
         private IEnumerable<T> _items;
+        private string _displayMember;
 
         public override IEnumerable<T> Value {
             get {
@@ -36,6 +37,15 @@ namespace DOS2Randomizer.UI {
             set {
                 _items = value;
                 _listBox.DataSource = _items;
+                _listBox.DisplayMember = DisplayMember;
+            }
+        }
+
+        public string DisplayMember {
+            get => _displayMember;
+            set {
+                _displayMember = value;
+                _listBox.DisplayMember = _displayMember;
             }
         }
 
@@ -62,5 +72,10 @@ namespace DOS2Randomizer.UI {
     }
 
     class LabeledSpellTypeSelection : LabeledSelection<Spell.Type> {}
-    class LabeledSpellSelection : LabeledSelection<Spell> {}
+
+    class LabeledSpellSelection : LabeledSelection<Spell> {
+        public LabeledSpellSelection() {
+            DisplayMember = typeof(Spell).GetProperties()[0].Name;
+        }
+    }
 }
