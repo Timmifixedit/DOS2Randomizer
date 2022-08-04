@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
 
@@ -32,6 +33,18 @@ namespace DOS2Randomizer.DataStructures {
             ImagePath = imagePath;
             Level = 1;
         }
+        
+        [JsonConstructor]
+        public Spell(string name, string imagePath, int level, Spell[] dependencies, School schoolType, Type[] types,
+            Attribute scaling) {
+            Name = name;
+            ImagePath = imagePath;
+            Level = level;
+            Dependencies = dependencies;
+            SchoolType = schoolType;
+            Types = types;
+            Scaling = scaling;
+        }
 
         public string Name { get; set; }
         public string ImagePath { get; }
@@ -40,8 +53,5 @@ namespace DOS2Randomizer.DataStructures {
         public School SchoolType { get; set; }
         public Type[] Types { get; set; }
         public Attribute Scaling { get; set; }
-
-
-        // @TODO
     }
 }
