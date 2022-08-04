@@ -14,6 +14,7 @@ namespace DOS2Randomizer.UI {
 
         private DataStructures.Spell[] _spells;
         public ImageClickEvent OnImageClick;
+        private int? _lastIndex;
 
         public DataStructures.Spell[] Spells {
             get => _spells;
@@ -25,8 +26,13 @@ namespace DOS2Randomizer.UI {
             } 
         }
 
-        private void HandleSelect(int index) {   
+        private void HandleSelect(int index) {
+            if (_lastIndex.HasValue) {
+                layout.Items[_lastIndex.Value].Text = _spells[_lastIndex.Value].Name;
+            }
+
             OnImageClick?.Invoke(_spells[index]);
+            _lastIndex = index;
         }
 
         private void RefreshImages() {
