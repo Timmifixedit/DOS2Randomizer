@@ -46,7 +46,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void HandleSelect(int index) {
-            if (_lastIndex.HasValue) {
+            if (_lastIndex.HasValue && _lastIndex.Value < _spells.Length && _lastIndex.Value < layout.Items.Count) {
                 layout.Items[_lastIndex.Value].Text = _spells[_lastIndex.Value].Name;
             }
 
