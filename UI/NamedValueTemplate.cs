@@ -8,21 +8,12 @@ using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
 
-    public delegate void ValueChangedEvent<in T>(T value);
-    public abstract partial class NamedValueTemplate<T> : UserControl {
+    public abstract partial class NamedValueTemplate<T> : BindingControl<T> {
 
         public TableLayoutPanel LayoutPanel => layout;
         public string Label {
             get => name.Text;
             set => name.Text = value;
-        }
-
-        public ValueChangedEvent<T> OnValueChanged;
-
-        public abstract T Value { get; set; }
-
-        protected void HandleValueChanged() {
-            OnValueChanged?.Invoke(Value);
         }
 
         public int SplitPercentage {
@@ -54,6 +45,7 @@ namespace DOS2Randomizer.UI {
         }
         public NamedValueTemplate() {
             InitializeComponent();
+            Height = name.Height;
         }
     }
 }
