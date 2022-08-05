@@ -32,7 +32,7 @@ namespace DOS2Randomizer.UI {
             this.create = new System.Windows.Forms.Button();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.spellDesignPanel = new DOS2Randomizer.UI.SpellDesignPanel();
-            this.search = new DOS2Randomizer.UI.LabeledString();
+            this.search = new DOS2Randomizer.UI.SpellSearch();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.mainLayout.SuspendLayout();
@@ -66,6 +66,7 @@ namespace DOS2Randomizer.UI {
             this.spellList.Location = new System.Drawing.Point(268, 6);
             this.spellList.Name = "spellList";
             this.spellList.Size = new System.Drawing.Size(523, 116);
+            this.spellList.SpellCollection = null;
             this.spellList.Spells = null;
             this.spellList.TabIndex = 4;
             // 
@@ -142,8 +143,12 @@ namespace DOS2Randomizer.UI {
             // 
             // search
             // 
+            this.search.AllSpells = null;
+            this.search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.search.CaseSensitive = true;
             this.search.Label = "Search";
             this.search.Location = new System.Drawing.Point(92, 44);
+            this.search.ManagedCollection = null;
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(164, 35);
             this.search.SplitPercentage = 30;
@@ -175,6 +180,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel mainLayout;
         private SpellDesignPanel spellDesignPanel;
         private System.Windows.Forms.Button create;
-        private LabeledString search;
+        private SpellSearch search;
     }
 }

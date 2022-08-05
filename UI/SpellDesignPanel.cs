@@ -15,7 +15,8 @@ namespace DOS2Randomizer.UI {
         public SpellDesignPanel() {
             InitializeComponent();
             typeSelection.Data = (Spell.Type[]) Enum.GetValues(typeof(Spell.Type));
-            search.OnValueChanged = SearchDependencies;
+            search.ManagedCollection = dependencies;
+            search.OnValueChanged += value => { dependencies.Value = _spell?.Dependencies; };
             SubscribeToControls();
         }
 
@@ -90,13 +91,8 @@ namespace DOS2Randomizer.UI {
             get => _allSpells;
             set {
                 _allSpells = value;
-                dependencies.Data = _allSpells;
+                search.AllSpells = _allSpells;
             }
-        }
-
-        private void SearchDependencies(string searchString) {
-            dependencies.Data = _allSpells?.Where(spell => spell.Name.StartsWith(searchString)).ToArray();
-            dependencies.Value = _spell?.Dependencies;
         }
 
         private void RefreshUi() {

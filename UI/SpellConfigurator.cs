@@ -20,19 +20,14 @@ namespace DOS2Randomizer.UI {
             get => _spells;
             set {
                 _spells = value;
-                spellList.Spells = _spells;
                 spellDesignPanel.AllSpells = _spells;
+                search.AllSpells = _spells;
             }
         }
         public SpellConfigurator() {
             InitializeComponent();
             spellList.OnImageClick = spell => { spellDesignPanel.Spell = spell; };
-            search.OnValueChanged = LimitSpellSelection;
-        }
-
-        private void LimitSpellSelection(string searchString) {
-            var selection = Spells?.Where(spell => spell.Name.Contains(searchString));
-            spellList.Spells = selection?.ToArray();
+            search.ManagedCollection = spellList;
         }
 
         private void import_Click(object sender, EventArgs e) {

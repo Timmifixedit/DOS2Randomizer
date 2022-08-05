@@ -43,8 +43,8 @@ namespace DOS2Randomizer.UI {
             this.spellList = new DOS2Randomizer.UI.SpellList();
             this.spellSearchLayout = new System.Windows.Forms.TableLayoutPanel();
             this.import = new System.Windows.Forms.Button();
-            this.spellSearch = new DOS2Randomizer.UI.LabeledString();
             this.spellDesignPanel1 = new DOS2Randomizer.UI.SpellDesignPanel();
+            this.spellSearch = new DOS2Randomizer.UI.SpellSearch();
             this.tabControl.SuspendLayout();
             this.general.SuspendLayout();
             this.generalLayout.SuspendLayout();
@@ -263,6 +263,7 @@ namespace DOS2Randomizer.UI {
             this.spellList.Location = new System.Drawing.Point(221, 3);
             this.spellList.Name = "spellList";
             this.spellList.Size = new System.Drawing.Size(562, 115);
+            this.spellList.SpellCollection = null;
             this.spellList.Spells = null;
             this.spellList.TabIndex = 0;
             // 
@@ -292,17 +293,6 @@ namespace DOS2Randomizer.UI {
             this.import.UseVisualStyleBackColor = true;
             this.import.Click += new System.EventHandler(this.import_Click);
             // 
-            // spellSearch
-            // 
-            this.spellSearch.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.spellSearch.Label = "Search";
-            this.spellSearch.Location = new System.Drawing.Point(48, 69);
-            this.spellSearch.Name = "spellSearch";
-            this.spellSearch.Size = new System.Drawing.Size(161, 34);
-            this.spellSearch.SplitPercentage = 30;
-            this.spellSearch.TabIndex = 2;
-            this.spellSearch.Value = "";
-            // 
             // spellDesignPanel1
             // 
             this.spellDesignPanel1.AllSpells = null;
@@ -312,6 +302,20 @@ namespace DOS2Randomizer.UI {
             this.spellDesignPanel1.Size = new System.Drawing.Size(786, 289);
             this.spellDesignPanel1.Spell = null;
             this.spellDesignPanel1.TabIndex = 1;
+            // 
+            // spellSearch
+            // 
+            this.spellSearch.AllSpells = null;
+            this.spellSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellSearch.CaseSensitive = true;
+            this.spellSearch.Label = "Search";
+            this.spellSearch.Location = new System.Drawing.Point(3, 60);
+            this.spellSearch.ManagedCollection = null;
+            this.spellSearch.Name = "spellSearch";
+            this.spellSearch.Size = new System.Drawing.Size(206, 52);
+            this.spellSearch.SplitPercentage = 30;
+            this.spellSearch.TabIndex = 2;
+            this.spellSearch.Value = "";
             // 
             // ConfigCreator
             // 
@@ -358,6 +362,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel spellListLayout;
         private SpellDesignPanel spellDesignPanel1;
         private System.Windows.Forms.TableLayoutPanel spellSearchLayout;
-        private LabeledString spellSearch;
+        private SpellSearch spellSearch;
     }
 }

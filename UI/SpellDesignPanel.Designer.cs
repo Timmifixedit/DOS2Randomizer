@@ -36,7 +36,7 @@ namespace DOS2Randomizer.UI {
             this.cost = new DOS2Randomizer.UI.LabeledValue();
             this.flowLayoutSelections = new System.Windows.Forms.FlowLayoutPanel();
             this.dependenciesLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.search = new DOS2Randomizer.UI.LabeledString();
+            this.search = new DOS2Randomizer.UI.SpellSearch();
             this.mainLayout.SuspendLayout();
             this.flowLayout.SuspendLayout();
             this.flowLayoutSelections.SuspendLayout();
@@ -106,6 +106,7 @@ namespace DOS2Randomizer.UI {
             this.dependencies.Location = new System.Drawing.Point(3, 3);
             this.dependencies.Name = "dependencies";
             this.dependencies.Size = new System.Drawing.Size(194, 96);
+            this.dependencies.SpellCollection = null;
             this.dependencies.SplitPercentage = 40;
             this.dependencies.TabIndex = 5;
             this.dependencies.Value = new DOS2Randomizer.DataStructures.Spell[0];
@@ -189,11 +190,12 @@ namespace DOS2Randomizer.UI {
             // 
             // search
             // 
-            this.search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.search.AllSpells = null;
             this.search.Label = "Search";
             this.search.Location = new System.Drawing.Point(3, 105);
+            this.search.ManagedCollection = null;
             this.search.Name = "search";
-            this.search.Size = new System.Drawing.Size(194, 30);
+            this.search.Size = new System.Drawing.Size(191, 30);
             this.search.SplitPercentage = 30;
             this.search.TabIndex = 6;
             this.search.Value = "";
@@ -227,6 +229,6 @@ namespace DOS2Randomizer.UI {
         private LabeledValue memSlots;
         private LabeledValue cost;
         private System.Windows.Forms.TableLayoutPanel dependenciesLayout;
-        private LabeledString search;
+        private SpellSearch search;
     }
 }
