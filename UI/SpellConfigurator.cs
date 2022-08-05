@@ -14,17 +14,31 @@ using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace DOS2Randomizer.UI {
     public partial class SpellConfigurator : Form {
+        private Spell[] _spells;
+
+        private Spell[] Spells {
+            get => _spells;
+            set {
+                _spells = value;
+                spellList.Spells = _spells;
+                spellDesignPanel.AllSpells = _spells;
+            }
+        }
         public SpellConfigurator() {
             InitializeComponent();
-            spellList.OnImageClick += spell => { spellDesignPanel.Spell = spell; };
+            spellList.OnImageClick = spell => { spellDesignPanel.Spell = spell; };
+            search.OnValueChanged = LimitSpellSelection;
+        }
+
+        private void LimitSpellSelection(string searchString) {
+            var selection = Spells?.Where(spell => spell.Name.Contains(searchString));
+            spellList.Spells = selection?.ToArray();
         }
 
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                var spells = FileIo.ImportSpells(fileChooser.FileName);
-                spellList.Spells = spells;
-                spellDesignPanel.AllSpells = spells;
+                Spells = FileIo.ImportSpells(fileChooser.FileName);
             }
         }
 
@@ -39,7 +53,7 @@ namespace DOS2Randomizer.UI {
                 try {
                     using var file = fileChooser.OpenFile();
                     using var writer = new StreamWriter(file);
-                    var json = JsonConvert.SerializeObject(spellList.Spells);
+                    var json = JsonConvert.SerializeObject(Spells);
                     writer.Write(json);
                 } catch (IOException exception) {
                     MessageBox.Show(Resources.ErrorMessages.SaveError + exception.Message);
@@ -56,9 +70,7 @@ namespace DOS2Randomizer.UI {
                     System.Diagnostics.Debug.WriteLine(file);
                 }
 
-                var spells = files.Select(imageFile => new Spell("<unknown>", imageFile)).ToArray();
-                spellList.Spells = spells;
-                spellDesignPanel.AllSpells = spells;
+                Spells = files.Select(imageFile => new Spell("<unknown>", imageFile)).ToArray();
             }
         }
     }
