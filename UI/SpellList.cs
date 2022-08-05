@@ -10,11 +10,16 @@ using System.Windows.Forms;
 namespace DOS2Randomizer.UI {
 
     public delegate void ImageClickEvent(DataStructures.Spell spell);
-    public partial class SpellList : UserControl {
+    public partial class SpellList : UserControl, ISpellCollection {
 
         private DataStructures.Spell[] _spells;
         public ImageClickEvent OnImageClick;
         private int? _lastIndex;
+
+        public DataStructures.Spell[] SpellCollection {
+            get => Spells;
+            set => Spells = value;
+        }
 
         public void SelectNext() {
             if (_lastIndex.HasValue && _lastIndex.Value < layout.Items.Count - 1) {
