@@ -43,8 +43,8 @@ namespace DOS2Randomizer.UI {
             this.spellList = new DOS2Randomizer.UI.SpellList();
             this.spellSearchLayout = new System.Windows.Forms.TableLayoutPanel();
             this.import = new System.Windows.Forms.Button();
-            this.spellDesignPanel1 = new DOS2Randomizer.UI.SpellDesignPanel();
             this.spellSearch = new DOS2Randomizer.UI.SpellSearch();
+            this.spellDesignPanel1 = new DOS2Randomizer.UI.SpellDesignPanel();
             this.tabControl.SuspendLayout();
             this.general.SuspendLayout();
             this.generalLayout.SuspendLayout();
@@ -88,6 +88,7 @@ namespace DOS2Randomizer.UI {
             this.generalLayout.Controls.Add(this.generalSplitLayout, 0, 0);
             this.generalLayout.Controls.Add(this.nChooseKLayout, 0, 2);
             this.generalLayout.Controls.Add(this.memSlots, 0, 1);
+            this.generalLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.generalLayout.Location = new System.Drawing.Point(3, 3);
             this.generalLayout.Name = "generalLayout";
             this.generalLayout.RowCount = 3;
@@ -211,7 +212,6 @@ namespace DOS2Randomizer.UI {
             // 
             // levelSpecificTable
             // 
-            this.levelSpecificTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.levelSpecificTable.Location = new System.Drawing.Point(0, 0);
             this.levelSpecificTable.Name = "levelSpecificTable";
             this.levelSpecificTable.Size = new System.Drawing.Size(460, 416);
@@ -293,16 +293,6 @@ namespace DOS2Randomizer.UI {
             this.import.UseVisualStyleBackColor = true;
             this.import.Click += new System.EventHandler(this.import_Click);
             // 
-            // spellDesignPanel1
-            // 
-            this.spellDesignPanel1.AllSpells = null;
-            this.spellDesignPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 130);
-            this.spellDesignPanel1.Name = "spellDesignPanel1";
-            this.spellDesignPanel1.Size = new System.Drawing.Size(786, 289);
-            this.spellDesignPanel1.Spell = null;
-            this.spellDesignPanel1.TabIndex = 1;
-            // 
             // spellSearch
             // 
             this.spellSearch.AllSpells = null;
@@ -316,6 +306,16 @@ namespace DOS2Randomizer.UI {
             this.spellSearch.SplitPercentage = 30;
             this.spellSearch.TabIndex = 2;
             this.spellSearch.Value = "";
+            // 
+            // spellDesignPanel1
+            // 
+            this.spellDesignPanel1.AllSpells = null;
+            this.spellDesignPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 130);
+            this.spellDesignPanel1.Name = "spellDesignPanel1";
+            this.spellDesignPanel1.Size = new System.Drawing.Size(786, 289);
+            this.spellDesignPanel1.Spell = null;
+            this.spellDesignPanel1.TabIndex = 1;
             // 
             // ConfigCreator
             // 

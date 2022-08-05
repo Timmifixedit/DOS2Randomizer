@@ -191,6 +191,7 @@ namespace DOS2Randomizer.UI {
             // search
             // 
             this.search.AllSpells = null;
+            this.search.CaseSensitive = true;
             this.search.Label = "Search";
             this.search.Location = new System.Drawing.Point(3, 105);
             this.search.ManagedCollection = null;
