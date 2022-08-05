@@ -31,6 +31,7 @@ namespace DOS2Randomizer.UI {
             _val = new NumericUpDown{Anchor = AnchorStyles.Left}; 
             LayoutPanel.Controls.Add(_val, 1, 0);
             _val.ValueChanged += (sender, args) => HandleValueChanged();
+            Height = Math.Max(Height, _val.Height);
         }
     }
 }
