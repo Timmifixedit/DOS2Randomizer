@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
 
-    public class Spell {
+    public class Spell : IEquatable<Spell> {
 
         public enum School {
             Aero,
@@ -35,7 +36,7 @@ namespace DOS2Randomizer.DataStructures {
             Level = 1;
             MemorySlots = 1;
         }
-        
+
         [JsonConstructor]
         public Spell(string name, string imagePath, int level, Spell[] dependencies, School schoolType, Type[] types,
             Attribute scaling, int memorySlots, int loadoutCost) {
@@ -58,6 +59,45 @@ namespace DOS2Randomizer.DataStructures {
         public Type[] Types { get; set; }
         public Attribute Scaling { get; set; }
         public int MemorySlots { get; set; }
-        public int LoadoutCost{ get; set; }
+        public int LoadoutCost { get; set; }
+
+        public bool Equals(Spell other) {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Name == other.Name && ImagePath == other.ImagePath && Level == other.Level &&
+                   SchoolType == other.SchoolType && SequenceEqual(Types, other.Types) && Scaling == other.Scaling &&
+                   MemorySlots == other.MemorySlots && LoadoutCost == other.LoadoutCost;
+        }
+
+        private bool SequenceEqual<T>(IEnumerable<T> lhs, IEnumerable<T> rhs) {
+            if (ReferenceEquals(lhs, rhs)) {
+                return true;
+            }
+
+            if (rhs is null || lhs is null) {
+                return false;
+            }
+
+            return lhs.SequenceEqual(rhs);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Spell) obj);
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(Name, ImagePath, Level, (int) SchoolType, Types, (int) Scaling, MemorySlots, LoadoutCost);
+        }
+
+        public static bool operator ==(Spell left, Spell right) {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Spell left, Spell right) {
+            return !Equals(left, right);
+        }
     }
 }
