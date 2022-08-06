@@ -34,17 +34,24 @@ namespace DOS2Randomizer.DataStructures {
             Name = name;
             ImagePath = imagePath;
             Level = 1;
+            Dependencies = new Spell[0];
+            SchoolRequirements = new Dictionary<School, int>(
+                ((School[]) Enum.GetValues(typeof(School))).Select(school => new KeyValuePair<School, int>(school, 0)));
+            Types = new Type[0];
+            Scaling = Attribute.None;
             MemorySlots = 1;
+            LoadoutCost = 0;
         }
 
         [JsonConstructor]
-        public Spell(string name, string imagePath, int level, Spell[] dependencies, School schoolType, Type[] types,
+        public Spell(string name, string imagePath, int level, Spell[] dependencies,
+            Dictionary<School, int> schoolRequirements, Type[] types,
             Attribute scaling, int memorySlots, int loadoutCost) {
             Name = name;
             ImagePath = imagePath;
             Level = level;
             Dependencies = dependencies;
-            SchoolType = schoolType;
+            SchoolRequirements = schoolRequirements;
             Types = types;
             Scaling = scaling;
             MemorySlots = memorySlots;
@@ -55,7 +62,7 @@ namespace DOS2Randomizer.DataStructures {
         public string ImagePath { get; }
         public int Level { get; set; }
         public Spell[] Dependencies { get; set; }
-        public School SchoolType { get; set; }
+        public Dictionary<School, int> SchoolRequirements { get; set; }
         public Type[] Types { get; set; }
         public Attribute Scaling { get; set; }
         public int MemorySlots { get; set; }
@@ -65,7 +72,7 @@ namespace DOS2Randomizer.DataStructures {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Name == other.Name && ImagePath == other.ImagePath && Level == other.Level &&
-                   SchoolType == other.SchoolType && SequenceEqual(Types, other.Types) && Scaling == other.Scaling &&
+                   SequenceEqual(Types, other.Types) && Scaling == other.Scaling &&
                    MemorySlots == other.MemorySlots && LoadoutCost == other.LoadoutCost;
         }
 
@@ -89,7 +96,7 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         public override int GetHashCode() {
-            return HashCode.Combine(Name, ImagePath, Level, (int) SchoolType, Types, (int) Scaling, MemorySlots, LoadoutCost);
+            return HashCode.Combine(Name, ImagePath, Level, Types, (int) Scaling, MemorySlots, LoadoutCost);
         }
 
         public static bool operator ==(Spell left, Spell right) {

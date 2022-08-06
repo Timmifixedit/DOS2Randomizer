@@ -24,7 +24,6 @@ namespace DOS2Randomizer.UI {
         public ConfigCreator() {
             InitializeComponent();
             spellList.OnImageClick = spell => spellDesignPanel1.Spell = spell;
-            spellSearch.ManagedCollection = spellList;
         }
 
         /// <summary>

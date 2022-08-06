@@ -300,7 +300,7 @@ namespace DOS2Randomizer.UI {
             this.spellSearch.CaseSensitive = true;
             this.spellSearch.Label = "Search";
             this.spellSearch.Location = new System.Drawing.Point(3, 60);
-            this.spellSearch.ManagedCollection = null;
+            this.spellSearch.ManagedCollection = this.spellList;
             this.spellSearch.Name = "spellSearch";
             this.spellSearch.Size = new System.Drawing.Size(206, 52);
             this.spellSearch.SplitPercentage = 30;

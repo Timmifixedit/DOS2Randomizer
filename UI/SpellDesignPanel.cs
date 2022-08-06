@@ -15,7 +15,6 @@ namespace DOS2Randomizer.UI {
         public SpellDesignPanel() {
             InitializeComponent();
             typeSelection.Data = (Spell.Type[]) Enum.GetValues(typeof(Spell.Type));
-            search.ManagedCollection = dependencies;
             search.OnValueChanged += value => { dependencies.Value = _spell?.Dependencies; };
             SubscribeToControls();
         }
@@ -31,9 +30,9 @@ namespace DOS2Randomizer.UI {
                     _spell.Level = value;
                 }
             };
-            schoolBox.OnValueChanged = value => {
+            skillPointsPanel1.OnValueChanged = value => {
                 if (_spell != null) {
-                    _spell.SchoolType = value;
+                    _spell.SchoolRequirements = value;
                 }
             };
             attributeBox.OnValueChanged = value => {
@@ -67,7 +66,7 @@ namespace DOS2Randomizer.UI {
         private void UnsubscribeFromControls() {
             level.OnValueChanged = null;
             name.OnValueChanged = null;
-            schoolBox.OnValueChanged = null;
+            skillPointsPanel1.OnValueChanged = null;
             attributeBox.OnValueChanged = null;
             typeSelection.OnValueChanged = null;
             dependencies.OnValueChanged = null;
@@ -99,7 +98,7 @@ namespace DOS2Randomizer.UI {
             try {
                 name.Value = _spell.Name;
                 level.Value = _spell.Level;
-                schoolBox.Value = _spell.SchoolType;
+                skillPointsPanel1.Value = _spell.SchoolRequirements;
                 attributeBox.Value = _spell.Scaling;
                 typeSelection.Value = _spell.Types;
                 dependencies.Value = _spell.Dependencies;

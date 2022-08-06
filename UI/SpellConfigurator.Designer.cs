@@ -30,9 +30,9 @@ namespace DOS2Randomizer.UI {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.create = new System.Windows.Forms.Button();
+            this.search = new DOS2Randomizer.UI.SpellSearch();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.spellDesignPanel = new DOS2Randomizer.UI.SpellDesignPanel();
-            this.search = new DOS2Randomizer.UI.SpellSearch();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.mainLayout.SuspendLayout();
@@ -116,6 +116,20 @@ namespace DOS2Randomizer.UI {
             this.create.UseVisualStyleBackColor = true;
             this.create.Click += new System.EventHandler(this.create_Click);
             // 
+            // search
+            // 
+            this.search.AllSpells = null;
+            this.search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.search.CaseSensitive = true;
+            this.search.Label = "Search";
+            this.search.Location = new System.Drawing.Point(92, 44);
+            this.search.ManagedCollection = this.spellList;
+            this.search.Name = "search";
+            this.search.Size = new System.Drawing.Size(164, 35);
+            this.search.SplitPercentage = 30;
+            this.search.TabIndex = 5;
+            this.search.Value = "";
+            // 
             // mainLayout
             // 
             this.mainLayout.ColumnCount = 1;
@@ -140,20 +154,6 @@ namespace DOS2Randomizer.UI {
             this.spellDesignPanel.Size = new System.Drawing.Size(794, 309);
             this.spellDesignPanel.Spell = null;
             this.spellDesignPanel.TabIndex = 6;
-            // 
-            // search
-            // 
-            this.search.AllSpells = null;
-            this.search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.search.CaseSensitive = true;
-            this.search.Label = "Search";
-            this.search.Location = new System.Drawing.Point(92, 44);
-            this.search.ManagedCollection = null;
-            this.search.Name = "search";
-            this.search.Size = new System.Drawing.Size(164, 35);
-            this.search.SplitPercentage = 30;
-            this.search.TabIndex = 5;
-            this.search.Value = "";
             // 
             // SpellConfigurator
             // 
