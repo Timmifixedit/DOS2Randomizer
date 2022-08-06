@@ -35,7 +35,6 @@ namespace DOS2Randomizer.UI {
             this.k = new DOS2Randomizer.UI.LabeledValue();
             this.memSlots = new DOS2Randomizer.UI.LabeledValue();
             this.levelSpecific = new System.Windows.Forms.TabPage();
-            this.levelSpecificPanel = new System.Windows.Forms.Panel();
             this.levelSpecificTable = new DOS2Randomizer.UI.LevelSpecificTable();
             this.spells = new System.Windows.Forms.TabPage();
             this.spellMainLayout = new System.Windows.Forms.TableLayoutPanel();
@@ -51,7 +50,6 @@ namespace DOS2Randomizer.UI {
             this.generalSplitLayout.SuspendLayout();
             this.nChooseKLayout.SuspendLayout();
             this.levelSpecific.SuspendLayout();
-            this.levelSpecificPanel.SuspendLayout();
             this.spells.SuspendLayout();
             this.spellMainLayout.SuspendLayout();
             this.spellListLayout.SuspendLayout();
@@ -192,7 +190,7 @@ namespace DOS2Randomizer.UI {
             // 
             // levelSpecific
             // 
-            this.levelSpecific.Controls.Add(this.levelSpecificPanel);
+            this.levelSpecific.Controls.Add(this.levelSpecificTable);
             this.levelSpecific.Location = new System.Drawing.Point(4, 24);
             this.levelSpecific.Name = "levelSpecific";
             this.levelSpecific.Padding = new System.Windows.Forms.Padding(3);
@@ -201,18 +199,9 @@ namespace DOS2Randomizer.UI {
             this.levelSpecific.Text = "Level Specific";
             this.levelSpecific.UseVisualStyleBackColor = true;
             // 
-            // levelSpecificPanel
-            // 
-            this.levelSpecificPanel.Controls.Add(this.levelSpecificTable);
-            this.levelSpecificPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.levelSpecificPanel.Location = new System.Drawing.Point(3, 3);
-            this.levelSpecificPanel.Name = "levelSpecificPanel";
-            this.levelSpecificPanel.Size = new System.Drawing.Size(460, 416);
-            this.levelSpecificPanel.TabIndex = 1;
-            // 
             // levelSpecificTable
             // 
-            this.levelSpecificTable.Location = new System.Drawing.Point(0, 0);
+            this.levelSpecificTable.Location = new System.Drawing.Point(3, 3);
             this.levelSpecificTable.Name = "levelSpecificTable";
             this.levelSpecificTable.Size = new System.Drawing.Size(460, 416);
             this.levelSpecificTable.TabIndex = 0;
@@ -331,7 +320,6 @@ namespace DOS2Randomizer.UI {
             this.generalSplitLayout.ResumeLayout(false);
             this.nChooseKLayout.ResumeLayout(false);
             this.levelSpecific.ResumeLayout(false);
-            this.levelSpecificPanel.ResumeLayout(false);
             this.spells.ResumeLayout(false);
             this.spellMainLayout.ResumeLayout(false);
             this.spellListLayout.ResumeLayout(false);
@@ -350,8 +338,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel nChooseKLayout;
         private System.Windows.Forms.TableLayoutPanel generalLayout;
         private System.Windows.Forms.TableLayoutPanel generalSplitLayout;
-        private LevelSpecificTable levelSpecificTable;
-        private System.Windows.Forms.Panel levelSpecificPanel;
         private LabeledValue memSlots;
         private LabeledValue n;
         private LabeledValue k;
@@ -363,5 +349,6 @@ namespace DOS2Randomizer.UI {
         private SpellDesignPanel spellDesignPanel1;
         private System.Windows.Forms.TableLayoutPanel spellSearchLayout;
         private SpellSearch spellSearch;
+        private LevelSpecificTable levelSpecificTable;
     }
 }

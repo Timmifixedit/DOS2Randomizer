@@ -104,9 +104,9 @@ namespace DOS2Randomizer.UI {
             // mainLayout
             // 
             this.mainLayout.ColumnCount = 3;
-            this.mainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.66667F));
-            this.mainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.33333F));
-            this.mainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 208F));
+            this.mainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.24658F));
+            this.mainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.65753F));
+            this.mainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.09589F));
             this.mainLayout.Controls.Add(this.flowLayout, 0, 0);
             this.mainLayout.Controls.Add(this.flowLayoutSelections, 2, 0);
             this.mainLayout.Controls.Add(this.skillPointsPanel1, 1, 0);
@@ -128,7 +128,7 @@ namespace DOS2Randomizer.UI {
             this.flowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayout.Location = new System.Drawing.Point(3, 3);
             this.flowLayout.Name = "flowLayout";
-            this.flowLayout.Size = new System.Drawing.Size(211, 366);
+            this.flowLayout.Size = new System.Drawing.Size(244, 366);
             this.flowLayout.TabIndex = 0;
             // 
             // memSlots
@@ -160,9 +160,9 @@ namespace DOS2Randomizer.UI {
             this.flowLayoutSelections.Controls.Add(this.dependenciesLayout);
             this.flowLayoutSelections.Controls.Add(this.typeSelection);
             this.flowLayoutSelections.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutSelections.Location = new System.Drawing.Point(525, 3);
+            this.flowLayoutSelections.Location = new System.Drawing.Point(433, 3);
             this.flowLayoutSelections.Name = "flowLayoutSelections";
-            this.flowLayoutSelections.Size = new System.Drawing.Size(203, 366);
+            this.flowLayoutSelections.Size = new System.Drawing.Size(295, 366);
             this.flowLayoutSelections.TabIndex = 1;
             // 
             // dependenciesLayout
@@ -194,8 +194,7 @@ namespace DOS2Randomizer.UI {
             // 
             // skillPointsPanel1
             // 
-            this.skillPointsPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.skillPointsPanel1.Location = new System.Drawing.Point(220, 21);
+            this.skillPointsPanel1.Location = new System.Drawing.Point(253, 3);
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);
             this.skillPointsPanel1.TabIndex = 2;
