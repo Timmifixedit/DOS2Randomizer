@@ -21,6 +21,7 @@ namespace DOS2Randomizer.UI {
             _text = new TextBox {Anchor = (AnchorStyles.Left | AnchorStyles.Right)};
             LayoutPanel.Controls.Add(_text, 1, 0);
             _text.TextChanged += (sender, args) => HandleValueChanged();
+            Height = Math.Max(Height, _text.Height);
         }
     }
 }
