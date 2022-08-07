@@ -21,7 +21,7 @@ namespace DOS2Randomizer.UI {
             set {
                 _spells = value;
                 spellDesignPanel.AllSpells = _spells;
-                search.AllSpells = _spells;
+                spellList.Spells = _spells;
             }
         }
         public SpellConfigurator() {
