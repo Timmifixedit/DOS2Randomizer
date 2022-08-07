@@ -32,7 +32,7 @@ namespace DOS2Randomizer.UI {
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                Spells = FileIo.ImportSpells(fileChooser.FileName);
+                Spells = FileIo.ImportConfig<Spell[]>(fileChooser.FileName);
             }
         }
 
@@ -44,14 +44,7 @@ namespace DOS2Randomizer.UI {
 
             using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = ".json"};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                try {
-                    using var file = fileChooser.OpenFile();
-                    using var writer = new StreamWriter(file);
-                    var json = JsonConvert.SerializeObject(Spells);
-                    writer.Write(json);
-                } catch (IOException exception) {
-                    MessageBox.Show(Resources.ErrorMessages.SaveError + exception.Message);
-                }
+                FileIo.SaveConfig(Spells, fileChooser.FileName);
             }
         }
 
