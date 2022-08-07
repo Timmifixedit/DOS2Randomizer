@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
-    class OnLevelUp {
+    public class OnLevelUp {
 
         [JsonConstructor]
         public OnLevelUp(int level, int newSpells, int newRerolls, int newShuffles) {
