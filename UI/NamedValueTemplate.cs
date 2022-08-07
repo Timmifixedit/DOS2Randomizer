@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
 
-    public abstract partial class NamedValueTemplate<T> : BindingControl<T> {
+    public abstract partial class NamedValueTemplate<T> : BindingControl<T>, ISplittableControl {
 
         public TableLayoutPanel LayoutPanel => layout;
         public string Label {
@@ -17,32 +17,10 @@ namespace DOS2Randomizer.UI {
         }
 
         public int SplitPercentage {
-            get {
-                var styles = layout.ColumnStyles;
-                if (styles.Count != 2) {
-                    throw new InvalidOperationException($"Invalid number of columns ({styles.Count}), expected 2");
-                }
-
-                if (styles[0].SizeType != SizeType.Percent) {
-                    throw new InvalidOperationException($"Invalid size type, expected percentage, got {styles[0].SizeType}");
-                }
-
-                return Convert.ToInt32(styles[0].Width);
-            }
-
-            set {
-                if (value < 0 || value > 100) {
-                    throw new ArgumentException($"split percentage value must be in [0, 100], got {value}");
-                }
-                var styles = layout.ColumnStyles;
-                if (styles.Count != 2) {
-                    throw new InvalidOperationException($"Invalid number of columns ({styles.Count}), expected 2");
-                }
-
-                (styles[0].SizeType, styles[1].SizeType) = (SizeType.Percent, SizeType.Percent);
-                (styles[0].Width, styles[1].Width) = (value, 100 - value);
-            }
+            get => (this as ISplittableControl).SplitPercentageProperty;
+            set => (this as ISplittableControl).SplitPercentageProperty = value;
         }
+
         public NamedValueTemplate() {
             InitializeComponent();
             Height = name.Height;
