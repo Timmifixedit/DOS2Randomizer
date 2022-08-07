@@ -8,12 +8,12 @@ using Newtonsoft.Json;
 
 namespace DOS2Randomizer.Util {
     static class FileIo {
-        public static Spell[] ImportSpells(string fileName) {
-            Spell[] spells = null;
+        public static T ImportConfig<T>(string fileName) where T : class {
+            T spells = null;
             try {
                 using var file = File.OpenRead(fileName);
                 using var reader = new StreamReader(file);
-                spells = JsonConvert.DeserializeObject<Spell[]>(reader.ReadToEnd());
+                spells = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
             } catch (JsonException) {
                 MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileName));
             } catch (IOException exception) {
@@ -22,6 +22,19 @@ namespace DOS2Randomizer.Util {
             }
 
             return spells;
+        }
+
+        public static void SaveConfig<T>(T config, string fileName) {
+            try {
+                using var file = File.OpenWrite(fileName);
+                using var writer = new StreamWriter(file);
+                var json = JsonConvert.SerializeObject(config);
+                writer.Write(json);
+            } catch (IOException exception) {
+                MessageBox.Show(Resources.ErrorMessages.SaveError + exception.Message);
+            } catch (JsonSerializationException e) {
+                MessageBox.Show(Resources.ErrorMessages.JsonSerializeFailed + e.Message);
+            }
         }
     }
 }
