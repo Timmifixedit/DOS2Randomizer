@@ -88,6 +88,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Json error while serializing:  ähnelt.
+        /// </summary>
+        internal static string JsonSerializeFailed {
+            get {
+                return ResourceManager.GetString("JsonSerializeFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No spells are loaded. ähnelt.
         /// </summary>
         internal static string NoSpells {

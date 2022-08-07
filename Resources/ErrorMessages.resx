@@ -126,6 +126,9 @@
   <data name="JsonParseFailed" xml:space="preserve">
     <value>Failed to read config file '{0}'</value>
   </data>
+  <data name="JsonSerializeFailed" xml:space="preserve">
+    <value>Json error while serializing: </value>
+  </data>
   <data name="NoSpells" xml:space="preserve">
     <value>No spells are loaded.</value>
   </data>
