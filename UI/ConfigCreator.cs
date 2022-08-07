@@ -9,14 +9,32 @@ namespace DOS2Randomizer.UI {
     public partial class ConfigCreator : Form {
         #region Fields
 
-        private Spell[] _spells;
+        private MatchConfig _matchConfig;
+
+        private MatchConfig Config {
+            get => _matchConfig;
+            set {
+                _matchConfig = value;
+                if (_matchConfig is null) {
+                    return;
+                }
+
+                Spells = _matchConfig.Spells;
+                levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents;
+                n.Value = _matchConfig.N;
+                k.Value = _matchConfig.K;
+                configName.Value = _matchConfig.Name;
+                memSlots.Value = _matchConfig.MaxNumMemSlots;
+
+            }
+        }
 
         private Spell[] Spells {
-            get => _spells;
+            get => _matchConfig.Spells;
             set {
-                _spells = value;
-                spellDesignPanel1.AllSpells = _spells;
-                spellSearch.AllSpells = _spells;
+                _matchConfig.Spells = value;
+                spellDesignPanel1.AllSpells = Spells;
+                spellSearch.AllSpells = Spells;
             }
         }
 
@@ -24,41 +42,32 @@ namespace DOS2Randomizer.UI {
         public ConfigCreator() {
             InitializeComponent();
             spellList.OnImageClick = spell => spellDesignPanel1.Spell = spell;
-        }
-
-        /// <summary>
-        /// Checks if all data fields are set and all values are valid
-        /// @TODO
-        /// </summary>
-        /// <returns>true if all fields are set correctly</returns>
-        private bool CheckValues() {
-            return true;
+            _matchConfig = new MatchConfig();
+            configName.OnValueChanged = value => _matchConfig.Name = value;
+            memSlots.OnValueChanged = value => _matchConfig.MaxNumMemSlots = value;
+            n.OnValueChanged = value => _matchConfig.N = value;
+            k.OnValueChanged = value => _matchConfig.K = value;
+            levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents;
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e) {
-            if (!CheckValues()) {
-                MessageBox.Show("Some data fields are missing");
-                return;
-            }
-
             using var fileChooser = new SaveFileDialog {DefaultExt = ".json", AddExtension = true};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                try {
-                    using var file = fileChooser.OpenFile();
-                    using var writer = new StreamWriter(file);
-                    // @TODO serialize config and save
-                } catch (IOException exception) {
-                    MessageBox.Show(Resources.ErrorMessages.SaveError + exception.Message);
-                } catch (UnauthorizedAccessException) {
-                    MessageBox.Show("Access denied for file " + fileChooser.FileName);
-                }
+                FileIo.SaveConfig(Config, fileChooser.FileName);
             }
         }
 
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                Spells = FileIo.ImportSpells(fileChooser.FileName);
+                Spells = FileIo.ImportConfig<Spell[]>(fileChooser.FileName);
+            }
+        }
+
+        private void importButton_Click(object sender, EventArgs e) {
+            using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
+            if (fileChooser.ShowDialog() == DialogResult.OK) {
+                Config = FileIo.ImportConfig<MatchConfig>(fileChooser.FileName);
             }
         }
     }

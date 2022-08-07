@@ -28,8 +28,10 @@ namespace DOS2Randomizer.UI {
             this.general = new System.Windows.Forms.TabPage();
             this.generalLayout = new System.Windows.Forms.TableLayoutPanel();
             this.generalSplitLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.SaveButton = new System.Windows.Forms.Button();
             this.configName = new DOS2Randomizer.UI.LabeledString();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.importMatchConfig = new System.Windows.Forms.Button();
             this.nChooseKLayout = new System.Windows.Forms.TableLayoutPanel();
             this.n = new DOS2Randomizer.UI.LabeledValue();
             this.k = new DOS2Randomizer.UI.LabeledValue();
@@ -41,13 +43,14 @@ namespace DOS2Randomizer.UI {
             this.spellListLayout = new System.Windows.Forms.TableLayoutPanel();
             this.spellList = new DOS2Randomizer.UI.SpellList();
             this.spellSearchLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.import = new System.Windows.Forms.Button();
+            this.importSpells = new System.Windows.Forms.Button();
             this.spellSearch = new DOS2Randomizer.UI.SpellSearch();
             this.spellDesignPanel1 = new DOS2Randomizer.UI.SpellDesignPanel();
             this.tabControl.SuspendLayout();
             this.general.SuspendLayout();
             this.generalLayout.SuspendLayout();
             this.generalSplitLayout.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.nChooseKLayout.SuspendLayout();
             this.levelSpecific.SuspendLayout();
             this.spells.SuspendLayout();
@@ -90,8 +93,8 @@ namespace DOS2Randomizer.UI {
             this.generalLayout.Location = new System.Drawing.Point(3, 3);
             this.generalLayout.Name = "generalLayout";
             this.generalLayout.RowCount = 3;
-            this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.04348F));
-            this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.47826F));
+            this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.11539F));
+            this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.13462F));
             this.generalLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.47826F));
             this.generalLayout.Size = new System.Drawing.Size(786, 416);
             this.generalLayout.TabIndex = 9;
@@ -102,36 +105,59 @@ namespace DOS2Randomizer.UI {
             this.generalSplitLayout.ColumnCount = 2;
             this.generalSplitLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
             this.generalSplitLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
-            this.generalSplitLayout.Controls.Add(this.SaveButton, 1, 0);
             this.generalSplitLayout.Controls.Add(this.configName, 0, 0);
-            this.generalSplitLayout.Location = new System.Drawing.Point(3, 3);
+            this.generalSplitLayout.Controls.Add(this.tableLayoutPanel1, 1, 0);
+            this.generalSplitLayout.Location = new System.Drawing.Point(3, 12);
             this.generalSplitLayout.Name = "generalSplitLayout";
             this.generalSplitLayout.RowCount = 1;
             this.generalSplitLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.generalSplitLayout.Size = new System.Drawing.Size(780, 48);
+            this.generalSplitLayout.Size = new System.Drawing.Size(780, 67);
             this.generalSplitLayout.TabIndex = 10;
-            // 
-            // SaveButton
-            // 
-            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveButton.Location = new System.Drawing.Point(560, 12);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(217, 23);
-            this.SaveButton.TabIndex = 3;
-            this.SaveButton.Text = "Save";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // configName
             // 
             this.configName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.configName.Label = "Configuration Name";
-            this.configName.Location = new System.Drawing.Point(3, 3);
+            this.configName.Location = new System.Drawing.Point(3, 12);
             this.configName.Name = "configName";
             this.configName.Size = new System.Drawing.Size(551, 42);
             this.configName.SplitPercentage = 40;
             this.configName.TabIndex = 4;
             this.configName.Value = "";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.saveButton, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.importMatchConfig, 0, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(560, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 61);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(3, 3);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 0;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // importMatchConfig
+            // 
+            this.importMatchConfig.Location = new System.Drawing.Point(3, 33);
+            this.importMatchConfig.Name = "importMatchConfig";
+            this.importMatchConfig.Size = new System.Drawing.Size(75, 23);
+            this.importMatchConfig.TabIndex = 1;
+            this.importMatchConfig.Text = "Import";
+            this.importMatchConfig.UseVisualStyleBackColor = true;
+            this.importMatchConfig.Click += new System.EventHandler(this.importButton_Click);
             // 
             // nChooseKLayout
             // 
@@ -179,11 +205,11 @@ namespace DOS2Randomizer.UI {
             // 
             this.memSlots.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.memSlots.Label = "Maximum number of memory slots";
-            this.memSlots.Location = new System.Drawing.Point(3, 69);
+            this.memSlots.Location = new System.Drawing.Point(3, 95);
             this.memSlots.Max = 100;
             this.memSlots.Min = 0;
             this.memSlots.Name = "memSlots";
-            this.memSlots.Size = new System.Drawing.Size(780, 150);
+            this.memSlots.Size = new System.Drawing.Size(780, 136);
             this.memSlots.SplitPercentage = 50;
             this.memSlots.TabIndex = 11;
             this.memSlots.Value = 0;
@@ -260,7 +286,7 @@ namespace DOS2Randomizer.UI {
             // 
             this.spellSearchLayout.ColumnCount = 1;
             this.spellSearchLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.spellSearchLayout.Controls.Add(this.import, 0, 0);
+            this.spellSearchLayout.Controls.Add(this.importSpells, 0, 0);
             this.spellSearchLayout.Controls.Add(this.spellSearch, 0, 1);
             this.spellSearchLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spellSearchLayout.Location = new System.Drawing.Point(3, 3);
@@ -271,16 +297,16 @@ namespace DOS2Randomizer.UI {
             this.spellSearchLayout.Size = new System.Drawing.Size(212, 115);
             this.spellSearchLayout.TabIndex = 1;
             // 
-            // import
+            // importSpells
             // 
-            this.import.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.import.Location = new System.Drawing.Point(134, 17);
-            this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(75, 23);
-            this.import.TabIndex = 1;
-            this.import.Text = "Import";
-            this.import.UseVisualStyleBackColor = true;
-            this.import.Click += new System.EventHandler(this.import_Click);
+            this.importSpells.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.importSpells.Location = new System.Drawing.Point(134, 17);
+            this.importSpells.Name = "importSpells";
+            this.importSpells.Size = new System.Drawing.Size(75, 23);
+            this.importSpells.TabIndex = 1;
+            this.importSpells.Text = "Import";
+            this.importSpells.UseVisualStyleBackColor = true;
+            this.importSpells.Click += new System.EventHandler(this.import_Click);
             // 
             // spellSearch
             // 
@@ -318,6 +344,7 @@ namespace DOS2Randomizer.UI {
             this.general.ResumeLayout(false);
             this.generalLayout.ResumeLayout(false);
             this.generalSplitLayout.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.nChooseKLayout.ResumeLayout(false);
             this.levelSpecific.ResumeLayout(false);
             this.spells.ResumeLayout(false);
@@ -334,7 +361,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TabPage general;
         private System.Windows.Forms.TabPage levelSpecific;
         private System.Windows.Forms.TabPage spells;
-        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.TableLayoutPanel nChooseKLayout;
         private System.Windows.Forms.TableLayoutPanel generalLayout;
         private System.Windows.Forms.TableLayoutPanel generalSplitLayout;
@@ -343,12 +369,15 @@ namespace DOS2Randomizer.UI {
         private LabeledValue k;
         private LabeledString configName;
         private SpellList spellList;
-        private System.Windows.Forms.Button import;
+        private System.Windows.Forms.Button importSpells;
         private System.Windows.Forms.TableLayoutPanel spellMainLayout;
         private System.Windows.Forms.TableLayoutPanel spellListLayout;
         private SpellDesignPanel spellDesignPanel1;
         private System.Windows.Forms.TableLayoutPanel spellSearchLayout;
         private SpellSearch spellSearch;
         private LevelSpecificTable levelSpecificTable;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button importMatchConfig;
     }
 }
