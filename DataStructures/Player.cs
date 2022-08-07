@@ -1,4 +1,6 @@
-﻿namespace DOS2Randomizer.DataStructures {
+﻿using System.Collections.Generic;
+
+namespace DOS2Randomizer.DataStructures {
     public enum Attribute {
         Strength,
         Int,
@@ -21,6 +23,9 @@
         public string Name { get; set; }
         public Spell[] KnownSpells { get; set; }
         public Spell[] EquippedSpells { get; set; }
+        public SkillType[] PossibleSkillTypes { get; set; }
+        public Dictionary<Attribute, int> Attributes;
+        public Dictionary<Spell.School, int> SkillPoints;
 
     }
 }
