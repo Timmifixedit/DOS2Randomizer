@@ -2,30 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using System.Linq;
 
 namespace DOS2Randomizer.UI {
 
     public partial class PlayerPanel : UserControl {
 
-        private Player _player;
+        private readonly Player _player;
+        private readonly Spell[] _spells;
         public Action OnRemoveClick;
-        public ValueChangedEvent<PlayerPanel> OnAddSpellsClick;
-
-        public Player Player {
-            get => _player;
-            set {
-                _player = value;
-                if (_player != null) {
-                    UnsubscribeFromControls();
-                    RefreshUi();
-                    SubscribeToControls();
-                }
-            }
-        }
 
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => {
@@ -63,7 +53,7 @@ namespace DOS2Randomizer.UI {
             possibleSkillTypes.OnValueChanged = null;
         }
 
-        void RefreshUi() {
+        void UpdateUi() {
             playerName.Value = _player.Name;
             playerLevel.Value = _player.Level;
             attributePointsPanel1.Value = _player.Attributes;
@@ -73,8 +63,17 @@ namespace DOS2Randomizer.UI {
             equippedSpellList.Spells = _player.EquippedSpells;
         }
 
-        public PlayerPanel() {
+        private void RefreshUi() {
+            UnsubscribeFromControls();
+            UpdateUi();
+            SubscribeToControls();
+        }
+
+        public PlayerPanel([DisallowNull]Player player, [DisallowNull]Spell[] allSpells) {
+            _player = player;
+            _spells = allSpells;
             InitializeComponent();
+            RefreshUi();
         }
 
         private void remove_Click(object sender, EventArgs e) {
@@ -82,7 +81,16 @@ namespace DOS2Randomizer.UI {
         }
 
         private void addSpells_Click(object sender, EventArgs e) {
-            OnAddSpellsClick?.Invoke(this);
+            var spellChooseDialog = new SpellChooseDialog(_spells) {
+                OnConfirm = value => {
+                    _player.KnownSpells = (_player.KnownSpells ?? new Spell[0]).Concat(value).Distinct().ToArray();
+                    UnsubscribeFromControls();
+                    UpdateUi();
+                    SubscribeToControls();
+                },
+                Visible = true
+            };
+            spellChooseDialog.Activate();
         }
     }
 }

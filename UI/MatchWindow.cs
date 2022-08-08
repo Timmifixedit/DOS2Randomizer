@@ -12,7 +12,7 @@ using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
     public partial class MatchWindow : Form {
-        private MatchConfig _config;
+        private readonly MatchConfig _config;
 
         private Player[] Players {
             get => _config.Players;
@@ -25,8 +25,7 @@ namespace DOS2Randomizer.UI {
         private void GeneratePlayerPanels() {
             playersLayout.Controls.Clear();
             foreach (var player in Players) {
-                var playerPanel = new PlayerPanel
-                    {Player = player, OnRemoveClick = () => RemovePlayer(player), OnAddSpellsClick = AddSpellsManually};
+                var playerPanel = new PlayerPanel(player, _config.Spells) {OnRemoveClick = () => RemovePlayer(player)};
                 playersLayout.Controls.Add(playerPanel);
             }
         }
@@ -63,21 +62,6 @@ namespace DOS2Randomizer.UI {
 
         private void RemovePlayer(Player player) {
             Players = Players.Except(new[] {player}).ToArray();
-        }
-
-        private void AddSpellsManually(PlayerPanel playerPanel) {
-            var spellChooseDialog = new SpellChooseDialog(_config.Spells) {
-                OnConfirm = value => { AddSpellsToPlayerPanel(value, playerPanel);},
-                Visible = true
-            };
-            spellChooseDialog.Activate();
-        }
-
-        private void AddSpellsToPlayerPanel(Spell[] spells, PlayerPanel playerPanel) {
-            var player = playerPanel.Player;
-            player.KnownSpells = (player.KnownSpells ?? new Spell[0]).Concat(spells).Distinct().ToArray();
-            playerPanel.Player = player;
-
         }
     }
 }
