@@ -41,11 +41,12 @@ namespace DOS2Randomizer.DataStructures {
             Scaling = Attribute.None;
             MemorySlots = 1;
             LoadoutCost = 0;
+            EquipmentRequirement = Player.SkillType.None;
         }
 
         [JsonConstructor]
         public Spell(string name, string imagePath, int level, Spell[] dependencies,
-            Dictionary<School, int> schoolRequirements, Type[] types,
+            Dictionary<School, int> schoolRequirements, Player.SkillType equipmentRequirement, Type[] types,
             Attribute scaling, int memorySlots, int loadoutCost) {
             Name = name;
             ImagePath = imagePath;
@@ -56,6 +57,7 @@ namespace DOS2Randomizer.DataStructures {
             Scaling = scaling;
             MemorySlots = memorySlots;
             LoadoutCost = loadoutCost;
+            EquipmentRequirement = equipmentRequirement;
         }
 
         public string Name { get; set; }
@@ -63,6 +65,7 @@ namespace DOS2Randomizer.DataStructures {
         public int Level { get; set; }
         public Spell[] Dependencies { get; set; }
         public Dictionary<School, int> SchoolRequirements { get; set; }
+        public Player.SkillType EquipmentRequirement { get; set; }
         public Type[] Types { get; set; }
         public Attribute Scaling { get; set; }
         public int MemorySlots { get; set; }

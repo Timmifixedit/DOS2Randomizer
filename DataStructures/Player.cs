@@ -16,7 +16,8 @@ namespace DOS2Randomizer.DataStructures {
             Melee,
             Archer,
             Shield,
-            Dagger
+            Dagger,
+            None
         }
 
         public int Level { get; set; }
