@@ -29,6 +29,8 @@ namespace DOS2Randomizer.UI {
             this.skillPointsPanel1 = new DOS2Randomizer.UI.SkillPointsPanel();
             this.possibleSkillTypes = new DOS2Randomizer.UI.LabeledSkillTypeSelection();
             this.attributePointsPanel1 = new DOS2Randomizer.UI.AttributePointsPanel();
+            this.knownSpellList = new DOS2Randomizer.UI.SearchableSpellList();
+            this.equippedSpellList = new DOS2Randomizer.UI.SearchableSpellList();
             this.SuspendLayout();
             // 
             // playerName
@@ -56,7 +58,7 @@ namespace DOS2Randomizer.UI {
             // skillPointsPanel1
             // 
             this.skillPointsPanel1.ExcludedValues = null;
-            this.skillPointsPanel1.Location = new System.Drawing.Point(268, 47);
+            this.skillPointsPanel1.Location = new System.Drawing.Point(260, 31);
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);
             this.skillPointsPanel1.TabIndex = 2;
@@ -82,17 +84,39 @@ namespace DOS2Randomizer.UI {
             this.attributePointsPanel1.Size = new System.Drawing.Size(150, 261);
             this.attributePointsPanel1.TabIndex = 4;
             // 
+            // knownSpellList
+            // 
+            this.knownSpellList.Label = "Known Spells";
+            this.knownSpellList.Location = new System.Drawing.Point(0, 407);
+            this.knownSpellList.Name = "knownSpellList";
+            this.knownSpellList.Size = new System.Drawing.Size(620, 123);
+            this.knownSpellList.Spells = null;
+            this.knownSpellList.SplitPercentage = 29;
+            this.knownSpellList.TabIndex = 5;
+            // 
+            // equippedSpellList
+            // 
+            this.equippedSpellList.Label = "All known spells";
+            this.equippedSpellList.Location = new System.Drawing.Point(0, 536);
+            this.equippedSpellList.Name = "equippedSpellList";
+            this.equippedSpellList.Size = new System.Drawing.Size(620, 123);
+            this.equippedSpellList.Spells = null;
+            this.equippedSpellList.SplitPercentage = 29;
+            this.equippedSpellList.TabIndex = 6;
+            // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.equippedSpellList);
+            this.Controls.Add(this.knownSpellList);
             this.Controls.Add(this.attributePointsPanel1);
             this.Controls.Add(this.possibleSkillTypes);
             this.Controls.Add(this.skillPointsPanel1);
             this.Controls.Add(this.playerLevel);
             this.Controls.Add(this.playerName);
             this.Name = "PlayerPanel";
-            this.Size = new System.Drawing.Size(433, 388);
+            this.Size = new System.Drawing.Size(626, 679);
             this.ResumeLayout(false);
 
         }
@@ -104,5 +128,7 @@ namespace DOS2Randomizer.UI {
         private UI.SkillPointsPanel skillPointsPanel1;
         private UI.LabeledSkillTypeSelection possibleSkillTypes;
         private UI.AttributePointsPanel attributePointsPanel1;
+        private SearchableSpellList knownSpellList;
+        private SearchableSpellList equippedSpellList;
     }
 }
