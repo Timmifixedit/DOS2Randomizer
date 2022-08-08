@@ -27,10 +27,10 @@ namespace DOS2Randomizer.UI {
             this.playerName = new DOS2Randomizer.UI.LabeledString();
             this.playerLevel = new DOS2Randomizer.UI.LabeledValue();
             this.skillPointsPanel1 = new DOS2Randomizer.UI.SkillPointsPanel();
-            this.possibleSkillTypes = new DOS2Randomizer.UI.LabeledSkillTypeSelection();
             this.attributePointsPanel1 = new DOS2Randomizer.UI.AttributePointsPanel();
             this.knownSpellList = new DOS2Randomizer.UI.SearchableSpellList();
             this.equippedSpellList = new DOS2Randomizer.UI.SearchableSpellList();
+            this.possibleSkillTypes = new DOS2Randomizer.UI.LabeledSkillTypeSelection();
             this.SuspendLayout();
             // 
             // playerName
@@ -58,28 +58,16 @@ namespace DOS2Randomizer.UI {
             // skillPointsPanel1
             // 
             this.skillPointsPanel1.ExcludedValues = null;
-            this.skillPointsPanel1.Location = new System.Drawing.Point(260, 31);
+            this.skillPointsPanel1.Location = new System.Drawing.Point(3, 61);
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);
             this.skillPointsPanel1.TabIndex = 2;
-            // 
-            // possibleSkillTypes
-            // 
-            this.possibleSkillTypes.Data = null;
-            this.possibleSkillTypes.DisplayMember = null;
-            this.possibleSkillTypes.Label = "Possible Skill Types";
-            this.possibleSkillTypes.Location = new System.Drawing.Point(3, 61);
-            this.possibleSkillTypes.Name = "possibleSkillTypes";
-            this.possibleSkillTypes.Size = new System.Drawing.Size(234, 33);
-            this.possibleSkillTypes.SplitPercentage = 50;
-            this.possibleSkillTypes.TabIndex = 3;
-            this.possibleSkillTypes.Value = new DOS2Randomizer.DataStructures.Player.SkillType[0];
             // 
             // attributePointsPanel1
             // 
             this.attributePointsPanel1.ExcludedValues = new DOS2Randomizer.DataStructures.Attribute[] {
         DOS2Randomizer.DataStructures.Attribute.None};
-            this.attributePointsPanel1.Location = new System.Drawing.Point(3, 100);
+            this.attributePointsPanel1.Location = new System.Drawing.Point(243, 130);
             this.attributePointsPanel1.Name = "attributePointsPanel1";
             this.attributePointsPanel1.Size = new System.Drawing.Size(150, 261);
             this.attributePointsPanel1.TabIndex = 4;
@@ -87,7 +75,7 @@ namespace DOS2Randomizer.UI {
             // knownSpellList
             // 
             this.knownSpellList.Label = "Known Spells";
-            this.knownSpellList.Location = new System.Drawing.Point(0, 407);
+            this.knownSpellList.Location = new System.Drawing.Point(0, 397);
             this.knownSpellList.Name = "knownSpellList";
             this.knownSpellList.Size = new System.Drawing.Size(620, 123);
             this.knownSpellList.Spells = null;
@@ -97,26 +85,43 @@ namespace DOS2Randomizer.UI {
             // equippedSpellList
             // 
             this.equippedSpellList.Label = "All known spells";
-            this.equippedSpellList.Location = new System.Drawing.Point(0, 536);
+            this.equippedSpellList.Location = new System.Drawing.Point(0, 526);
             this.equippedSpellList.Name = "equippedSpellList";
             this.equippedSpellList.Size = new System.Drawing.Size(620, 123);
             this.equippedSpellList.Spells = null;
             this.equippedSpellList.SplitPercentage = 29;
             this.equippedSpellList.TabIndex = 6;
             // 
+            // possibleSkillTypes
+            // 
+            this.possibleSkillTypes.Data = new DOS2Randomizer.DataStructures.Player.SkillType[] {
+        DOS2Randomizer.DataStructures.Player.SkillType.Melee,
+        DOS2Randomizer.DataStructures.Player.SkillType.Archer,
+        DOS2Randomizer.DataStructures.Player.SkillType.Shield,
+        DOS2Randomizer.DataStructures.Player.SkillType.Dagger,
+        DOS2Randomizer.DataStructures.Player.SkillType.None};
+            this.possibleSkillTypes.DisplayMember = null;
+            this.possibleSkillTypes.Label = "Loadout";
+            this.possibleSkillTypes.Location = new System.Drawing.Point(243, 3);
+            this.possibleSkillTypes.Name = "possibleSkillTypes";
+            this.possibleSkillTypes.Size = new System.Drawing.Size(150, 111);
+            this.possibleSkillTypes.SplitPercentage = 40;
+            this.possibleSkillTypes.TabIndex = 7;
+            this.possibleSkillTypes.Value = new DOS2Randomizer.DataStructures.Player.SkillType[0];
+            // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.possibleSkillTypes);
             this.Controls.Add(this.equippedSpellList);
             this.Controls.Add(this.knownSpellList);
             this.Controls.Add(this.attributePointsPanel1);
-            this.Controls.Add(this.possibleSkillTypes);
             this.Controls.Add(this.skillPointsPanel1);
             this.Controls.Add(this.playerLevel);
             this.Controls.Add(this.playerName);
             this.Name = "PlayerPanel";
-            this.Size = new System.Drawing.Size(626, 679);
+            this.Size = new System.Drawing.Size(626, 656);
             this.ResumeLayout(false);
 
         }
@@ -126,9 +131,9 @@ namespace DOS2Randomizer.UI {
         private UI.LabeledString playerName;
         private UI.LabeledValue playerLevel;
         private UI.SkillPointsPanel skillPointsPanel1;
-        private UI.LabeledSkillTypeSelection possibleSkillTypes;
         private UI.AttributePointsPanel attributePointsPanel1;
         private SearchableSpellList knownSpellList;
         private SearchableSpellList equippedSpellList;
+        private LabeledSkillTypeSelection possibleSkillTypes;
     }
 }

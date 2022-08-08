@@ -62,7 +62,7 @@ namespace DOS2Randomizer.UI {
         }
 
         void RefreshUi() {
-            playerName.Text = _player.Name;
+            playerName.Value = _player.Name;
             playerLevel.Value = _player.Level;
             attributePointsPanel1.Value = _player.Attributes;
             skillPointsPanel1.Value = _player.SkillPoints;
