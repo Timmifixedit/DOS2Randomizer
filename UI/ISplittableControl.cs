@@ -36,14 +36,4 @@ namespace DOS2Randomizer.UI {
             }
         }
     }
-
-   /* public static class SplittableExtension {
-        public static void SplitPercentage(this ISplittableControl control, int value) {
-            control.SplitPercentageProperty = value;
-        }
-
-        public static int SplitPercentage(this ISplittableControl control) {
-            return control.SplitPercentageProperty;
-        }
-    }*/
 }
