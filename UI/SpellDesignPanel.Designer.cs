@@ -37,6 +37,7 @@ namespace DOS2Randomizer.UI {
             this.dependenciesLayout = new System.Windows.Forms.TableLayoutPanel();
             this.search = new DOS2Randomizer.UI.SpellSearch();
             this.skillPointsPanel1 = new DOS2Randomizer.UI.SkillPointsPanel();
+            this.requiredEquipment = new DOS2Randomizer.UI.LabeledEquipType();
             this.mainLayout.SuspendLayout();
             this.flowLayout.SuspendLayout();
             this.flowLayoutSelections.SuspendLayout();
@@ -125,6 +126,7 @@ namespace DOS2Randomizer.UI {
             this.flowLayout.Controls.Add(this.attributeBox);
             this.flowLayout.Controls.Add(this.memSlots);
             this.flowLayout.Controls.Add(this.cost);
+            this.flowLayout.Controls.Add(this.requiredEquipment);
             this.flowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayout.Location = new System.Drawing.Point(3, 3);
             this.flowLayout.Name = "flowLayout";
@@ -194,10 +196,21 @@ namespace DOS2Randomizer.UI {
             // 
             // skillPointsPanel1
             // 
+            this.skillPointsPanel1.ExcludedValues = null;
             this.skillPointsPanel1.Location = new System.Drawing.Point(253, 3);
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);
             this.skillPointsPanel1.TabIndex = 2;
+            // 
+            // requiredEquipment
+            // 
+            this.requiredEquipment.Label = "Requires Equipment";
+            this.requiredEquipment.Location = new System.Drawing.Point(3, 183);
+            this.requiredEquipment.Name = "requiredEquipment";
+            this.requiredEquipment.Size = new System.Drawing.Size(191, 30);
+            this.requiredEquipment.SplitPercentage = 50;
+            this.requiredEquipment.TabIndex = 6;
+            this.requiredEquipment.Value = DOS2Randomizer.DataStructures.Player.SkillType.Melee;
             // 
             // SpellDesignPanel
             // 
@@ -229,5 +242,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel dependenciesLayout;
         private SpellSearch search;
         private SkillPointsPanel skillPointsPanel1;
+        private LabeledEquipType requiredEquipment;
     }
 }
