@@ -26,7 +26,7 @@ namespace DOS2Randomizer.Util {
 
         public static void SaveConfig<T>(T config, string fileName) {
             try {
-                using var file = File.OpenWrite(fileName);
+                using var file = File.Open(fileName, FileMode.Create);
                 using var writer = new StreamWriter(file);
                 var json = JsonConvert.SerializeObject(config);
                 writer.Write(json);
