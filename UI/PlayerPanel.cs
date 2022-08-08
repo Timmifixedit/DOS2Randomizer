@@ -13,6 +13,7 @@ namespace DOS2Randomizer.UI {
 
         private Player _player;
         public Action OnRemoveClick;
+        public ValueChangedEvent<PlayerPanel> OnAddSpellsClick;
 
         public Player Player {
             get => _player;
@@ -78,6 +79,10 @@ namespace DOS2Randomizer.UI {
 
         private void remove_Click(object sender, EventArgs e) {
             OnRemoveClick?.Invoke();
+        }
+
+        private void addSpells_Click(object sender, EventArgs e) {
+            OnAddSpellsClick?.Invoke(this);
         }
     }
 }

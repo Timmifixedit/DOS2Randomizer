@@ -14,18 +14,20 @@ namespace DOS2Randomizer.UI {
 
         public ValueChangedEvent<Spell[]> OnConfirm;
         public SpellChooseDialog([DisallowNull]Spell[] spells) {
-            fromList.Spells = spells;
-            fromList.OnImageClick = spell => { MoveSpellTo(spell, selectionList); };
-            selectionList.OnImageClick = spell => { MoveSpellTo(spell, fromList); };
             InitializeComponent();
+            fromList.Spells = (Spell[]) spells.Clone();
+            fromList.OnImageClick = spell => { MoveSpellTo(spell, fromList, selectionList); };
+            selectionList.OnImageClick = spell => { MoveSpellTo(spell, fromList, selectionList); };
         }
 
-        private void MoveSpellTo(Spell spell, ISpellCollection destination) {
-            destination.SpellCollection = (selectionList.Spells ?? new Spell[0]).Append(spell).ToArray();
+        private void MoveSpellTo(Spell spell, ISpellCollection source, ISpellCollection destination) {
+            destination.SpellCollection = (destination.SpellCollection ?? new Spell[0]).Append(spell).ToArray();
+            source.SpellCollection = source.SpellCollection.Except(new[] {spell}).ToArray();
         }
 
         private void confirm_Click(object sender, EventArgs e) {
             OnConfirm?.Invoke(selectionList.Spells);
+            this.Close();
         }
     }
 }

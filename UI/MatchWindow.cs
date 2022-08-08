@@ -25,7 +25,8 @@ namespace DOS2Randomizer.UI {
         private void GeneratePlayerPanels() {
             playersLayout.Controls.Clear();
             foreach (var player in Players) {
-                var playerPanel = new PlayerPanel {Player = player, OnRemoveClick = () => RemovePlayer(player)};
+                var playerPanel = new PlayerPanel
+                    {Player = player, OnRemoveClick = () => RemovePlayer(player), OnAddSpellsClick = AddSpellsManually};
                 playersLayout.Controls.Add(playerPanel);
             }
         }
@@ -62,6 +63,21 @@ namespace DOS2Randomizer.UI {
 
         private void RemovePlayer(Player player) {
             Players = Players.Except(new[] {player}).ToArray();
+        }
+
+        private void AddSpellsManually(PlayerPanel playerPanel) {
+            var spellChooseDialog = new SpellChooseDialog(_config.Spells) {
+                OnConfirm = value => { AddSpellsToPlayerPanel(value, playerPanel);},
+                Visible = true
+            };
+            spellChooseDialog.Activate();
+        }
+
+        private void AddSpellsToPlayerPanel(Spell[] spells, PlayerPanel playerPanel) {
+            var player = playerPanel.Player;
+            player.KnownSpells = (player.KnownSpells ?? new Spell[0]).Concat(spells).Distinct().ToArray();
+            playerPanel.Player = player;
+
         }
     }
 }
