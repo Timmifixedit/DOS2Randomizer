@@ -12,6 +12,7 @@ namespace DOS2Randomizer.UI {
     public partial class PlayerPanel : UserControl {
 
         private Player _player;
+        public Action OnRemoveClick;
 
         public Player Player {
             get => _player;
@@ -73,6 +74,10 @@ namespace DOS2Randomizer.UI {
 
         public PlayerPanel() {
             InitializeComponent();
+        }
+
+        private void remove_Click(object sender, EventArgs e) {
+            OnRemoveClick?.Invoke();
         }
     }
 }

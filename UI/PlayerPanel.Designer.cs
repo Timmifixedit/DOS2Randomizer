@@ -31,6 +31,7 @@ namespace DOS2Randomizer.UI {
             this.knownSpellList = new DOS2Randomizer.UI.SearchableSpellList();
             this.equippedSpellList = new DOS2Randomizer.UI.SearchableSpellList();
             this.possibleSkillTypes = new DOS2Randomizer.UI.LabeledSkillTypeSelection();
+            this.remove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playerName
@@ -109,10 +110,21 @@ namespace DOS2Randomizer.UI {
             this.possibleSkillTypes.TabIndex = 7;
             this.possibleSkillTypes.Value = new DOS2Randomizer.DataStructures.Player.SkillType[0];
             // 
+            // remove
+            // 
+            this.remove.Location = new System.Drawing.Point(544, 4);
+            this.remove.Name = "remove";
+            this.remove.Size = new System.Drawing.Size(75, 23);
+            this.remove.TabIndex = 8;
+            this.remove.Text = "Remove";
+            this.remove.UseVisualStyleBackColor = true;
+            this.remove.Click += new System.EventHandler(this.remove_Click);
+            // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.remove);
             this.Controls.Add(this.possibleSkillTypes);
             this.Controls.Add(this.equippedSpellList);
             this.Controls.Add(this.knownSpellList);
@@ -135,5 +147,6 @@ namespace DOS2Randomizer.UI {
         private SearchableSpellList knownSpellList;
         private SearchableSpellList equippedSpellList;
         private LabeledSkillTypeSelection possibleSkillTypes;
+        private System.Windows.Forms.Button remove;
     }
 }

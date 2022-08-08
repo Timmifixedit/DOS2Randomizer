@@ -25,7 +25,7 @@ namespace DOS2Randomizer.UI {
         private void GeneratePlayerPanels() {
             playersLayout.Controls.Clear();
             foreach (var player in Players) {
-                var playerPanel = new PlayerPanel{Player = player};
+                var playerPanel = new PlayerPanel {Player = player, OnRemoveClick = () => RemovePlayer(player)};
                 playersLayout.Controls.Add(playerPanel);
             }
         }
@@ -58,6 +58,10 @@ namespace DOS2Randomizer.UI {
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
             }
+        }
+
+        private void RemovePlayer(Player player) {
+            Players = Players.Except(new[] {player}).ToArray();
         }
     }
 }
