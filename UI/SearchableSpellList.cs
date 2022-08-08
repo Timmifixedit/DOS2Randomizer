@@ -24,6 +24,11 @@ namespace DOS2Randomizer.UI {
             set => (this as ISplittableControl).SplitPercentageImpl = value;
         }
 
+        public string Label {
+            get => label.Text;
+            set => label.Text = value;
+        }
+
         public ImageClickEvent OnImageClick;
         public TableLayoutPanel LayoutPanel => layout;
     }

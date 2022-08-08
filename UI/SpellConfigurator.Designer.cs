@@ -106,6 +106,7 @@ namespace DOS2Randomizer.UI {
             // spellList
             // 
             this.spellList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellList.Label = "";
             this.spellList.Location = new System.Drawing.Point(164, 3);
             this.spellList.Name = "spellList";
             this.spellList.Size = new System.Drawing.Size(627, 123);

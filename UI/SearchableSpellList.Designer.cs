@@ -27,7 +27,10 @@ namespace DOS2Randomizer.UI {
             this.layout = new System.Windows.Forms.TableLayoutPanel();
             this.search = new DOS2Randomizer.UI.SpellSearch();
             this.spellList = new DOS2Randomizer.UI.SpellList();
+            this.labelSearchLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.label = new System.Windows.Forms.Label();
             this.layout.SuspendLayout();
+            this.labelSearchLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // layout
@@ -35,8 +38,8 @@ namespace DOS2Randomizer.UI {
             this.layout.ColumnCount = 2;
             this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.77698F));
             this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.22302F));
-            this.layout.Controls.Add(this.search, 0, 0);
             this.layout.Controls.Add(this.spellList, 1, 0);
+            this.layout.Controls.Add(this.labelSearchLayout, 0, 0);
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout.Location = new System.Drawing.Point(0, 0);
             this.layout.Name = "layout";
@@ -51,10 +54,10 @@ namespace DOS2Randomizer.UI {
             this.search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.search.CaseSensitive = false;
             this.search.Label = "Search";
-            this.search.Location = new System.Drawing.Point(3, 45);
+            this.search.Location = new System.Drawing.Point(3, 79);
             this.search.ManagedCollection = this.spellList;
             this.search.Name = "search";
-            this.search.Size = new System.Drawing.Size(179, 64);
+            this.search.Size = new System.Drawing.Size(173, 64);
             this.search.SplitPercentage = 35;
             this.search.TabIndex = 0;
             this.search.Value = "";
@@ -69,6 +72,32 @@ namespace DOS2Randomizer.UI {
             this.spellList.Spells = null;
             this.spellList.TabIndex = 1;
             // 
+            // labelSearchLayout
+            // 
+            this.labelSearchLayout.ColumnCount = 1;
+            this.labelSearchLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.labelSearchLayout.Controls.Add(this.search, 0, 1);
+            this.labelSearchLayout.Controls.Add(this.label, 0, 0);
+            this.labelSearchLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelSearchLayout.Location = new System.Drawing.Point(3, 3);
+            this.labelSearchLayout.Name = "labelSearchLayout";
+            this.labelSearchLayout.RowCount = 2;
+            this.labelSearchLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.labelSearchLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.labelSearchLayout.Size = new System.Drawing.Size(179, 148);
+            this.labelSearchLayout.TabIndex = 2;
+            // 
+            // label
+            // 
+            this.label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label.AutoSize = true;
+            this.label.Location = new System.Drawing.Point(3, 29);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(173, 15);
+            this.label.TabIndex = 1;
+            this.label.Text = "label1";
+            this.label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // SearchableSpellList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -77,6 +106,8 @@ namespace DOS2Randomizer.UI {
             this.Name = "SearchableSpellList";
             this.Size = new System.Drawing.Size(644, 154);
             this.layout.ResumeLayout(false);
+            this.labelSearchLayout.ResumeLayout(false);
+            this.labelSearchLayout.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -86,5 +117,7 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel layout;
         private SpellSearch search;
         private SpellList spellList;
+        private System.Windows.Forms.TableLayoutPanel labelSearchLayout;
+        private System.Windows.Forms.Label label;
     }
 }

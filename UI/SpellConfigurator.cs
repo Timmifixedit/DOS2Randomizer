@@ -9,7 +9,6 @@ using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 using DOS2Randomizer.Util;
-using Newtonsoft.Json;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace DOS2Randomizer.UI {
