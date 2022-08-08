@@ -24,7 +24,7 @@ namespace DOS2Randomizer.UI {
             if (fileChooser.ShowDialog() == DialogResult.OK) {
                 var config = FileIo.ImportConfig<MatchConfig>(fileChooser.FileName);
                 if (config != null) {
-                    var window = new MatchWindow {Visible = true, Text = config.Name};
+                    var window = new MatchWindow(config) {Visible = true, Text = config.Name};
                     window.Activate();
                 }
             }
