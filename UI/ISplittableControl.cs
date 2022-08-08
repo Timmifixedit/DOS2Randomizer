@@ -8,7 +8,8 @@ namespace DOS2Randomizer.UI {
 
     public interface ISplittableControl {
         public TableLayoutPanel LayoutPanel { get; }
-        public int SplitPercentageProperty {
+        public int SplitPercentage { get; set; }
+        public int SplitPercentageImpl {
             get {
                 var styles = LayoutPanel.ColumnStyles;
                 if (styles.Count != 2) {

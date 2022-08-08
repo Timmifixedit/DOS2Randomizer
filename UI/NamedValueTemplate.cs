@@ -17,8 +17,8 @@ namespace DOS2Randomizer.UI {
         }
 
         public int SplitPercentage {
-            get => (this as ISplittableControl).SplitPercentageProperty;
-            set => (this as ISplittableControl).SplitPercentageProperty = value;
+            get => (this as ISplittableControl).SplitPercentageImpl;
+            set => (this as ISplittableControl).SplitPercentageImpl = value;
         }
 
         public NamedValueTemplate() {
