@@ -41,7 +41,7 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = ".json"};
+            using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
                 FileIo.SaveConfig(Spells, fileChooser.FileName);
             }

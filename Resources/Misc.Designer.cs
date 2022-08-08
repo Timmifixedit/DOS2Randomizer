@@ -61,6 +61,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die .json ähnelt.
+        /// </summary>
+        internal static string JsonExtension {
+            get {
+                return ResourceManager.GetString("JsonExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die json files (*.json) | *.json ähnelt.
         /// </summary>
         internal static string JsonFilter {

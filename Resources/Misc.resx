@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="JsonExtension" xml:space="preserve">
+    <value>.json</value>
+  </data>
   <data name="JsonFilter" xml:space="preserve">
     <value>json files (*.json) | *.json</value>
   </data>
