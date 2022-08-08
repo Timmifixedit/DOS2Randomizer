@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    public partial class SearchableSpellList : UserControl, ISplittableControl {
+    public partial class SearchableSpellList : UserControl, ISplittableControl, ISpellCollection {
         public SearchableSpellList() {
             InitializeComponent();
             spellList.OnImageClick = spell => OnImageClick?.Invoke(spell);
@@ -31,5 +31,10 @@ namespace DOS2Randomizer.UI {
 
         public ImageClickEvent OnImageClick;
         public TableLayoutPanel LayoutPanel => layout;
+
+        public Spell[] SpellCollection {
+            get => Spells;
+            set => Spells = value;
+        }
     }
 }
