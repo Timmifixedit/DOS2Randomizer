@@ -34,10 +34,10 @@ namespace DOS2Randomizer.DataStructures {
             Name = name;
             ImagePath = imagePath;
             Level = 1;
-            Dependencies = new Spell[0];
+            Dependencies = Array.Empty<Spell>();
             SchoolRequirements = new Dictionary<School, int>(
                 ((School[]) Enum.GetValues(typeof(School))).Select(school => new KeyValuePair<School, int>(school, 0)));
-            Types = new Type[0];
+            Types = Array.Empty<Type>();
             Scaling = Attribute.None;
             MemorySlots = 1;
             LoadoutCost = 0;
@@ -71,7 +71,7 @@ namespace DOS2Randomizer.DataStructures {
         public int MemorySlots { get; set; }
         public int LoadoutCost { get; set; }
 
-        public bool Equals(Spell other) {
+        public bool Equals(Spell? other) {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Name == other.Name && ImagePath == other.ImagePath && Level == other.Level &&
@@ -79,7 +79,7 @@ namespace DOS2Randomizer.DataStructures {
                    MemorySlots == other.MemorySlots && LoadoutCost == other.LoadoutCost;
         }
 
-        private bool SequenceEqual<T>(IEnumerable<T> lhs, IEnumerable<T> rhs) {
+        private static bool SequenceEqual<T>(IEnumerable<T>? lhs, IEnumerable<T>? rhs) {
             if (ReferenceEquals(lhs, rhs)) {
                 return true;
             }
@@ -91,7 +91,7 @@ namespace DOS2Randomizer.DataStructures {
             return lhs.SequenceEqual(rhs);
         }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object? obj) {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
@@ -102,11 +102,11 @@ namespace DOS2Randomizer.DataStructures {
             return HashCode.Combine(Name, ImagePath, Level, Types, (int) Scaling, MemorySlots, LoadoutCost);
         }
 
-        public static bool operator ==(Spell left, Spell right) {
+        public static bool operator ==(Spell? left, Spell? right) {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Spell left, Spell right) {
+        public static bool operator !=(Spell? left, Spell? right) {
             return !Equals(left, right);
         }
     }

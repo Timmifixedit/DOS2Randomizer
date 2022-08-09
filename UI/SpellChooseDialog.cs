@@ -12,8 +12,8 @@ using DOS2Randomizer.DataStructures;
 namespace DOS2Randomizer.UI {
     public partial class SpellChooseDialog : Form {
 
-        public ValueChangedEvent<Spell[]> OnConfirm;
-        public SpellChooseDialog([DisallowNull]Spell[] spells) {
+        public ValueChangedEvent<Spell[]>? OnConfirm;
+        public SpellChooseDialog(Spell[] spells) {
             InitializeComponent();
             fromList.Spells = (Spell[]) spells.Clone();
             fromList.OnImageClick = spell => { MoveSpellTo(spell, fromList, selectionList); };
@@ -21,7 +21,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void MoveSpellTo(Spell spell, ISpellCollection source, ISpellCollection destination) {
-            destination.SpellCollection = (destination.SpellCollection ?? new Spell[0]).Append(spell).ToArray();
+            destination.SpellCollection = destination.SpellCollection.Append(spell).ToArray();
             source.SpellCollection = source.SpellCollection.Except(new[] {spell}).ToArray();
         }
 

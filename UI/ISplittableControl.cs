@@ -8,6 +8,7 @@ namespace DOS2Randomizer.UI {
 
     public interface ISplittableControl {
         public TableLayoutPanel LayoutPanel { get; }
+
         public int SplitPercentage { get; set; }
         public int SplitPercentageImpl {
             get {
@@ -24,7 +25,7 @@ namespace DOS2Randomizer.UI {
             }
 
             set {
-                if (value < 0 || value > 100) {
+                if (value is < 0 or > 100) {
                     throw new ArgumentException($"split percentage value must be in [0, 100], got {value}");
                 }
                 var styles = LayoutPanel.ColumnStyles;

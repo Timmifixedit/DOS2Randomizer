@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -8,10 +9,12 @@ using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
     class LabeledSelection<T> : NamedValueTemplate<T[]> {
-        private CheckedListBox _listBox;
-        private T[] _items;
-        private string _displayMember;
+        private readonly CheckedListBox _listBox;
+        private T[]? _items;
+        private string? _displayMember;
 
+                
+        [AllowNull]
         public override T[] Value {
             get => _listBox.CheckedItems.Cast<T>().ToArray();
             set {
@@ -19,19 +22,20 @@ namespace DOS2Randomizer.UI {
                     _listBox.SetItemChecked(i, false);
                 }
 
-                if (value != null) {
-                    foreach (var val in value) {
-                        int index = _listBox.Items.IndexOf(val);
-                        if (index != -1) {
-                            _listBox.SetItemChecked(index, true);
-                        }
+                if (value == null) {
+                    return;
+                }
+
+                foreach (var val in value) {
+                    if (val is not null && _listBox.Items.IndexOf(val) is var index && index != -1) {
+                        _listBox.SetItemChecked(index, true);
                     }
                 }
             }
         }
 
         public T[] Data {
-            get => _items;
+            get => _items ?? Array.Empty<T>();
             set {
                 _items = value;
                 _listBox.DataSource = _items;
@@ -39,7 +43,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public string DisplayMember {
+        public string? DisplayMember {
             get => _displayMember;
             set {
                 _displayMember = value;

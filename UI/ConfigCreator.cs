@@ -15,10 +15,6 @@ namespace DOS2Randomizer.UI {
             get => _matchConfig;
             set {
                 _matchConfig = value;
-                if (_matchConfig is null) {
-                    return;
-                }
-
                 Spells = _matchConfig.Spells;
                 levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents;
                 n.Value = _matchConfig.N;
@@ -59,15 +55,17 @@ namespace DOS2Randomizer.UI {
 
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                Spells = FileIo.ImportConfig<Spell[]>(fileChooser.FileName);
+            if (fileChooser.ShowDialog() == DialogResult.OK &&
+                FileIo.ImportConfig<Spell[]>(fileChooser.FileName) is {} s) {
+                Spells = s;
             }
         }
 
         private void importButton_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                Config = FileIo.ImportConfig<MatchConfig>(fileChooser.FileName);
+            if (fileChooser.ShowDialog() == DialogResult.OK &&
+                FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is { } config) {
+                Config = config;
             }
         }
     }

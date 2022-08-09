@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -8,8 +9,8 @@ using Newtonsoft.Json;
 
 namespace DOS2Randomizer.Util {
     static class FileIo {
-        public static T ImportConfig<T>(string fileName) where T : class {
-            T spells = null;
+        public static T? ImportConfig<T>(string fileName) where T : class {
+            T? spells = null;
             try {
                 using var file = File.OpenRead(fileName);
                 using var reader = new StreamReader(file);

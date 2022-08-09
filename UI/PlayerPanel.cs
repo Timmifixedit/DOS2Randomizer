@@ -15,34 +15,14 @@ namespace DOS2Randomizer.UI {
 
         private readonly Player _player;
         private readonly Spell[] _spells;
-        public Action OnRemoveClick;
+        public Action? OnRemoveClick;
 
         private void SubscribeToControls() {
-            playerName.OnValueChanged = value => {
-                if (_player != null) {
-                    _player.Name = value;
-                }
-            };
-            playerLevel.OnValueChanged = value => {
-                if (_player != null) {
-                    _player.Level = value;
-                }
-            };
-            attributePointsPanel1.OnValueChanged = value => {
-                if (_player != null) {
-                    _player.Attributes = value;
-                }
-            };
-            skillPointsPanel1.OnValueChanged = value => {
-                if (_player != null) {
-                    _player.SkillPoints = value;
-                }
-            };
-            possibleSkillTypes.OnValueChanged = value => {
-                if (_player != null) {
-                    _player.PossibleSkillTypes = value;
-                }
-            };
+            playerName.OnValueChanged = value => { _player.Name = value; };
+            playerLevel.OnValueChanged = value => { _player.Level = value; };
+            attributePointsPanel1.OnValueChanged = value => { _player.Attributes = value; };
+            skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value; };
+            possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value; };
         }
 
         private void UnsubscribeFromControls() {
@@ -69,7 +49,7 @@ namespace DOS2Randomizer.UI {
             SubscribeToControls();
         }
 
-        public PlayerPanel([DisallowNull]Player player, [DisallowNull]Spell[] allSpells) {
+        public PlayerPanel(Player player, Spell[] allSpells) {
             _player = player;
             _spells = allSpells;
             InitializeComponent();
@@ -83,7 +63,7 @@ namespace DOS2Randomizer.UI {
         private void addSpells_Click(object sender, EventArgs e) {
             var spellChooseDialog = new SpellChooseDialog(_spells) {
                 OnConfirm = value => {
-                    _player.KnownSpells = (_player.KnownSpells ?? new Spell[0]).Concat(value).Distinct().ToArray();
+                    _player.KnownSpells = _player.KnownSpells.Concat(value).Distinct().ToArray();
                     UnsubscribeFromControls();
                     UpdateUi();
                     SubscribeToControls();

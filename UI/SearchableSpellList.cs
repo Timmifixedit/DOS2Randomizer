@@ -15,7 +15,7 @@ namespace DOS2Randomizer.UI {
         }
 
         public Spell[] Spells {
-            get => search.AllSpells;
+            get => search.AllSpells ?? Array.Empty<Spell>();
             set => search.AllSpells = value;
         }
 
@@ -29,7 +29,7 @@ namespace DOS2Randomizer.UI {
             set => label.Text = value;
         }
 
-        public ImageClickEvent OnImageClick;
+        public ImageClickEvent? OnImageClick;
         public TableLayoutPanel LayoutPanel => layout;
 
         public Spell[] SpellCollection {

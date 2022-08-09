@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,16 +12,18 @@ namespace DOS2Randomizer.UI {
     public class PointsPanel<T> : BindingControl<Dictionary<T, int>> where T : Enum {
 
         private Dictionary<T, int> _pointLevels;
-        private TableLayoutPanel _layout;
-        public T[] ExcludedValues { get; set; }
+        private readonly TableLayoutPanel _layout;
+        private readonly T[]? _excludedValues;
 
-        public PointsPanel(IEnumerable<T> excludedValues) {
-            ExcludedValues = excludedValues?.ToArray();
+        private T[] ExcludedValues => _excludedValues ?? Array.Empty<T>();
+
+        public PointsPanel(IEnumerable<T>? excludedValues = null) {
+            _excludedValues = excludedValues?.ToArray();
             _pointLevels = new Dictionary<T, int>();
             var schoolTypes = (T[]) Enum.GetValues(typeof(T));
             _layout = new TableLayoutPanel {ColumnCount = 1, RowCount = schoolTypes.Length, Dock = DockStyle.Fill};
             int row = 0;
-            foreach (var type in schoolTypes.Except(ExcludedValues ?? Array.Empty<T>())) {
+            foreach (var type in schoolTypes.Except(ExcludedValues)) {
                 var valBox = new LabeledValue {
                     Label = type.ToString(), Anchor = (AnchorStyles.Left | AnchorStyles.Right), SplitPercentage = 70,
                     Name = type.ToString()
@@ -43,10 +46,9 @@ namespace DOS2Randomizer.UI {
             Controls.Add(_layout);
         }
 
-        public PointsPanel() : this(null) { }
-
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [AllowNull]
         public override Dictionary<T, int> Value {
             get => _pointLevels;
             set {

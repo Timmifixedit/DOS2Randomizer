@@ -30,10 +30,9 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public MatchWindow([DisallowNull]MatchConfig config) {
+        public MatchWindow(MatchConfig config) {
             _config = config;
             InitializeComponent();
-            Players ??= new Player[0];
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
             }
@@ -59,7 +58,6 @@ namespace DOS2Randomizer.UI {
                 addPlayer.Enabled = false;
             }
         }
-
         private void RemovePlayer(Player player) {
             Players = Players.Except(new[] {player}).ToArray();
         }

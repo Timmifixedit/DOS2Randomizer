@@ -13,10 +13,10 @@ using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace DOS2Randomizer.UI {
     public partial class SpellConfigurator : Form {
-        private Spell[] _spells;
+        private Spell[]? _spells;
 
         private Spell[] Spells {
-            get => _spells;
+            get => _spells ?? Array.Empty<Spell>();
             set {
                 _spells = value;
                 spellDesignPanel.AllSpells = _spells;
@@ -30,8 +30,9 @@ namespace DOS2Randomizer.UI {
 
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                Spells = FileIo.ImportConfig<Spell[]>(fileChooser.FileName);
+            if (fileChooser.ShowDialog() == DialogResult.OK &&
+                FileIo.ImportConfig<Spell[]>(fileChooser.FileName) is {} spells) {
+                Spells = spells;
             }
         }
 

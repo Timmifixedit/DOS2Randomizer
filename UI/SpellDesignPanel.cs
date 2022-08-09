@@ -10,12 +10,12 @@ using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
     public partial class SpellDesignPanel : UserControl {
-        private Spell _spell;
-        private Spell[] _allSpells;
+        private Spell? _spell;
+        private Spell[]? _allSpells;
         public SpellDesignPanel() {
             InitializeComponent();
             typeSelection.Data = (Spell.Type[]) Enum.GetValues(typeof(Spell.Type));
-            search.OnValueChanged += value => { dependencies.Value = _spell?.Dependencies; };
+            search.OnValueChanged += _ => { dependencies.Value = _spell?.Dependencies; };
             SubscribeToControls();
         }
 
@@ -48,7 +48,7 @@ namespace DOS2Randomizer.UI {
             dependencies.OnValueChanged = value => {
                 if (_spell != null) {
                     var removed = dependencies.Data.Except(value);
-                    _spell.Dependencies = (_spell.Dependencies ?? new Spell[0]).Except(removed).Union(value).ToArray();
+                    _spell.Dependencies = _spell.Dependencies.Except(removed).Union(value).ToArray();
                 }
             };
             memSlots.OnValueChanged = value => {
@@ -80,7 +80,7 @@ namespace DOS2Randomizer.UI {
             requiredEquipment.OnValueChanged = null;
         }
 
-        public Spell Spell {
+        public Spell? Spell {
             get => _spell;
             set {
                 _spell = value;
@@ -92,7 +92,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public Spell[] AllSpells {
+        public Spell[]? AllSpells {
             get => _allSpells;
             set {
                 _allSpells = value;
@@ -101,6 +101,10 @@ namespace DOS2Randomizer.UI {
         }
 
         private void RefreshUi() {
+            if (_spell is null) {
+                return;
+            }
+
             try {
                 name.Value = _spell.Name;
                 level.Value = _spell.Level;

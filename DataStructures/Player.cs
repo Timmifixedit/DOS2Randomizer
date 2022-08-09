@@ -26,9 +26,9 @@ namespace DOS2Randomizer.DataStructures {
         public Player() {
             Name = "";
             Level = 1;
-            KnownSpells = new Spell[0];
-            EquippedSpells = new Spell[0];
-            PossibleSkillTypes = new SkillType[0];
+            KnownSpells = Array.Empty<Spell>();
+            EquippedSpells = Array.Empty<Spell>();
+            PossibleSkillTypes = Array.Empty<SkillType>();
             Attributes = new Dictionary<Attribute, int>(((Attribute[]) Enum.GetValues(typeof(Spell.School))).Select(a =>
                 new KeyValuePair<Attribute, int>(a, 0)));
             SkillPoints = new Dictionary<Spell.School, int>(

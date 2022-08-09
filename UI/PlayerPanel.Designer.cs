@@ -59,7 +59,6 @@ namespace DOS2Randomizer.UI {
             // 
             // skillPointsPanel1
             // 
-            this.skillPointsPanel1.ExcludedValues = null;
             this.skillPointsPanel1.Location = new System.Drawing.Point(3, 61);
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);
@@ -67,8 +66,6 @@ namespace DOS2Randomizer.UI {
             // 
             // attributePointsPanel1
             // 
-            this.attributePointsPanel1.ExcludedValues = new DOS2Randomizer.DataStructures.Attribute[] {
-        DOS2Randomizer.DataStructures.Attribute.None};
             this.attributePointsPanel1.Location = new System.Drawing.Point(243, 130);
             this.attributePointsPanel1.Name = "attributePointsPanel1";
             this.attributePointsPanel1.Size = new System.Drawing.Size(150, 261);

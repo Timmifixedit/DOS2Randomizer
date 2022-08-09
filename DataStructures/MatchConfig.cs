@@ -18,8 +18,9 @@ namespace DOS2Randomizer.DataStructures {
 
         public MatchConfig() {
             LevelSpecificEvents = Enumerable.Range(1, MaxLevel).Select(i => new OnLevelUp(i, 0, 0, 0)).ToArray();
-            Spells = new Spell[0];
-            Players = new Player[0];
+            Name = "<Match config name>";
+            Spells = Array.Empty<Spell>();
+            Players = Array.Empty<Player>();
         }
 
         [JsonConstructor]

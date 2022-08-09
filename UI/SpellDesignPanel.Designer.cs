@@ -196,7 +196,6 @@ namespace DOS2Randomizer.UI {
             // 
             // skillPointsPanel1
             // 
-            this.skillPointsPanel1.ExcludedValues = null;
             this.skillPointsPanel1.Location = new System.Drawing.Point(253, 3);
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);

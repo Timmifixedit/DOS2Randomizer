@@ -13,7 +13,7 @@ namespace DOS2Randomizer.UI {
     public partial class SpellList : UserControl, ISpellCollection {
 
         private DataStructures.Spell[] _spells;
-        public ImageClickEvent OnImageClick;
+        public ImageClickEvent? OnImageClick;
         private int? _lastIndex;
 
         public DataStructures.Spell[] SpellCollection {
@@ -39,9 +39,7 @@ namespace DOS2Randomizer.UI {
             get => _spells;
             set {
                 _spells = value;
-                if (_spells != null) {
-                    RefreshImages();
-                }
+                RefreshImages();
             } 
         }
 
@@ -71,8 +69,9 @@ namespace DOS2Randomizer.UI {
         }
 
         public SpellList() {
+            _spells = Array.Empty<DataStructures.Spell>();
             InitializeComponent();
-            layout.Click += (sender, args) => HandleSelect(layout.SelectedIndices[0]);
+            layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
             layout.KeyDown += (sender, args) => {
                 if (args.KeyCode == Keys.Enter && layout.SelectedIndices.Count != 0) {
                     HandleSelect(layout.SelectedIndices[0]);
