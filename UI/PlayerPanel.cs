@@ -12,13 +12,11 @@ using System.Linq;
 namespace DOS2Randomizer.UI {
 
     public partial class PlayerPanel : UserControl {
-        public delegate void PlayerEvent(PlayerPanel player);
 
         private readonly Player _player;
-        public PlayerEvent? OnRemoveClick;
-        public PlayerEvent? OnDrawSpells;
-        public PlayerEvent? OnConfigureSpells;
-        public Player Player => _player;
+        public Action<Player>? OnRemoveClick;
+        public Action<PlayerPanel, int, Spell[]>? OnDrawSpells;
+        public Action<PlayerPanel, Spell[]>? OnConfigureSpells;
 
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
@@ -65,15 +63,15 @@ namespace DOS2Randomizer.UI {
         }
 
         private void remove_Click(object sender, EventArgs e) {
-            OnRemoveClick?.Invoke(this);
+            OnRemoveClick?.Invoke(_player);
         }
 
         private void configureSpells_Click(object sender, EventArgs e) {
-            OnConfigureSpells?.Invoke(this);
+            OnConfigureSpells?.Invoke(this, _player.KnownSpells);
         }
 
         private void drawSpells_Click(object sender, EventArgs e) {
-            
+            OnDrawSpells?.Invoke(this, _player.Level, _player.KnownSpells);           
         }
     }
 }

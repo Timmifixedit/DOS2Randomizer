@@ -121,6 +121,6 @@
     <value>Are you sure you want to remove {0} from squad?</value>
   </data>
   <data name="MaxNumberSpellsReached" xml:space="preserve">
-    <value>{0} has reached the maximum number of spells at level {1}.</value>
+    <value>This player has reached the maximum number of spells at level {0}.</value>
   </data>
 </root>

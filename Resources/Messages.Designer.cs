@@ -70,7 +70,7 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} has reached the maximum number of spells at level {1}..
+        ///   Looks up a localized string similar to This player has reached the maximum number of spells at level {0}..
         /// </summary>
         internal static string MaxNumberSpellsReached {
             get {
