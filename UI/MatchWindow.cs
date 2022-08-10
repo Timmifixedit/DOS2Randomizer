@@ -26,10 +26,8 @@ namespace DOS2Randomizer.UI {
         private void GeneratePlayerPanels() {
             playersLayout.Controls.Clear();
             foreach (var player in Players) {
-                var playerPanel = new PlayerPanel(player) {
+                var playerPanel = new PlayerPanel(player, _config) {
                     OnRemoveClick = RemovePlayer,
-                    OnConfigureSpells = ConfigurePlayerSpells,
-                    OnDrawSpells = DrawNewSpells
                 };
                 playersLayout.Controls.Add(playerPanel);
             }
@@ -69,39 +67,6 @@ namespace DOS2Randomizer.UI {
             if (confirmed == DialogResult.OK) {
                 Players = Players.Except(new[] {player}).ToArray();
                 addPlayer.Enabled = true;
-            }
-        }
-
-        private void ConfigurePlayerSpells(PlayerPanel playerPanel, Spell[] knownSpells) {
-            var spellChooseDialog = new SpellChooseDialog(_config.Spells.Except(knownSpells), knownSpells) {
-                FromListName = "Available Spells",
-                ToListName = "Known Spells",
-                OnConfirm = playerPanel.SetPlayerSpells,
-                Visible = true
-            };
-            spellChooseDialog.Activate();
-        }
-
-
-
-        private void DrawNewSpells(PlayerPanel panel, Player player) {
-            var level = player.Level;
-            if (_config.LevelSpecificEvents.Length < level) {
-                throw new InvalidOperationException("not enough level specific entries");
-            }
-
-            var maxSpellsToThisLevel = _config.LevelSpecificEvents.Take(level).Select(data => data.NewSpells).Sum();
-            var numSpellsKnown = player.KnownSpells.Length;
-            if (numSpellsKnown < maxSpellsToThisLevel) {
-                var numSpellsToChoose = Math.Min(_config.K, maxSpellsToThisLevel - numSpellsKnown);
-                var spellChooseDialog =
-                    new ChooseKDialog(new SpellChooser(_config, player), numSpellsToChoose, player.NumRerolls) {
-                        OnConfirm = spells => { panel.SetPlayerSpells(player.KnownSpells.Concat(spells)); },
-                        Visible = true
-                    };
-                spellChooseDialog.Activate();
-            } else {
-                MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, level));
             }
         }
     }

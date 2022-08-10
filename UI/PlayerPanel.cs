@@ -14,9 +14,8 @@ namespace DOS2Randomizer.UI {
     public partial class PlayerPanel : UserControl {
 
         private readonly Player _player;
+        private readonly MatchConfig _matchConfig;
         public Action<Player>? OnRemoveClick;
-        public Action<PlayerPanel, Player>? OnDrawSpells;
-        public Action<PlayerPanel, Spell[]>? OnConfigureSpells;
 
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
@@ -44,7 +43,7 @@ namespace DOS2Randomizer.UI {
             equippedSpellList.Spells = _player.EquippedSpells;
         }
 
-        public void SetPlayerSpells(IEnumerable<Spell> spells) {
+        private void SetPlayerSpells(IEnumerable<Spell> spells) {
             _player.KnownSpells = spells.ToArray();
             _player.EquippedSpells = _player.KnownSpells.Intersect(_player.EquippedSpells).ToArray();
             RefreshUi();
@@ -56,8 +55,9 @@ namespace DOS2Randomizer.UI {
             SubscribeToControls();
         }
 
-        public PlayerPanel(Player player) {
+        public PlayerPanel(Player player, MatchConfig matchConfig) {
             _player = player;
+            _matchConfig = matchConfig;
             InitializeComponent();
             RefreshUi();
         }
@@ -67,11 +67,35 @@ namespace DOS2Randomizer.UI {
         }
 
         private void configureSpells_Click(object sender, EventArgs e) {
-            OnConfigureSpells?.Invoke(this, _player.KnownSpells);
+            var spellChooseDialog =
+                new SpellChooseDialog(_matchConfig.Spells.Except(_player.KnownSpells), _player.KnownSpells) {
+                    FromListName = "Available Spells",
+                    ToListName = "Known Spells",
+                    OnConfirm = SetPlayerSpells,
+                    Visible = true
+                };
+            spellChooseDialog.Activate();
         }
 
         private void drawSpells_Click(object sender, EventArgs e) {
-            OnDrawSpells?.Invoke(this, _player);           
+            var level = _player.Level;
+            if (_matchConfig.LevelSpecificEvents.Length < level) {
+                throw new InvalidOperationException("not enough level specific entries");
+            }
+
+            var maxSpellsToThisLevel = _matchConfig.LevelSpecificEvents.Take(level).Select(data => data.NewSpells).Sum();
+            var numSpellsKnown = _player.KnownSpells.Length;
+            if (numSpellsKnown < maxSpellsToThisLevel) {
+                var numSpellsToChoose = Math.Min(_matchConfig.K, maxSpellsToThisLevel - numSpellsKnown);
+                var spellChooseDialog =
+                    new ChooseKDialog(new Logic.SpellChooser(_matchConfig, _player), numSpellsToChoose, _player.NumRerolls) {
+                        OnConfirm = spells => { SetPlayerSpells(_player.KnownSpells.Concat(spells)); },
+                        Visible = true
+                    };
+                spellChooseDialog.Activate();
+            } else {
+                MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, level));
+            }
         }
     }
 }
