@@ -48,13 +48,9 @@ namespace DOS2Randomizer.UI {
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [AllowNull]
         public override Dictionary<T, int> Value {
             get => _pointLevels;
             set {
-                if (value == null) {
-                    return;
-                }
                 _pointLevels = value;
                 foreach (T type in Enum.GetValues(typeof(T))) {
                     if (ExcludedValues != null && ExcludedValues.Contains(type)) {

@@ -27,7 +27,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void Search(string searchString) {
-            if (ManagedCollection is not  null && AllSpells is not null) {
+            if (ManagedCollection is not null && AllSpells is not null) {
                 ManagedCollection.Spells = AllSpells
                     .Where(spell => ManageCase(spell.Name).Contains(ManageCase(searchString))).ToArray();
             }
