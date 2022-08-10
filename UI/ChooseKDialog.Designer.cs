@@ -27,13 +27,14 @@
             this.source = new DOS2Randomizer.UI.SpellList();
             this.selection = new DOS2Randomizer.UI.SpellList();
             this.description = new System.Windows.Forms.Label();
+            this.reroll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // confirm
             // 
-            this.confirm.Location = new System.Drawing.Point(12, 12);
+            this.confirm.Location = new System.Drawing.Point(12, 224);
             this.confirm.Name = "confirm";
-            this.confirm.Size = new System.Drawing.Size(75, 23);
+            this.confirm.Size = new System.Drawing.Size(99, 23);
             this.confirm.TabIndex = 0;
             this.confirm.Text = "Confirm";
             this.confirm.UseVisualStyleBackColor = true;
@@ -58,17 +59,28 @@
             // description
             // 
             this.description.AutoSize = true;
-            this.description.Location = new System.Drawing.Point(12, 58);
+            this.description.Location = new System.Drawing.Point(12, 9);
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(38, 15);
             this.description.TabIndex = 3;
             this.description.Text = "label1";
+            // 
+            // reroll
+            // 
+            this.reroll.Location = new System.Drawing.Point(12, 27);
+            this.reroll.Name = "reroll";
+            this.reroll.Size = new System.Drawing.Size(99, 23);
+            this.reroll.TabIndex = 4;
+            this.reroll.Text = "Reroll";
+            this.reroll.UseVisualStyleBackColor = true;
+            this.reroll.Click += new System.EventHandler(this.reroll_Click);
             // 
             // ChooseKDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 259);
+            this.Controls.Add(this.reroll);
             this.Controls.Add(this.description);
             this.Controls.Add(this.selection);
             this.Controls.Add(this.source);
@@ -88,5 +100,6 @@
         private SpellList source;
         private SpellList selection;
         private System.Windows.Forms.Label description;
+        private System.Windows.Forms.Button reroll;
     }
 }

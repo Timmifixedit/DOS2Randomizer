@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.Logic;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
@@ -81,19 +82,23 @@ namespace DOS2Randomizer.UI {
             spellChooseDialog.Activate();
         }
 
-        private void DrawNewSpells(PlayerPanel panel, int level, Spell[] knownSpells) {
+
+
+        private void DrawNewSpells(PlayerPanel panel, Player player) {
+            var level = player.Level;
             if (_config.LevelSpecificEvents.Length < level) {
                 throw new InvalidOperationException("not enough level specific entries");
             }
 
             var maxSpellsToThisLevel = _config.LevelSpecificEvents.Take(level).Select(data => data.NewSpells).Sum();
-            if (knownSpells.Length < maxSpellsToThisLevel) {
-                var numSpellsToChoose = Math.Min(_config.K, maxSpellsToThisLevel - knownSpells.Length);
-                // @TODO generateSpells(player, _match, N)
-                // For testing purposes:
-                var spellSelection = _config.Spells.Except(knownSpells).Take(3);
-                var spellChooseDialog = new ChooseKDialog(spellSelection, numSpellsToChoose)
-                    { OnConfirm = spells => { panel.SetPlayerSpells(knownSpells.Concat(spells)); }, Visible = true };
+            var numSpellsKnown = player.KnownSpells.Length;
+            if (numSpellsKnown < maxSpellsToThisLevel) {
+                var numSpellsToChoose = Math.Min(_config.K, maxSpellsToThisLevel - numSpellsKnown);
+                var spellChooseDialog =
+                    new ChooseKDialog(new SpellChooser(_config, player), numSpellsToChoose, player.NumRerolls) {
+                        OnConfirm = spells => { panel.SetPlayerSpells(player.KnownSpells.Concat(spells)); },
+                        Visible = true
+                    };
                 spellChooseDialog.Activate();
             } else {
                 MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, level));

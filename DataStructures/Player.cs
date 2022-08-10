@@ -15,6 +15,7 @@ namespace DOS2Randomizer.DataStructures {
     }
 
     public class Player {
+        public const int BaseAttributeValue = 10;
         public enum SkillType {
             Melee,
             Archer,
@@ -33,13 +34,13 @@ namespace DOS2Randomizer.DataStructures {
                 new KeyValuePair<Attribute, int>(a, 0)));
             SkillPoints = new Dictionary<Spell.School, int>(
                 ((Spell.School[]) Enum.GetValues(typeof(Spell.School))).Select(s =>
-                    new KeyValuePair<Spell.School, int>(s, 0)));
+                    new KeyValuePair<Spell.School, int>(s, BaseAttributeValue)));
         }
 
         [JsonConstructor]
         public Player(string name, int level, Spell[] knownSpells, Spell[] equippedSpells,
             SkillType[] possibleSkillTypes, Dictionary<Attribute, int> attributes,
-            Dictionary<Spell.School, int> skillPoints) {
+            Dictionary<Spell.School, int> skillPoints, int numRerolls, int numShuffles) {
             Name = name;
             Level = level;
             KnownSpells = knownSpells;
@@ -47,6 +48,8 @@ namespace DOS2Randomizer.DataStructures {
             PossibleSkillTypes = possibleSkillTypes;
             Attributes = attributes;
             SkillPoints = skillPoints;
+            NumRerolls = numRerolls;
+            NumShuffles = numShuffles;
         }
 
         public string Name { get; set; }
@@ -56,5 +59,8 @@ namespace DOS2Randomizer.DataStructures {
         public SkillType[] PossibleSkillTypes { get; set; }
         public Dictionary<Attribute, int> Attributes;
         public Dictionary<Spell.School, int> SkillPoints;
+        public int NumRerolls { get; set; }
+        public int NumShuffles { get; set; }
+
     }
 }

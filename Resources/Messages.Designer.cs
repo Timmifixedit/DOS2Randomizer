@@ -86,5 +86,14 @@ namespace DOS2Randomizer.Resources {
                 return ResourceManager.GetString("MaxNumberSpellsReached", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rerolls ({0} left).
+        /// </summary>
+        internal static string Rerolls {
+            get {
+                return ResourceManager.GetString("Rerolls", resourceCulture);
+            }
+        }
     }
 }

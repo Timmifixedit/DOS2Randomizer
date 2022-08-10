@@ -126,4 +126,7 @@
   <data name="MaxNumberSpellsReached" xml:space="preserve">
     <value>This player has reached the maximum number of spells at level {0}.</value>
   </data>
+  <data name="Rerolls" xml:space="preserve">
+    <value>Rerolls ({0} left)</value>
+  </data>
 </root>

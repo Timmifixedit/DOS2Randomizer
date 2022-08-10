@@ -15,7 +15,7 @@ namespace DOS2Randomizer.UI {
 
         private readonly Player _player;
         public Action<Player>? OnRemoveClick;
-        public Action<PlayerPanel, int, Spell[]>? OnDrawSpells;
+        public Action<PlayerPanel, Player>? OnDrawSpells;
         public Action<PlayerPanel, Spell[]>? OnConfigureSpells;
 
         private void SubscribeToControls() {
@@ -71,7 +71,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void drawSpells_Click(object sender, EventArgs e) {
-            OnDrawSpells?.Invoke(this, _player.Level, _player.KnownSpells);           
+            OnDrawSpells?.Invoke(this, _player);           
         }
     }
 }
