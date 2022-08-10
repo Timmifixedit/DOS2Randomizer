@@ -68,5 +68,14 @@ namespace DOS2Randomizer.Resources {
                 return ResourceManager.GetString("ConfirmDeletePlayer", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has reached the maximum number of spells at level {1}..
+        /// </summary>
+        internal static string MaxNumberSpellsReached {
+            get {
+                return ResourceManager.GetString("MaxNumberSpellsReached", resourceCulture);
+            }
+        }
     }
 }
