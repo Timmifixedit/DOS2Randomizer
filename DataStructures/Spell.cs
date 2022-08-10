@@ -37,7 +37,9 @@ namespace DOS2Randomizer.DataStructures {
             Level = 1;
             Dependencies = ImmutableArray<Spell>.Empty;
             SchoolRequirements = new Dictionary<School, int>(
-                ((School[]) Enum.GetValues(typeof(School))).Select(school => new KeyValuePair<School, int>(school, 0)));
+                    ((School[])Enum.GetValues(typeof(School))).Select(
+                        school => new KeyValuePair<School, int>(school, 0)))
+                .ToImmutableDictionary();
             Types = ImmutableArray<Type>.Empty;
             Scaling = Attribute.None;
             MemorySlots = 1;
@@ -47,7 +49,7 @@ namespace DOS2Randomizer.DataStructures {
 
         [JsonConstructor]
         public Spell(string name, string imagePath, int level, ImmutableArray<Spell> dependencies,
-            Dictionary<School, int> schoolRequirements, Player.SkillType equipmentRequirement,
+            ImmutableDictionary<School, int> schoolRequirements, Player.SkillType equipmentRequirement,
             ImmutableArray<Type> types,
             Attribute scaling, int memorySlots, int loadoutCost) {
             Name = name;
@@ -66,7 +68,7 @@ namespace DOS2Randomizer.DataStructures {
         public string ImagePath { get; }
         public int Level { get; set; }
         public ImmutableArray<Spell> Dependencies { get; set; }
-        public Dictionary<School, int> SchoolRequirements { get; set; }
+        public ImmutableDictionary<School, int> SchoolRequirements { get; set; }
         public Player.SkillType EquipmentRequirement { get; set; }
         public ImmutableArray<Type> Types { get; set; }
         public Attribute Scaling { get; set; }
