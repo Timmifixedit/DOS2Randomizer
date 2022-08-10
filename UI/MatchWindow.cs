@@ -59,7 +59,11 @@ namespace DOS2Randomizer.UI {
             }
         }
         private void RemovePlayer(Player player) {
-            Players = Players.Except(new[] {player}).ToArray();
+            var confirmed = MessageBox.Show(String.Format(Resources.Messages.ConfirmDeletePlayer, player.Name), "",
+                MessageBoxButtons.OKCancel);
+            if (confirmed == DialogResult.OK) {
+                Players = Players.Except(new[] {player}).ToArray();
+            }
         }
     }
 }
