@@ -17,7 +17,7 @@ namespace DOS2Randomizer.UI {
             InitializeComponent();
             fromList.Spells = (Spell[]) spells.Clone();
             fromList.OnImageClick = spell => { MoveSpellTo(spell, fromList, selectionList); };
-            selectionList.OnImageClick = spell => { MoveSpellTo(spell, fromList, selectionList); };
+            selectionList.OnImageClick = spell => { MoveSpellTo(spell, selectionList, fromList); };
         }
 
         private void MoveSpellTo(Spell spell, ISpellCollection source, ISpellCollection destination) {
