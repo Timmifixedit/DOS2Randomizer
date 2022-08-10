@@ -13,6 +13,17 @@ namespace DOS2Randomizer.UI {
     public partial class SpellChooseDialog : Form {
 
         public ValueChangedEvent<IEnumerable<Spell>>? OnConfirm;
+
+        public string FromListName {
+            get => fromList.Label;
+            set => fromList.Label = value;
+        }
+
+        public string ToListName {
+            get => toList.Label;
+            set => toList.Label = value;
+        }
+
         public SpellChooseDialog(IEnumerable<Spell> source, IEnumerable<Spell> destination) {
             InitializeComponent();
             fromList.Spells = source;
