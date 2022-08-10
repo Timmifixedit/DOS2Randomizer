@@ -4,7 +4,7 @@ using System.Text;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    interface ISpellCollection {
+    public interface ISpellCollection {
         public IEnumerable<Spell>? Spells { get; set; }
     }
 }
