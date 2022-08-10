@@ -47,8 +47,9 @@ namespace DOS2Randomizer.UI {
             };
             dependencies.OnValueChanged = value => {
                 if (_spell != null) {
-                    var removed = dependencies.Data.Except(value);
-                    _spell.Dependencies = _spell.Dependencies.Except(removed).Union(value).ToArray();
+                    var tmp = value as Spell[] ?? value.ToArray();
+                    var removed = dependencies.Data.Except(tmp);
+                    _spell.Dependencies = _spell.Dependencies.Except(removed).Union(tmp).ToArray();
                 }
             };
             memSlots.OnValueChanged = value => {
