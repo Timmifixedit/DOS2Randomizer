@@ -25,7 +25,11 @@ namespace DOS2Randomizer.UI {
         private void GeneratePlayerPanels() {
             playersLayout.Controls.Clear();
             foreach (var player in Players) {
-                var playerPanel = new PlayerPanel(player, _config.Spells) {OnRemoveClick = () => RemovePlayer(player)};
+                var playerPanel = new PlayerPanel(player) {
+                    OnRemoveClick = RemovePlayer,
+                    OnConfigureSpells = ConfigurePlayerSpells,
+                    OnDrawSpells = DrawNewSpells
+                };
                 playersLayout.Controls.Add(playerPanel);
             }
         }
@@ -58,11 +62,40 @@ namespace DOS2Randomizer.UI {
                 addPlayer.Enabled = false;
             }
         }
-        private void RemovePlayer(Player player) {
-            var confirmed = MessageBox.Show(String.Format(Resources.Messages.ConfirmDeletePlayer, player.Name), "",
-                MessageBoxButtons.OKCancel);
+        private void RemovePlayer(PlayerPanel panel) {
+            var confirmed = MessageBox.Show(String.Format(Resources.Messages.ConfirmDeletePlayer, panel.Player.Name),
+                "", MessageBoxButtons.OKCancel);
             if (confirmed == DialogResult.OK) {
-                Players = Players.Except(new[] {player}).ToArray();
+                Players = Players.Except(new[] {panel.Player}).ToArray();
+                addPlayer.Enabled = true;
+            }
+        }
+
+        private void ConfigurePlayerSpells(PlayerPanel playerPanel) {
+            var player = playerPanel.Player;
+            var spellChooseDialog = new SpellChooseDialog(_config.Spells.Except(player.KnownSpells), player.KnownSpells) {
+                OnConfirm = playerPanel.SetPlayerSpells,
+                Visible = true
+            };
+            spellChooseDialog.Activate();
+        }
+
+        private void DrawNewSpells(PlayerPanel panel) {
+            var player = panel.Player;
+            var level = player.Level;
+            if (_config.LevelSpecificEvents.Length < level) {
+                throw new InvalidOperationException("not enough level specific entries");
+            }
+
+            var maxSpellsToThisLevel = _config.LevelSpecificEvents.Take(level).Select(data => data.NewSpells).Sum();
+            if (player.KnownSpells.Length < maxSpellsToThisLevel) {
+                var numSpellsToChoose = Math.Min(_config.K, maxSpellsToThisLevel - player.KnownSpells.Length);
+                // @TODO generateSpells(player, _match, N)
+                // For testing purposes:
+                var spellSelection = _config.Spells.Except(player.KnownSpells).Take(3);
+            } else {
+                MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, player.Name,
+                    maxSpellsToThisLevel));
             }
         }
     }

@@ -33,6 +33,7 @@ namespace DOS2Randomizer.UI {
             this.possibleSkillTypes = new DOS2Randomizer.UI.LabeledSkillTypeSelection();
             this.remove = new System.Windows.Forms.Button();
             this.configureSpells = new System.Windows.Forms.Button();
+            this.drawSpells = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playerName
@@ -128,10 +129,21 @@ namespace DOS2Randomizer.UI {
             this.configureSpells.UseVisualStyleBackColor = true;
             this.configureSpells.Click += new System.EventHandler(this.configureSpells_Click);
             // 
+            // drawSpells
+            // 
+            this.drawSpells.Location = new System.Drawing.Point(514, 61);
+            this.drawSpells.Name = "drawSpells";
+            this.drawSpells.Size = new System.Drawing.Size(105, 23);
+            this.drawSpells.TabIndex = 10;
+            this.drawSpells.Text = "Draw new Spells";
+            this.drawSpells.UseVisualStyleBackColor = true;
+            this.drawSpells.Click += new System.EventHandler(this.drawSpells_Click);
+            // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.drawSpells);
             this.Controls.Add(this.configureSpells);
             this.Controls.Add(this.remove);
             this.Controls.Add(this.possibleSkillTypes);
@@ -158,5 +170,6 @@ namespace DOS2Randomizer.UI {
         private LabeledSkillTypeSelection possibleSkillTypes;
         private System.Windows.Forms.Button remove;
         private System.Windows.Forms.Button configureSpells;
+        private System.Windows.Forms.Button drawSpells;
     }
 }

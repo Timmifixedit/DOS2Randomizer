@@ -12,10 +12,13 @@ using System.Linq;
 namespace DOS2Randomizer.UI {
 
     public partial class PlayerPanel : UserControl {
+        public delegate void PlayerEvent(PlayerPanel player);
 
         private readonly Player _player;
-        private readonly Spell[] _allSpells;
-        public Action? OnRemoveClick;
+        public PlayerEvent? OnRemoveClick;
+        public PlayerEvent? OnDrawSpells;
+        public PlayerEvent? OnConfigureSpells;
+        public Player Player => _player;
 
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
@@ -43,32 +46,34 @@ namespace DOS2Randomizer.UI {
             equippedSpellList.Spells = _player.EquippedSpells;
         }
 
+        public void SetPlayerSpells(IEnumerable<Spell> spells) {
+            _player.KnownSpells = spells.ToArray();
+            _player.EquippedSpells = _player.KnownSpells.Intersect(_player.EquippedSpells).ToArray();
+            RefreshUi();
+        }
+
         private void RefreshUi() {
             UnsubscribeFromControls();
             UpdateUi();
             SubscribeToControls();
         }
 
-        public PlayerPanel(Player player, Spell[] allSpells) {
+        public PlayerPanel(Player player) {
             _player = player;
-            _allSpells = allSpells;
             InitializeComponent();
             RefreshUi();
         }
 
         private void remove_Click(object sender, EventArgs e) {
-            OnRemoveClick?.Invoke();
+            OnRemoveClick?.Invoke(this);
         }
 
         private void configureSpells_Click(object sender, EventArgs e) {
-            var spellChooseDialog = new SpellChooseDialog(_allSpells.Except(_player.KnownSpells), _player.KnownSpells) {
-                OnConfirm = selected => {
-                    _player.KnownSpells = selected.ToArray();
-                    RefreshUi();
-                },
-                Visible = true
-            };
-            spellChooseDialog.Activate();
+            OnConfigureSpells?.Invoke(this);
+        }
+
+        private void drawSpells_Click(object sender, EventArgs e) {
+            
         }
     }
 }
