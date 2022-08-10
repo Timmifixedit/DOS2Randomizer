@@ -67,8 +67,10 @@ namespace DOS2Randomizer.UI {
             this.Controls.Add(this.toList);
             this.Controls.Add(this.confirm);
             this.Controls.Add(this.fromList);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SpellChooseDialog";
-            this.Text = "SpellChooseDialog";
+            this.Text = "Configure Spells manually";
             this.ResumeLayout(false);
 
         }
