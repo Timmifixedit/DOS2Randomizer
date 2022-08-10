@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,10 +35,10 @@ namespace DOS2Randomizer.DataStructures {
             Name = name;
             ImagePath = imagePath;
             Level = 1;
-            Dependencies = Array.Empty<Spell>();
+            Dependencies = ImmutableArray<Spell>.Empty;
             SchoolRequirements = new Dictionary<School, int>(
                 ((School[]) Enum.GetValues(typeof(School))).Select(school => new KeyValuePair<School, int>(school, 0)));
-            Types = Array.Empty<Type>();
+            Types = ImmutableArray<Type>.Empty;
             Scaling = Attribute.None;
             MemorySlots = 1;
             LoadoutCost = 0;
@@ -45,8 +46,9 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         [JsonConstructor]
-        public Spell(string name, string imagePath, int level, Spell[] dependencies,
-            Dictionary<School, int> schoolRequirements, Player.SkillType equipmentRequirement, Type[] types,
+        public Spell(string name, string imagePath, int level, ImmutableArray<Spell> dependencies,
+            Dictionary<School, int> schoolRequirements, Player.SkillType equipmentRequirement,
+            ImmutableArray<Type> types,
             Attribute scaling, int memorySlots, int loadoutCost) {
             Name = name;
             ImagePath = imagePath;
@@ -63,10 +65,10 @@ namespace DOS2Randomizer.DataStructures {
         public string Name { get; set; }
         public string ImagePath { get; }
         public int Level { get; set; }
-        public Spell[] Dependencies { get; set; }
+        public ImmutableArray<Spell> Dependencies { get; set; }
         public Dictionary<School, int> SchoolRequirements { get; set; }
         public Player.SkillType EquipmentRequirement { get; set; }
-        public Type[] Types { get; set; }
+        public ImmutableArray<Type> Types { get; set; }
         public Attribute Scaling { get; set; }
         public int MemorySlots { get; set; }
         public int LoadoutCost { get; set; }
