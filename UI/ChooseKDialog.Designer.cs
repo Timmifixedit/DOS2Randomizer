@@ -73,6 +73,8 @@
             this.Controls.Add(this.selection);
             this.Controls.Add(this.source);
             this.Controls.Add(this.confirm);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ChooseKDialog";
             this.Text = "ChooseKDialog";
             this.ResumeLayout(false);
