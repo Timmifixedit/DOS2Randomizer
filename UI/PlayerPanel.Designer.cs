@@ -77,7 +77,6 @@ namespace DOS2Randomizer.UI {
             this.knownSpellList.Location = new System.Drawing.Point(0, 397);
             this.knownSpellList.Name = "knownSpellList";
             this.knownSpellList.Size = new System.Drawing.Size(620, 123);
-            this.knownSpellList.SpellCollection = null;
             this.knownSpellList.Spells = null;
             this.knownSpellList.SplitPercentage = 29;
             this.knownSpellList.TabIndex = 5;
@@ -88,7 +87,6 @@ namespace DOS2Randomizer.UI {
             this.equippedSpellList.Location = new System.Drawing.Point(0, 526);
             this.equippedSpellList.Name = "equippedSpellList";
             this.equippedSpellList.Size = new System.Drawing.Size(620, 123);
-            this.equippedSpellList.SpellCollection = null;
             this.equippedSpellList.Spells = null;
             this.equippedSpellList.SplitPercentage = 29;
             this.equippedSpellList.TabIndex = 6;

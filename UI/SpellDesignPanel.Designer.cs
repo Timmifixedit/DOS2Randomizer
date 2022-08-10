@@ -97,7 +97,6 @@ namespace DOS2Randomizer.UI {
             this.dependencies.Location = new System.Drawing.Point(3, 3);
             this.dependencies.Name = "dependencies";
             this.dependencies.Size = new System.Drawing.Size(194, 96);
-            this.dependencies.SpellCollection = null;
             this.dependencies.SplitPercentage = 40;
             this.dependencies.TabIndex = 5;
             this.dependencies.Value = new DOS2Randomizer.DataStructures.Spell[0];

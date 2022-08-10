@@ -5,6 +5,6 @@ using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
     interface ISpellCollection {
-        public Spell[] SpellCollection { get; set; }
+        public Spell[]? Spells { get; set; }
     }
 }

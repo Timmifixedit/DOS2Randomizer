@@ -278,7 +278,6 @@ namespace DOS2Randomizer.UI {
             this.spellList.Location = new System.Drawing.Point(221, 3);
             this.spellList.Name = "spellList";
             this.spellList.Size = new System.Drawing.Size(562, 115);
-            this.spellList.SpellCollection = null;
             this.spellList.Spells = null;
             this.spellList.TabIndex = 0;
             // 

@@ -34,6 +34,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
+        [AllowNull]
         public T[] Data {
             get => _items ?? Array.Empty<T>();
             set {
@@ -80,7 +81,7 @@ namespace DOS2Randomizer.UI {
             DisplayMember = typeof(Spell).GetProperties()[0].Name;
         }
 
-        public Spell[] SpellCollection {
+        public Spell[]? Spells {
             get => Data;
             set => Data = value;
         }

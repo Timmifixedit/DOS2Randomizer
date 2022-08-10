@@ -14,7 +14,7 @@ namespace DOS2Randomizer.UI {
             spellList.OnImageClick = spell => OnImageClick?.Invoke(spell);
         }
 
-        public Spell[] Spells {
+        public Spell[]? Spells {
             get => search.AllSpells ?? Array.Empty<Spell>();
             set => search.AllSpells = value;
         }
@@ -31,10 +31,5 @@ namespace DOS2Randomizer.UI {
 
         public ImageClickEvent? OnImageClick;
         public TableLayoutPanel LayoutPanel => layout;
-
-        public Spell[] SpellCollection {
-            get => Spells;
-            set => Spells = value;
-        }
     }
 }

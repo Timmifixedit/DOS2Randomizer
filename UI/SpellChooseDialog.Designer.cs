@@ -44,7 +44,6 @@ namespace DOS2Randomizer.UI {
             this.selectionList.Location = new System.Drawing.Point(241, 141);
             this.selectionList.Name = "selectionList";
             this.selectionList.Size = new System.Drawing.Size(547, 116);
-            this.selectionList.SpellCollection = null;
             this.selectionList.Spells = null;
             this.selectionList.TabIndex = 1;
             // 

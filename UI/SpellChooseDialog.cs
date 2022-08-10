@@ -21,12 +21,12 @@ namespace DOS2Randomizer.UI {
         }
 
         private void MoveSpellTo(Spell spell, ISpellCollection source, ISpellCollection destination) {
-            destination.SpellCollection = destination.SpellCollection.Append(spell).ToArray();
-            source.SpellCollection = source.SpellCollection.Except(new[] {spell}).ToArray();
+            destination.Spells = (destination.Spells ?? Array.Empty<Spell>()).Append(spell).ToArray();
+            source.Spells = source.Spells?.Except(new[] {spell}).ToArray();
         }
 
         private void confirm_Click(object sender, EventArgs e) {
-            OnConfirm?.Invoke(selectionList.Spells);
+            OnConfirm?.Invoke(selectionList.Spells ?? Array.Empty<Spell>());
             this.Close();
         }
     }

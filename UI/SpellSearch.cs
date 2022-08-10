@@ -16,7 +16,7 @@ namespace DOS2Randomizer.UI {
             set {
                 _spells = value;
                 if (ManagedCollection != null) {
-                    ManagedCollection.SpellCollection = _spells ?? Array.Empty<Spell>();
+                    ManagedCollection.Spells = _spells;
                 }
             }
 
@@ -28,7 +28,7 @@ namespace DOS2Randomizer.UI {
 
         private void Search(string searchString) {
             if (ManagedCollection is not  null && AllSpells is not null) {
-                ManagedCollection.SpellCollection = AllSpells
+                ManagedCollection.Spells = AllSpells
                     .Where(spell => ManageCase(spell.Name).Contains(ManageCase(searchString))).ToArray();
             }
         }
