@@ -73,6 +73,8 @@ namespace DOS2Randomizer.UI {
 
         private void ConfigurePlayerSpells(PlayerPanel playerPanel, Spell[] knownSpells) {
             var spellChooseDialog = new SpellChooseDialog(_config.Spells.Except(knownSpells), knownSpells) {
+                FromListName = "Available Spells",
+                ToListName = "Known Spells",
                 OnConfirm = playerPanel.SetPlayerSpells,
                 Visible = true
             };
@@ -90,8 +92,11 @@ namespace DOS2Randomizer.UI {
                 // @TODO generateSpells(player, _match, N)
                 // For testing purposes:
                 var spellSelection = _config.Spells.Except(knownSpells).Take(3);
+                var spellChooseDialog = new ChooseKDialog(spellSelection, numSpellsToChoose)
+                    { OnConfirm = spells => { panel.SetPlayerSpells(knownSpells.Concat(spells)); }, Visible = true };
+                spellChooseDialog.Activate();
             } else {
-                MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, maxSpellsToThisLevel));
+                MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, level));
             }
         }
     }

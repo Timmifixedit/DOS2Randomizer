@@ -12,7 +12,7 @@ using DOS2Randomizer.DataStructures;
 namespace DOS2Randomizer.UI {
     public partial class SpellChooseDialog : Form {
 
-        public ValueChangedEvent<IEnumerable<Spell>>? OnConfirm;
+        public Action<IEnumerable<Spell>>? OnConfirm;
 
         public string FromListName {
             get => fromList.Label;
@@ -32,7 +32,7 @@ namespace DOS2Randomizer.UI {
             toList.OnImageClick = spell => { MoveSpellTo(spell, toList, fromList); };
         }
 
-        private static void MoveSpellTo(Spell spell, ISpellCollection source, ISpellCollection destination) {
+        public static void MoveSpellTo(Spell spell, ISpellCollection source, ISpellCollection destination) {
             destination.Spells = (destination.Spells ?? Array.Empty<Spell>()).Append(spell).ToArray();
             source.Spells = source.Spells?.Except(new[] {spell}).ToArray();
         }

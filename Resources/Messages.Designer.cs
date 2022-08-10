@@ -61,6 +61,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose {0} spells..
+        /// </summary>
+        internal static string ChooseK {
+            get {
+                return ResourceManager.GetString("ChooseK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to remove {0} from squad?.
         /// </summary>
         internal static string ConfirmDeletePlayer {
