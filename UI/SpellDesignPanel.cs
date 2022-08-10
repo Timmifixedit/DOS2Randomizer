@@ -42,7 +42,7 @@ namespace DOS2Randomizer.UI {
             };
             typeSelection.OnValueChanged = value => {
                 if (_spell != null) {
-                    _spell.Types = value;
+                    _spell.Types = value.ToArray();
                 }
             };
             dependencies.OnValueChanged = value => {

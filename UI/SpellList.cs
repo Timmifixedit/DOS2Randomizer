@@ -12,7 +12,7 @@ namespace DOS2Randomizer.UI {
     public delegate void ImageClickEvent(DataStructures.Spell spell);
     public partial class SpellList : UserControl, ISpellCollection {
 
-        private DataStructures.Spell[]? _spells;
+        private IEnumerable<DataStructures.Spell>? _spells;
         public ImageClickEvent? OnImageClick;
         private int? _lastIndex;
 
@@ -30,7 +30,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public DataStructures.Spell[]? Spells {
+        public IEnumerable<DataStructures.Spell>? Spells {
             get => _spells;
             set {
                 _spells = value;
@@ -43,17 +43,17 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            if (_lastIndex.HasValue && _lastIndex.Value < Spells.Length && _lastIndex.Value < layout.Items.Count) {
-                layout.Items[_lastIndex.Value].Text = Spells[_lastIndex.Value].Name;
+            if (_lastIndex.HasValue && _lastIndex.Value < Spells.Count() && _lastIndex.Value < layout.Items.Count) {
+                layout.Items[_lastIndex.Value].Text = Spells.ElementAt(_lastIndex.Value).Name;
             }
 
-            OnImageClick?.Invoke(Spells[index]);
+            OnImageClick?.Invoke(Spells.ElementAt(index));
             _lastIndex = index;
         }
 
         private void RefreshImages() {
             layout.Clear();
-            if (Spells is null || Spells.Length == 0) {
+            if (Spells is null || !Spells.Any()) {
                 return;
             }
 
@@ -62,8 +62,8 @@ namespace DOS2Randomizer.UI {
             imageList.Images.AddRange(images);
             layout.View = View.LargeIcon;
             layout.LargeImageList = imageList;
-            for (int index = 0; index < Spells.Length; ++index) {
-                layout.Items.Add(Spells[index].Name, index);
+            for (int index = 0; index < Spells.Count(); ++index) {
+                layout.Items.Add(Spells.ElementAt(index).Name, index);
             }
         }
 

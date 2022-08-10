@@ -14,7 +14,7 @@ namespace DOS2Randomizer.UI {
             spellList.OnImageClick = spell => OnImageClick?.Invoke(spell);
         }
 
-        public Spell[]? Spells {
+        public IEnumerable<Spell>? Spells {
             get => search.AllSpells ?? Array.Empty<Spell>();
             set => search.AllSpells = value;
         }

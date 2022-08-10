@@ -8,14 +8,14 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    class LabeledSelection<T> : NamedValueTemplate<T[]> {
+    class LabeledSelection<T> : NamedValueTemplate<IEnumerable<T>> {
         private readonly CheckedListBox _listBox;
-        private T[]? _items;
+        private IEnumerable<T>? _items;
         private string? _displayMember;
 
                 
         [AllowNull]
-        public override T[] Value {
+        public override IEnumerable<T> Value {
             get => _listBox.CheckedItems.Cast<T>().ToArray();
             set {
                 for (int i = 0; i < _listBox.Items.Count; i++) {
@@ -35,7 +35,7 @@ namespace DOS2Randomizer.UI {
         }
 
         [AllowNull]
-        public T[] Data {
+        public IEnumerable<T> Data {
             get => _items ?? Array.Empty<T>();
             set {
                 _items = value;
@@ -81,7 +81,7 @@ namespace DOS2Randomizer.UI {
             DisplayMember = typeof(Spell).GetProperties()[0].Name;
         }
 
-        public Spell[]? Spells {
+        public IEnumerable<Spell>? Spells {
             get => Data;
             set => Data = value;
         }

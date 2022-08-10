@@ -14,7 +14,7 @@ namespace DOS2Randomizer.UI {
     public partial class PlayerPanel : UserControl {
 
         private readonly Player _player;
-        private readonly Spell[] _spells;
+        private readonly Spell[] _allSpells;
         public Action? OnRemoveClick;
 
         private void SubscribeToControls() {
@@ -22,7 +22,7 @@ namespace DOS2Randomizer.UI {
             playerLevel.OnValueChanged = value => { _player.Level = value; };
             attributePointsPanel1.OnValueChanged = value => { _player.Attributes = value; };
             skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value; };
-            possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value; };
+            possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value.ToArray(); };
         }
 
         private void UnsubscribeFromControls() {
@@ -51,7 +51,7 @@ namespace DOS2Randomizer.UI {
 
         public PlayerPanel(Player player, Spell[] allSpells) {
             _player = player;
-            _spells = allSpells;
+            _allSpells = allSpells;
             InitializeComponent();
             RefreshUi();
         }
@@ -60,13 +60,11 @@ namespace DOS2Randomizer.UI {
             OnRemoveClick?.Invoke();
         }
 
-        private void addSpells_Click(object sender, EventArgs e) {
-            var spellChooseDialog = new SpellChooseDialog(_spells) {
-                OnConfirm = value => {
-                    _player.KnownSpells = _player.KnownSpells.Concat(value).Distinct().ToArray();
-                    UnsubscribeFromControls();
-                    UpdateUi();
-                    SubscribeToControls();
+        private void configureSpells_Click(object sender, EventArgs e) {
+            var spellChooseDialog = new SpellChooseDialog(_allSpells.Except(_player.KnownSpells), _player.KnownSpells) {
+                OnConfirm = selected => {
+                    _player.KnownSpells = selected.ToArray();
+                    RefreshUi();
                 },
                 Visible = true
             };

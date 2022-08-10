@@ -25,8 +25,8 @@ namespace DOS2Randomizer.UI {
         /// </summary>
         private void InitializeComponent() {
             this.fromList = new DOS2Randomizer.UI.SearchableSpellList();
-            this.selectionList = new DOS2Randomizer.UI.SpellList();
             this.confirm = new System.Windows.Forms.Button();
+            this.toList = new DOS2Randomizer.UI.SearchableSpellList();
             this.SuspendLayout();
             // 
             // fromList
@@ -35,21 +35,13 @@ namespace DOS2Randomizer.UI {
             this.fromList.Location = new System.Drawing.Point(16, 12);
             this.fromList.Name = "fromList";
             this.fromList.Size = new System.Drawing.Size(772, 123);
-            this.fromList.Spells = null;
+            this.fromList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
             this.fromList.SplitPercentage = 29;
             this.fromList.TabIndex = 0;
             // 
-            // selectionList
-            // 
-            this.selectionList.Location = new System.Drawing.Point(241, 141);
-            this.selectionList.Name = "selectionList";
-            this.selectionList.Size = new System.Drawing.Size(547, 116);
-            this.selectionList.Spells = null;
-            this.selectionList.TabIndex = 1;
-            // 
             // confirm
             // 
-            this.confirm.Location = new System.Drawing.Point(12, 233);
+            this.confirm.Location = new System.Drawing.Point(16, 12);
             this.confirm.Name = "confirm";
             this.confirm.Size = new System.Drawing.Size(75, 23);
             this.confirm.TabIndex = 2;
@@ -57,13 +49,23 @@ namespace DOS2Randomizer.UI {
             this.confirm.UseVisualStyleBackColor = true;
             this.confirm.Click += new System.EventHandler(this.confirm_Click);
             // 
+            // toList
+            // 
+            this.toList.Label = "";
+            this.toList.Location = new System.Drawing.Point(16, 141);
+            this.toList.Name = "toList";
+            this.toList.Size = new System.Drawing.Size(772, 154);
+            this.toList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
+            this.toList.SplitPercentage = 29;
+            this.toList.TabIndex = 3;
+            // 
             // SpellChooseDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 268);
+            this.ClientSize = new System.Drawing.Size(796, 297);
+            this.Controls.Add(this.toList);
             this.Controls.Add(this.confirm);
-            this.Controls.Add(this.selectionList);
             this.Controls.Add(this.fromList);
             this.Name = "SpellChooseDialog";
             this.Text = "SpellChooseDialog";
@@ -74,7 +76,7 @@ namespace DOS2Randomizer.UI {
         #endregion
 
         private SearchableSpellList fromList;
-        private SpellList selectionList;
         private System.Windows.Forms.Button confirm;
+        private SearchableSpellList toList;
     }
 }

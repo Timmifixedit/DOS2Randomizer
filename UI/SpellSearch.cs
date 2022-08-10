@@ -6,12 +6,12 @@ using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
     class SpellSearch : LabeledString {
-        private Spell[]? _spells;
+        private IEnumerable<Spell>? _spells;
         public ISpellCollection? ManagedCollection { get; set; }
 
         public bool CaseSensitive { get; set; }
 
-        public Spell[]? AllSpells {
+        public IEnumerable<Spell>? AllSpells {
             get => _spells;
             set {
                 _spells = value;

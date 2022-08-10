@@ -32,7 +32,7 @@ namespace DOS2Randomizer.UI {
             this.equippedSpellList = new DOS2Randomizer.UI.SearchableSpellList();
             this.possibleSkillTypes = new DOS2Randomizer.UI.LabeledSkillTypeSelection();
             this.remove = new System.Windows.Forms.Button();
-            this.addSpells = new System.Windows.Forms.Button();
+            this.configureSpells = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playerName
@@ -77,7 +77,7 @@ namespace DOS2Randomizer.UI {
             this.knownSpellList.Location = new System.Drawing.Point(0, 397);
             this.knownSpellList.Name = "knownSpellList";
             this.knownSpellList.Size = new System.Drawing.Size(620, 123);
-            this.knownSpellList.Spells = null;
+            this.knownSpellList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
             this.knownSpellList.SplitPercentage = 29;
             this.knownSpellList.TabIndex = 5;
             // 
@@ -87,7 +87,7 @@ namespace DOS2Randomizer.UI {
             this.equippedSpellList.Location = new System.Drawing.Point(0, 526);
             this.equippedSpellList.Name = "equippedSpellList";
             this.equippedSpellList.Size = new System.Drawing.Size(620, 123);
-            this.equippedSpellList.Spells = null;
+            this.equippedSpellList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
             this.equippedSpellList.SplitPercentage = 29;
             this.equippedSpellList.TabIndex = 6;
             // 
@@ -110,29 +110,29 @@ namespace DOS2Randomizer.UI {
             // 
             // remove
             // 
-            this.remove.Location = new System.Drawing.Point(544, 4);
+            this.remove.Location = new System.Drawing.Point(514, 4);
             this.remove.Name = "remove";
-            this.remove.Size = new System.Drawing.Size(75, 23);
+            this.remove.Size = new System.Drawing.Size(105, 23);
             this.remove.TabIndex = 8;
             this.remove.Text = "Remove";
             this.remove.UseVisualStyleBackColor = true;
             this.remove.Click += new System.EventHandler(this.remove_Click);
             // 
-            // addSpells
+            // configureSpells
             // 
-            this.addSpells.Location = new System.Drawing.Point(544, 32);
-            this.addSpells.Name = "addSpells";
-            this.addSpells.Size = new System.Drawing.Size(75, 23);
-            this.addSpells.TabIndex = 9;
-            this.addSpells.Text = "Add Spells";
-            this.addSpells.UseVisualStyleBackColor = true;
-            this.addSpells.Click += new System.EventHandler(this.addSpells_Click);
+            this.configureSpells.Location = new System.Drawing.Point(514, 32);
+            this.configureSpells.Name = "configureSpells";
+            this.configureSpells.Size = new System.Drawing.Size(105, 23);
+            this.configureSpells.TabIndex = 9;
+            this.configureSpells.Text = "Configure Spells";
+            this.configureSpells.UseVisualStyleBackColor = true;
+            this.configureSpells.Click += new System.EventHandler(this.configureSpells_Click);
             // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.addSpells);
+            this.Controls.Add(this.configureSpells);
             this.Controls.Add(this.remove);
             this.Controls.Add(this.possibleSkillTypes);
             this.Controls.Add(this.equippedSpellList);
@@ -157,6 +157,6 @@ namespace DOS2Randomizer.UI {
         private SearchableSpellList equippedSpellList;
         private LabeledSkillTypeSelection possibleSkillTypes;
         private System.Windows.Forms.Button remove;
-        private System.Windows.Forms.Button addSpells;
+        private System.Windows.Forms.Button configureSpells;
     }
 }
