@@ -14,10 +14,10 @@ namespace DOS2Randomizer.Logic {
     }
 
     public class SpellChooser {
-        private readonly MatchConfig _matchConfig;
+        private readonly IMatchProperties _matchConfig;
         private readonly Player _player;
         private readonly int _numSpellsToGenerate;
-        public SpellChooser(MatchConfig matchConfig, Player player) {
+        public SpellChooser(IMatchProperties matchConfig, Player player) {
             _matchConfig = matchConfig;
             _numSpellsToGenerate = _matchConfig.N;
             _player = player;

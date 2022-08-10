@@ -13,7 +13,7 @@ using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
     public partial class MatchWindow : Form {
-        private readonly MatchConfig _config;
+        private readonly IConstMatchConfig _config;
 
         private Player[] Players {
             get => _config.Players;

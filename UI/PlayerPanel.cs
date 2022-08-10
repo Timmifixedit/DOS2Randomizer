@@ -14,7 +14,7 @@ namespace DOS2Randomizer.UI {
     public partial class PlayerPanel : UserControl {
 
         private readonly Player _player;
-        private readonly MatchConfig _matchConfig;
+        private readonly IMatchProperties _matchConfig;
         public Action<Player>? OnRemoveClick;
 
         private void SubscribeToControls() {
@@ -55,7 +55,7 @@ namespace DOS2Randomizer.UI {
             SubscribeToControls();
         }
 
-        public PlayerPanel(Player player, MatchConfig matchConfig) {
+        public PlayerPanel(Player player, IMatchProperties matchConfig) {
             _player = player;
             _matchConfig = matchConfig;
             InitializeComponent();
