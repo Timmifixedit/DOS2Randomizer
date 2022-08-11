@@ -99,7 +99,7 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         public override int GetHashCode() {
-            return HashCode.Combine(Name, ImagePath, Level, Types, (int) Scaling, MemorySlots, LoadoutCost);
+            return HashCode.Combine(Name, ImagePath, Level, (int) Scaling, MemorySlots, LoadoutCost);
         }
 
         public static bool operator ==(Spell? left, Spell? right) {
