@@ -28,12 +28,12 @@ namespace DOS2Randomizer.UI {
             this.playerLevel = new DOS2Randomizer.UI.LabeledValue();
             this.skillPointsPanel1 = new DOS2Randomizer.UI.SkillPointsPanel();
             this.attributePointsPanel1 = new DOS2Randomizer.UI.AttributePointsPanel();
-            this.knownSpellList = new DOS2Randomizer.UI.SearchableSpellList();
-            this.equippedSpellList = new DOS2Randomizer.UI.SearchableSpellList();
             this.possibleSkillTypes = new DOS2Randomizer.UI.LabeledSkillTypeSelection();
             this.remove = new System.Windows.Forms.Button();
             this.configureSpells = new System.Windows.Forms.Button();
             this.drawSpells = new System.Windows.Forms.Button();
+            this.equippedSpellList = new DOS2Randomizer.UI.CSearchableSpellList();
+            this.knownSpellList = new DOS2Randomizer.UI.CSearchableSpellList();
             this.SuspendLayout();
             // 
             // playerName
@@ -71,26 +71,6 @@ namespace DOS2Randomizer.UI {
             this.attributePointsPanel1.Name = "attributePointsPanel1";
             this.attributePointsPanel1.Size = new System.Drawing.Size(150, 261);
             this.attributePointsPanel1.TabIndex = 4;
-            // 
-            // knownSpellList
-            // 
-            this.knownSpellList.Label = "Known Spells";
-            this.knownSpellList.Location = new System.Drawing.Point(0, 397);
-            this.knownSpellList.Name = "knownSpellList";
-            this.knownSpellList.Size = new System.Drawing.Size(620, 123);
-            this.knownSpellList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
-            this.knownSpellList.SplitPercentage = 29;
-            this.knownSpellList.TabIndex = 5;
-            // 
-            // equippedSpellList
-            // 
-            this.equippedSpellList.Label = "Equipped Spells";
-            this.equippedSpellList.Location = new System.Drawing.Point(0, 526);
-            this.equippedSpellList.Name = "equippedSpellList";
-            this.equippedSpellList.Size = new System.Drawing.Size(620, 123);
-            this.equippedSpellList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
-            this.equippedSpellList.SplitPercentage = 29;
-            this.equippedSpellList.TabIndex = 6;
             // 
             // possibleSkillTypes
             // 
@@ -139,16 +119,36 @@ namespace DOS2Randomizer.UI {
             this.drawSpells.UseVisualStyleBackColor = true;
             this.drawSpells.Click += new System.EventHandler(this.drawSpells_Click);
             // 
+            // equippedSpellList
+            // 
+            this.equippedSpellList.Label = "Equipped Spells";
+            this.equippedSpellList.Location = new System.Drawing.Point(3, 526);
+            this.equippedSpellList.Name = "equippedSpellList";
+            this.equippedSpellList.Size = new System.Drawing.Size(616, 123);
+            this.equippedSpellList.Spells = new DOS2Randomizer.DataStructures.IConstSpell[0];
+            this.equippedSpellList.SplitPercentage = 29;
+            this.equippedSpellList.TabIndex = 11;
+            // 
+            // knownSpellList
+            // 
+            this.knownSpellList.Label = "Known Spells";
+            this.knownSpellList.Location = new System.Drawing.Point(3, 397);
+            this.knownSpellList.Name = "knownSpellList";
+            this.knownSpellList.Size = new System.Drawing.Size(616, 123);
+            this.knownSpellList.Spells = new DOS2Randomizer.DataStructures.IConstSpell[0];
+            this.knownSpellList.SplitPercentage = 29;
+            this.knownSpellList.TabIndex = 12;
+            // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.knownSpellList);
+            this.Controls.Add(this.equippedSpellList);
             this.Controls.Add(this.drawSpells);
             this.Controls.Add(this.configureSpells);
             this.Controls.Add(this.remove);
             this.Controls.Add(this.possibleSkillTypes);
-            this.Controls.Add(this.equippedSpellList);
-            this.Controls.Add(this.knownSpellList);
             this.Controls.Add(this.attributePointsPanel1);
             this.Controls.Add(this.skillPointsPanel1);
             this.Controls.Add(this.playerLevel);
@@ -165,11 +165,11 @@ namespace DOS2Randomizer.UI {
         private UI.LabeledValue playerLevel;
         private UI.SkillPointsPanel skillPointsPanel1;
         private UI.AttributePointsPanel attributePointsPanel1;
-        private SearchableSpellList knownSpellList;
-        private SearchableSpellList equippedSpellList;
         private LabeledSkillTypeSelection possibleSkillTypes;
         private System.Windows.Forms.Button remove;
         private System.Windows.Forms.Button configureSpells;
         private System.Windows.Forms.Button drawSpells;
+        private CSearchableSpellList equippedSpellList;
+        private CSearchableSpellList knownSpellList;
     }
 }
