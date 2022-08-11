@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ namespace DOS2Randomizer.UI {
             set {
                 _matchConfig = value;
                 Spells = _matchConfig.Spells;
-                levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents;
+                levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents.ToArray();
                 n.Value = _matchConfig.N;
                 k.Value = _matchConfig.K;
                 configName.Value = _matchConfig.Name;
@@ -43,7 +44,7 @@ namespace DOS2Randomizer.UI {
             memSlots.OnValueChanged = value => _matchConfig.MaxNumMemSlots = value;
             n.OnValueChanged = value => _matchConfig.N = value;
             k.OnValueChanged = value => _matchConfig.K = value;
-            levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents;
+            levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents.ToArray();
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e) {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -9,7 +10,7 @@ namespace DOS2Randomizer.DataStructures {
         public int MaxNumMemSlots { get; set; }
         public int N { get; }
         public int K { get; }
-        public OnLevelUp[] LevelSpecificEvents { get; }
+        public ImmutableArray<OnLevelUp> LevelSpecificEvents { get; }
         public Spell[] Spells { get; }
     }
 
@@ -26,19 +27,20 @@ namespace DOS2Randomizer.DataStructures {
         public int MaxNumMemSlots { get; set; }
         public int N { get; set; }
         public int K { get; set; }
-        public OnLevelUp[] LevelSpecificEvents { get; set; }
+        public ImmutableArray<OnLevelUp> LevelSpecificEvents { get; set; }
         public Spell[] Spells { get; set; }
         public Player[] Players { get; set; }
 
         public MatchConfig() {
-            LevelSpecificEvents = Enumerable.Range(1, MaxLevel).Select(i => new OnLevelUp(i, 0, 0, 0)).ToArray();
+            LevelSpecificEvents =
+                Enumerable.Range(1, MaxLevel).Select(i => new OnLevelUp(i, 0, 0, 0)).ToImmutableArray();
             Name = "<Match config name>";
             Spells = Array.Empty<Spell>();
             Players = Array.Empty<Player>();
         }
 
         [JsonConstructor]
-        public MatchConfig(string name, int maxNumMemSlots, int n, int k, OnLevelUp[] levelSpecificEvents,
+        public MatchConfig(string name, int maxNumMemSlots, int n, int k, ImmutableArray<OnLevelUp> levelSpecificEvents,
             Spell[] spells, Player[] players) {
             Name = name;
             MaxNumMemSlots = maxNumMemSlots;

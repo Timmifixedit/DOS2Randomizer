@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -27,20 +28,20 @@ namespace DOS2Randomizer.DataStructures {
         public Player() {
             Name = "";
             Level = 1;
-            KnownSpells = Array.Empty<Spell>();
-            EquippedSpells = Array.Empty<Spell>();
-            PossibleSkillTypes = Array.Empty<SkillType>();
-            Attributes = new Dictionary<Attribute, int>(((Attribute[]) Enum.GetValues(typeof(Spell.School))).Select(a =>
-                new KeyValuePair<Attribute, int>(a, 0)));
+            KnownSpells = ImmutableArray<Spell>.Empty;
+            EquippedSpells = ImmutableArray<Spell>.Empty;
+            PossibleSkillTypes = ImmutableArray<SkillType>.Empty;
+            Attributes = new Dictionary<Attribute, int>(((Attribute[])Enum.GetValues(typeof(Spell.School))).Select(a =>
+                new KeyValuePair<Attribute, int>(a, 0))).ToImmutableDictionary();
             SkillPoints = new Dictionary<Spell.School, int>(
-                ((Spell.School[]) Enum.GetValues(typeof(Spell.School))).Select(s =>
-                    new KeyValuePair<Spell.School, int>(s, BaseAttributeValue)));
+                ((Spell.School[])Enum.GetValues(typeof(Spell.School))).Select(s =>
+                    new KeyValuePair<Spell.School, int>(s, BaseAttributeValue))).ToImmutableDictionary();
         }
 
         [JsonConstructor]
-        public Player(string name, int level, Spell[] knownSpells, Spell[] equippedSpells,
-            SkillType[] possibleSkillTypes, Dictionary<Attribute, int> attributes,
-            Dictionary<Spell.School, int> skillPoints, int numRerolls, int numShuffles) {
+        public Player(string name, int level, ImmutableArray<Spell> knownSpells, ImmutableArray<Spell> equippedSpells,
+            ImmutableArray<SkillType> possibleSkillTypes, ImmutableDictionary<Attribute, int> attributes,
+            ImmutableDictionary<Spell.School, int> skillPoints, int numRerolls, int numShuffles) {
             Name = name;
             Level = level;
             KnownSpells = knownSpells;
@@ -54,11 +55,11 @@ namespace DOS2Randomizer.DataStructures {
 
         public string Name { get; set; }
         public int Level { get; set; }
-        public Spell[] KnownSpells { get; set; }
-        public Spell[] EquippedSpells { get; set; }
-        public SkillType[] PossibleSkillTypes { get; set; }
-        public Dictionary<Attribute, int> Attributes;
-        public Dictionary<Spell.School, int> SkillPoints;
+        public ImmutableArray<Spell> KnownSpells { get; set; }
+        public ImmutableArray<Spell> EquippedSpells { get; set; }
+        public ImmutableArray<SkillType> PossibleSkillTypes { get; set; }
+        public ImmutableDictionary<Attribute, int> Attributes;
+        public ImmutableDictionary<Spell.School, int> SkillPoints;
         public int NumRerolls { get; set; }
         public int NumShuffles { get; set; }
 

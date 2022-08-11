@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 using System.Linq;
+using Attribute = DOS2Randomizer.DataStructures.Attribute;
 
 namespace DOS2Randomizer.UI {
 
@@ -20,9 +22,9 @@ namespace DOS2Randomizer.UI {
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
             playerLevel.OnValueChanged = value => { _player.Level = value; };
-            attributePointsPanel1.OnValueChanged = value => { _player.Attributes = value; };
-            skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value; };
-            possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value.ToArray(); };
+            attributePointsPanel1.OnValueChanged = value => { _player.Attributes = value.ToImmutableDictionary(); };
+            skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value.ToImmutableDictionary(); };
+            possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value.ToImmutableArray(); };
         }
 
         private void UnsubscribeFromControls() {
@@ -36,16 +38,16 @@ namespace DOS2Randomizer.UI {
         void UpdateUi() {
             playerName.Value = _player.Name;
             playerLevel.Value = _player.Level;
-            attributePointsPanel1.Value = _player.Attributes;
-            skillPointsPanel1.Value = _player.SkillPoints;
+            attributePointsPanel1.Value = new Dictionary<Attribute, int>(_player.Attributes);
+            skillPointsPanel1.Value = new Dictionary<Spell.School, int>(_player.SkillPoints);
             possibleSkillTypes.Value = _player.PossibleSkillTypes;
             knownSpellList.Spells = _player.KnownSpells;
             equippedSpellList.Spells = _player.EquippedSpells;
         }
 
         private void SetPlayerSpells(IEnumerable<Spell> spells) {
-            _player.KnownSpells = spells.ToArray();
-            _player.EquippedSpells = _player.KnownSpells.Intersect(_player.EquippedSpells).ToArray();
+            _player.KnownSpells = spells.ToImmutableArray();
+            _player.EquippedSpells = _player.KnownSpells.Intersect(_player.EquippedSpells).ToImmutableArray();
             RefreshUi();
         }
 
