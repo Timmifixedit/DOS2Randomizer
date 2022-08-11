@@ -31,7 +31,23 @@ namespace DOS2Randomizer.DataStructures {
         public int NumShuffles { get; }
     }
 
-    public class Player : IConstPlayer {
+    public interface IMutablePlayer : IConstPlayer {
+        public new string Name { get; set; }
+        public new int Level { get; set; }
+
+        [JsonIgnore]
+        public new ImmutableArray<IConstSpell> CKnownSpells { get; set; }
+
+        [JsonIgnore]
+        public new ImmutableArray<IConstSpell> CEquippedSpells { get; set; }
+        public new ImmutableArray<Player.SkillType> PossibleSkillTypes { get; set; }
+        public new ImmutableDictionary<Attribute, int> Attributes { get; set; }
+        public new ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }
+        public new int NumRerolls { get; set; }
+        public new int NumShuffles { get; set; }
+    }
+
+    public class Player : IMutablePlayer {
         public const int BaseAttributeValue = 10;
         public enum SkillType {
             Melee,
@@ -72,9 +88,17 @@ namespace DOS2Randomizer.DataStructures {
         public string Name { get; set; }
         public int Level { get; set; }
         public ImmutableArray<Spell> KnownSpells { get; set; }
-        public ImmutableArray<IConstSpell> CKnownSpells => KnownSpells.CastArray<IConstSpell>();
+
+        public ImmutableArray<IConstSpell> CKnownSpells {
+            get => KnownSpells.CastArray<IConstSpell>();
+            set => KnownSpells = value.Cast<Spell>().ToImmutableArray();
+        }
         public ImmutableArray<Spell> EquippedSpells { get; set; }
-        public ImmutableArray<IConstSpell> CEquippedSpells => EquippedSpells.CastArray<IConstSpell>();
+
+        public ImmutableArray<IConstSpell> CEquippedSpells {
+            get => EquippedSpells.CastArray<IConstSpell>();
+            set => EquippedSpells = value.Cast<Spell>().ToImmutableArray();
+        }
         public ImmutableArray<SkillType> PossibleSkillTypes { get; set; }
         public ImmutableDictionary<Attribute, int> Attributes { get; set; }
         public ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }

@@ -18,8 +18,8 @@ namespace DOS2Randomizer.DataStructures {
     }
 
     public interface IConstMatchConfig : IMatchProperties {
-        public string Name { get;}
-        public ImmutableArray<Player> Players { get; set; }
+        public string Name { get; }
+        public ImmutableArray<IMutablePlayer> Players { get; set; }
 
     }
 
@@ -33,14 +33,14 @@ namespace DOS2Randomizer.DataStructures {
         public ImmutableArray<OnLevelUp> LevelSpecificEvents { get; set; }
         public ImmutableArray<IConstSpell> CSpells => Spells.CastArray<IConstSpell>();
         public ImmutableArray<Spell> Spells { get; set; }
-        public ImmutableArray<Player> Players { get; set; }
+        public ImmutableArray<IMutablePlayer> Players { get; set; }
 
         public MatchConfig() {
             LevelSpecificEvents =
                 Enumerable.Range(1, MaxLevel).Select(i => new OnLevelUp(i, 0, 0, 0)).ToImmutableArray();
             Name = "<Match config name>";
             Spells = ImmutableArray<Spell>.Empty;
-            Players = ImmutableArray<Player>.Empty;
+            Players = ImmutableArray<IMutablePlayer>.Empty;
         }
 
         [JsonConstructor]
@@ -52,7 +52,7 @@ namespace DOS2Randomizer.DataStructures {
             K = k;
             LevelSpecificEvents = levelSpecificEvents;
             Spells = spells;
-            Players = players;
+            Players = players.CastArray<IMutablePlayer>();
         }
     }
 

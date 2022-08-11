@@ -15,9 +15,9 @@ namespace DOS2Randomizer.UI {
 
     public partial class PlayerPanel : UserControl {
 
-        private readonly Player _player;
+        private readonly IMutablePlayer _player;
         private readonly IMatchProperties _matchConfig;
-        public Action<Player>? OnRemoveClick;
+        public Action<IMutablePlayer>? OnRemoveClick;
 
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
@@ -41,13 +41,13 @@ namespace DOS2Randomizer.UI {
             attributePointsPanel1.Value = new Dictionary<Attribute, int>(_player.Attributes);
             skillPointsPanel1.Value = new Dictionary<Spell.School, int>(_player.SkillPoints);
             possibleSkillTypes.Value = _player.PossibleSkillTypes;
-            knownSpellList.Spells = _player.KnownSpells;
-            equippedSpellList.Spells = _player.EquippedSpells;
+            knownSpellList.Spells = _player.CKnownSpells;
+            equippedSpellList.Spells = _player.CEquippedSpells;
         }
 
         private void SetPlayerSpells(IEnumerable<IConstSpell> spells) {
-            _player.KnownSpells = spells.Cast<Spell>().ToImmutableArray();
-            _player.EquippedSpells = _player.KnownSpells.Intersect(_player.EquippedSpells).ToImmutableArray();
+            _player.CKnownSpells = spells.ToImmutableArray();
+            _player.CEquippedSpells = _player.CKnownSpells.Intersect(_player.CEquippedSpells).ToImmutableArray();
             RefreshUi();
         }
 
@@ -57,7 +57,7 @@ namespace DOS2Randomizer.UI {
             SubscribeToControls();
         }
 
-        public PlayerPanel(Player player, IMatchProperties matchConfig) {
+        public PlayerPanel(IMutablePlayer player, IMatchProperties matchConfig) {
             _player = player;
             _matchConfig = matchConfig;
             InitializeComponent();
@@ -70,7 +70,7 @@ namespace DOS2Randomizer.UI {
 
         private void configureSpells_Click(object sender, EventArgs e) {
             var spellChooseDialog =
-                new SpellChooseDialog(_matchConfig.CSpells.Except(_player.CKnownSpells), _player.KnownSpells) {
+                new SpellChooseDialog(_matchConfig.CSpells.Except(_player.CKnownSpells), _player.CKnownSpells) {
                     FromListName = "Available Spells",
                     ToListName = "Known Spells",
                     OnConfirm = SetPlayerSpells,
@@ -86,12 +86,12 @@ namespace DOS2Randomizer.UI {
             }
 
             var maxSpellsToThisLevel = _matchConfig.LevelSpecificEvents.Take(level).Select(data => data.NewSpells).Sum();
-            var numSpellsKnown = _player.KnownSpells.Length;
+            var numSpellsKnown = _player.CKnownSpells.Length;
             if (numSpellsKnown < maxSpellsToThisLevel) {
                 var numSpellsToChoose = Math.Min(_matchConfig.K, maxSpellsToThisLevel - numSpellsKnown);
                 var spellChooseDialog =
                     new ChooseKDialog(new Logic.SpellChooser(_matchConfig, _player), numSpellsToChoose, _player.NumRerolls) {
-                        OnConfirm = spells => { SetPlayerSpells(_player.KnownSpells.Concat(spells.Cast<Spell>())); },
+                        OnConfirm = spells => { SetPlayerSpells(_player.CKnownSpells.Concat(spells.Cast<Spell>())); },
                         Visible = true
                     };
                 spellChooseDialog.Activate();

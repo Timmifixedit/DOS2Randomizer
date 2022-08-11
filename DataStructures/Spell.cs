@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualBasic.CompilerServices;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
@@ -21,7 +22,6 @@ namespace DOS2Randomizer.DataStructures {
         public Attribute Scaling { get; }
         public int MemorySlots { get; }
         public int LoadoutCost { get; }
-
     }
 
     public class Spell : IEquatable<Spell>, IConstSpell {
@@ -99,7 +99,6 @@ namespace DOS2Randomizer.DataStructures {
                    SequenceEqual(Types, other.Types) && Scaling == other.Scaling &&
                    MemorySlots == other.MemorySlots && LoadoutCost == other.LoadoutCost;
         }
-
         private static bool SequenceEqual<T>(IEnumerable<T>? lhs, IEnumerable<T>? rhs) {
             if (ReferenceEquals(lhs, rhs)) {
                 return true;

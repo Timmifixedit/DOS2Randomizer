@@ -16,7 +16,7 @@ namespace DOS2Randomizer.UI {
     public partial class MatchWindow : Form {
         private readonly MatchConfigGuard _config;
 
-        private ImmutableArray<Player> Players {
+        private ImmutableArray<IMutablePlayer> Players {
             get => _config.Get.Players;
             set {
                 _config.Get.Players = value;
@@ -62,7 +62,7 @@ namespace DOS2Randomizer.UI {
                 addPlayer.Enabled = false;
             }
         }
-        private void RemovePlayer(Player player) {
+        private void RemovePlayer(IMutablePlayer player) {
             var confirmed = MessageBox.Show(String.Format(Resources.Messages.ConfirmDeletePlayer, player.Name),
                 "", MessageBoxButtons.OKCancel);
             if (confirmed == DialogResult.OK) {

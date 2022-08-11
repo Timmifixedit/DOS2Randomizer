@@ -24,7 +24,7 @@ namespace DOS2Randomizer.UI {
             set => toList.Label = value;
         }
 
-        public SpellChooseDialog(IEnumerable<IConstSpell> source, IEnumerable<Spell> destination) {
+        public SpellChooseDialog(IEnumerable<IConstSpell> source, IEnumerable<IConstSpell> destination) {
             InitializeComponent();
             fromList.Spells = source;
             toList.Spells = destination;
