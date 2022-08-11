@@ -16,7 +16,7 @@ namespace DOS2Randomizer.UI {
             get => _matchConfig;
             set {
                 _matchConfig = value;
-                Spells = _matchConfig.Spells;
+                Spells = _matchConfig.Spells.ToArray();
                 levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents.ToArray();
                 n.Value = _matchConfig.N;
                 k.Value = _matchConfig.K;
@@ -27,9 +27,9 @@ namespace DOS2Randomizer.UI {
         }
 
         private Spell[] Spells {
-            get => _matchConfig.Spells;
+            get => _matchConfig.Spells.ToArray();
             set {
-                _matchConfig.Spells = value;
+                _matchConfig.Spells = value.ToImmutableArray();
                 spellDesignPanel1.AllSpells = Spells;
                 spellSearch.AllSpells = Spells;
             }

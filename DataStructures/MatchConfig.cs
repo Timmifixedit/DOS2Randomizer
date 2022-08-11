@@ -11,12 +11,12 @@ namespace DOS2Randomizer.DataStructures {
         public int N { get; }
         public int K { get; }
         public ImmutableArray<OnLevelUp> LevelSpecificEvents { get; }
-        public Spell[] Spells { get; }
+        public ImmutableArray<Spell> Spells { get; }
     }
 
     public interface IConstMatchConfig : IMatchProperties {
         public string Name { get;}
-        public Player[] Players { get; set; }
+        public ImmutableArray<Player> Players { get; set; }
 
     }
 
@@ -28,20 +28,20 @@ namespace DOS2Randomizer.DataStructures {
         public int N { get; set; }
         public int K { get; set; }
         public ImmutableArray<OnLevelUp> LevelSpecificEvents { get; set; }
-        public Spell[] Spells { get; set; }
-        public Player[] Players { get; set; }
+        public ImmutableArray<Spell> Spells { get; set; }
+        public ImmutableArray<Player> Players { get; set; }
 
         public MatchConfig() {
             LevelSpecificEvents =
                 Enumerable.Range(1, MaxLevel).Select(i => new OnLevelUp(i, 0, 0, 0)).ToImmutableArray();
             Name = "<Match config name>";
-            Spells = Array.Empty<Spell>();
-            Players = Array.Empty<Player>();
+            Spells = ImmutableArray<Spell>.Empty;
+            Players = ImmutableArray<Player>.Empty;
         }
 
         [JsonConstructor]
         public MatchConfig(string name, int maxNumMemSlots, int n, int k, ImmutableArray<OnLevelUp> levelSpecificEvents,
-            Spell[] spells, Player[] players) {
+            ImmutableArray<Spell> spells, ImmutableArray<Player> players) {
             Name = name;
             MaxNumMemSlots = maxNumMemSlots;
             N = n;

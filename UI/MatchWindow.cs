@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
@@ -15,7 +16,7 @@ namespace DOS2Randomizer.UI {
     public partial class MatchWindow : Form {
         private readonly IConstMatchConfig _config;
 
-        private Player[] Players {
+        private ImmutableArray<Player> Players {
             get => _config.Players;
             set {
                 _config.Players = value;
@@ -56,7 +57,7 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            Players = Players.Append(new Player()).ToArray();
+            Players = Players.Append(new Player()).ToImmutableArray();
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
             }
@@ -65,7 +66,7 @@ namespace DOS2Randomizer.UI {
             var confirmed = MessageBox.Show(String.Format(Resources.Messages.ConfirmDeletePlayer, player.Name),
                 "", MessageBoxButtons.OKCancel);
             if (confirmed == DialogResult.OK) {
-                Players = Players.Except(new[] {player}).ToArray();
+                Players = Players.Except(new[] {player}).ToImmutableArray();
                 addPlayer.Enabled = true;
             }
         }
