@@ -31,8 +31,8 @@ namespace DOS2Randomizer.UI {
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK &&
-                FileIo.ImportConfig<Spell[]>(fileChooser.FileName) is {} spells) {
-                Spells = spells;
+                FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} spells) {
+                Spells = spells.Spells.ToArray();
             }
         }
 
@@ -44,7 +44,7 @@ namespace DOS2Randomizer.UI {
 
             using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                FileIo.SaveConfig(Spells, fileChooser.FileName);
+                FileIo.SaveConfig(new SpellListWrapper(Spells), fileChooser.FileName);
             }
         }
 

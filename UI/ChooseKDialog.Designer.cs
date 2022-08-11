@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.confirm = new System.Windows.Forms.Button();
-            this.source = new DOS2Randomizer.UI.SpellList();
-            this.selection = new DOS2Randomizer.UI.SpellList();
+            this.source = new DOS2Randomizer.UI.CSpellList();
+            this.selection = new DOS2Randomizer.UI.CSpellList();
             this.description = new System.Windows.Forms.Label();
             this.reroll = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -97,8 +97,8 @@
         #endregion
 
         private System.Windows.Forms.Button confirm;
-        private SpellList source;
-        private SpellList selection;
+        private CSpellList source;
+        private CSpellList selection;
         private System.Windows.Forms.Label description;
         private System.Windows.Forms.Button reroll;
     }

@@ -24,9 +24,9 @@ namespace DOS2Randomizer.UI {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.fromList = new DOS2Randomizer.UI.SearchableSpellList();
+            this.fromList = new DOS2Randomizer.UI.CSearchableSpellList();
             this.confirm = new System.Windows.Forms.Button();
-            this.toList = new DOS2Randomizer.UI.SearchableSpellList();
+            this.toList = new DOS2Randomizer.UI.CSearchableSpellList();
             this.SuspendLayout();
             // 
             // fromList
@@ -77,8 +77,8 @@ namespace DOS2Randomizer.UI {
 
         #endregion
 
-        private SearchableSpellList fromList;
+        private CSearchableSpellList fromList;
         private System.Windows.Forms.Button confirm;
-        private SearchableSpellList toList;
+        private CSearchableSpellList toList;
     }
 }

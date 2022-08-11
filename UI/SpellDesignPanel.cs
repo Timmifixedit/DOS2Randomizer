@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -32,7 +33,7 @@ namespace DOS2Randomizer.UI {
             };
             skillPointsPanel1.OnValueChanged = value => {
                 if (_spell != null) {
-                    _spell.SchoolRequirements = value;
+                    _spell.SchoolRequirements = value.ToImmutableDictionary();
                 }
             };
             attributeBox.OnValueChanged = value => {
@@ -42,14 +43,14 @@ namespace DOS2Randomizer.UI {
             };
             typeSelection.OnValueChanged = value => {
                 if (_spell != null) {
-                    _spell.Types = value.ToArray();
+                    _spell.Types = value.ToImmutableArray();
                 }
             };
             dependencies.OnValueChanged = value => {
                 if (_spell != null) {
                     var tmp = value as Spell[] ?? value.ToArray();
                     var removed = dependencies.Data.Except(tmp);
-                    _spell.Dependencies = _spell.Dependencies.Except(removed).Union(tmp).ToArray();
+                    _spell.Dependencies = _spell.Dependencies.Except(removed).Union(tmp).ToImmutableArray();
                 }
             };
             memSlots.OnValueChanged = value => {
@@ -109,7 +110,7 @@ namespace DOS2Randomizer.UI {
             try {
                 name.Value = _spell.Name;
                 level.Value = _spell.Level;
-                skillPointsPanel1.Value = _spell.SchoolRequirements;
+                skillPointsPanel1.Value = new Dictionary<Spell.School, int>(_spell.SchoolRequirements);
                 attributeBox.Value = _spell.Scaling;
                 typeSelection.Value = _spell.Types;
                 dependencies.Value = _spell.Dependencies;

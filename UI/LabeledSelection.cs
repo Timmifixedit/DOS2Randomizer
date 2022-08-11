@@ -76,7 +76,7 @@ namespace DOS2Randomizer.UI {
 
     class LabeledSpellTypeSelection : LabeledSelection<Spell.Type> {}
 
-    class LabeledSpellSelection : LabeledSelection<Spell>, ISpellCollection {
+    class LabeledSpellSelection : LabeledSelection<Spell>, ISpellCollection<Spell> {
         public LabeledSpellSelection() {
             DisplayMember = typeof(Spell).GetProperties()[0].Name;
         }

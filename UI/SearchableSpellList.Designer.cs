@@ -1,6 +1,6 @@
 ﻿
 namespace DOS2Randomizer.UI {
-    partial class SearchableSpellList {
+    partial class SearchableSpellListBase<T> {
         /// <summary> 
         /// Erforderliche Designervariable.
         /// </summary>
@@ -25,8 +25,8 @@ namespace DOS2Randomizer.UI {
         /// </summary>
         private void InitializeComponent() {
             this.layout = new System.Windows.Forms.TableLayoutPanel();
-            this.search = new DOS2Randomizer.UI.SpellSearch();
-            this.spellList = new DOS2Randomizer.UI.SpellList();
+            this.search = new DOS2Randomizer.UI.SpellSearchBase<T>();
+            this.spellList = new DOS2Randomizer.UI.SpellListBase<T>();
             this.labelSearchLayout = new System.Windows.Forms.TableLayoutPanel();
             this.label = new System.Windows.Forms.Label();
             this.layout.SuspendLayout();
@@ -114,8 +114,8 @@ namespace DOS2Randomizer.UI {
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel layout;
-        private SpellSearch search;
-        private SpellList spellList;
+        private SpellSearchBase<T> search;
+        private SpellListBase<T> spellList;
         private System.Windows.Forms.TableLayoutPanel labelSearchLayout;
         private System.Windows.Forms.Label label;
     }

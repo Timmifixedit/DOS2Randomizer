@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
@@ -13,12 +14,12 @@ using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
     public partial class MatchWindow : Form {
-        private readonly MatchConfig _config;
+        private readonly MatchConfigGuard _config;
 
-        private Player[] Players {
-            get => _config.Players;
+        private ImmutableArray<IMutablePlayer> Players {
+            get => _config.Get.Players;
             set {
-                _config.Players = value;
+                _config.Get.Players = value;
                 GeneratePlayerPanels();
             }
         }
@@ -26,14 +27,14 @@ namespace DOS2Randomizer.UI {
         private void GeneratePlayerPanels() {
             playersLayout.Controls.Clear();
             foreach (var player in Players) {
-                var playerPanel = new PlayerPanel(player, _config) {
+                var playerPanel = new PlayerPanel(player, _config.Get) {
                     OnRemoveClick = RemovePlayer,
                 };
                 playersLayout.Controls.Add(playerPanel);
             }
         }
 
-        public MatchWindow(MatchConfig config) {
+        public MatchWindow(MatchConfigGuard config) {
             _config = config;
             InitializeComponent();
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
@@ -46,7 +47,7 @@ namespace DOS2Randomizer.UI {
         private void save_Click(object sender, EventArgs e) {
             using var fileChooser = new SaveFileDialog {AddExtension = true, DefaultExt = Resources.Misc.JsonExtension};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                FileIo.SaveConfig(_config, fileChooser.FileName);
+                _config.Save(fileChooser.FileName);
             }
         }
 
@@ -56,16 +57,16 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            Players = Players.Append(new Player()).ToArray();
+            Players = Players.Append(new Player()).ToImmutableArray();
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
             }
         }
-        private void RemovePlayer(Player player) {
+        private void RemovePlayer(IMutablePlayer player) {
             var confirmed = MessageBox.Show(String.Format(Resources.Messages.ConfirmDeletePlayer, player.Name),
                 "", MessageBoxButtons.OKCancel);
             if (confirmed == DialogResult.OK) {
-                Players = Players.Except(new[] {player}).ToArray();
+                Players = Players.Except(new[] {player}).ToImmutableArray();
                 addPlayer.Enabled = true;
             }
         }

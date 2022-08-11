@@ -9,11 +9,10 @@ using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
 
-    public delegate void ImageClickEvent(DataStructures.Spell spell);
-    public partial class SpellList : UserControl, ISpellCollection {
+    public partial class SpellListBase<T> : UserControl, ISpellCollection<T> where T: DataStructures.IConstSpell {
 
-        private IEnumerable<DataStructures.Spell>? _spells;
-        public ImageClickEvent? OnImageClick;
+        private IEnumerable<T>? _spells;
+        public Action<T>? OnImageClick;
         private int? _lastIndex;
 
         public void SelectNext() {
@@ -30,7 +29,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public IEnumerable<DataStructures.Spell>? Spells {
+        public IEnumerable<T>? Spells {
             get => _spells;
             set {
                 _spells = value;
@@ -67,7 +66,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public SpellList() {
+        public SpellListBase() {
             InitializeComponent();
             layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
             layout.KeyDown += (sender, args) => {
@@ -77,4 +76,7 @@ namespace DOS2Randomizer.UI {
             };
         }
     }
+
+    public class SpellList : SpellListBase<DataStructures.Spell> {}
+    public class CSpellList : SpellListBase<DataStructures.IConstSpell> {}
 }

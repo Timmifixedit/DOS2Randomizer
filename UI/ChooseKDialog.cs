@@ -25,7 +25,7 @@ namespace DOS2Randomizer.UI {
 
         #endregion
 
-        public Action<IEnumerable<Spell>>? OnConfirm;
+        public Action<IEnumerable<IConstSpell>>? OnConfirm;
         private int _numToChoose;
         private int _numLeftToChoose;
         private int _numRerolls;

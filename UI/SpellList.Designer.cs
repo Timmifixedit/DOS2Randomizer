@@ -1,6 +1,6 @@
 ﻿
 namespace DOS2Randomizer.UI {
-    partial class SpellList {
+    partial class SpellListBase<T> {
         /// <summary> 
         /// Erforderliche Designervariable.
         /// </summary>
