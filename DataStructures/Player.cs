@@ -31,10 +31,10 @@ namespace DOS2Randomizer.DataStructures {
             EquippedSpells = Array.Empty<Spell>();
             PossibleSkillTypes = Array.Empty<SkillType>();
             Attributes = new Dictionary<Attribute, int>(((Attribute[]) Enum.GetValues(typeof(Spell.School))).Select(a =>
-                new KeyValuePair<Attribute, int>(a, 0)));
+                new KeyValuePair<Attribute, int>(a, BaseAttributeValue)));
             SkillPoints = new Dictionary<Spell.School, int>(
                 ((Spell.School[]) Enum.GetValues(typeof(Spell.School))).Select(s =>
-                    new KeyValuePair<Spell.School, int>(s, BaseAttributeValue)));
+                    new KeyValuePair<Spell.School, int>(s, 0)));
         }
 
         [JsonConstructor]
