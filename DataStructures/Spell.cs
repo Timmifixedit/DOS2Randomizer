@@ -24,7 +24,7 @@ namespace DOS2Randomizer.DataStructures {
         public int LoadoutCost { get; }
     }
 
-    public class Spell : IEquatable<Spell>, IConstSpell {
+    public class Spell : IEquatable<Spell>, IConstSpell, ISerilizable {
 
         public enum School {
             Aero,

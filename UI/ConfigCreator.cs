@@ -57,8 +57,8 @@ namespace DOS2Randomizer.UI {
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK &&
-                FileIo.ImportConfig<Spell[]>(fileChooser.FileName) is {} s) {
-                Spells = s;
+                FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} s) {
+                Spells = s.Spells.ToArray();
             }
         }
 

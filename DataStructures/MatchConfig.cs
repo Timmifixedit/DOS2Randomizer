@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
-using DOS2Randomizer.Util;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
@@ -23,7 +22,7 @@ namespace DOS2Randomizer.DataStructures {
 
     }
 
-    public class MatchConfig : IConstMatchConfig {
+    public class MatchConfig : IConstMatchConfig, ISerilizable {
         public const int MaxNumPlayers = 4;
         public const int MaxLevel = 21;
         public string Name { get; set; }
@@ -56,17 +55,4 @@ namespace DOS2Randomizer.DataStructures {
         }
     }
 
-    public class MatchConfigGuard {
-        private readonly MatchConfig _matchConfig;
-
-        public MatchConfigGuard(MatchConfig matchConfig) {
-            _matchConfig = matchConfig;
-        }
-
-        public void Save(string filename) {
-            FileIo.SaveConfig(_matchConfig, filename);
-        }
-
-        public IConstMatchConfig Get => _matchConfig;
-    }
 }
