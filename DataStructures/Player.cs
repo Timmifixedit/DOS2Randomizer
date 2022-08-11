@@ -32,10 +32,10 @@ namespace DOS2Randomizer.DataStructures {
             EquippedSpells = ImmutableArray<Spell>.Empty;
             PossibleSkillTypes = ImmutableArray<SkillType>.Empty;
             Attributes = new Dictionary<Attribute, int>(((Attribute[])Enum.GetValues(typeof(Spell.School))).Select(a =>
-                new KeyValuePair<Attribute, int>(a, 0))).ToImmutableDictionary();
+                new KeyValuePair<Attribute, int>(a, BaseAttributeValue))).ToImmutableDictionary();
             SkillPoints = new Dictionary<Spell.School, int>(
                 ((Spell.School[])Enum.GetValues(typeof(Spell.School))).Select(s =>
-                    new KeyValuePair<Spell.School, int>(s, BaseAttributeValue))).ToImmutableDictionary();
+                    new KeyValuePair<Spell.School, int>(s, 0))).ToImmutableDictionary();
         }
 
         [JsonConstructor]
