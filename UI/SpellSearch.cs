@@ -5,13 +5,13 @@ using System.Text;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    class SpellSearch : LabeledString {
-        private IEnumerable<Spell>? _spells;
-        public ISpellCollection? ManagedCollection { get; set; }
+    class SpellSearchBase<T> : LabeledString where T: IConstSpell {
+        private IEnumerable<T>? _spells;
+        public ISpellCollection<T>? ManagedCollection { get; set; }
 
         public bool CaseSensitive { get; set; }
 
-        public IEnumerable<Spell>? AllSpells {
+        public IEnumerable<T>? AllSpells {
             get => _spells;
             set {
                 _spells = value;
@@ -33,8 +33,11 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public SpellSearch() {
+        public SpellSearchBase() {
             OnValueChanged = Search;
         }
     }
+
+    class SpellSearch : SpellSearchBase<Spell> {}
+    class CSpellSearch : SpellSearchBase<IConstSpell> {}
 }

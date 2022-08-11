@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
+using DOS2Randomizer.Util;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
@@ -53,5 +54,19 @@ namespace DOS2Randomizer.DataStructures {
             Spells = spells;
             Players = players;
         }
+    }
+
+    public class MatchConfigGuard {
+        private readonly MatchConfig _matchConfig;
+
+        public MatchConfigGuard(MatchConfig matchConfig) {
+            _matchConfig = matchConfig;
+        }
+
+        public void Save(string filename) {
+            FileIo.SaveConfig(_matchConfig, filename);
+        }
+
+        public IConstMatchConfig Get => _matchConfig;
     }
 }

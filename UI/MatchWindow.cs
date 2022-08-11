@@ -14,12 +14,12 @@ using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
     public partial class MatchWindow : Form {
-        private readonly IConstMatchConfig _config;
+        private readonly MatchConfigGuard _config;
 
         private ImmutableArray<Player> Players {
-            get => _config.Players;
+            get => _config.Get.Players;
             set {
-                _config.Players = value;
+                _config.Get.Players = value;
                 GeneratePlayerPanels();
             }
         }
@@ -27,14 +27,14 @@ namespace DOS2Randomizer.UI {
         private void GeneratePlayerPanels() {
             playersLayout.Controls.Clear();
             foreach (var player in Players) {
-                var playerPanel = new PlayerPanel(player, _config) {
+                var playerPanel = new PlayerPanel(player, _config.Get) {
                     OnRemoveClick = RemovePlayer,
                 };
                 playersLayout.Controls.Add(playerPanel);
             }
         }
 
-        public MatchWindow(MatchConfig config) {
+        public MatchWindow(MatchConfigGuard config) {
             _config = config;
             InitializeComponent();
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
@@ -47,7 +47,7 @@ namespace DOS2Randomizer.UI {
         private void save_Click(object sender, EventArgs e) {
             using var fileChooser = new SaveFileDialog {AddExtension = true, DefaultExt = Resources.Misc.JsonExtension};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                FileIo.SaveConfig(_config, fileChooser.FileName);
+                _config.Save(fileChooser.FileName);
             }
         }
 

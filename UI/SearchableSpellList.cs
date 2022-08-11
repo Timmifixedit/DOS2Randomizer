@@ -8,14 +8,14 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    public partial class SearchableSpellList : UserControl, ISplittableControl, ISpellCollection {
-        public SearchableSpellList() {
+    public partial class SearchableSpellListBase<T> : UserControl, ISplittableControl, ISpellCollection<T> where T: IConstSpell{
+        public SearchableSpellListBase() {
             InitializeComponent();
             spellList.OnImageClick = spell => OnImageClick?.Invoke(spell);
         }
 
-        public IEnumerable<Spell>? Spells {
-            get => search.AllSpells ?? Array.Empty<Spell>();
+        public IEnumerable<T>? Spells {
+            get => search.AllSpells ?? Array.Empty<T>();
             set => search.AllSpells = value;
         }
 
@@ -29,7 +29,10 @@ namespace DOS2Randomizer.UI {
             set => label.Text = value;
         }
 
-        public ImageClickEvent? OnImageClick;
+        public Action<T>? OnImageClick;
         public TableLayoutPanel LayoutPanel => layout;
     }
+
+    public class SearchableSpellList : SearchableSpellListBase<Spell> {}
+    public class CSearchableSpellList : SearchableSpellListBase<IConstSpell> {}
 }

@@ -15,17 +15,17 @@ namespace DOS2Randomizer.Logic {
 
     public class SpellChooser {
         private readonly IMatchProperties _matchConfig;
-        private readonly Player _player;
+        private readonly IConstPlayer _player;
         private readonly int _numSpellsToGenerate;
-        public SpellChooser(IMatchProperties matchConfig, Player player) {
+        public SpellChooser(IMatchProperties matchConfig, IConstPlayer player) {
             _matchConfig = matchConfig;
             _numSpellsToGenerate = _matchConfig.N;
             _player = player;
         }
 
-        public IEnumerable<Spell> GetSpells() {
+        public IEnumerable<IConstSpell> GetSpells() {
             // @TODO this is only a dummy implementation
-            return _matchConfig.Spells.Except(_player.KnownSpells).ChooseRandom(_numSpellsToGenerate);
+            return _matchConfig.CSpells.Except(_player.CKnownSpells).ChooseRandom(_numSpellsToGenerate);
         }
     }
 }

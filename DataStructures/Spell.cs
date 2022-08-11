@@ -12,9 +12,9 @@ namespace DOS2Randomizer.DataStructures {
         public string Name { get; }
         public string ImagePath { get; }
         public int Level { get; }
-        public ImmutableArray<IConstSpell> CDependencies { get; }
 
         [JsonIgnore]
+        public ImmutableArray<IConstSpell> CDependencies { get; }
         public ImmutableDictionary<Spell.School, int> SchoolRequirements { get; }
         public Player.SkillType EquipmentRequirement { get; }
         public ImmutableArray<Spell.Type> Types { get; }

@@ -15,8 +15,9 @@ namespace DOS2Randomizer.Util {
                 using var file = File.OpenRead(fileName);
                 using var reader = new StreamReader(file);
                 spells = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
-            } catch (JsonException) {
-                MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileName));
+            } catch (JsonException e) {
+                MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileName) + Environment.NewLine +
+                                e.Message);
             } catch (IOException exception) {
                 MessageBox.Show(String.Format(Resources.ErrorMessages.FileOpenFailed, fileName) +
                                 Environment.NewLine + exception.Message);

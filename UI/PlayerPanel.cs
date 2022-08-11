@@ -45,8 +45,8 @@ namespace DOS2Randomizer.UI {
             equippedSpellList.Spells = _player.EquippedSpells;
         }
 
-        private void SetPlayerSpells(IEnumerable<Spell> spells) {
-            _player.KnownSpells = spells.ToImmutableArray();
+        private void SetPlayerSpells(IEnumerable<IConstSpell> spells) {
+            _player.KnownSpells = spells.Cast<Spell>().ToImmutableArray();
             _player.EquippedSpells = _player.KnownSpells.Intersect(_player.EquippedSpells).ToImmutableArray();
             RefreshUi();
         }
@@ -70,7 +70,7 @@ namespace DOS2Randomizer.UI {
 
         private void configureSpells_Click(object sender, EventArgs e) {
             var spellChooseDialog =
-                new SpellChooseDialog(_matchConfig.Spells.Except(_player.KnownSpells), _player.KnownSpells) {
+                new SpellChooseDialog(_matchConfig.CSpells.Except(_player.CKnownSpells), _player.KnownSpells) {
                     FromListName = "Available Spells",
                     ToListName = "Known Spells",
                     OnConfirm = SetPlayerSpells,
@@ -91,7 +91,7 @@ namespace DOS2Randomizer.UI {
                 var numSpellsToChoose = Math.Min(_matchConfig.K, maxSpellsToThisLevel - numSpellsKnown);
                 var spellChooseDialog =
                     new ChooseKDialog(new Logic.SpellChooser(_matchConfig, _player), numSpellsToChoose, _player.NumRerolls) {
-                        OnConfirm = spells => { SetPlayerSpells(_player.KnownSpells.Concat(spells)); },
+                        OnConfirm = spells => { SetPlayerSpells(_player.KnownSpells.Concat(spells.Cast<Spell>())); },
                         Visible = true
                     };
                 spellChooseDialog.Activate();
