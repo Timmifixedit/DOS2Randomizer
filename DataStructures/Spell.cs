@@ -8,7 +8,23 @@ using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
 
-    public class Spell : IEquatable<Spell> {
+    public interface IConstSpell {
+        public string Name { get; }
+        public string ImagePath { get; }
+        public int Level { get; }
+        public ImmutableArray<IConstSpell> CDependencies { get; }
+
+        [JsonIgnore]
+        public ImmutableDictionary<Spell.School, int> SchoolRequirements { get; }
+        public Player.SkillType EquipmentRequirement { get; }
+        public ImmutableArray<Spell.Type> Types { get; }
+        public Attribute Scaling { get; }
+        public int MemorySlots { get; }
+        public int LoadoutCost { get; }
+
+    }
+
+    public class Spell : IEquatable<Spell>, IConstSpell {
 
         public enum School {
             Aero,
@@ -68,6 +84,7 @@ namespace DOS2Randomizer.DataStructures {
         public string ImagePath { get; }
         public int Level { get; set; }
         public ImmutableArray<Spell> Dependencies { get; set; }
+        public ImmutableArray<IConstSpell> CDependencies => Dependencies.CastArray<IConstSpell>();
         public ImmutableDictionary<School, int> SchoolRequirements { get; set; }
         public Player.SkillType EquipmentRequirement { get; set; }
         public ImmutableArray<Type> Types { get; set; }

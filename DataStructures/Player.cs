@@ -15,7 +15,23 @@ namespace DOS2Randomizer.DataStructures {
         None
     }
 
-    public class Player {
+    public interface IConstPlayer {
+        public string Name { get; }
+        public int Level { get; }
+
+        [JsonIgnore]
+        public ImmutableArray<IConstSpell> CKnownSpells { get; }
+
+        [JsonIgnore]
+        public ImmutableArray<IConstSpell> CEquippedSpells { get; }
+        public ImmutableArray<Player.SkillType> PossibleSkillTypes { get; }
+        public ImmutableDictionary<Attribute, int> Attributes { get; }
+        public ImmutableDictionary<Spell.School, int> SkillPoints { get; }
+        public int NumRerolls { get; }
+        public int NumShuffles { get; }
+    }
+
+    public class Player : IConstPlayer {
         public const int BaseAttributeValue = 10;
         public enum SkillType {
             Melee,
@@ -56,10 +72,12 @@ namespace DOS2Randomizer.DataStructures {
         public string Name { get; set; }
         public int Level { get; set; }
         public ImmutableArray<Spell> KnownSpells { get; set; }
+        public ImmutableArray<IConstSpell> CKnownSpells => KnownSpells.CastArray<IConstSpell>();
         public ImmutableArray<Spell> EquippedSpells { get; set; }
+        public ImmutableArray<IConstSpell> CEquippedSpells => EquippedSpells.CastArray<IConstSpell>();
         public ImmutableArray<SkillType> PossibleSkillTypes { get; set; }
-        public ImmutableDictionary<Attribute, int> Attributes;
-        public ImmutableDictionary<Spell.School, int> SkillPoints;
+        public ImmutableDictionary<Attribute, int> Attributes { get; set; }
+        public ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }
         public int NumRerolls { get; set; }
         public int NumShuffles { get; set; }
 
