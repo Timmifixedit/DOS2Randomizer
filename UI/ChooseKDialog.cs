@@ -25,7 +25,7 @@ namespace DOS2Randomizer.UI {
 
         #endregion
 
-        public Action<IEnumerable<IConstSpell>>? OnConfirm;
+        public Action<IEnumerable<IConstSpell>, int>? OnConfirm;
         private int _numToChoose;
         private int _numLeftToChoose;
         private int _numRerolls;
@@ -67,7 +67,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void confirm_Click(object sender, EventArgs e) {
-            OnConfirm?.Invoke(selection.Spells ?? Array.Empty<Spell>());
+            OnConfirm?.Invoke(selection.Spells ?? Array.Empty<Spell>(), NumRerolls);
             this.Close();
         }
 

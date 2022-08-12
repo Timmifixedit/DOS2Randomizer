@@ -97,11 +97,29 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No shuffles left.
+        /// </summary>
+        internal static string NoShuffles {
+            get {
+                return ResourceManager.GetString("NoShuffles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rerolls ({0} left).
         /// </summary>
         internal static string Rerolls {
             get {
                 return ResourceManager.GetString("Rerolls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shuffle Spells ({0}).
+        /// </summary>
+        internal static string Shuffle {
+            get {
+                return ResourceManager.GetString("Shuffle", resourceCulture);
             }
         }
         

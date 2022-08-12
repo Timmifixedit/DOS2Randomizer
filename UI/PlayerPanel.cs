@@ -43,6 +43,8 @@ namespace DOS2Randomizer.UI {
             possibleSkillTypes.Value = _player.PossibleSkillTypes;
             knownSpellList.Spells = _player.CKnownSpells;
             equippedSpellList.Spells = _player.CEquippedSpells;
+            shuffle.Text = String.Format(Resources.Messages.Shuffle, _player.NumShuffles);
+            shuffle.Enabled = _player.NumShuffles > 0;
         }
 
         private void SetPlayerSpells(IEnumerable<IConstSpell> spells) {
@@ -108,7 +110,10 @@ namespace DOS2Randomizer.UI {
                 var numSpellsToChoose = Math.Min(_matchConfig.K, maxSpellsToThisLevel - numSpellsKnown);
                 var spellChooseDialog =
                     new ChooseKDialog(new Logic.SpellChooser(_matchConfig, _player), numSpellsToChoose, _player.NumRerolls) {
-                        OnConfirm = spells => { SetPlayerSpells(_player.CKnownSpells.Concat(spells.Cast<Spell>())); },
+                        OnConfirm = (spells, numRerolls) => {
+                            _player.NumRerolls = numRerolls;
+                            SetPlayerSpells(_player.CKnownSpells.Concat(spells.Cast<Spell>()));
+                        },
                         Visible = true
                     };
                 spellChooseDialog.Activate();
@@ -118,11 +123,17 @@ namespace DOS2Randomizer.UI {
         }
 
         private void shuffle_Click(object sender, EventArgs e) {
-            if (_player.CKnownSpells.Length <= _player.NumMemSlots) {
+            if (_player.NumShuffles <= 0) {
+                MessageBox.Show(Resources.Messages.NoShuffles);
+            } else if (_player.CKnownSpells.Length <= _player.NumMemSlots) {
                 MessageBox.Show(String.Format(Resources.Messages.ShuffleNoEffect, _player.Name, _player.NumMemSlots,
                     _player.CKnownSpells.Length));
             } else {
-
+                --_player.NumShuffles;
+                var random = new Random();
+                _player.CEquippedSpells = _player.CKnownSpells.OrderBy(_ => random.Next()).Take(_player.NumMemSlots)
+                    .ToImmutableArray();
+                RefreshUi();
             }
         }
     }
