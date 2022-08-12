@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 using System.Linq;
+using DOS2Randomizer.Logic;
 using Attribute = DOS2Randomizer.DataStructures.Attribute;
 
 namespace DOS2Randomizer.UI {
@@ -130,9 +131,7 @@ namespace DOS2Randomizer.UI {
                     _player.CKnownSpells.Length));
             } else {
                 --_player.NumShuffles;
-                var random = new Random();
-                _player.CEquippedSpells = _player.CKnownSpells.OrderBy(_ => random.Next()).Take(_player.NumMemSlots)
-                    .ToImmutableArray();
+                _player.CEquippedSpells = _player.CKnownSpells.ChooseRandom(_player.NumMemSlots).ToImmutableArray();
                 RefreshUi();
             }
         }
