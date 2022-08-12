@@ -29,6 +29,9 @@ namespace DOS2Randomizer.DataStructures {
         public ImmutableDictionary<Spell.School, int> SkillPoints { get; }
         public int NumRerolls { get; }
         public int NumShuffles { get; }
+
+        [JsonIgnore]
+        public int NumMemSlots { get; }
     }
 
     public interface IMutablePlayer : IConstPlayer {
@@ -49,6 +52,7 @@ namespace DOS2Randomizer.DataStructures {
 
     public class Player : IMutablePlayer {
         public const int BaseAttributeValue = 10;
+        public const int BaseMemSlots = 3;
         public enum SkillType {
             Melee,
             Archer,
@@ -104,6 +108,6 @@ namespace DOS2Randomizer.DataStructures {
         public ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }
         public int NumRerolls { get; set; }
         public int NumShuffles { get; set; }
-
+        public int NumMemSlots => Attributes[Attribute.Mem] - BaseAttributeValue + (Level / 2) + BaseMemSlots;
     }
 }

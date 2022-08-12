@@ -61,7 +61,21 @@ namespace DOS2Randomizer.UI {
             _player = player;
             _matchConfig = matchConfig;
             InitializeComponent();
+            knownSpellList.OnImageClick = EquipSpell;
             RefreshUi();
+        }
+
+        private void EquipSpell(IConstSpell spell) {
+            if (_player.CEquippedSpells.Contains(spell)) {
+                MessageBox.Show(String.Format(Resources.Messages.AlreadyEquipped, spell.Name));
+            } else if (_player.CEquippedSpells.Length + spell.MemorySlots > _player.NumMemSlots) {
+                var slotsLeft = _player.NumMemSlots - _player.CEquippedSpells.Length;
+                MessageBox.Show(string.Format(Resources.Messages.TooFewMemSlots, _player.Name, slotsLeft, spell.Name,
+                    spell.MemorySlots));
+            } else {
+                _player.CEquippedSpells = _player.CEquippedSpells.Add(spell);
+                equippedSpellList.Spells = _player.CEquippedSpells;
+            }
         }
 
         private void remove_Click(object sender, EventArgs e) {
@@ -97,6 +111,15 @@ namespace DOS2Randomizer.UI {
                 spellChooseDialog.Activate();
             } else {
                 MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, level));
+            }
+        }
+
+        private void shuffle_Click(object sender, EventArgs e) {
+            if (_player.CKnownSpells.Length <= _player.NumMemSlots) {
+                MessageBox.Show(String.Format(Resources.Messages.ShuffleNoEffect, _player.Name, _player.NumMemSlots,
+                    _player.CKnownSpells.Length));
+            } else {
+
             }
         }
     }

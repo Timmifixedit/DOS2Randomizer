@@ -34,6 +34,7 @@ namespace DOS2Randomizer.UI {
             this.drawSpells = new System.Windows.Forms.Button();
             this.equippedSpellList = new DOS2Randomizer.UI.CSearchableSpellList();
             this.knownSpellList = new DOS2Randomizer.UI.CSearchableSpellList();
+            this.shuffle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playerName
@@ -139,10 +140,21 @@ namespace DOS2Randomizer.UI {
             this.knownSpellList.SplitPercentage = 29;
             this.knownSpellList.TabIndex = 12;
             // 
+            // shuffle
+            // 
+            this.shuffle.Location = new System.Drawing.Point(514, 91);
+            this.shuffle.Name = "shuffle";
+            this.shuffle.Size = new System.Drawing.Size(105, 23);
+            this.shuffle.TabIndex = 13;
+            this.shuffle.Text = "Shuffle equipped Spells";
+            this.shuffle.UseVisualStyleBackColor = true;
+            this.shuffle.Click += new System.EventHandler(this.shuffle_Click);
+            // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.shuffle);
             this.Controls.Add(this.knownSpellList);
             this.Controls.Add(this.equippedSpellList);
             this.Controls.Add(this.drawSpells);
@@ -171,5 +183,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.Button drawSpells;
         private CSearchableSpellList equippedSpellList;
         private CSearchableSpellList knownSpellList;
+        private System.Windows.Forms.Button shuffle;
     }
 }

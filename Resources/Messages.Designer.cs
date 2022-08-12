@@ -61,6 +61,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is already equipped..
+        /// </summary>
+        internal static string AlreadyEquipped {
+            get {
+                return ResourceManager.GetString("AlreadyEquipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose {0} spells..
         /// </summary>
         internal static string ChooseK {
@@ -93,6 +102,24 @@ namespace DOS2Randomizer.Resources {
         internal static string Rerolls {
             get {
                 return ResourceManager.GetString("Rerolls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has a total of {1} memory slots and knows {2} spells. Shuffeling equipped spells would have no effect..
+        /// </summary>
+        internal static string ShuffleNoEffect {
+            get {
+                return ResourceManager.GetString("ShuffleNoEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has {1} memory slots left but {2} requires {3} memory slots..
+        /// </summary>
+        internal static string TooFewMemSlots {
+            get {
+                return ResourceManager.GetString("TooFewMemSlots", resourceCulture);
             }
         }
     }
