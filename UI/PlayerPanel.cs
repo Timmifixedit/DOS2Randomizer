@@ -131,6 +131,7 @@ namespace DOS2Randomizer.UI {
                     _player.CKnownSpells.Length));
             } else {
                 --_player.NumShuffles;
+                //@TODO this may choose a set of spells that violates spell dependencies or memory constraints
                 _player.CEquippedSpells = _player.CKnownSpells.ChooseRandom(_player.NumMemSlots).ToImmutableArray();
                 RefreshUi();
             }
