@@ -88,6 +88,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Equip {0}?.
+        /// </summary>
+        internal static string EquipSpell {
+            get {
+                return ResourceManager.GetString("EquipSpell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This player has reached the maximum number of spells at level {0}..
         /// </summary>
         internal static string MaxNumberSpellsReached {

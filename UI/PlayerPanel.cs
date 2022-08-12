@@ -79,8 +79,11 @@ namespace DOS2Randomizer.UI {
                 MessageBox.Show(string.Format(Resources.Messages.TooFewMemSlots, _player.Name, slotsLeft, spell.Name,
                     spell.MemorySlots));
             } else {
-                _player.CEquippedSpells = _player.CEquippedSpells.Add(spell);
-                equippedSpellList.Spells = _player.CEquippedSpells;
+                if (MessageBox.Show(String.Format(Resources.Messages.EquipSpell, spell.Name), "",
+                        MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                    _player.CEquippedSpells = _player.CEquippedSpells.Add(spell);
+                    equippedSpellList.Spells = _player.CEquippedSpells;
+                }
             }
         }
 
