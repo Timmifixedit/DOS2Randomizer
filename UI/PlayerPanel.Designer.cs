@@ -52,12 +52,12 @@ namespace DOS2Randomizer.UI {
             this.playerLevel.Label = "Player Level";
             this.playerLevel.Location = new System.Drawing.Point(3, 32);
             this.playerLevel.Max = 100;
-            this.playerLevel.Min = 0;
+            this.playerLevel.Min = 1;
             this.playerLevel.Name = "playerLevel";
             this.playerLevel.Size = new System.Drawing.Size(234, 23);
             this.playerLevel.SplitPercentage = 80;
             this.playerLevel.TabIndex = 1;
-            this.playerLevel.Value = 0;
+            this.playerLevel.Value = 1;
             // 
             // skillPointsPanel1
             // 

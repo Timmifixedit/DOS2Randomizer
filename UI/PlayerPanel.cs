@@ -22,7 +22,7 @@ namespace DOS2Randomizer.UI {
 
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
-            playerLevel.OnValueChanged = value => { _player.Level = value; };
+            playerLevel.OnValueChanged = SetPlayerLevel;
             attributePointsPanel1.OnValueChanged = value => { _player.Attributes = value.ToImmutableDictionary(); };
             skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value.ToImmutableDictionary(); };
             possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value.ToImmutableArray(); };
@@ -64,6 +64,7 @@ namespace DOS2Randomizer.UI {
             _player = player;
             _matchConfig = matchConfig;
             InitializeComponent();
+            playerLevel.Max = MatchConfig.MaxLevel;
             knownSpellList.OnImageClick = EquipSpell;
             RefreshUi();
         }
@@ -74,7 +75,7 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            var slotsLeft = _player.NumMemSlots - _player.CEquippedSpells.Select(spell => spell.MemorySlots).Sum();
+            var slotsLeft = _player.NumMemSlots - _player.CEquippedSpells.Select(s => s.MemorySlots).Sum();
             if (spell.MemorySlots > slotsLeft) {
                 MessageBox.Show(string.Format(Resources.Messages.TooFewMemSlots, _player.Name, slotsLeft, spell.Name,
                     spell.MemorySlots));
@@ -84,6 +85,23 @@ namespace DOS2Randomizer.UI {
                     _player.CEquippedSpells = _player.CEquippedSpells.Add(spell);
                     equippedSpellList.Spells = _player.CEquippedSpells;
                 }
+            }
+        }
+
+        public void SetPlayerLevel(int level) {
+            if (level <= MatchConfig.MaxLevel) {
+                if (level > _matchConfig.LevelSpecificEvents.Length) {
+                    throw new InvalidOperationException("not enough level specific entries");
+                }
+
+                if (level > _player.Level) {
+                    var levelUpdates = _matchConfig.LevelSpecificEvents[level - 1];
+                    _player.NumRerolls += levelUpdates.NewRerolls;
+                    _player.NumShuffles += levelUpdates.NewShuffles;
+                }
+
+                _player.Level = level;
+                RefreshUi();
             }
         }
 
