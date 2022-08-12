@@ -68,8 +68,11 @@ namespace DOS2Randomizer.UI {
         private void EquipSpell(IConstSpell spell) {
             if (_player.CEquippedSpells.Contains(spell)) {
                 MessageBox.Show(String.Format(Resources.Messages.AlreadyEquipped, spell.Name));
-            } else if (_player.CEquippedSpells.Length + spell.MemorySlots > _player.NumMemSlots) {
-                var slotsLeft = _player.NumMemSlots - _player.CEquippedSpells.Length;
+                return;
+            }
+
+            var slotsLeft = _player.NumMemSlots - _player.CEquippedSpells.Select(spell => spell.MemorySlots).Sum();
+            if (spell.MemorySlots > slotsLeft) {
                 MessageBox.Show(string.Format(Resources.Messages.TooFewMemSlots, _player.Name, slotsLeft, spell.Name,
                     spell.MemorySlots));
             } else {
