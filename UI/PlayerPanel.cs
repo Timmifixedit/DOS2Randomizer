@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 using System.Linq;
@@ -16,10 +11,15 @@ namespace DOS2Randomizer.UI {
 
     public partial class PlayerPanel : UserControl {
 
+        #region fields
+
         private readonly IMutablePlayer _player;
         private readonly IMatchProperties _matchConfig;
         public Action<IMutablePlayer>? OnRemoveClick;
 
+        #endregion
+
+        #region Ui
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
             playerLevel.OnValueChanged = SetPlayerLevel;
@@ -47,18 +47,13 @@ namespace DOS2Randomizer.UI {
             shuffle.Text = String.Format(Resources.Messages.Shuffle, _player.NumShuffles);
             shuffle.Enabled = _player.NumShuffles > 0;
         }
-
-        private void SetPlayerSpells(IEnumerable<IConstSpell> spells) {
-            _player.CKnownSpells = spells.ToImmutableArray();
-            _player.CEquippedSpells = _player.CKnownSpells.Intersect(_player.CEquippedSpells).ToImmutableArray();
-            RefreshUi();
-        }
-
         private void RefreshUi() {
             UnsubscribeFromControls();
             UpdateUi();
             SubscribeToControls();
         }
+
+        #endregion
 
         public PlayerPanel(IMutablePlayer player, IMatchProperties matchConfig) {
             _player = player;
@@ -68,6 +63,14 @@ namespace DOS2Randomizer.UI {
             knownSpellList.OnImageClick = EquipSpell;
             RefreshUi();
         }
+
+        #region helpers
+        private void SetPlayerSpells(IEnumerable<IConstSpell> spells) {
+            _player.CKnownSpells = spells.ToImmutableArray();
+            _player.CEquippedSpells = _player.CKnownSpells.Intersect(_player.CEquippedSpells).ToImmutableArray();
+            RefreshUi();
+        }
+
 
         private void EquipSpell(IConstSpell spell) {
             if (_player.CEquippedSpells.Contains(spell)) {
@@ -105,6 +108,9 @@ namespace DOS2Randomizer.UI {
             }
         }
 
+        #endregion
+
+        #region event handlers
         private void remove_Click(object sender, EventArgs e) {
             OnRemoveClick?.Invoke(_player);
         }
@@ -134,7 +140,7 @@ namespace DOS2Randomizer.UI {
                     new ChooseKDialog(new Logic.SpellChooser(_matchConfig, _player), numSpellsToChoose, _player.NumRerolls) {
                         OnConfirm = (spells, numRerolls) => {
                             _player.NumRerolls = numRerolls;
-                            SetPlayerSpells(_player.CKnownSpells.Concat(spells.Cast<Spell>()));
+                            SetPlayerSpells(_player.CKnownSpells.Concat(spells));
                         },
                         Visible = true
                     };
@@ -157,5 +163,7 @@ namespace DOS2Randomizer.UI {
                 RefreshUi();
             }
         }
+
+        #endregion
     }
 }
