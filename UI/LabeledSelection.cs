@@ -8,6 +8,11 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// User control that provides a labeled check box list for selections
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     class LabeledSelection<T> : NamedValueTemplate<IEnumerable<T>> {
         private readonly CheckedListBox _listBox;
         private IEnumerable<T>? _items;
@@ -34,6 +39,9 @@ namespace DOS2Randomizer.UI {
             }
         }
 
+        /// <summary>
+        /// Get or set the managed collection
+        /// </summary>
         [AllowNull]
         public IEnumerable<T> Data {
             get => _items ?? Array.Empty<T>();
@@ -44,6 +52,9 @@ namespace DOS2Randomizer.UI {
             }
         }
 
+        /// <summary>
+        /// name of the property of T to display in list
+        /// </summary>
         public string? DisplayMember {
             get => _displayMember;
             set {

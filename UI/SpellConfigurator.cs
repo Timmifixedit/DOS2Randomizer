@@ -12,6 +12,10 @@ using DOS2Randomizer.Util;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// Form that is used to create and configure spells
+    /// </summary>
     public partial class SpellConfigurator : Form {
         private Spell[]? _spells;
 

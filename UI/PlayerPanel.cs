@@ -9,6 +9,9 @@ using Attribute = DOS2Randomizer.DataStructures.Attribute;
 
 namespace DOS2Randomizer.UI {
 
+    /// <summary>
+    /// User control that manages a player
+    /// </summary>
     public partial class PlayerPanel : UserControl {
 
         #region fields
@@ -102,7 +105,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public void SetPlayerLevel(int level) {
+        private void SetPlayerLevel(int level) {
             if (level <= MatchConfig.MaxLevel) {
                 if (level > _matchConfig.LevelSpecificEvents.Length) {
                     throw new InvalidOperationException("not enough level specific entries");

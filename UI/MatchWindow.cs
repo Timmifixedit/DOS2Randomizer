@@ -13,6 +13,10 @@ using DOS2Randomizer.Logic;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// Form that is used during a match
+    /// </summary>
     public partial class MatchWindow : Form {
         private readonly MatchConfigGuard _config;
 

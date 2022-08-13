@@ -5,6 +5,10 @@ using System.Text;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
+    /// <summary>
+    /// User control that can manage an ISpellCollection and provide search utility
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     class SpellSearchBase<T> : LabeledString where T: IConstSpell {
         private IEnumerable<T>? _spells;
         public ISpellCollection<T>? ManagedCollection { get; set; }

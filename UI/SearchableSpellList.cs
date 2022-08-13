@@ -8,6 +8,11 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// Spell list with additional search function
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public partial class SearchableSpellListBase<T> : UserControl, ISplittableControl, ISpellCollection<T> where T: IConstSpell{
         public SearchableSpellListBase() {
             InitializeComponent();

@@ -9,6 +9,10 @@ using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
 
+    /// <summary>
+    /// User control that provides a labeled combobox for enum values
+    /// </summary>
+    /// <typeparam name="TEnum"></typeparam>
     public class LabeledEnum<TEnum> : NamedValueTemplate<TEnum> {
 
         private readonly ComboBox _comboBox;
