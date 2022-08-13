@@ -23,7 +23,10 @@ namespace DOS2Randomizer.UI {
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
             playerLevel.OnValueChanged = SetPlayerLevel;
-            attributePointsPanel1.OnValueChanged = value => { _player.Attributes = value.ToImmutableDictionary(); };
+            attributePointsPanel1.OnValueChanged = value => {
+                _player.Attributes = value.ToImmutableDictionary();
+                RefreshUi();
+            };
             skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value.ToImmutableDictionary(); };
             possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value.ToImmutableArray(); };
         }
@@ -44,6 +47,8 @@ namespace DOS2Randomizer.UI {
             possibleSkillTypes.Value = _player.PossibleSkillTypes;
             knownSpellList.Spells = _player.CKnownSpells;
             equippedSpellList.Spells = _player.CEquippedSpells;
+            equippedSpellList.Label = String.Format(Resources.Messages.EquippedSpellsAndMem, _player.NumMemorySlotsUsed,
+                _player.NumMemSlots);
             shuffle.Text = String.Format(Resources.Messages.Shuffle, _player.NumShuffles);
             shuffle.Enabled = _player.NumShuffles > 0;
         }
@@ -52,6 +57,7 @@ namespace DOS2Randomizer.UI {
             UpdateUi();
             SubscribeToControls();
         }
+
 
         #endregion
 
@@ -65,10 +71,16 @@ namespace DOS2Randomizer.UI {
         }
 
         #region helpers
+        private void SetEquippedSpells(IEnumerable<IConstSpell> spells) {
+            _player.CEquippedSpells = spells.ToImmutableArray();
+            equippedSpellList.Spells = _player.CEquippedSpells;
+            RefreshUi();
+        }
+
         private void SetPlayerSpells(IEnumerable<IConstSpell> spells) {
             _player.CKnownSpells = spells.ToImmutableArray();
-            _player.CEquippedSpells = _player.CKnownSpells.Intersect(_player.CEquippedSpells).ToImmutableArray();
-            RefreshUi();
+            knownSpellList.Spells = _player.CKnownSpells;
+            SetEquippedSpells(_player.CKnownSpells.Intersect(_player.CEquippedSpells).ToImmutableArray());
         }
 
 
@@ -78,15 +90,14 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            var slotsLeft = _player.NumMemSlots - _player.CEquippedSpells.Select(s => s.MemorySlots).Sum();
+            var slotsLeft = _player.NumMemSlots - _player.NumMemorySlotsUsed;
             if (spell.MemorySlots > slotsLeft) {
                 MessageBox.Show(string.Format(Resources.Messages.TooFewMemSlots, _player.Name, slotsLeft, spell.Name,
                     spell.MemorySlots));
             } else {
                 if (MessageBox.Show(String.Format(Resources.Messages.EquipSpell, spell.Name), "",
                         MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                    _player.CEquippedSpells = _player.CEquippedSpells.Add(spell);
-                    equippedSpellList.Spells = _player.CEquippedSpells;
+                    SetEquippedSpells(_player.CEquippedSpells.Add(spell));
                 }
             }
         }
@@ -153,14 +164,17 @@ namespace DOS2Randomizer.UI {
         private void shuffle_Click(object sender, EventArgs e) {
             if (_player.NumShuffles <= 0) {
                 MessageBox.Show(Resources.Messages.NoShuffles);
-            } else if (_player.CKnownSpells.Length <= _player.NumMemSlots) {
+                return;
+            }
+
+            var requiredSlots = _player.CKnownSpells.Select(spell => spell.MemorySlots).Sum();
+            if (requiredSlots <= _player.NumMemSlots) {
                 MessageBox.Show(String.Format(Resources.Messages.ShuffleNoEffect, _player.Name, _player.NumMemSlots,
-                    _player.CKnownSpells.Length));
+                    requiredSlots));
             } else {
                 --_player.NumShuffles;
                 //@TODO this may choose a set of spells that violates spell dependencies or memory constraints
-                _player.CEquippedSpells = _player.CKnownSpells.ChooseRandom(_player.NumMemSlots).ToImmutableArray();
-                RefreshUi();
+                SetEquippedSpells(_player.CKnownSpells.ChooseRandom(_player.NumMemSlots));
             }
         }
 

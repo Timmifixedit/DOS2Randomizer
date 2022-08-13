@@ -32,6 +32,9 @@ namespace DOS2Randomizer.DataStructures {
 
         [JsonIgnore]
         public int NumMemSlots { get; }
+
+        [JsonIgnore]
+        public int NumMemorySlotsUsed { get; }
     }
 
     public interface IMutablePlayer : IConstPlayer {
@@ -109,5 +112,6 @@ namespace DOS2Randomizer.DataStructures {
         public int NumRerolls { get; set; }
         public int NumShuffles { get; set; }
         public int NumMemSlots => Attributes[Attribute.Mem] - BaseAttributeValue + (Level / 2) + BaseMemSlots;
+        public int NumMemorySlotsUsed => CEquippedSpells.Select(spell => spell.MemorySlots).Sum();
     }
 }

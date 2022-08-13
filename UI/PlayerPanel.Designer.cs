@@ -102,7 +102,7 @@ namespace DOS2Randomizer.UI {
             // 
             // configureSpells
             // 
-            this.configureSpells.Location = new System.Drawing.Point(514, 32);
+            this.configureSpells.Location = new System.Drawing.Point(514, 309);
             this.configureSpells.Name = "configureSpells";
             this.configureSpells.Size = new System.Drawing.Size(105, 23);
             this.configureSpells.TabIndex = 9;
@@ -112,7 +112,7 @@ namespace DOS2Randomizer.UI {
             // 
             // drawSpells
             // 
-            this.drawSpells.Location = new System.Drawing.Point(514, 61);
+            this.drawSpells.Location = new System.Drawing.Point(514, 338);
             this.drawSpells.Name = "drawSpells";
             this.drawSpells.Size = new System.Drawing.Size(105, 23);
             this.drawSpells.TabIndex = 10;
@@ -142,7 +142,7 @@ namespace DOS2Randomizer.UI {
             // 
             // shuffle
             // 
-            this.shuffle.Location = new System.Drawing.Point(514, 91);
+            this.shuffle.Location = new System.Drawing.Point(514, 368);
             this.shuffle.Name = "shuffle";
             this.shuffle.Size = new System.Drawing.Size(105, 23);
             this.shuffle.TabIndex = 13;

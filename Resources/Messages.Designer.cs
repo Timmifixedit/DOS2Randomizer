@@ -88,6 +88,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Equipped Spells ({0} / {1}).
+        /// </summary>
+        internal static string EquippedSpellsAndMem {
+            get {
+                return ResourceManager.GetString("EquippedSpellsAndMem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Equip {0}?.
         /// </summary>
         internal static string EquipSpell {
@@ -133,7 +142,7 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} has a total of {1} memory slots and knows {2} spells. Shuffeling equipped spells would have no effect..
+        ///   Looks up a localized string similar to {0} has a total of {1} memory slots and knows spells which require a total of {2} slots. Shuffeling equipped spells would have no effect..
         /// </summary>
         internal static string ShuffleNoEffect {
             get {
