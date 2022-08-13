@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualBasic.CompilerServices;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
 
-    public class Spell : IEquatable<Spell> {
+    public interface IConstSpell {
+        public string Name { get; }
+        public string ImagePath { get; }
+        public int Level { get; }
+
+        [JsonIgnore]
+        public ImmutableArray<IConstSpell> CDependencies { get; }
+        public ImmutableDictionary<Spell.School, int> SchoolRequirements { get; }
+        public Player.SkillType EquipmentRequirement { get; }
+        public ImmutableArray<Spell.Type> Types { get; }
+        public Attribute Scaling { get; }
+        public int MemorySlots { get; }
+        public int LoadoutCost { get; }
+    }
+
+    public class Spell : IEquatable<Spell>, IConstSpell, ISerilizable {
 
         public enum School {
             Aero,
@@ -34,18 +51,22 @@ namespace DOS2Randomizer.DataStructures {
             Name = name;
             ImagePath = imagePath;
             Level = 1;
-            Dependencies = new Spell[0];
+            Dependencies = ImmutableArray<Spell>.Empty;
             SchoolRequirements = new Dictionary<School, int>(
-                ((School[]) Enum.GetValues(typeof(School))).Select(school => new KeyValuePair<School, int>(school, 0)));
-            Types = new Type[0];
+                    ((School[])Enum.GetValues(typeof(School))).Select(
+                        school => new KeyValuePair<School, int>(school, 0)))
+                .ToImmutableDictionary();
+            Types = ImmutableArray<Type>.Empty;
             Scaling = Attribute.None;
             MemorySlots = 1;
             LoadoutCost = 0;
+            EquipmentRequirement = Player.SkillType.None;
         }
 
         [JsonConstructor]
-        public Spell(string name, string imagePath, int level, Spell[] dependencies,
-            Dictionary<School, int> schoolRequirements, Type[] types,
+        public Spell(string name, string imagePath, int level, ImmutableArray<Spell> dependencies,
+            ImmutableDictionary<School, int> schoolRequirements, Player.SkillType equipmentRequirement,
+            ImmutableArray<Type> types,
             Attribute scaling, int memorySlots, int loadoutCost) {
             Name = name;
             ImagePath = imagePath;
@@ -56,27 +77,29 @@ namespace DOS2Randomizer.DataStructures {
             Scaling = scaling;
             MemorySlots = memorySlots;
             LoadoutCost = loadoutCost;
+            EquipmentRequirement = equipmentRequirement;
         }
 
         public string Name { get; set; }
         public string ImagePath { get; }
         public int Level { get; set; }
-        public Spell[] Dependencies { get; set; }
-        public Dictionary<School, int> SchoolRequirements { get; set; }
-        public Type[] Types { get; set; }
+        public ImmutableArray<Spell> Dependencies { get; set; }
+        public ImmutableArray<IConstSpell> CDependencies => Dependencies.CastArray<IConstSpell>();
+        public ImmutableDictionary<School, int> SchoolRequirements { get; set; }
+        public Player.SkillType EquipmentRequirement { get; set; }
+        public ImmutableArray<Type> Types { get; set; }
         public Attribute Scaling { get; set; }
         public int MemorySlots { get; set; }
         public int LoadoutCost { get; set; }
 
-        public bool Equals(Spell other) {
+        public bool Equals(Spell? other) {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Name == other.Name && ImagePath == other.ImagePath && Level == other.Level &&
                    SequenceEqual(Types, other.Types) && Scaling == other.Scaling &&
                    MemorySlots == other.MemorySlots && LoadoutCost == other.LoadoutCost;
         }
-
-        private bool SequenceEqual<T>(IEnumerable<T> lhs, IEnumerable<T> rhs) {
+        private static bool SequenceEqual<T>(IEnumerable<T>? lhs, IEnumerable<T>? rhs) {
             if (ReferenceEquals(lhs, rhs)) {
                 return true;
             }
@@ -88,7 +111,7 @@ namespace DOS2Randomizer.DataStructures {
             return lhs.SequenceEqual(rhs);
         }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object? obj) {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
@@ -96,14 +119,14 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         public override int GetHashCode() {
-            return HashCode.Combine(Name, ImagePath, Level, Types, (int) Scaling, MemorySlots, LoadoutCost);
+            return HashCode.Combine(Name, ImagePath, Level, (int) Scaling, MemorySlots, LoadoutCost);
         }
 
-        public static bool operator ==(Spell left, Spell right) {
+        public static bool operator ==(Spell? left, Spell? right) {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Spell left, Spell right) {
+        public static bool operator !=(Spell? left, Spell? right) {
             return !Equals(left, right);
         }
     }

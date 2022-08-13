@@ -129,6 +129,9 @@
   <data name="JsonSerializeFailed" xml:space="preserve">
     <value>Json error while serializing: </value>
   </data>
+  <data name="MaxNumPlayers" xml:space="preserve">
+    <value>Maximum number of players reached.</value>
+  </data>
   <data name="NoSpells" xml:space="preserve">
     <value>No spells are loaded.</value>
   </data>

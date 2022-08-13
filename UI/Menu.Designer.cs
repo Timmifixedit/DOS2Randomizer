@@ -26,8 +26,8 @@
             this.LoadConfig = new System.Windows.Forms.Button();
             this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CreateConfig = new System.Windows.Forms.Button();
-            this.centerLayout = new System.Windows.Forms.TableLayoutPanel();
             this.spellConfigurator = new System.Windows.Forms.Button();
+            this.centerLayout = new System.Windows.Forms.TableLayoutPanel();
             this.layoutPanel.SuspendLayout();
             this.centerLayout.SuspendLayout();
             this.SuspendLayout();
@@ -41,6 +41,7 @@
             this.LoadConfig.TabIndex = 0;
             this.LoadConfig.Text = "Load Config";
             this.LoadConfig.UseVisualStyleBackColor = true;
+            this.LoadConfig.Click += new System.EventHandler(this.LoadConfig_Click);
             // 
             // layoutPanel
             // 
@@ -70,6 +71,17 @@
             this.CreateConfig.UseVisualStyleBackColor = true;
             this.CreateConfig.Click += new System.EventHandler(this.CreateConfig_Click);
             // 
+            // spellConfigurator
+            // 
+            this.spellConfigurator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellConfigurator.Location = new System.Drawing.Point(3, 134);
+            this.spellConfigurator.Name = "spellConfigurator";
+            this.spellConfigurator.Size = new System.Drawing.Size(628, 42);
+            this.spellConfigurator.TabIndex = 2;
+            this.spellConfigurator.Text = "Configure Spells";
+            this.spellConfigurator.UseVisualStyleBackColor = true;
+            this.spellConfigurator.Click += new System.EventHandler(this.spellConfigurator_Click);
+            // 
             // centerLayout
             // 
             this.centerLayout.ColumnCount = 3;
@@ -86,17 +98,6 @@
             this.centerLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.centerLayout.Size = new System.Drawing.Size(800, 450);
             this.centerLayout.TabIndex = 2;
-            // 
-            // spellConfigurator
-            // 
-            this.spellConfigurator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.spellConfigurator.Location = new System.Drawing.Point(3, 134);
-            this.spellConfigurator.Name = "spellConfigurator";
-            this.spellConfigurator.Size = new System.Drawing.Size(628, 42);
-            this.spellConfigurator.TabIndex = 2;
-            this.spellConfigurator.Text = "Configure Spells";
-            this.spellConfigurator.UseVisualStyleBackColor = true;
-            this.spellConfigurator.Click += new System.EventHandler(this.spellConfigurator_Click);
             // 
             // Menu
             // 

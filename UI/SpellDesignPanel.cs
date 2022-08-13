@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -10,12 +11,12 @@ using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
     public partial class SpellDesignPanel : UserControl {
-        private Spell _spell;
-        private Spell[] _allSpells;
+        private Spell? _spell;
+        private Spell[]? _allSpells;
         public SpellDesignPanel() {
             InitializeComponent();
             typeSelection.Data = (Spell.Type[]) Enum.GetValues(typeof(Spell.Type));
-            search.OnValueChanged += value => { dependencies.Value = _spell?.Dependencies; };
+            search.OnValueChanged += _ => { dependencies.Value = _spell?.Dependencies; };
             SubscribeToControls();
         }
 
@@ -32,7 +33,7 @@ namespace DOS2Randomizer.UI {
             };
             skillPointsPanel1.OnValueChanged = value => {
                 if (_spell != null) {
-                    _spell.SchoolRequirements = value;
+                    _spell.SchoolRequirements = value.ToImmutableDictionary();
                 }
             };
             attributeBox.OnValueChanged = value => {
@@ -42,13 +43,14 @@ namespace DOS2Randomizer.UI {
             };
             typeSelection.OnValueChanged = value => {
                 if (_spell != null) {
-                    _spell.Types = value;
+                    _spell.Types = value.ToImmutableArray();
                 }
             };
             dependencies.OnValueChanged = value => {
                 if (_spell != null) {
-                    var removed = dependencies.Data.Except(value);
-                    _spell.Dependencies = (_spell.Dependencies ?? new Spell[0]).Except(removed).Union(value).ToArray();
+                    var tmp = value as Spell[] ?? value.ToArray();
+                    var removed = dependencies.Data.Except(tmp);
+                    _spell.Dependencies = _spell.Dependencies.Except(removed).Union(tmp).ToImmutableArray();
                 }
             };
             memSlots.OnValueChanged = value => {
@@ -59,6 +61,11 @@ namespace DOS2Randomizer.UI {
             cost.OnValueChanged = value => {
                 if (_spell != null) {
                     _spell.LoadoutCost = value;
+                }
+            };
+            requiredEquipment.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.EquipmentRequirement = value;
                 }
             };
         }
@@ -72,9 +79,10 @@ namespace DOS2Randomizer.UI {
             dependencies.OnValueChanged = null;
             memSlots.OnValueChanged = null;
             cost.OnValueChanged = null;
+            requiredEquipment.OnValueChanged = null;
         }
 
-        public Spell Spell {
+        public Spell? Spell {
             get => _spell;
             set {
                 _spell = value;
@@ -86,7 +94,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public Spell[] AllSpells {
+        public Spell[]? AllSpells {
             get => _allSpells;
             set {
                 _allSpells = value;
@@ -95,15 +103,20 @@ namespace DOS2Randomizer.UI {
         }
 
         private void RefreshUi() {
+            if (_spell is null) {
+                return;
+            }
+
             try {
                 name.Value = _spell.Name;
                 level.Value = _spell.Level;
-                skillPointsPanel1.Value = _spell.SchoolRequirements;
+                skillPointsPanel1.Value = new Dictionary<Spell.School, int>(_spell.SchoolRequirements);
                 attributeBox.Value = _spell.Scaling;
                 typeSelection.Value = _spell.Types;
                 dependencies.Value = _spell.Dependencies;
                 memSlots.Value = _spell.MemorySlots;
                 cost.Value = _spell.LoadoutCost;
+                requiredEquipment.Value = _spell.EquipmentRequirement;
             } catch (ArgumentException e) {
                 MessageBox.Show(Resources.ErrorMessages.InvalidConfigValues + e.Message);
             }

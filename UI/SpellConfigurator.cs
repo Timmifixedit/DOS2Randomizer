@@ -9,19 +9,18 @@ using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 using DOS2Randomizer.Util;
-using Newtonsoft.Json;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace DOS2Randomizer.UI {
     public partial class SpellConfigurator : Form {
-        private Spell[] _spells;
+        private Spell[]? _spells;
 
         private Spell[] Spells {
-            get => _spells;
+            get => _spells ?? Array.Empty<Spell>();
             set {
                 _spells = value;
                 spellDesignPanel.AllSpells = _spells;
-                search.AllSpells = _spells;
+                spellList.Spells = _spells;
             }
         }
         public SpellConfigurator() {
@@ -31,8 +30,9 @@ namespace DOS2Randomizer.UI {
 
         private void import_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                Spells = FileIo.ImportConfig<Spell[]>(fileChooser.FileName);
+            if (fileChooser.ShowDialog() == DialogResult.OK &&
+                FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} spells) {
+                Spells = spells.Spells.ToArray();
             }
         }
 
@@ -42,9 +42,9 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = ".json"};
+            using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
-                FileIo.SaveConfig(Spells, fileChooser.FileName);
+                FileIo.SaveConfig(new SpellListWrapper(Spells), fileChooser.FileName);
             }
         }
 

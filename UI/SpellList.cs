@@ -9,17 +9,11 @@ using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
 
-    public delegate void ImageClickEvent(DataStructures.Spell spell);
-    public partial class SpellList : UserControl, ISpellCollection {
+    public partial class SpellListBase<T> : UserControl, ISpellCollection<T> where T: DataStructures.IConstSpell {
 
-        private DataStructures.Spell[] _spells;
-        public ImageClickEvent OnImageClick;
+        private IEnumerable<T>? _spells;
+        public Action<T>? OnImageClick;
         private int? _lastIndex;
-
-        public DataStructures.Spell[] SpellCollection {
-            get => Spells;
-            set => Spells = value;
-        }
 
         public void SelectNext() {
             if (_lastIndex.HasValue && _lastIndex.Value < layout.Items.Count - 1) {
@@ -35,44 +29,46 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public DataStructures.Spell[] Spells {
+        public IEnumerable<T>? Spells {
             get => _spells;
             set {
                 _spells = value;
-                if (_spells != null) {
-                    RefreshImages();
-                }
+                RefreshImages();
             } 
         }
 
         private void HandleSelect(int index) {
-            if (_lastIndex.HasValue && _lastIndex.Value < _spells.Length && _lastIndex.Value < layout.Items.Count) {
-                layout.Items[_lastIndex.Value].Text = _spells[_lastIndex.Value].Name;
+            if (Spells is null) {
+                return;
             }
 
-            OnImageClick?.Invoke(_spells[index]);
+            if (_lastIndex.HasValue && _lastIndex.Value < Spells.Count() && _lastIndex.Value < layout.Items.Count) {
+                layout.Items[_lastIndex.Value].Text = Spells.ElementAt(_lastIndex.Value).Name;
+            }
+
+            OnImageClick?.Invoke(Spells.ElementAt(index));
             _lastIndex = index;
         }
 
         private void RefreshImages() {
             layout.Clear();
-            if (_spells.Length == 0) {
+            if (Spells is null || !Spells.Any()) {
                 return;
             }
 
-            var images = _spells.Select(spell => Image.FromFile(spell.ImagePath)).ToArray();
+            var images = Spells.Select(spell => Image.FromFile(spell.ImagePath)).ToArray();
             var imageList = new ImageList{ImageSize = images[0].Size};
             imageList.Images.AddRange(images);
             layout.View = View.LargeIcon;
             layout.LargeImageList = imageList;
-            for (int index = 0; index < _spells.Length; ++index) {
-                layout.Items.Add(_spells[index].Name, index);
+            for (int index = 0; index < Spells.Count(); ++index) {
+                layout.Items.Add(Spells.ElementAt(index).Name, index);
             }
         }
 
-        public SpellList() {
+        public SpellListBase() {
             InitializeComponent();
-            layout.Click += (sender, args) => HandleSelect(layout.SelectedIndices[0]);
+            layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
             layout.KeyDown += (sender, args) => {
                 if (args.KeyCode == Keys.Enter && layout.SelectedIndices.Count != 0) {
                     HandleSelect(layout.SelectedIndices[0]);
@@ -80,4 +76,7 @@ namespace DOS2Randomizer.UI {
             };
         }
     }
+
+    public class SpellList : SpellListBase<DataStructures.Spell> {}
+    public class CSpellList : SpellListBase<DataStructures.IConstSpell> {}
 }

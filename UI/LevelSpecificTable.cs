@@ -10,7 +10,7 @@ using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
     public partial class LevelSpecificTable : UserControl {
-        private OnLevelUp[] _levelEvents;
+        private OnLevelUp[] _levelEvents = null!;
         public OnLevelUp[] LevelEvents {
             get => _levelEvents;
             set {

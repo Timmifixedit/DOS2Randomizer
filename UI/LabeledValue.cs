@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace DOS2Randomizer.UI {
     public partial class LabeledValue : NamedValueTemplate<int> {
 
-        private NumericUpDown _val;
+        private readonly NumericUpDown _val;
 
         public override int Value {
             get => Convert.ToInt32(_val.Value);
@@ -30,7 +30,7 @@ namespace DOS2Randomizer.UI {
             InitializeComponent();
             _val = new NumericUpDown{Anchor = AnchorStyles.Left}; 
             LayoutPanel.Controls.Add(_val, 1, 0);
-            _val.ValueChanged += (sender, args) => HandleValueChanged();
+            _val.ValueChanged += (_, _) => HandleValueChanged();
             Height = Math.Max(Height, _val.Height);
         }
     }

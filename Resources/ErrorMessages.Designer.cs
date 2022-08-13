@@ -97,6 +97,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum number of players reached. ähnelt.
+        /// </summary>
+        internal static string MaxNumPlayers {
+            get {
+                return ResourceManager.GetString("MaxNumPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No spells are loaded. ähnelt.
         /// </summary>
         internal static string NoSpells {

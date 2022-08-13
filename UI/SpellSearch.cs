@@ -5,35 +5,39 @@ using System.Text;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
-    class SpellSearch : LabeledString {
-        public ISpellCollection ManagedCollection { get; set; }
+    class SpellSearchBase<T> : LabeledString where T: IConstSpell {
+        private IEnumerable<T>? _spells;
+        public ISpellCollection<T>? ManagedCollection { get; set; }
 
         public bool CaseSensitive { get; set; }
 
-        public Spell[] AllSpells {
+        public IEnumerable<T>? AllSpells {
             get => _spells;
             set {
                 _spells = value;
                 if (ManagedCollection != null) {
-                    ManagedCollection.SpellCollection = _spells;
+                    ManagedCollection.Spells = _spells;
                 }
             }
 
         }
-
-        private Spell[] _spells;
 
         private string ManageCase(string s) {
             return CaseSensitive ? s : s.ToLower();
         }
 
         private void Search(string searchString) {
-            ManagedCollection.SpellCollection = AllSpells
-                ?.Where(spell => ManageCase(spell.Name).Contains(ManageCase(searchString))).ToArray();
+            if (ManagedCollection is not null && AllSpells is not null) {
+                ManagedCollection.Spells = AllSpells
+                    .Where(spell => ManageCase(spell.Name).Contains(ManageCase(searchString))).ToArray();
+            }
         }
 
-        public SpellSearch() {
+        public SpellSearchBase() {
             OnValueChanged = Search;
         }
     }
+
+    class SpellSearch : SpellSearchBase<Spell> {}
+    class CSpellSearch : SpellSearchBase<IConstSpell> {}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -8,14 +9,15 @@ using Newtonsoft.Json;
 
 namespace DOS2Randomizer.Util {
     static class FileIo {
-        public static T ImportConfig<T>(string fileName) where T : class {
-            T spells = null;
+        public static T? ImportConfig<T>(string fileName) where T : class, ISerilizable {
+            T? spells = null;
             try {
                 using var file = File.OpenRead(fileName);
                 using var reader = new StreamReader(file);
                 spells = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
-            } catch (JsonException) {
-                MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileName));
+            } catch (JsonException e) {
+                MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileName) + Environment.NewLine +
+                                e.Message);
             } catch (IOException exception) {
                 MessageBox.Show(String.Format(Resources.ErrorMessages.FileOpenFailed, fileName) +
                                 Environment.NewLine + exception.Message);
@@ -24,9 +26,9 @@ namespace DOS2Randomizer.Util {
             return spells;
         }
 
-        public static void SaveConfig<T>(T config, string fileName) {
+        public static void SaveConfig<T>(T config, string fileName) where T: ISerilizable {
             try {
-                using var file = File.OpenWrite(fileName);
+                using var file = File.Open(fileName, FileMode.Create);
                 using var writer = new StreamWriter(file);
                 var json = JsonConvert.SerializeObject(config);
                 writer.Write(json);
