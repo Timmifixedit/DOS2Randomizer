@@ -6,10 +6,20 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace DOS2Randomizer.UI {
 
+    /// <summary>
+    /// Why-is-there-no-CRTP-in-c#-interface that can be used to define the SplitPercentage property
+    /// </summary>
     public interface ISplittableControl {
         public TableLayoutPanel LayoutPanel { get; }
 
+        /// <summary>
+        /// Split position of split in a user control with two elements managed by a TableLayout with two columns (in percent)
+        /// </summary>
         public int SplitPercentage { get; set; }
+
+        /// <summary>
+        /// Implementation of SplitPercentage
+        /// </summary>
         public int SplitPercentageImpl {
             get {
                 var styles = LayoutPanel.ColumnStyles;

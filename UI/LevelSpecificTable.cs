@@ -9,6 +9,10 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// User control that provides a table for designing level specific settings
+    /// </summary>
     public partial class LevelSpecificTable : UserControl {
         private OnLevelUp[] _levelEvents = null!;
         public OnLevelUp[] LevelEvents {

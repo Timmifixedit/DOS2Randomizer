@@ -9,9 +9,17 @@ using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
 
+    /// <summary>
+    /// User control that displays a list of spells
+    /// </summary>
+    /// <typeparam name="T">type of spell</typeparam>
     public partial class SpellListBase<T> : UserControl, ISpellCollection<T> where T: DataStructures.IConstSpell {
 
         private IEnumerable<T>? _spells;
+
+        /// <summary>
+        /// Event that is triggered when a spell is clicked
+        /// </summary>
         public Action<T>? OnImageClick;
         private int? _lastIndex;
 

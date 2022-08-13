@@ -8,9 +8,17 @@ using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
 
+    /// <summary>
+    /// Base class for labeled user controls that manage some kind of value
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract partial class NamedValueTemplate<T> : BindingControl<T>, ISplittableControl {
 
         public TableLayoutPanel LayoutPanel => layout;
+
+        /// <summary>
+        /// Displayed label of the control
+        /// </summary>
         public string Label {
             get => name.Text;
             set => name.Text = value;

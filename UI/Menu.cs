@@ -4,6 +4,10 @@ using DOS2Randomizer.DataStructures;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// Main menu
+    /// </summary>
     public partial class Menu : Form {
         public Menu() {
             InitializeComponent();

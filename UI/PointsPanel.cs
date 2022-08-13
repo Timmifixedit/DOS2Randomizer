@@ -9,6 +9,10 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
+    /// <summary>
+    /// User control that provides a labeled number box for every possible value of an enum
+    /// </summary>
+    /// <typeparam name="T">type of enum</typeparam>
     public class PointsPanel<T> : BindingControl<Dictionary<T, int>> where T : Enum {
 
         private Dictionary<T, int> _pointLevels;
@@ -17,6 +21,10 @@ namespace DOS2Randomizer.UI {
 
         private T[] ExcludedValues => _excludedValues ?? Array.Empty<T>();
 
+        /// <summary>
+        /// CTor
+        /// </summary>
+        /// <param name="excludedValues">enum values not to be included in the control</param>
         public PointsPanel(IEnumerable<T>? excludedValues = null) {
             _excludedValues = excludedValues?.ToArray();
             _pointLevels = new Dictionary<T, int>();

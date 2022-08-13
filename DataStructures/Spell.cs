@@ -24,8 +24,14 @@ namespace DOS2Randomizer.DataStructures {
         public int LoadoutCost { get; }
     }
 
+    /// <summary>
+    /// Spell class
+    /// </summary>
     public class Spell : IEquatable<Spell>, IConstSpell, ISerilizable {
 
+        /// <summary>
+        /// Spell school type
+        /// </summary>
         public enum School {
             Aero,
             Hydro,
@@ -39,6 +45,9 @@ namespace DOS2Randomizer.DataStructures {
             Summoning
         }
 
+        /// <summary>
+        /// Spell type
+        /// </summary>
         public enum Type {
             Util,
             Dmg,
@@ -47,6 +56,11 @@ namespace DOS2Randomizer.DataStructures {
             BuffDebuff
         }
 
+        /// <summary>
+        /// Creates a spell with a name and an image. All other members are default initialized
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="imagePath"></param>
         public Spell(string name, string imagePath) {
             Name = name;
             ImagePath = imagePath;
@@ -92,6 +106,11 @@ namespace DOS2Randomizer.DataStructures {
         public int MemorySlots { get; set; }
         public int LoadoutCost { get; set; }
 
+        /// <summary>
+        /// Compares Spell member fields
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Spell? other) {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;

@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
+    /// <summary>
+    /// Dialog that requires the user to choose K spells from a randomly generated selection
+    /// </summary>
     public partial class ChooseKDialog : Form {
         #region Hax
 
@@ -25,11 +28,15 @@ namespace DOS2Randomizer.UI {
 
         #endregion
 
+        #region fields
+
         public Action<IEnumerable<IConstSpell>, int>? OnConfirm;
         private int _numToChoose;
         private int _numLeftToChoose;
         private int _numRerolls;
         private readonly Logic.SpellChooser _spellChooser;
+
+        #endregion
 
         private int NumRerolls {
             get => _numRerolls;
@@ -47,6 +54,12 @@ namespace DOS2Randomizer.UI {
             }
         }
 
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="spellChooser">SpellChooser instance used to generate a selection</param>
+        /// <param name="numSpellsToChoose">size of spell selection</param>
+        /// <param name="numRerolls">number of times a reroll may be performed</param>
         public ChooseKDialog(Logic.SpellChooser spellChooser, int numSpellsToChoose, int numRerolls) {
             InitializeComponent();
             _numToChoose = numSpellsToChoose;
@@ -66,6 +79,7 @@ namespace DOS2Randomizer.UI {
             };
         }
 
+        #region event handlers
         private void confirm_Click(object sender, EventArgs e) {
             OnConfirm?.Invoke(selection.Spells ?? Array.Empty<Spell>(), NumRerolls);
             this.Close();
@@ -80,5 +94,7 @@ namespace DOS2Randomizer.UI {
                 NumLeft = _numToChoose;
             }
         }
+
+        #endregion
     }
 }

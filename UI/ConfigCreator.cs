@@ -7,6 +7,9 @@ using DOS2Randomizer.DataStructures;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
+    /// <summary>
+    /// Form used to create or adapt MatchConfigurations
+    /// </summary>
     public partial class ConfigCreator : Form {
         #region Fields
 
@@ -47,6 +50,7 @@ namespace DOS2Randomizer.UI {
             levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents.ToArray();
         }
 
+        #region event handlers
         private void SaveButton_Click(object sender, System.EventArgs e) {
             using var fileChooser = new SaveFileDialog {DefaultExt = Resources.Misc.JsonExtension, AddExtension = true};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
@@ -69,5 +73,7 @@ namespace DOS2Randomizer.UI {
                 Config = config;
             }
         }
+
+        #endregion
     }
 }

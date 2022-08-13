@@ -5,6 +5,9 @@ using System.Linq;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
+    /// <summary>
+    /// Primary player attributes
+    /// </summary>
     public enum Attribute {
         Strength,
         Int,
@@ -53,9 +56,16 @@ namespace DOS2Randomizer.DataStructures {
         public new int NumShuffles { get; set; }
     }
 
+    /// <summary>
+    /// Player class
+    /// </summary>
     public class Player : IMutablePlayer {
         public const int BaseAttributeValue = 10;
         public const int BaseMemSlots = 3;
+
+        /// <summary>
+        /// Type of skills usable by player
+        /// </summary>
         public enum SkillType {
             Melee,
             Archer,
@@ -64,6 +74,9 @@ namespace DOS2Randomizer.DataStructures {
             None
         }
 
+        /// <summary>
+        /// Creates a level 1 empty player object, initializes all members
+        /// </summary>
         public Player() {
             Name = "";
             Level = 1;

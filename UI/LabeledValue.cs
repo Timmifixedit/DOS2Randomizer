@@ -7,6 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// User control that provides a labeled integer value
+    /// </summary>
     public partial class LabeledValue : NamedValueTemplate<int> {
 
         private readonly NumericUpDown _val;

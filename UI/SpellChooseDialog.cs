@@ -10,20 +10,38 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
+
+    /// <summary>
+    /// Dialog for choosing spells from a collection
+    /// </summary>
     public partial class SpellChooseDialog : Form {
 
+        /// <summary>
+        /// Event that is triggered when the selection is confirmed
+        /// </summary>
         public Action<IEnumerable<IConstSpell>>? OnConfirm;
 
+        /// <summary>
+        /// Label of the list from where spells are drawn
+        /// </summary>
         public string FromListName {
             get => fromList.Label;
             set => fromList.Label = value;
         }
 
+        /// <summary>
+        /// Label of the list where spells are put into
+        /// </summary>
         public string ToListName {
             get => toList.Label;
             set => toList.Label = value;
         }
 
+        /// <summary>
+        /// CTor. Both source and destination remained unchanged. Get updates via the OnConfirmEvent
+        /// </summary>
+        /// <param name="source">source collection of spells</param>
+        /// <param name="destination">destination collection of spells</param>
         public SpellChooseDialog(IEnumerable<IConstSpell> source, IEnumerable<IConstSpell> destination) {
             InitializeComponent();
             fromList.Spells = source;
