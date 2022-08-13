@@ -8,7 +8,17 @@ using DOS2Randomizer.DataStructures;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.Util {
+    /// <summary>
+    /// static class used for (de-)serializing configs
+    /// </summary>
     static class FileIo {
+
+        /// <summary>
+        /// Deserialize a config
+        /// </summary>
+        /// <typeparam name="T">type of config</typeparam>
+        /// <param name="fileName">path to file</param>
+        /// <returns>deserialized config or null if deserialization failed</returns>
         public static T? ImportConfig<T>(string fileName) where T : class, ISerilizable {
             T? spells = null;
             try {
@@ -26,6 +36,12 @@ namespace DOS2Randomizer.Util {
             return spells;
         }
 
+        /// <summary>
+        /// Serialize and save a config 
+        /// </summary>
+        /// <typeparam name="T">Type of config</typeparam>
+        /// <param name="config">config to serialize</param>
+        /// <param name="fileName">destination file</param>
         public static void SaveConfig<T>(T config, string fileName) where T: ISerilizable {
             try {
                 using var file = File.Open(fileName, FileMode.Create);
