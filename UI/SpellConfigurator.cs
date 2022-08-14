@@ -64,5 +64,18 @@ namespace DOS2Randomizer.UI {
                 Spells = files.Select(imageFile => new Spell("<unknown>", imageFile)).ToArray();
             }
         }
+
+        private void remove_Click(object sender, EventArgs e) {
+            var spell = spellDesignPanel.Spell;
+            if (spell is null) {
+                return;
+            }
+
+            var confirmed = MessageBox.Show(String.Format(Resources.Messages.RemoveSpell, spell.Name), "",
+                MessageBoxButtons.YesNo);
+            if (confirmed == DialogResult.Yes) {
+                Spells = Spells.Except(new[] { spell }).ToArray();
+            }
+        }
     }
 }

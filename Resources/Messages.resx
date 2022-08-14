@@ -138,6 +138,9 @@
   <data name="NoShuffles" xml:space="preserve">
     <value>No shuffles left</value>
   </data>
+  <data name="RemoveSpell" xml:space="preserve">
+    <value>Do you want to remove {0} from the list of spells?</value>
+  </data>
   <data name="Rerolls" xml:space="preserve">
     <value>Rerolls ({0} left)</value>
   </data>

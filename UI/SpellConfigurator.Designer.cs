@@ -148,6 +148,7 @@ namespace DOS2Randomizer.UI {
             this.remove.TabIndex = 0;
             this.remove.Text = "Remove";
             this.remove.UseVisualStyleBackColor = true;
+            this.remove.Click += new System.EventHandler(this.remove_Click);
             // 
             // search
             // 
