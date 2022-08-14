@@ -34,7 +34,7 @@ namespace DOS2Randomizer.UI {
             this.fromList.Label = "";
             this.fromList.Location = new System.Drawing.Point(16, 12);
             this.fromList.Name = "fromList";
-            this.fromList.Size = new System.Drawing.Size(772, 123);
+            this.fromList.Size = new System.Drawing.Size(772, 130);
             this.fromList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
             this.fromList.SplitPercentage = 29;
             this.fromList.TabIndex = 0;
@@ -54,7 +54,7 @@ namespace DOS2Randomizer.UI {
             this.toList.Label = "";
             this.toList.Location = new System.Drawing.Point(16, 141);
             this.toList.Name = "toList";
-            this.toList.Size = new System.Drawing.Size(772, 154);
+            this.toList.Size = new System.Drawing.Size(772, 130);
             this.toList.Spells = new DOS2Randomizer.DataStructures.Spell[0];
             this.toList.SplitPercentage = 29;
             this.toList.TabIndex = 3;
