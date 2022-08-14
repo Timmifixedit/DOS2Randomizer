@@ -71,6 +71,7 @@ namespace DOS2Randomizer.UI {
             this.MinimizeBox = false;
             this.Name = "SpellChooseDialog";
             this.Text = "Configure Spells manually";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SpellChooseDialog_FormClosed);
             this.ResumeLayout(false);
 
         }

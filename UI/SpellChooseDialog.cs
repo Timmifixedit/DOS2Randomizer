@@ -22,6 +22,11 @@ namespace DOS2Randomizer.UI {
         public Action<IEnumerable<IConstSpell>>? OnConfirm;
 
         /// <summary>
+        /// Event that is triggered when the dialog is closed in any way
+        /// </summary>
+        public Action? OnClose;
+
+        /// <summary>
         /// Label of the list from where spells are drawn
         /// </summary>
         public string FromListName {
@@ -58,6 +63,10 @@ namespace DOS2Randomizer.UI {
         private void confirm_Click(object sender, EventArgs e) {
             OnConfirm?.Invoke(toList.Spells ?? Array.Empty<Spell>());
             this.Close();
+        }
+
+        private void SpellChooseDialog_FormClosed(object sender, FormClosedEventArgs e) {
+            OnClose?.Invoke();
         }
     }
 }
