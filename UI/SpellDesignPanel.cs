@@ -91,6 +91,7 @@ namespace DOS2Randomizer.UI {
             set {
                 _spell = value;
                 if (_spell != null) {
+                    search.AllSpells = AllSpells?.Except(new[] { _spell }).ToArray();
                     UnsubscribeFromControls();
                     RefreshUi();
                     SubscribeToControls();
