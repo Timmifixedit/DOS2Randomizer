@@ -96,9 +96,9 @@ namespace DOS2Randomizer.UI {
             this.dependencies.Label = "Dependencies";
             this.dependencies.Location = new System.Drawing.Point(3, 3);
             this.dependencies.Name = "dependencies";
-            this.dependencies.Size = new System.Drawing.Size(194, 96);
+            this.dependencies.Size = new System.Drawing.Size(286, 96);
             this.dependencies.Spells = new DOS2Randomizer.DataStructures.Spell[0];
-            this.dependencies.SplitPercentage = 40;
+            this.dependencies.SplitPercentage = 35;
             this.dependencies.TabIndex = 5;
             this.dependencies.Value = new DOS2Randomizer.DataStructures.Spell[0];
             // 
@@ -188,19 +188,20 @@ namespace DOS2Randomizer.UI {
             this.dependenciesLayout.RowCount = 2;
             this.dependenciesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.91304F));
             this.dependenciesLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.08696F));
-            this.dependenciesLayout.Size = new System.Drawing.Size(200, 138);
+            this.dependenciesLayout.Size = new System.Drawing.Size(292, 138);
             this.dependenciesLayout.TabIndex = 6;
             // 
             // search
             // 
             this.search.AllSpells = null;
+            this.search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.search.CaseSensitive = false;
             this.search.Label = "Search";
             this.search.Location = new System.Drawing.Point(3, 105);
             this.search.ManagedCollection = this.dependencies;
             this.search.Name = "search";
-            this.search.Size = new System.Drawing.Size(191, 30);
-            this.search.SplitPercentage = 30;
+            this.search.Size = new System.Drawing.Size(286, 30);
+            this.search.SplitPercentage = 35;
             this.search.TabIndex = 6;
             this.search.Value = "";
             // 
