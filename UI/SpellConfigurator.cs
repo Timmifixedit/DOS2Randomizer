@@ -18,17 +18,21 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     public partial class SpellConfigurator : Form {
         private Spell[]? _spells;
+        private readonly SpellSearch _search;
 
         private Spell[] Spells {
             get => _spells ?? Array.Empty<Spell>();
             set {
                 _spells = value;
                 spellDesignPanel.AllSpells = _spells;
-                spellList.Spells = _spells;
+                _search.AllSpells = _spells;
             }
         }
         public SpellConfigurator() {
             InitializeComponent();
+            _search = new SpellSearch
+                { ManagedCollection = spellList, Label = "Search", SplitPercentage = 30, Dock = DockStyle.Right };
+            searchDeleteLayout.Controls.Add(_search, 0, 1);
             spellList.OnImageClick = spell => { spellDesignPanel.Spell = spell; };
         }
 
