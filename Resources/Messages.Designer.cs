@@ -106,6 +106,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A memory level greater than {0} would lead to exceeding the maximum number of memory slots of {1} at max level..
+        /// </summary>
+        internal static string MaxMemorySlots {
+            get {
+                return ResourceManager.GetString("MaxMemorySlots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This player has reached the maximum number of spells at level {0}..
         /// </summary>
         internal static string MaxNumberSpellsReached {
