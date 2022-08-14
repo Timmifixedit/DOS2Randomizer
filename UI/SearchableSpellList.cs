@@ -34,6 +34,9 @@ namespace DOS2Randomizer.UI {
             set => label.Text = value;
         }
 
+        /// <summary>
+        /// Event that is triggered when a spell in the list is selected
+        /// </summary>
         public Action<T>? OnImageClick;
         public TableLayoutPanel LayoutPanel => layout;
     }
