@@ -55,13 +55,12 @@ namespace DOS2Randomizer.UI {
         private void create_Click(object sender, EventArgs e) {
             using var dirChooser = new FolderBrowserDialog {ShowNewFolderButton = false};
             if (dirChooser.ShowDialog() == DialogResult.OK) {
-                var files = Directory.GetFiles(dirChooser.SelectedPath, "*.png", SearchOption.AllDirectories);
-                System.Diagnostics.Debug.WriteLine("Found the following png files");
+                var files = Directory.GetFiles(dirChooser.SelectedPath, "*png", SearchOption.AllDirectories);
                 foreach (var file in files) {
                     System.Diagnostics.Debug.WriteLine(file);
                 }
 
-                Spells = files.Select(imageFile => new Spell("<unknown>", imageFile)).ToArray();
+                Spells = files.Select(imageFile => new Spell(Resources.Misc.DefaultSpellName, imageFile)).ToArray();
             }
         }
 
@@ -75,6 +74,14 @@ namespace DOS2Randomizer.UI {
                 MessageBoxButtons.YesNo);
             if (confirmed == DialogResult.Yes) {
                 Spells = Spells.Except(new[] { spell }).ToArray();
+            }
+        }
+
+        private void add_Click(object sender, EventArgs e) {
+            using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.ImageFilter };
+            if (fileChooser.ShowDialog() == DialogResult.OK) {
+                var newSpell = new Spell(Resources.Misc.DefaultSpellName, fileChooser.FileName);
+                Spells = Spells.Concat(new[] { newSpell }).ToArray();
             }
         }
     }
