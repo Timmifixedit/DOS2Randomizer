@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.UI {
+
     /// <summary>
     /// User control that can manage an ISpellCollection and provide search utility
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    class SpellSearchBase<T> : LabeledString where T: IConstSpell {
+    public partial class SpellSearchBase<T> : LabeledString where T: IConstSpell {
+        public SpellSearchBase() {
+            InitializeComponent();
+            OnValueChanged = Search;
+        }
+
         private IEnumerable<T>? _spells;
         public ISpellCollection<T>? ManagedCollection { get; set; }
 
@@ -36,12 +47,7 @@ namespace DOS2Randomizer.UI {
                     .Where(spell => ManageCase(spell.Name).Contains(ManageCase(searchString))).ToArray();
             }
         }
-
-        public SpellSearchBase() {
-            OnValueChanged = Search;
-        }
     }
-
     class SpellSearch : SpellSearchBase<Spell> {}
     class CSpellSearch : SpellSearchBase<IConstSpell> {}
 }

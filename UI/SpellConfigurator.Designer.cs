@@ -32,6 +32,7 @@ namespace DOS2Randomizer.UI {
             this.searchLayout = new System.Windows.Forms.TableLayoutPanel();
             this.searchDeleteLayout = new System.Windows.Forms.TableLayoutPanel();
             this.remove = new System.Windows.Forms.Button();
+            this.search = new DOS2Randomizer.UI.SpellSearch();
             this.spellList = new DOS2Randomizer.UI.SpellList();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.spellDesignPanel = new DOS2Randomizer.UI.SpellDesignPanel();
@@ -128,6 +129,7 @@ namespace DOS2Randomizer.UI {
             this.searchDeleteLayout.ColumnCount = 1;
             this.searchDeleteLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.searchDeleteLayout.Controls.Add(this.remove, 0, 0);
+            this.searchDeleteLayout.Controls.Add(this.search, 0, 1);
             this.searchDeleteLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchDeleteLayout.Location = new System.Drawing.Point(3, 3);
             this.searchDeleteLayout.Name = "searchDeleteLayout";
@@ -146,6 +148,20 @@ namespace DOS2Randomizer.UI {
             this.remove.TabIndex = 0;
             this.remove.Text = "Remove";
             this.remove.UseVisualStyleBackColor = true;
+            // 
+            // search
+            // 
+            this.search.AllSpells = null;
+            this.search.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.search.CaseSensitive = false;
+            this.search.Label = "Search";
+            this.search.Location = new System.Drawing.Point(3, 72);
+            this.search.ManagedCollection = this.spellList;
+            this.search.Name = "search";
+            this.search.Size = new System.Drawing.Size(160, 30);
+            this.search.SplitPercentage = 30;
+            this.search.TabIndex = 7;
+            this.search.Value = "";
             // 
             // spellList
             // 
@@ -211,5 +227,6 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel searchDeleteLayout;
         private SpellList spellList;
         private System.Windows.Forms.Button remove;
+        private SpellSearch search;
     }
 }

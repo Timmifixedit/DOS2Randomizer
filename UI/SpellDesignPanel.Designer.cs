@@ -33,11 +33,11 @@ namespace DOS2Randomizer.UI {
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.memSlots = new DOS2Randomizer.UI.LabeledValue();
             this.cost = new DOS2Randomizer.UI.LabeledValue();
+            this.requiredEquipment = new DOS2Randomizer.UI.LabeledEquipType();
             this.flowLayoutSelections = new System.Windows.Forms.FlowLayoutPanel();
             this.dependenciesLayout = new System.Windows.Forms.TableLayoutPanel();
             this.search = new DOS2Randomizer.UI.SpellSearch();
             this.skillPointsPanel1 = new DOS2Randomizer.UI.SkillPointsPanel();
-            this.requiredEquipment = new DOS2Randomizer.UI.LabeledEquipType();
             this.mainLayout.SuspendLayout();
             this.flowLayout.SuspendLayout();
             this.flowLayoutSelections.SuspendLayout();
@@ -78,7 +78,7 @@ namespace DOS2Randomizer.UI {
             // 
             // typeSelection
             // 
-            this.typeSelection.Data = null;
+            this.typeSelection.Data = new DOS2Randomizer.DataStructures.Spell.Type[0];
             this.typeSelection.DisplayMember = null;
             this.typeSelection.Label = "Type(s)";
             this.typeSelection.Location = new System.Drawing.Point(3, 147);
@@ -90,13 +90,14 @@ namespace DOS2Randomizer.UI {
             // 
             // dependencies
             // 
-            this.dependencies.Data = null;
+            this.dependencies.Data = new DOS2Randomizer.DataStructures.Spell[0];
             this.dependencies.DisplayMember = "Name";
             this.dependencies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dependencies.Label = "Dependencies";
             this.dependencies.Location = new System.Drawing.Point(3, 3);
             this.dependencies.Name = "dependencies";
             this.dependencies.Size = new System.Drawing.Size(194, 96);
+            this.dependencies.Spells = new DOS2Randomizer.DataStructures.Spell[0];
             this.dependencies.SplitPercentage = 40;
             this.dependencies.TabIndex = 5;
             this.dependencies.Value = new DOS2Randomizer.DataStructures.Spell[0];
@@ -156,6 +157,16 @@ namespace DOS2Randomizer.UI {
             this.cost.TabIndex = 5;
             this.cost.Value = 0;
             // 
+            // requiredEquipment
+            // 
+            this.requiredEquipment.Label = "Requires Equipment";
+            this.requiredEquipment.Location = new System.Drawing.Point(3, 183);
+            this.requiredEquipment.Name = "requiredEquipment";
+            this.requiredEquipment.Size = new System.Drawing.Size(191, 30);
+            this.requiredEquipment.SplitPercentage = 50;
+            this.requiredEquipment.TabIndex = 6;
+            this.requiredEquipment.Value = DOS2Randomizer.DataStructures.Player.SkillType.Melee;
+            // 
             // flowLayoutSelections
             // 
             this.flowLayoutSelections.Controls.Add(this.dependenciesLayout);
@@ -183,7 +194,7 @@ namespace DOS2Randomizer.UI {
             // search
             // 
             this.search.AllSpells = null;
-            this.search.CaseSensitive = true;
+            this.search.CaseSensitive = false;
             this.search.Label = "Search";
             this.search.Location = new System.Drawing.Point(3, 105);
             this.search.ManagedCollection = this.dependencies;
@@ -199,16 +210,6 @@ namespace DOS2Randomizer.UI {
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);
             this.skillPointsPanel1.TabIndex = 2;
-            // 
-            // requiredEquipment
-            // 
-            this.requiredEquipment.Label = "Requires Equipment";
-            this.requiredEquipment.Location = new System.Drawing.Point(3, 183);
-            this.requiredEquipment.Name = "requiredEquipment";
-            this.requiredEquipment.Size = new System.Drawing.Size(191, 30);
-            this.requiredEquipment.SplitPercentage = 50;
-            this.requiredEquipment.TabIndex = 6;
-            this.requiredEquipment.Value = DOS2Randomizer.DataStructures.Player.SkillType.Melee;
             // 
             // SpellDesignPanel
             // 
