@@ -54,6 +54,15 @@ namespace DOS2Randomizer.UI {
         private void SaveButton_Click(object sender, System.EventArgs e) {
             using var fileChooser = new SaveFileDialog {DefaultExt = Resources.Misc.JsonExtension, AddExtension = true};
             if (fileChooser.ShowDialog() == DialogResult.OK) {
+                var spellLookup =
+                    Config.Spells.ToImmutableDictionary(spell => spell.ImagePath, spell => (IConstSpell)spell);
+                foreach (var player in Config.Players) {
+                    player.CKnownSpells = player.CKnownSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
+                        .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
+                    player.CEquippedSpells = player.CEquippedSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
+                        .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
+                }
+
                 FileIo.SaveConfig(Config, fileChooser.FileName);
             }
         }
