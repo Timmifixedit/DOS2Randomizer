@@ -18,7 +18,7 @@ namespace DOS2Randomizer.UI {
         private IEnumerable<T>? _spells;
 
         /// <summary>
-        /// Event that is triggered when a spell is clicked
+        /// Event that is triggered when a spell is selected
         /// </summary>
         public Action<T>? OnImageClick;
         private int? _lastIndex;
@@ -77,8 +77,8 @@ namespace DOS2Randomizer.UI {
         public SpellListBase() {
             InitializeComponent();
             layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
-            layout.KeyDown += (sender, args) => {
-                if (args.KeyCode == Keys.Enter && layout.SelectedIndices.Count != 0) {
+            layout.KeyUp += (_, args) => {
+                if (args.KeyCode is Keys.Left or Keys.Right && layout.SelectedIndices.Count != 0) {
                     HandleSelect(layout.SelectedIndices[0]);
                 }
             };
