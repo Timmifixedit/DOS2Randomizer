@@ -123,9 +123,12 @@ namespace DOS2Randomizer.DataStructures {
         public ImmutableArray<SkillType> PossibleSkillTypes { get; set; }
         public ImmutableDictionary<Attribute, int> Attributes { get; set; }
         public ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }
-        public int NumMemSlots => Attributes[Attribute.Mem] - BaseAttributeValue + (Level / 2) + BaseMemSlots;
+        public int NumMemSlots => MemSlotsAtLevel(Level, Attributes[Attribute.Mem]);
         public int NumMemorySlotsUsed => CEquippedSpells.Select(spell => spell.MemorySlots).Sum();
         public int NumRerollsExpended { get; set; }
         public int NumShufflesExpended { get; set; }
+
+        public static int MemSlotsAtLevel(int playerLevel, int memory) =>
+            memory - BaseAttributeValue + (playerLevel / 2) + BaseMemSlots;
     }
 }

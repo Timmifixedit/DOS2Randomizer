@@ -34,10 +34,7 @@ namespace DOS2Randomizer.UI {
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
             playerLevel.OnValueChanged = SetPlayerLevel;
-            attributePointsPanel1.OnValueChanged = value => {
-                _player.Attributes = value.ToImmutableDictionary();
-                RefreshUi();
-            };
+            attributePointsPanel1.OnValueChanged = SetPlayerAttributes;
             skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value.ToImmutableDictionary(); };
             possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value.ToImmutableArray(); };
         }
@@ -96,6 +93,17 @@ namespace DOS2Randomizer.UI {
         }
 
         #region helpers
+
+        private void SetPlayerAttributes(Dictionary<Attribute, int> attributes) {
+            if (Player.MemSlotsAtLevel(MatchConfig.MaxLevel, attributes[Attribute.Mem]) > _matchConfig.MaxNumMemSlots) {
+                MessageBox.Show(String.Format(Resources.Messages.MaxMemorySlots, _player.Attributes[Attribute.Mem],
+                    _matchConfig.MaxNumMemSlots));
+            } else {
+                _player.Attributes = attributes.ToImmutableDictionary();
+            }
+
+            RefreshUi();
+        }
 
         private OnLevelUp GetAccumulatedLevelInfo() {
             var levelRange = _matchConfig.LevelSpecificEvents.Take(_player.Level).ToArray();

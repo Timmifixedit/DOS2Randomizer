@@ -132,6 +132,9 @@
   <data name="EquipSpell" xml:space="preserve">
     <value>Equip {0}?</value>
   </data>
+  <data name="MaxMemorySlots" xml:space="preserve">
+    <value>A memory level greater than {0} would lead to exceeding the maximum number of memory slots of {1} at max level.</value>
+  </data>
   <data name="MaxNumberSpellsReached" xml:space="preserve">
     <value>This player has reached the maximum number of spells at level {0}.</value>
   </data>
