@@ -29,10 +29,12 @@ namespace DOS2Randomizer.Util {
             } catch (JsonException e) {
                 MessageBox.Show(String.Format(Resources.ErrorMessages.JsonParseFailed, fileName) + Environment.NewLine +
                                 e.Message);
+            } catch (FileNotFoundException e) {
+                MessageBox.Show(e.Message);
             } catch (IOException exception) {
                 MessageBox.Show(String.Format(Resources.ErrorMessages.FileOpenFailed, fileName) +
                                 Environment.NewLine + exception.Message);
-            }
+            } 
 
             return spells;
         }
