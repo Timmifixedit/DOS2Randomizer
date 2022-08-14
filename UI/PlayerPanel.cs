@@ -69,6 +69,16 @@ namespace DOS2Randomizer.UI {
             SubscribeToControls();
         }
 
+        private void EnableSpellDialogs() {
+            drawSpells.Enabled = true;
+            configureSpells.Enabled = true;
+        }
+
+        private void DisableSpellDialogs() {
+            drawSpells.Enabled = false;
+            configureSpells.Enabled = false;
+        }
+
 
         #endregion
 
@@ -145,8 +155,10 @@ namespace DOS2Randomizer.UI {
                     FromListName = "Available Spells",
                     ToListName = "Known Spells",
                     OnConfirm = SetPlayerSpells,
+                    OnClose = EnableSpellDialogs,
                     Visible = true
                 };
+            DisableSpellDialogs();
             spellChooseDialog.Activate();
         }
 
@@ -165,9 +177,11 @@ namespace DOS2Randomizer.UI {
                         OnConfirm = (spells, numRerolls) => {
                             _player.NumRerollsExpended += NumRerolls - numRerolls;
                             SetPlayerSpells(_player.CKnownSpells.Concat(spells));
+                            EnableSpellDialogs();
                         },
                         Visible = true
                     };
+                DisableSpellDialogs();
                 spellChooseDialog.Activate();
             } else {
                 MessageBox.Show(String.Format(Resources.Messages.MaxNumberSpellsReached, level));
