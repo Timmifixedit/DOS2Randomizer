@@ -124,6 +124,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to remove {0} from the list of spells?.
+        /// </summary>
+        internal static string RemoveSpell {
+            get {
+                return ResourceManager.GetString("RemoveSpell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rerolls ({0} left).
         /// </summary>
         internal static string Rerolls {

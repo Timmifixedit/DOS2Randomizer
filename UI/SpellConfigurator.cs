@@ -24,7 +24,7 @@ namespace DOS2Randomizer.UI {
             set {
                 _spells = value;
                 spellDesignPanel.AllSpells = _spells;
-                spellList.Spells = _spells;
+                search.AllSpells = _spells;
             }
         }
         public SpellConfigurator() {
@@ -55,13 +55,33 @@ namespace DOS2Randomizer.UI {
         private void create_Click(object sender, EventArgs e) {
             using var dirChooser = new FolderBrowserDialog {ShowNewFolderButton = false};
             if (dirChooser.ShowDialog() == DialogResult.OK) {
-                var files = Directory.GetFiles(dirChooser.SelectedPath, "*.png", SearchOption.AllDirectories);
-                System.Diagnostics.Debug.WriteLine("Found the following png files");
+                var files = Directory.GetFiles(dirChooser.SelectedPath, "*png", SearchOption.AllDirectories);
                 foreach (var file in files) {
                     System.Diagnostics.Debug.WriteLine(file);
                 }
 
-                Spells = files.Select(imageFile => new Spell("<unknown>", imageFile)).ToArray();
+                Spells = files.Select(imageFile => new Spell(Resources.Misc.DefaultSpellName, imageFile)).ToArray();
+            }
+        }
+
+        private void remove_Click(object sender, EventArgs e) {
+            var spell = spellDesignPanel.Spell;
+            if (spell is null) {
+                return;
+            }
+
+            var confirmed = MessageBox.Show(String.Format(Resources.Messages.RemoveSpell, spell.Name), "",
+                MessageBoxButtons.YesNo);
+            if (confirmed == DialogResult.Yes) {
+                Spells = Spells.Except(new[] { spell }).ToArray();
+            }
+        }
+
+        private void add_Click(object sender, EventArgs e) {
+            using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.ImageFilter };
+            if (fileChooser.ShowDialog() == DialogResult.OK) {
+                var newSpell = new Spell(Resources.Misc.DefaultSpellName, fileChooser.FileName);
+                Spells = Spells.Concat(new[] { newSpell }).ToArray();
             }
         }
     }

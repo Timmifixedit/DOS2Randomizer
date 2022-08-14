@@ -117,40 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlreadyEquipped" xml:space="preserve">
-    <value>{0} is already equipped.</value>
-  </data>
-  <data name="ChooseK" xml:space="preserve">
-    <value>Choose {0} spells.</value>
-  </data>
-  <data name="ConfirmDeletePlayer" xml:space="preserve">
-    <value>Are you sure you want to remove {0} from squad?</value>
-  </data>
-  <data name="EquippedSpellsAndMem" xml:space="preserve">
-    <value>Equipped Spells ({0} / {1})</value>
-  </data>
-  <data name="EquipSpell" xml:space="preserve">
-    <value>Equip {0}?</value>
-  </data>
-  <data name="MaxNumberSpellsReached" xml:space="preserve">
-    <value>This player has reached the maximum number of spells at level {0}.</value>
-  </data>
-  <data name="NoShuffles" xml:space="preserve">
-    <value>No shuffles left</value>
-  </data>
-  <data name="RemoveSpell" xml:space="preserve">
-    <value>Do you want to remove {0} from the list of spells?</value>
-  </data>
-  <data name="Rerolls" xml:space="preserve">
-    <value>Rerolls ({0} left)</value>
-  </data>
-  <data name="Shuffle" xml:space="preserve">
-    <value>Shuffle Spells ({0})</value>
-  </data>
-  <data name="ShuffleNoEffect" xml:space="preserve">
-    <value>{0} has a total of {1} memory slots and knows spells which require a total of {2} slots. Shuffeling equipped spells would have no effect.</value>
-  </data>
-  <data name="TooFewMemSlots" xml:space="preserve">
-    <value>{0} has {1} memory slots left but {2} requires {3} memory slots.</value>
-  </data>
 </root>
