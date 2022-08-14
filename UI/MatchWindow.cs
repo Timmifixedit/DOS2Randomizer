@@ -61,11 +61,7 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            var newPlayer = new Player {
-                NumShuffles = _config.Get.LevelSpecificEvents[0].NewShuffles,
-                NumRerolls = _config.Get.LevelSpecificEvents[0].NewRerolls
-            };
-            Players = Players.Append(newPlayer).ToImmutableArray();
+            Players = Players.Append(new Player()).ToImmutableArray();
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
             }

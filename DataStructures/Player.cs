@@ -30,14 +30,15 @@ namespace DOS2Randomizer.DataStructures {
         public ImmutableArray<Player.SkillType> PossibleSkillTypes { get; }
         public ImmutableDictionary<Attribute, int> Attributes { get; }
         public ImmutableDictionary<Spell.School, int> SkillPoints { get; }
-        public int NumRerolls { get; }
-        public int NumShuffles { get; }
 
         [JsonIgnore]
         public int NumMemSlots { get; }
 
         [JsonIgnore]
         public int NumMemorySlotsUsed { get; }
+
+        public int NumRerollsExpended { get; }
+        public int NumShufflesExpended { get; }
     }
 
     public interface IMutablePlayer : IConstPlayer {
@@ -52,8 +53,8 @@ namespace DOS2Randomizer.DataStructures {
         public new ImmutableArray<Player.SkillType> PossibleSkillTypes { get; set; }
         public new ImmutableDictionary<Attribute, int> Attributes { get; set; }
         public new ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }
-        public new int NumRerolls { get; set; }
-        public new int NumShuffles { get; set; }
+        public new int NumRerollsExpended { get; set; }
+        public new int NumShufflesExpended { get; set; }
     }
 
     /// <summary>
@@ -93,7 +94,7 @@ namespace DOS2Randomizer.DataStructures {
         [JsonConstructor]
         public Player(string name, int level, ImmutableArray<Spell> knownSpells, ImmutableArray<Spell> equippedSpells,
             ImmutableArray<SkillType> possibleSkillTypes, ImmutableDictionary<Attribute, int> attributes,
-            ImmutableDictionary<Spell.School, int> skillPoints, int numRerolls, int numShuffles) {
+            ImmutableDictionary<Spell.School, int> skillPoints, int numRerollsExpended, int numShufflesExpended) {
             Name = name;
             Level = level;
             KnownSpells = knownSpells;
@@ -101,8 +102,8 @@ namespace DOS2Randomizer.DataStructures {
             PossibleSkillTypes = possibleSkillTypes;
             Attributes = attributes;
             SkillPoints = skillPoints;
-            NumRerolls = numRerolls;
-            NumShuffles = numShuffles;
+            NumRerollsExpended = numRerollsExpended;
+            NumShufflesExpended = numShufflesExpended;
         }
 
         public string Name { get; set; }
@@ -122,9 +123,9 @@ namespace DOS2Randomizer.DataStructures {
         public ImmutableArray<SkillType> PossibleSkillTypes { get; set; }
         public ImmutableDictionary<Attribute, int> Attributes { get; set; }
         public ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }
-        public int NumRerolls { get; set; }
-        public int NumShuffles { get; set; }
         public int NumMemSlots => Attributes[Attribute.Mem] - BaseAttributeValue + (Level / 2) + BaseMemSlots;
         public int NumMemorySlotsUsed => CEquippedSpells.Select(spell => spell.MemorySlots).Sum();
+        public int NumRerollsExpended { get; set; }
+        public int NumShufflesExpended { get; set; }
     }
 }

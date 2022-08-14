@@ -22,6 +22,14 @@ namespace DOS2Randomizer.UI {
 
         #endregion
 
+        #region properties
+
+        private int NumRerolls => Math.Max(GetAccumulatedLevelInfo().NewRerolls - _player.NumRerollsExpended, 0);
+        private int NumShuffles => Math.Max(GetAccumulatedLevelInfo().NewShuffles - _player.NumShufflesExpended, 0);
+        private int NumSpells => GetAccumulatedLevelInfo().NewSpells;
+
+        #endregion
+
         #region Ui
         private void SubscribeToControls() {
             playerName.OnValueChanged = value => { _player.Name = value; };
@@ -52,8 +60,8 @@ namespace DOS2Randomizer.UI {
             equippedSpellList.Spells = _player.CEquippedSpells;
             equippedSpellList.Label = String.Format(Resources.Messages.EquippedSpellsAndMem, _player.NumMemorySlotsUsed,
                 _player.NumMemSlots);
-            shuffle.Text = String.Format(Resources.Messages.Shuffle, _player.NumShuffles);
-            shuffle.Enabled = _player.NumShuffles > 0;
+            shuffle.Text = String.Format(Resources.Messages.Shuffle, NumShuffles);
+            shuffle.Enabled = NumShuffles > 0;
         }
         private void RefreshUi() {
             UnsubscribeFromControls();
@@ -70,10 +78,22 @@ namespace DOS2Randomizer.UI {
             InitializeComponent();
             playerLevel.Max = MatchConfig.MaxLevel;
             knownSpellList.OnImageClick = EquipSpell;
+            if (_matchConfig.LevelSpecificEvents.Length != MatchConfig.MaxLevel) {
+                throw new ArgumentException("Expected MatchConfig to have a level specific entry for each level");
+            }
+
             RefreshUi();
         }
 
         #region helpers
+
+        private OnLevelUp GetAccumulatedLevelInfo() {
+            var levelRange = _matchConfig.LevelSpecificEvents.Take(_player.Level).ToArray();
+            return new OnLevelUp(_player.Level, levelRange.Select(info => info.NewSpells).Sum(),
+                levelRange.Select(info => info.NewRerolls).Sum(),
+                levelRange.Select(info => info.NewShuffles).Sum());
+        }
+
         private void SetEquippedSpells(IEnumerable<IConstSpell> spells) {
             _player.CEquippedSpells = spells.ToImmutableArray();
             equippedSpellList.Spells = _player.CEquippedSpells;
@@ -107,16 +127,6 @@ namespace DOS2Randomizer.UI {
 
         private void SetPlayerLevel(int level) {
             if (level <= MatchConfig.MaxLevel) {
-                if (level > _matchConfig.LevelSpecificEvents.Length) {
-                    throw new InvalidOperationException("not enough level specific entries");
-                }
-
-                if (level > _player.Level) {
-                    var levelUpdates = _matchConfig.LevelSpecificEvents[level - 1];
-                    _player.NumRerolls += levelUpdates.NewRerolls;
-                    _player.NumShuffles += levelUpdates.NewShuffles;
-                }
-
                 _player.Level = level;
                 RefreshUi();
             }
@@ -151,9 +161,9 @@ namespace DOS2Randomizer.UI {
             if (numSpellsKnown < maxSpellsToThisLevel) {
                 var numSpellsToChoose = Math.Min(_matchConfig.K, maxSpellsToThisLevel - numSpellsKnown);
                 var spellChooseDialog =
-                    new ChooseKDialog(new Logic.SpellChooser(_matchConfig, _player), numSpellsToChoose, _player.NumRerolls) {
+                    new ChooseKDialog(new Logic.SpellChooser(_matchConfig, _player), numSpellsToChoose, NumRerolls) {
                         OnConfirm = (spells, numRerolls) => {
-                            _player.NumRerolls = numRerolls;
+                            _player.NumRerollsExpended += NumRerolls - numRerolls;
                             SetPlayerSpells(_player.CKnownSpells.Concat(spells));
                         },
                         Visible = true
@@ -165,7 +175,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void shuffle_Click(object sender, EventArgs e) {
-            if (_player.NumShuffles <= 0) {
+            if (NumShuffles <= 0) {
                 MessageBox.Show(Resources.Messages.NoShuffles);
                 return;
             }
@@ -175,7 +185,7 @@ namespace DOS2Randomizer.UI {
                 MessageBox.Show(String.Format(Resources.Messages.ShuffleNoEffect, _player.Name, _player.NumMemSlots,
                     requiredSlots));
             } else {
-                --_player.NumShuffles;
+                ++_player.NumShufflesExpended;
                 //@TODO this may choose a set of spells that violates spell dependencies or memory constraints
                 SetEquippedSpells(_player.CKnownSpells.ChooseRandom(_player.NumMemSlots));
             }
