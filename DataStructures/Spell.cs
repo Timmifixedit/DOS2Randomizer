@@ -27,7 +27,7 @@ namespace DOS2Randomizer.DataStructures {
     /// <summary>
     /// Spell class
     /// </summary>
-    public class Spell : IEquatable<Spell>, IConstSpell, ISerilizable {
+    public class Spell : IEquatable<Spell>, IConstSpell {
 
         /// <summary>
         /// Spell school type
@@ -95,7 +95,7 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         public string Name { get; set; }
-        public string ImagePath { get; }
+        public string ImagePath { get; set; }
         public int Level { get; set; }
         public ImmutableArray<Spell> Dependencies { get; set; }
         public ImmutableArray<IConstSpell> CDependencies => Dependencies.CastArray<IConstSpell>();

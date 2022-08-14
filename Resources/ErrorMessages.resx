@@ -120,6 +120,9 @@
   <data name="FileOpenFailed" xml:space="preserve">
     <value>Failed to open file ''{0}'</value>
   </data>
+  <data name="ImageNamesNotUnique" xml:space="preserve">
+    <value>Encountered two images files with the same name ("{0}" and "{1}").</value>
+  </data>
   <data name="InvalidConfigValues" xml:space="preserve">
     <value>Invalid values in config: </value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="MaxNumPlayers" xml:space="preserve">
     <value>Maximum number of players reached.</value>
+  </data>
+  <data name="MismatchedSpells" xml:space="preserve">
+    <value>Some spells could not be matched by their image file names:</value>
   </data>
   <data name="NoSpells" xml:space="preserve">
     <value>No spells are loaded.</value>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -108,6 +109,12 @@ namespace DOS2Randomizer.DataStructures {
             LevelSpecificEvents = levelSpecificEvents;
             Spells = spells;
             Players = players.CastArray<IMutablePlayer>();
+            var missingIcons = SpellListWrapper.MissingIcons(Spells);
+            if (missingIcons.Length > 0) {
+                throw new FileNotFoundException(
+                    "Invalid Spells config. Could not find icon for the following spells" + Environment.NewLine +
+                    missingIcons);
+            }
         }
     }
 

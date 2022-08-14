@@ -124,6 +124,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All spells have successfully been migrated to this machine..
+        /// </summary>
+        internal static string MigrationSuccess {
+            get {
+                return ResourceManager.GetString("MigrationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No shuffles left.
         /// </summary>
         internal static string NoShuffles {
@@ -147,6 +156,24 @@ namespace DOS2Randomizer.Resources {
         internal static string Rerolls {
             get {
                 return ResourceManager.GetString("Rerolls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can now save the migrated config..
+        /// </summary>
+        internal static string SaveMigratedConfig {
+            get {
+                return ResourceManager.GetString("SaveMigratedConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify where to look for spell icons.
+        /// </summary>
+        internal static string SelectImages {
+            get {
+                return ResourceManager.GetString("SelectImages", resourceCulture);
             }
         }
         
