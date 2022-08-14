@@ -33,5 +33,27 @@ namespace DOS2Randomizer.UI {
                 }
             }
         }
+
+        private void migrateSpells_Click(object sender, EventArgs e) {
+            SpellListWrapper? spells = null;
+            using (var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter }) {
+                if (fileChooser.ShowDialog() == DialogResult.OK &&
+                    FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is { } spellList) {
+                    using var dirChooser = new FolderBrowserDialog { ShowNewFolderButton = false };
+                    MessageBox.Show(Resources.Messages.SelectImages);
+                    if (dirChooser.ShowDialog() == DialogResult.OK) {
+                        spells = FileIo.MigrateSpellConfig(spellList, dirChooser.SelectedPath);
+                    }
+                }
+            }
+
+            if (spells is not null) {
+                using var fileChooser = new SaveFileDialog
+                    { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension };
+                if (fileChooser.ShowDialog() == DialogResult.OK) {
+                    FileIo.SaveConfig(spells, fileChooser.FileName);
+                }
+            }
+        }
     }
 }

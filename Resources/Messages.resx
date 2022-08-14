@@ -138,6 +138,9 @@
   <data name="MaxNumberSpellsReached" xml:space="preserve">
     <value>This player has reached the maximum number of spells at level {0}.</value>
   </data>
+  <data name="MigrationSuccess" xml:space="preserve">
+    <value>All spells have successfully been migrated to this machine.</value>
+  </data>
   <data name="NoShuffles" xml:space="preserve">
     <value>No shuffles left</value>
   </data>
@@ -146,6 +149,12 @@
   </data>
   <data name="Rerolls" xml:space="preserve">
     <value>Rerolls ({0} left)</value>
+  </data>
+  <data name="SaveMigratedConfig" xml:space="preserve">
+    <value>You can now save the migrated config.</value>
+  </data>
+  <data name="SelectImages" xml:space="preserve">
+    <value>Specify where to look for spell icons</value>
   </data>
   <data name="Shuffle" xml:space="preserve">
     <value>Shuffle Spells ({0})</value>

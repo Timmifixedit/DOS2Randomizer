@@ -95,7 +95,7 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         public string Name { get; set; }
-        public string ImagePath { get; }
+        public string ImagePath { get; set; }
         public int Level { get; set; }
         public ImmutableArray<Spell> Dependencies { get; set; }
         public ImmutableArray<IConstSpell> CDependencies => Dependencies.CastArray<IConstSpell>();
