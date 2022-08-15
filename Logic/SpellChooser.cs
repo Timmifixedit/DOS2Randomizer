@@ -21,8 +21,9 @@ namespace DOS2Randomizer.Logic {
         private readonly IMatchProperties _matchConfig;
         private readonly IConstPlayer _player;
         private readonly int _numSpellsToGenerate;
-        private const double AttributeFactor = 2.5; // One level point is worth roughly <value> AttributePoints
-        private const double SkillPointFactor = 0.8; // One level point is worth roughly <value> AttributePoints
+        public const double LevelFactor = 1;
+        public const double AttributeFactor = 2.5 * LevelFactor; // One level point is worth roughly <value> AttributePoints
+        public const double SkillPointFactor = 0.8 * LevelFactor; // One level point is worth roughly <value> AttributePoints
 
         public SpellChooser(IMatchProperties matchConfig, IConstPlayer player) {
             _matchConfig = matchConfig;
@@ -52,7 +53,7 @@ namespace DOS2Randomizer.Logic {
                    PlayerCanWield(spell) && !_player.CKnownSpells.Contains(spell);
         }
 
-        private double Gaussian(double x, double std) {
+        public static double Gaussian(double x, double std) {
             return Math.Exp(-Math.Pow(x, 2) / std);
         }
 
@@ -77,7 +78,7 @@ namespace DOS2Randomizer.Logic {
                 throw new ArgumentException("importance must be in [0, 1]");
             }
 
-            return Weighting(spells, spell => Gaussian(spell.Level - _player.Level, importance));
+            return Weighting(spells, spell => Gaussian(spell.Level - _player.Level, importance * LevelFactor));
         }
 
         private Pdf AttributeWeighting(IEnumerable<IConstSpell> spells, double importance) {
@@ -103,7 +104,7 @@ namespace DOS2Randomizer.Logic {
             int maxSkillVal = _player.SkillPoints.Values.Max();
             return Weighting(spells, spell => {
                 if (BenefitsFrom(spell) is { } benefit) {
-                    return Gaussian(_player.SkillPoints[benefit] - maxSkillVal, importance);
+                    return Gaussian(_player.SkillPoints[benefit] - maxSkillVal, importance * SkillPointFactor);
                 }
 
                 return 1;
