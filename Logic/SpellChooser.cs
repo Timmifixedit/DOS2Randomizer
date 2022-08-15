@@ -74,18 +74,10 @@ namespace DOS2Randomizer.Logic {
         }
 
         private Pdf LevelWeighting(IEnumerable<IConstSpell> spells, double importance) {
-            if (importance is < 0 or > 1) {
-                throw new ArgumentException("importance must be in [0, 1]");
-            }
-
             return Weighting(spells, spell => Gaussian(spell.Level - _player.Level, importance * LevelFactor));
         }
 
         private Pdf AttributeWeighting(IEnumerable<IConstSpell> spells, double importance) {
-            if (importance is < 0 or > 1) {
-                throw new ArgumentException("importance must be in [0, 1]");
-            }
-
             var maxAttributeVal = _player.Attributes.Values.Max();
             return Weighting(spells, spell => {
                 if (spell.Scaling is not Attribute.None) {
@@ -97,10 +89,6 @@ namespace DOS2Randomizer.Logic {
         }
 
         private Pdf SkillPointsWeighting(IEnumerable<IConstSpell> spells, double importance) {
-            if (importance is < 0 or > 1) {
-                throw new ArgumentException("importance must be in [0, 1]");
-            }
-
             int maxSkillVal = _player.SkillPoints.Values.Max();
             return Weighting(spells, spell => {
                 if (BenefitsFrom(spell) is { } benefit) {
@@ -113,10 +101,6 @@ namespace DOS2Randomizer.Logic {
 
         //@TODO implementation
         private Pdf SkillTypeWeighting(IEnumerable<IConstSpell> spells, double importance) {
-            if (importance is < 0 or > 1) {
-                throw new ArgumentException("importance must be in [0, 1]");
-            }
-
             var ret = spells.ToDictionary(spell => spell, _ => 1.0);
             return ret;
         }
@@ -183,9 +167,9 @@ namespace DOS2Randomizer.Logic {
             var allPossibleSpells = _matchConfig.CSpells.Where(spell => Learnable(spell, maxSkillPointDifference))
                 .ToArray();
             var spellPdf = PdfProduct(new[] {
-                LevelWeighting(allPossibleSpells, 0.5),
-                AttributeWeighting(allPossibleSpells, 0.5),
-                SkillPointsWeighting(allPossibleSpells, 0.5),
+                LevelWeighting(allPossibleSpells, _matchConfig.SpellWeights.Level),
+                AttributeWeighting(allPossibleSpells, _matchConfig.SpellWeights.Attribute),
+                SkillPointsWeighting(allPossibleSpells, _matchConfig.SpellWeights.SkillPoints),
                 SkillTypeWeighting(allPossibleSpells, 0.5)
             });
 

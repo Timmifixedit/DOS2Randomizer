@@ -29,7 +29,9 @@ namespace DOS2Randomizer.UI {
                 k.Value = _matchConfig.K;
                 configName.Value = _matchConfig.Name;
                 memSlots.Value = _matchConfig.MaxNumMemSlots;
-
+                _levelImportanceVisualizer.Std = _matchConfig.SpellWeights.Level;
+                _attributeImportanceVisualizer.Std = _matchConfig.SpellWeights.Attribute;
+                _skillPointImportanceVisualizer.Std = _matchConfig.SpellWeights.SkillPoints;
             }
         }
 
@@ -74,11 +76,6 @@ namespace DOS2Randomizer.UI {
             pdfLayout.Controls.Add(_levelImportanceVisualizer);
             pdfLayout.Controls.Add(_attributeImportanceVisualizer);
             pdfLayout.Controls.Add(_skillPointImportanceVisualizer);
-            pdfLayout.Controls.Add(new PdfVisualizer {
-                Function = (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.SkillPointFactor * std),
-                XLabel = "Bla",
-                XRange = 15
-            });
         }
 
         #region event handlers
@@ -94,6 +91,8 @@ namespace DOS2Randomizer.UI {
                         .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
                 }
 
+                Config.SpellWeights = new ImportanceValues(_levelImportanceVisualizer.Std,
+                    _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std);
                 FileIo.SaveConfig(Config, fileChooser.FileName);
             }
         }
