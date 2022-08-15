@@ -170,7 +170,7 @@ namespace DOS2Randomizer.Logic {
             return ret;
         }
 
-        public IEnumerable<IConstSpell> GetSpells() {
+        public IConstSpell[] GetSpells() {
 
             const int maxSkillPointDifference = 2;
             var allPossibleSpells = _matchConfig.CSpells.Where(spell => Learnable(spell, maxSkillPointDifference))
@@ -183,9 +183,10 @@ namespace DOS2Randomizer.Logic {
             });
 
             var cdf = GenerateCdf(spellPdf);
-            var ret = new IConstSpell[_numSpellsToGenerate];
+            var numToGenerate = Math.Min(allPossibleSpells.Length, _numSpellsToGenerate);
+            var ret = new IConstSpell[numToGenerate];
             var rng = new Random();
-            for (int i = 0; i < _numSpellsToGenerate; ++i) {
+            for (int i = 0; i < numToGenerate; ++i) {
                 ret[i] = cdf.First(tuple => tuple.Item1 >= rng.NextDouble()).Item2;
                 spellPdf.Remove(ret[i]);
                 Normalize(spellPdf);
