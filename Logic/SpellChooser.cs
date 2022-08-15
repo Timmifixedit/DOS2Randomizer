@@ -39,11 +39,17 @@ namespace DOS2Randomizer.Logic {
             return ret;
         }
 
+        private bool PlayerCanWield(IConstSpell spell) {
+            return spell.EquipmentRequirement == Player.SkillType.None ||
+                   _player.PossibleSkillTypes.Contains(spell.EquipmentRequirement) ||
+                   (spell.EquipmentRequirement == Player.SkillType.Melee &&
+                    _player.PossibleSkillTypes.Contains(Player.SkillType.Dagger));
+        }
+
         private bool Learnable(IConstSpell spell, int maxSkillDiff) {
             return spell.Level <= _player.Level && SkillPointDifference(spell) < maxSkillDiff &&
                    (spell.CDependencies.IsEmpty || spell.CDependencies.Intersect(_player.CKnownSpells).Any()) &&
-                   _player.PossibleSkillTypes.Contains(spell.EquipmentRequirement) &&
-                   !_player.CKnownSpells.Contains(spell);
+                   PlayerCanWield(spell) && !_player.CKnownSpells.Contains(spell);
         }
 
         private double Gaussian(double x, double std) {
