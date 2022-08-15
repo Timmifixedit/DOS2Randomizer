@@ -178,7 +178,8 @@ namespace DOS2Randomizer.Logic {
             var ret = new IConstSpell[numToGenerate];
             var rng = new Random();
             for (int i = 0; i < numToGenerate; ++i) {
-                ret[i] = cdf.First(tuple => tuple.Item1 >= rng.NextDouble()).Item2;
+                var rn = rng.NextDouble();
+                ret[i] = cdf.First(tuple => tuple.Item1 >= rn).Item2;
                 spellPdf.Remove(ret[i]);
                 Normalize(spellPdf);
                 cdf = GenerateCdf(spellPdf);
