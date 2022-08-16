@@ -91,8 +91,8 @@ namespace DOS2Randomizer.Logic {
         private Pdf SkillPointsWeighting(IEnumerable<IConstSpell> spells, double importance) {
             int maxSkillVal = _player.SkillPoints.Values.Max();
             return Weighting(spells, spell => {
-                if (BenefitsFrom(spell) is { } benefit) {
-                    return Gaussian(_player.SkillPoints[benefit] - maxSkillVal, importance * SkillPointFactor);
+                if (spell.Benefit != Spell.School.None) {
+                    return Gaussian(_player.SkillPoints[spell.Benefit] - maxSkillVal, importance * SkillPointFactor);
                 }
 
                 return 1;
@@ -129,24 +129,6 @@ namespace DOS2Randomizer.Logic {
             foreach (var key in pdf.Keys) {
                 pdf[key] /= sum;
             }
-        }
-
-        //@TODO additional spell info needed
-        private Spell.School? BenefitsFrom(IConstSpell spell) {
-            var primarySchoolType = spell.SchoolRequirements.MaxBy(pair => pair.Value).Key;
-            return primarySchoolType switch {
-                Spell.School.Aero => Spell.School.Aero,
-                Spell.School.Hydro => Spell.School.Hydro,
-                Spell.School.Pyro => Spell.School.Pyro,
-                Spell.School.Geo => Spell.School.Geo,
-                Spell.School.Scoundrel => Spell.School.Warfare,
-                Spell.School.Warfare => Spell.School.Warfare,
-                Spell.School.Poly => null,
-                Spell.School.Huntsman => Spell.School.Warfare,
-                Spell.School.Necro => Spell.School.Warfare,
-                Spell.School.Summoning => Spell.School.Summoning,
-                _ => throw new ArgumentOutOfRangeException()
-            };
         }
 
         private Cdf GenerateCdf(Pdf pdf) {
