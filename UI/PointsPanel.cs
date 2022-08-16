@@ -76,7 +76,9 @@ namespace DOS2Randomizer.UI {
         }
     }
 
-    public class SkillPointsPanel : PointsPanel<DataStructures.Spell.School> {}
+    public class SkillPointsPanel : PointsPanel<DataStructures.Spell.School> {
+        public SkillPointsPanel() : base(new[] { DataStructures.Spell.School.None }) {}
+    }
 
     public class AttributePointsPanel : PointsPanel<DataStructures.Attribute> {
         public AttributePointsPanel() : base(new []{DataStructures.Attribute.None}) {}

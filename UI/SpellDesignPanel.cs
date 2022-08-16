@@ -72,6 +72,11 @@ namespace DOS2Randomizer.UI {
                     _spell.EquipmentRequirement = value;
                 }
             };
+            benefitBox.OnValueChanged = value => {
+                if (_spell != null) {
+                    _spell.Benefit = value;
+                }
+            };
         }
 
         private void UnsubscribeFromControls() {
@@ -84,6 +89,7 @@ namespace DOS2Randomizer.UI {
             memSlots.OnValueChanged = null;
             cost.OnValueChanged = null;
             requiredEquipment.OnValueChanged = null;
+            benefitBox.OnValueChanged = null;
         }
 
         public Spell? Spell {
@@ -122,6 +128,7 @@ namespace DOS2Randomizer.UI {
                 memSlots.Value = _spell.MemorySlots;
                 cost.Value = _spell.LoadoutCost;
                 requiredEquipment.Value = _spell.EquipmentRequirement;
+                benefitBox.Value = _spell.Benefit;
             } catch (ArgumentException e) {
                 MessageBox.Show(Resources.ErrorMessages.InvalidConfigValues + e.Message);
             }
