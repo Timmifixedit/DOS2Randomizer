@@ -219,6 +219,7 @@ namespace DOS2Randomizer.UI {
             // 
             // pdfLayout
             // 
+            this.pdfLayout.AutoScroll = true;
             this.pdfLayout.AutoScrollMinSize = new System.Drawing.Size(1500, 0);
             this.pdfLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pdfLayout.Location = new System.Drawing.Point(3, 81);
@@ -232,7 +233,7 @@ namespace DOS2Randomizer.UI {
             this.levelSpecific.Location = new System.Drawing.Point(4, 24);
             this.levelSpecific.Name = "levelSpecific";
             this.levelSpecific.Padding = new System.Windows.Forms.Padding(3);
-            this.levelSpecific.Size = new System.Drawing.Size(192, 72);
+            this.levelSpecific.Size = new System.Drawing.Size(803, 440);
             this.levelSpecific.TabIndex = 1;
             this.levelSpecific.Text = "Level Specific";
             this.levelSpecific.UseVisualStyleBackColor = true;
@@ -249,7 +250,7 @@ namespace DOS2Randomizer.UI {
             this.spells.Controls.Add(this.spellMainLayout);
             this.spells.Location = new System.Drawing.Point(4, 24);
             this.spells.Name = "spells";
-            this.spells.Size = new System.Drawing.Size(192, 72);
+            this.spells.Size = new System.Drawing.Size(803, 440);
             this.spells.TabIndex = 2;
             this.spells.Text = "Spells";
             this.spells.UseVisualStyleBackColor = true;
@@ -266,7 +267,7 @@ namespace DOS2Randomizer.UI {
             this.spellMainLayout.RowCount = 2;
             this.spellMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.46445F));
             this.spellMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.53555F));
-            this.spellMainLayout.Size = new System.Drawing.Size(192, 72);
+            this.spellMainLayout.Size = new System.Drawing.Size(803, 440);
             this.spellMainLayout.TabIndex = 2;
             // 
             // spellListLayout
@@ -281,15 +282,15 @@ namespace DOS2Randomizer.UI {
             this.spellListLayout.Name = "spellListLayout";
             this.spellListLayout.RowCount = 1;
             this.spellListLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.spellListLayout.Size = new System.Drawing.Size(186, 17);
+            this.spellListLayout.Size = new System.Drawing.Size(797, 136);
             this.spellListLayout.TabIndex = 0;
             // 
             // spellList
             // 
             this.spellList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.spellList.Location = new System.Drawing.Point(54, 3);
+            this.spellList.Location = new System.Drawing.Point(224, 3);
             this.spellList.Name = "spellList";
-            this.spellList.Size = new System.Drawing.Size(129, 11);
+            this.spellList.Size = new System.Drawing.Size(570, 130);
             this.spellList.Spells = null;
             this.spellList.TabIndex = 0;
             // 
@@ -305,15 +306,15 @@ namespace DOS2Randomizer.UI {
             this.spellSearchLayout.RowCount = 2;
             this.spellSearchLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.spellSearchLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.spellSearchLayout.Size = new System.Drawing.Size(45, 11);
+            this.spellSearchLayout.Size = new System.Drawing.Size(215, 130);
             this.spellSearchLayout.TabIndex = 1;
             // 
             // importSpells
             // 
             this.importSpells.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.importSpells.Location = new System.Drawing.Point(3, 3);
+            this.importSpells.Location = new System.Drawing.Point(137, 21);
             this.importSpells.Name = "importSpells";
-            this.importSpells.Size = new System.Drawing.Size(39, 1);
+            this.importSpells.Size = new System.Drawing.Size(75, 23);
             this.importSpells.TabIndex = 1;
             this.importSpells.Text = "Import";
             this.importSpells.UseVisualStyleBackColor = true;
@@ -325,10 +326,10 @@ namespace DOS2Randomizer.UI {
             this.spellSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.spellSearch.CaseSensitive = false;
             this.spellSearch.Label = "Search";
-            this.spellSearch.Location = new System.Drawing.Point(3, 8);
+            this.spellSearch.Location = new System.Drawing.Point(3, 82);
             this.spellSearch.ManagedCollection = this.spellList;
             this.spellSearch.Name = "spellSearch";
-            this.spellSearch.Size = new System.Drawing.Size(39, 1);
+            this.spellSearch.Size = new System.Drawing.Size(209, 30);
             this.spellSearch.SplitPercentage = 30;
             this.spellSearch.TabIndex = 2;
             this.spellSearch.Value = "";
@@ -337,9 +338,9 @@ namespace DOS2Randomizer.UI {
             // 
             this.spellDesignPanel1.AllSpells = null;
             this.spellDesignPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 26);
+            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 145);
             this.spellDesignPanel1.Name = "spellDesignPanel1";
-            this.spellDesignPanel1.Size = new System.Drawing.Size(186, 43);
+            this.spellDesignPanel1.Size = new System.Drawing.Size(797, 292);
             this.spellDesignPanel1.Spell = null;
             this.spellDesignPanel1.TabIndex = 1;
             // 
