@@ -22,6 +22,7 @@ namespace DOS2Randomizer.DataStructures {
         public Attribute Scaling { get; }
         public int MemorySlots { get; }
         public int LoadoutCost { get; }
+        public Spell.School Benefit { get; }
     }
 
     /// <summary>
@@ -42,7 +43,8 @@ namespace DOS2Randomizer.DataStructures {
             Poly,
             Huntsman,
             Necro,
-            Summoning
+            Summoning,
+            None
         }
 
         /// <summary>
@@ -75,13 +77,13 @@ namespace DOS2Randomizer.DataStructures {
             MemorySlots = 1;
             LoadoutCost = 0;
             EquipmentRequirement = Player.SkillType.None;
+            Benefit = School.None;
         }
 
         [JsonConstructor]
         public Spell(string name, string imagePath, int level, ImmutableArray<Spell> dependencies,
             ImmutableDictionary<School, int> schoolRequirements, Player.SkillType equipmentRequirement,
-            ImmutableArray<Type> types,
-            Attribute scaling, int memorySlots, int loadoutCost) {
+            ImmutableArray<Type> types, Attribute scaling, int memorySlots, int loadoutCost, School benefit) {
             Name = name;
             ImagePath = imagePath;
             Level = level;
@@ -92,6 +94,7 @@ namespace DOS2Randomizer.DataStructures {
             MemorySlots = memorySlots;
             LoadoutCost = loadoutCost;
             EquipmentRequirement = equipmentRequirement;
+            Benefit = benefit;
         }
 
         public string Name { get; set; }
@@ -105,6 +108,7 @@ namespace DOS2Randomizer.DataStructures {
         public Attribute Scaling { get; set; }
         public int MemorySlots { get; set; }
         public int LoadoutCost { get; set; }
+        public School Benefit { get; set; }
 
         /// <summary>
         /// Compares Spell member fields
@@ -116,7 +120,7 @@ namespace DOS2Randomizer.DataStructures {
             if (ReferenceEquals(this, other)) return true;
             return Name == other.Name && ImagePath == other.ImagePath && Level == other.Level &&
                    SequenceEqual(Types, other.Types) && Scaling == other.Scaling &&
-                   MemorySlots == other.MemorySlots && LoadoutCost == other.LoadoutCost;
+                   MemorySlots == other.MemorySlots && LoadoutCost == other.LoadoutCost && Benefit == other.Benefit;
         }
         private static bool SequenceEqual<T>(IEnumerable<T>? lhs, IEnumerable<T>? rhs) {
             if (ReferenceEquals(lhs, rhs)) {
@@ -138,7 +142,7 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         public override int GetHashCode() {
-            return HashCode.Combine(Name, ImagePath, Level, (int) Scaling, MemorySlots, LoadoutCost);
+            return HashCode.Combine(Name, ImagePath, Level, (int) Scaling, MemorySlots, LoadoutCost, Benefit);
         }
 
         public static bool operator ==(Spell? left, Spell? right) {

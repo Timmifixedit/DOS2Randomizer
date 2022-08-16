@@ -97,7 +97,7 @@ namespace DOS2Randomizer.UI {
             set => Data = value;
         }
     }
-
+    
     class LabeledSkillTypeSelection : LabeledSelection<Player.SkillType> {
         public LabeledSkillTypeSelection() {
             Data = (Player.SkillType[]) Enum.GetValues(typeof(Player.SkillType));

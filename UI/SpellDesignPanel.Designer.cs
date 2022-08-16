@@ -34,6 +34,7 @@ namespace DOS2Randomizer.UI {
             this.memSlots = new DOS2Randomizer.UI.LabeledValue();
             this.cost = new DOS2Randomizer.UI.LabeledValue();
             this.requiredEquipment = new DOS2Randomizer.UI.LabeledEquipType();
+            this.benefitBox = new DOS2Randomizer.UI.LabeledSchoolType();
             this.flowLayoutSelections = new System.Windows.Forms.FlowLayoutPanel();
             this.dependenciesLayout = new System.Windows.Forms.TableLayoutPanel();
             this.search = new DOS2Randomizer.UI.SpellSearch();
@@ -127,6 +128,7 @@ namespace DOS2Randomizer.UI {
             this.flowLayout.Controls.Add(this.memSlots);
             this.flowLayout.Controls.Add(this.cost);
             this.flowLayout.Controls.Add(this.requiredEquipment);
+            this.flowLayout.Controls.Add(this.benefitBox);
             this.flowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayout.Location = new System.Drawing.Point(3, 3);
             this.flowLayout.Name = "flowLayout";
@@ -166,6 +168,16 @@ namespace DOS2Randomizer.UI {
             this.requiredEquipment.SplitPercentage = 50;
             this.requiredEquipment.TabIndex = 6;
             this.requiredEquipment.Value = DOS2Randomizer.DataStructures.Player.SkillType.Melee;
+            // 
+            // benefitBox
+            // 
+            this.benefitBox.Label = "Benefits from";
+            this.benefitBox.Location = new System.Drawing.Point(3, 219);
+            this.benefitBox.Name = "benefitBox";
+            this.benefitBox.Size = new System.Drawing.Size(191, 30);
+            this.benefitBox.SplitPercentage = 50;
+            this.benefitBox.TabIndex = 7;
+            this.benefitBox.Value = DOS2Randomizer.DataStructures.Spell.School.Aero;
             // 
             // flowLayoutSelections
             // 
@@ -243,5 +255,6 @@ namespace DOS2Randomizer.UI {
         private SpellSearch search;
         private SkillPointsPanel skillPointsPanel1;
         private LabeledEquipType requiredEquipment;
+        private LabeledSchoolType benefitBox;
     }
 }
