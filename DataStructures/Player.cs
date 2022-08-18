@@ -93,11 +93,13 @@ namespace DOS2Randomizer.DataStructures {
             KnownSpells = ImmutableArray<Spell>.Empty;
             EquippedSpells = ImmutableArray<Spell>.Empty;
             PossibleSkillTypes = ImmutableArray<SkillType>.Empty;
-            Attributes = new Dictionary<Attribute, int>(((Attribute[])Enum.GetValues(typeof(Spell.School))).Select(a =>
-                new KeyValuePair<Attribute, int>(a, BaseAttributeValue))).ToImmutableDictionary();
+            Attributes = new Dictionary<Attribute, int>(((Attribute[])Enum.GetValues(typeof(Attribute)))
+                .Where(a => a is not (Attribute.None or Attribute.Weapon))
+                .Select(a => new KeyValuePair<Attribute, int>(a, BaseAttributeValue))).ToImmutableDictionary();
             SkillPoints = new Dictionary<Spell.School, int>(
-                ((Spell.School[])Enum.GetValues(typeof(Spell.School))).Select(s =>
-                    new KeyValuePair<Spell.School, int>(s, 0))).ToImmutableDictionary();
+                ((Spell.School[])Enum.GetValues(typeof(Spell.School)))
+                .Where(s => s is not Spell.School.None)
+                .Select(s => new KeyValuePair<Spell.School, int>(s, 0))).ToImmutableDictionary();
             DmgType = WeaponDmgType.Physical;
         }
 
