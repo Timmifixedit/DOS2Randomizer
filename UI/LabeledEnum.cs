@@ -38,4 +38,6 @@ namespace DOS2Randomizer.UI {
     public class LabeledEquipType : LabeledEnum<Player.SkillType> {}
 
     public class LabeledSchoolType : LabeledEnum<Spell.School> {}
+
+    public class LabeledDmgType : LabeledEnum<Player.WeaponDmgType> {}
 }

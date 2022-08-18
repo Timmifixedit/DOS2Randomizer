@@ -35,12 +35,13 @@ namespace DOS2Randomizer.UI {
             this.equippedSpellList = new DOS2Randomizer.UI.CSearchableSpellList();
             this.knownSpellList = new DOS2Randomizer.UI.CSearchableSpellList();
             this.shuffle = new System.Windows.Forms.Button();
+            this.dmgType = new DOS2Randomizer.UI.LabeledDmgType();
             this.SuspendLayout();
             // 
             // playerName
             // 
             this.playerName.Label = "Player Name";
-            this.playerName.Location = new System.Drawing.Point(3, 3);
+            this.playerName.Location = new System.Drawing.Point(3, 4);
             this.playerName.Name = "playerName";
             this.playerName.Size = new System.Drawing.Size(234, 23);
             this.playerName.SplitPercentage = 40;
@@ -54,21 +55,21 @@ namespace DOS2Randomizer.UI {
             this.playerLevel.Max = 100;
             this.playerLevel.Min = 1;
             this.playerLevel.Name = "playerLevel";
-            this.playerLevel.Size = new System.Drawing.Size(234, 23);
-            this.playerLevel.SplitPercentage = 80;
+            this.playerLevel.Size = new System.Drawing.Size(156, 23);
+            this.playerLevel.SplitPercentage = 70;
             this.playerLevel.TabIndex = 1;
             this.playerLevel.Value = 1;
             // 
             // skillPointsPanel1
             // 
-            this.skillPointsPanel1.Location = new System.Drawing.Point(3, 61);
+            this.skillPointsPanel1.Location = new System.Drawing.Point(3, 102);
             this.skillPointsPanel1.Name = "skillPointsPanel1";
             this.skillPointsPanel1.Size = new System.Drawing.Size(150, 330);
             this.skillPointsPanel1.TabIndex = 2;
             // 
             // attributePointsPanel1
             // 
-            this.attributePointsPanel1.Location = new System.Drawing.Point(243, 130);
+            this.attributePointsPanel1.Location = new System.Drawing.Point(243, 171);
             this.attributePointsPanel1.Name = "attributePointsPanel1";
             this.attributePointsPanel1.Size = new System.Drawing.Size(150, 261);
             this.attributePointsPanel1.TabIndex = 4;
@@ -102,7 +103,7 @@ namespace DOS2Randomizer.UI {
             // 
             // configureSpells
             // 
-            this.configureSpells.Location = new System.Drawing.Point(514, 309);
+            this.configureSpells.Location = new System.Drawing.Point(514, 350);
             this.configureSpells.Name = "configureSpells";
             this.configureSpells.Size = new System.Drawing.Size(105, 23);
             this.configureSpells.TabIndex = 9;
@@ -112,7 +113,7 @@ namespace DOS2Randomizer.UI {
             // 
             // drawSpells
             // 
-            this.drawSpells.Location = new System.Drawing.Point(514, 338);
+            this.drawSpells.Location = new System.Drawing.Point(514, 379);
             this.drawSpells.Name = "drawSpells";
             this.drawSpells.Size = new System.Drawing.Size(105, 23);
             this.drawSpells.TabIndex = 10;
@@ -123,7 +124,7 @@ namespace DOS2Randomizer.UI {
             // equippedSpellList
             // 
             this.equippedSpellList.Label = "Equipped Spells";
-            this.equippedSpellList.Location = new System.Drawing.Point(3, 526);
+            this.equippedSpellList.Location = new System.Drawing.Point(3, 567);
             this.equippedSpellList.Name = "equippedSpellList";
             this.equippedSpellList.Size = new System.Drawing.Size(616, 123);
             this.equippedSpellList.Spells = new DOS2Randomizer.DataStructures.IConstSpell[0];
@@ -133,7 +134,7 @@ namespace DOS2Randomizer.UI {
             // knownSpellList
             // 
             this.knownSpellList.Label = "Known Spells";
-            this.knownSpellList.Location = new System.Drawing.Point(3, 397);
+            this.knownSpellList.Location = new System.Drawing.Point(3, 438);
             this.knownSpellList.Name = "knownSpellList";
             this.knownSpellList.Size = new System.Drawing.Size(616, 123);
             this.knownSpellList.Spells = new DOS2Randomizer.DataStructures.IConstSpell[0];
@@ -142,7 +143,7 @@ namespace DOS2Randomizer.UI {
             // 
             // shuffle
             // 
-            this.shuffle.Location = new System.Drawing.Point(514, 368);
+            this.shuffle.Location = new System.Drawing.Point(514, 409);
             this.shuffle.Name = "shuffle";
             this.shuffle.Size = new System.Drawing.Size(105, 23);
             this.shuffle.TabIndex = 13;
@@ -150,10 +151,21 @@ namespace DOS2Randomizer.UI {
             this.shuffle.UseVisualStyleBackColor = true;
             this.shuffle.Click += new System.EventHandler(this.shuffle_Click);
             // 
+            // dmgType
+            // 
+            this.dmgType.Label = "Dmg Type";
+            this.dmgType.Location = new System.Drawing.Point(243, 109);
+            this.dmgType.Name = "dmgType";
+            this.dmgType.Size = new System.Drawing.Size(150, 40);
+            this.dmgType.SplitPercentage = 40;
+            this.dmgType.TabIndex = 14;
+            this.dmgType.Value = DOS2Randomizer.DataStructures.Player.WeaponDmgType.Physical;
+            // 
             // PlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dmgType);
             this.Controls.Add(this.shuffle);
             this.Controls.Add(this.knownSpellList);
             this.Controls.Add(this.equippedSpellList);
@@ -166,7 +178,7 @@ namespace DOS2Randomizer.UI {
             this.Controls.Add(this.playerLevel);
             this.Controls.Add(this.playerName);
             this.Name = "PlayerPanel";
-            this.Size = new System.Drawing.Size(626, 656);
+            this.Size = new System.Drawing.Size(630, 696);
             this.ResumeLayout(false);
 
         }
@@ -184,5 +196,6 @@ namespace DOS2Randomizer.UI {
         private CSearchableSpellList equippedSpellList;
         private CSearchableSpellList knownSpellList;
         private System.Windows.Forms.Button shuffle;
+        private LabeledDmgType dmgType;
     }
 }
