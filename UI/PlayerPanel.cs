@@ -37,6 +37,9 @@ namespace DOS2Randomizer.UI {
             attributePointsPanel1.OnValueChanged = SetPlayerAttributes;
             skillPointsPanel1.OnValueChanged = value => { _player.SkillPoints = value.ToImmutableDictionary(); };
             possibleSkillTypes.OnValueChanged = value => { _player.PossibleSkillTypes = value.ToImmutableArray(); };
+            dmgType.OnValueChanged = value => {
+                _player.DmgType = value;
+            };
         }
 
         private void UnsubscribeFromControls() {
@@ -45,6 +48,7 @@ namespace DOS2Randomizer.UI {
             attributePointsPanel1.OnValueChanged = null;
             skillPointsPanel1.OnValueChanged = null;
             possibleSkillTypes.OnValueChanged = null;
+            dmgType.OnValueChanged = null;
         }
 
         void UpdateUi() {
@@ -59,6 +63,7 @@ namespace DOS2Randomizer.UI {
                 _player.NumMemSlots);
             shuffle.Text = String.Format(Resources.Messages.Shuffle, NumShuffles);
             shuffle.Enabled = NumShuffles > 0;
+            dmgType.Value = _player.DmgType;
         }
         private void RefreshUi() {
             UnsubscribeFromControls();
@@ -80,14 +85,18 @@ namespace DOS2Randomizer.UI {
         #endregion
 
         public PlayerPanel(IMutablePlayer player, IMatchProperties matchConfig) {
+            InitializeComponent();
             _player = player;
             _matchConfig = matchConfig;
-            InitializeComponent();
             playerLevel.Max = MatchConfig.MaxLevel;
             knownSpellList.OnImageClick = EquipSpell;
             if (_matchConfig.LevelSpecificEvents.Length != MatchConfig.MaxLevel) {
                 throw new ArgumentException("Expected MatchConfig to have a level specific entry for each level");
             }
+
+            // This is necessary in order to correctly display the value of comboboxes.
+            // What the actual F***??? 
+            dmgType.CreateControl();
 
             RefreshUi();
         }

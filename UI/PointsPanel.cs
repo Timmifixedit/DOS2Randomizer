@@ -81,6 +81,6 @@ namespace DOS2Randomizer.UI {
     }
 
     public class AttributePointsPanel : PointsPanel<DataStructures.Attribute> {
-        public AttributePointsPanel() : base(new []{DataStructures.Attribute.None}) {}
+        public AttributePointsPanel() : base(new []{DataStructures.Attribute.None, DataStructures.Attribute.Weapon}) {}
     }
 }

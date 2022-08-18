@@ -15,7 +15,8 @@ namespace DOS2Randomizer.DataStructures {
         Con,
         Mem,
         Wit,
-        None
+        None,
+        Weapon
     }
 
     public interface IConstPlayer {
@@ -39,6 +40,7 @@ namespace DOS2Randomizer.DataStructures {
 
         public int NumRerollsExpended { get; }
         public int NumShufflesExpended { get; }
+        public Player.WeaponDmgType DmgType { get; }
     }
 
     public interface IMutablePlayer : IConstPlayer {
@@ -55,6 +57,8 @@ namespace DOS2Randomizer.DataStructures {
         public new ImmutableDictionary<Spell.School, int> SkillPoints { get; set; }
         public new int NumRerollsExpended { get; set; }
         public new int NumShufflesExpended { get; set; }
+        public new Player.WeaponDmgType DmgType { get; set; }
+
     }
 
     /// <summary>
@@ -75,6 +79,11 @@ namespace DOS2Randomizer.DataStructures {
             None
         }
 
+        public enum WeaponDmgType {
+            Physical,
+            Magical
+        }
+
         /// <summary>
         /// Creates a level 1 empty player object, initializes all members
         /// </summary>
@@ -89,12 +98,14 @@ namespace DOS2Randomizer.DataStructures {
             SkillPoints = new Dictionary<Spell.School, int>(
                 ((Spell.School[])Enum.GetValues(typeof(Spell.School))).Select(s =>
                     new KeyValuePair<Spell.School, int>(s, 0))).ToImmutableDictionary();
+            DmgType = WeaponDmgType.Physical;
         }
 
         [JsonConstructor]
         public Player(string name, int level, ImmutableArray<Spell> knownSpells, ImmutableArray<Spell> equippedSpells,
             ImmutableArray<SkillType> possibleSkillTypes, ImmutableDictionary<Attribute, int> attributes,
-            ImmutableDictionary<Spell.School, int> skillPoints, int numRerollsExpended, int numShufflesExpended) {
+            ImmutableDictionary<Spell.School, int> skillPoints, int numRerollsExpended, int numShufflesExpended,
+            WeaponDmgType weaponDmgType) {
             Name = name;
             Level = level;
             KnownSpells = knownSpells;
@@ -104,6 +115,7 @@ namespace DOS2Randomizer.DataStructures {
             SkillPoints = skillPoints;
             NumRerollsExpended = numRerollsExpended;
             NumShufflesExpended = numShufflesExpended;
+            DmgType = weaponDmgType;
         }
 
         public string Name { get; set; }
@@ -127,6 +139,7 @@ namespace DOS2Randomizer.DataStructures {
         public int NumMemorySlotsUsed => CEquippedSpells.Select(spell => spell.MemorySlots).Sum();
         public int NumRerollsExpended { get; set; }
         public int NumShufflesExpended { get; set; }
+        public WeaponDmgType DmgType { get; set; }
 
         public static int MemSlotsAtLevel(int playerLevel, int memory) =>
             memory - BaseAttributeValue + (playerLevel / 2) + BaseMemSlots;
