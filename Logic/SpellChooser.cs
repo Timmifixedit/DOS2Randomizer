@@ -57,7 +57,24 @@ namespace DOS2Randomizer.Logic {
             return Math.Exp(-Math.Pow(x, 2) / std);
         }
 
-        private Pdf Weighting(IEnumerable<IConstSpell> spells, Func<IConstSpell, double> likelihoodFunc) {
+        private Attribute GetScalingAttribute(IConstSpell spell) {
+            if (spell.Scaling == Attribute.Weapon) {
+                if (_player.DmgType == Player.WeaponDmgType.Magical) {
+                    return Attribute.Int;
+                }
+
+                if (_player.PossibleSkillTypes.Contains(Player.SkillType.Archer) ||
+                    _player.PossibleSkillTypes.Contains(Player.SkillType.Dagger)) {
+                    return Attribute.Finesse;
+                }
+
+                return Attribute.Strength;
+            } else {
+                return spell.Scaling;
+            }
+        }
+
+            private Pdf Weighting(IEnumerable<IConstSpell> spells, Func<IConstSpell, double> likelihoodFunc) {
             var ret = new Pdf();
             double sum = 0;
             foreach (var spell in spells) {
@@ -80,8 +97,9 @@ namespace DOS2Randomizer.Logic {
         private Pdf AttributeWeighting(IEnumerable<IConstSpell> spells, double importance) {
             var maxAttributeVal = _player.Attributes.Values.Max();
             return Weighting(spells, spell => {
-                if (spell.Scaling is not Attribute.None) {
-                    return Gaussian(_player.Attributes[spell.Scaling] - maxAttributeVal, importance * AttributeFactor);
+                var scalingAttr = GetScalingAttribute(spell);
+                if (scalingAttr != Attribute.None){
+                    return Gaussian(_player.Attributes[scalingAttr] - maxAttributeVal, importance * AttributeFactor);
                 }
 
                 return 1;
