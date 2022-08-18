@@ -40,7 +40,7 @@ namespace DOS2Randomizer.Logic {
 
         private int SkillPointDifference(IConstSpell spell) {
             int ret = 0;
-            foreach (var (school, val) in _player.SkillPoints) {
+            foreach (var (school, val) in _player.SkillPoints.Where(p => p.Key != Spell.School.None)) {
                 ret += Math.Max(spell.SchoolRequirements[school] - val, 0);
             }
 
