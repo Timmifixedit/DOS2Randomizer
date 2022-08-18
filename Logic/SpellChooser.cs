@@ -26,6 +26,7 @@ namespace DOS2Randomizer.Logic {
         public const double LevelFactor = 1;
         public const double AttributeFactor = 2.5 * LevelFactor; // One level point is worth roughly <value> AttributePoints
         public const double SkillPointFactor = 0.8 * LevelFactor; // One level point is worth roughly <value> AttributePoints
+        private const double NoWeightingLikelihood = 0.5;
 
         #endregion
 
@@ -111,7 +112,7 @@ namespace DOS2Randomizer.Logic {
                     return Gaussian(_player.Attributes[scalingAttr] - maxAttributeVal, importance * AttributeFactor);
                 }
 
-                return 1;
+                return NoWeightingLikelihood;
             });
         }
 
@@ -122,7 +123,7 @@ namespace DOS2Randomizer.Logic {
                     return Gaussian(_player.SkillPoints[spell.Benefit] - maxSkillVal, importance * SkillPointFactor);
                 }
 
-                return 1;
+                return NoWeightingLikelihood;
             });
         }
 
