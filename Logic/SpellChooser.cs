@@ -18,6 +18,8 @@ namespace DOS2Randomizer.Logic {
     }
 
     public class SpellChooser {
+        #region fields
+
         private readonly IMatchProperties _matchConfig;
         private readonly IConstPlayer _player;
         private readonly int _numSpellsToGenerate;
@@ -25,11 +27,15 @@ namespace DOS2Randomizer.Logic {
         public const double AttributeFactor = 2.5 * LevelFactor; // One level point is worth roughly <value> AttributePoints
         public const double SkillPointFactor = 0.8 * LevelFactor; // One level point is worth roughly <value> AttributePoints
 
+        #endregion
+
         public SpellChooser(IMatchProperties matchConfig, IConstPlayer player) {
             _matchConfig = matchConfig;
             _numSpellsToGenerate = _matchConfig.N;
             _player = player;
         }
+
+        #region util
 
         private int SkillPointDifference(IConstSpell spell) {
             int ret = 0;
@@ -74,7 +80,10 @@ namespace DOS2Randomizer.Logic {
             }
         }
 
-            private Pdf Weighting(IEnumerable<IConstSpell> spells, Func<IConstSpell, double> likelihoodFunc) {
+        #endregion
+
+        #region Likelihood functions
+        private Pdf Weighting(IEnumerable<IConstSpell> spells, Func<IConstSpell, double> likelihoodFunc) {
             var ret = new Pdf();
             double sum = 0;
             foreach (var spell in spells) {
@@ -123,6 +132,9 @@ namespace DOS2Randomizer.Logic {
             return ret;
         }
 
+        #endregion
+
+        #region probabilistic stuff
         private Pdf PdfProduct(IEnumerable<Pdf> pdfs) {
             var allPdfs = pdfs.ToArray();
             var ret = allPdfs.First().Keys.ToDictionary(spell => spell, _ => 1.0);
@@ -160,6 +172,9 @@ namespace DOS2Randomizer.Logic {
 
             return ret;
         }
+
+        #endregion
+
 
         public IConstSpell[] GetSpells() {
 
