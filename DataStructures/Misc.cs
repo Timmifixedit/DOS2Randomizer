@@ -62,14 +62,6 @@ namespace DOS2Randomizer.DataStructures {
 
         public SpellListWrapper(IEnumerable<Spell> spells) {
             Spells = spells.ToArray();
-            var missingIcons = MissingIcons(Spells);
-            if (missingIcons.Length > 0) {
-                throw new FileNotFoundException(
-                    "Invalid Spells config. Could not find icon for the following spells" + Environment.NewLine +
-                    missingIcons);
-            }
         }
     }
-
-
 }

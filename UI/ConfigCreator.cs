@@ -71,7 +71,11 @@ namespace DOS2Randomizer.UI {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} s) {
-                Spells = s.Spells.ToArray();
+                if (SpellListWrapper.MissingIcons(s.Spells) is { Length: > 0 } missing) {
+                    MessageBox.Show(Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missing);
+                } else {
+                    Spells = s.Spells.ToArray();
+                }
             }
         }
 
