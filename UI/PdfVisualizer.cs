@@ -46,6 +46,7 @@ namespace DOS2Randomizer.UI {
 
             plotCanvas.Plot.Legend();
             plotCanvas.Plot.SetAxisLimits(0, XRange, 0, 1);
+            plotCanvas.Plot.XLabel(XLabel);
             plotCanvas.Refresh();
         }
 

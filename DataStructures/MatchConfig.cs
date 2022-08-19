@@ -7,8 +7,8 @@ using System.Text;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
-    public record ImportanceValues(double Level, double Attribute, double SkillPoints) {
-        public ImportanceValues() : this(Double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity) { }
+    public record ImportanceValues(double Level, double Attribute, double SkillPoints, double SkillPointDiff) {
+        public ImportanceValues() : this(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity) {}
     }
 
     /// <summary>
@@ -106,7 +106,8 @@ namespace DOS2Randomizer.DataStructures {
             Spells = ImmutableArray<Spell>.Empty;
             Players = ImmutableArray<IMutablePlayer>.Empty;
             SpellWeights =
-                new ImportanceValues(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity);
+                new ImportanceValues(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity,
+                    double.NegativeInfinity);
         }
 
         [JsonConstructor]

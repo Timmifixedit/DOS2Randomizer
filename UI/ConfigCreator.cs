@@ -18,6 +18,7 @@ namespace DOS2Randomizer.UI {
         private PdfVisualizer _levelImportanceVisualizer;
         private PdfVisualizer _attributeImportanceVisualizer;
         private PdfVisualizer _skillPointImportanceVisualizer;
+        private PdfVisualizer _skillPointDiffImportanceVisualizer;
 
         private MatchConfig Config {
             get => _matchConfig;
@@ -75,9 +76,17 @@ namespace DOS2Randomizer.UI {
                 levelSamples: new []{1, 6, 11, 16, 21}
             );
 
+            _skillPointDiffImportanceVisualizer = new PdfVisualizer (
+                function: (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.SkillPointFactor * std),
+                xLabel: "Skill points to spend",
+                xRange: 10,
+                levelSamples: new []{1, 6, 11, 16, 21}
+            );
+
             pdfLayout.Controls.Add(_levelImportanceVisualizer);
             pdfLayout.Controls.Add(_attributeImportanceVisualizer);
             pdfLayout.Controls.Add(_skillPointImportanceVisualizer);
+            pdfLayout.Controls.Add(_skillPointDiffImportanceVisualizer);
         }
 
         #region event handlers
@@ -94,7 +103,8 @@ namespace DOS2Randomizer.UI {
                 }
 
                 Config.SpellWeights = new ImportanceValues(_levelImportanceVisualizer.Std,
-                    _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std);
+                    _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std,
+                    _skillPointDiffImportanceVisualizer.Std);
                 FileIo.SaveConfig(Config, fileChooser.FileName);
             }
         }
