@@ -113,6 +113,10 @@ namespace DOS2Randomizer.DataStructures {
         [JsonConstructor]
         public MatchConfig(string name, int maxNumMemSlots, int n, int k, ImmutableArray<OnLevelUp> levelSpecificEvents,
             ImmutableArray<Spell> spells, ImmutableArray<Player> players, ImportanceValues? spellWeights) {
+            if (name == null || levelSpecificEvents == null || spells == null || players == null) {
+                throw new ArgumentException("encountered null values in match config ctor");
+            } 
+
             Name = name;
             MaxNumMemSlots = maxNumMemSlots;
             N = n;

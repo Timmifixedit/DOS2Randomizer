@@ -126,6 +126,9 @@
   <data name="ImageNamesNotUnique" xml:space="preserve">
     <value>Encountered two images files with the same name ("{0}" and "{1}").</value>
   </data>
+  <data name="ImportConfigFailed" xml:space="preserve">
+    <value>Failed to import config file. Did you import to correct config file (Spell vs Match config)?</value>
+  </data>
   <data name="InvalidConfigValues" xml:space="preserve">
     <value>Invalid values in config: </value>
   </data>

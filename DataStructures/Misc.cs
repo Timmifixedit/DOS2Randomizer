@@ -44,7 +44,7 @@ namespace DOS2Randomizer.DataStructures {
     /// Serializable wrapper for a list of spells
     /// </summary>
     public class SpellListWrapper : ISerilizable {
-        public IEnumerable<Spell> Spells { get; }
+        public IEnumerable<Spell> Get { get; }
 
         /// <summary>
         /// Generates a string containing the names and icon paths of all spells where the icon could not be found
@@ -61,7 +61,7 @@ namespace DOS2Randomizer.DataStructures {
         }
 
         public SpellListWrapper(IEnumerable<Spell> spells) {
-            Spells = spells.ToArray();
+            Get = spells.ToArray();
         }
     }
 }

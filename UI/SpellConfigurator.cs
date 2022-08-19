@@ -36,10 +36,10 @@ namespace DOS2Randomizer.UI {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} spells) {
-                if (SpellListWrapper.MissingIcons(spells.Spells) is { Length: > 0 } missing) {
+                if (SpellListWrapper.MissingIcons(spells.Get) is { Length: > 0 } missing) {
                     MessageBox.Show(Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missing);
                 } else {
-                    Spells = spells.Spells.ToArray();
+                    Spells = spells.Get.ToArray();
                 }
             }
         }

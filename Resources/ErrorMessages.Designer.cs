@@ -88,6 +88,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to import config file. Did you import to correct config file (Spell vs Match config)?.
+        /// </summary>
+        internal static string ImportConfigFailed {
+            get {
+                return ResourceManager.GetString("ImportConfigFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid values in config: .
         /// </summary>
         internal static string InvalidConfigValues {
