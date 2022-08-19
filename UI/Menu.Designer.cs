@@ -23,12 +23,13 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.LoadConfig = new System.Windows.Forms.Button();
             this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CreateConfig = new System.Windows.Forms.Button();
             this.spellConfigurator = new System.Windows.Forms.Button();
-            this.centerLayout = new System.Windows.Forms.TableLayoutPanel();
             this.migrateSpells = new System.Windows.Forms.Button();
+            this.centerLayout = new System.Windows.Forms.TableLayoutPanel();
             this.layoutPanel.SuspendLayout();
             this.centerLayout.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +86,17 @@
             this.spellConfigurator.UseVisualStyleBackColor = true;
             this.spellConfigurator.Click += new System.EventHandler(this.spellConfigurator_Click);
             // 
+            // migrateSpells
+            // 
+            this.migrateSpells.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.migrateSpells.Location = new System.Drawing.Point(3, 141);
+            this.migrateSpells.Name = "migrateSpells";
+            this.migrateSpells.Size = new System.Drawing.Size(628, 42);
+            this.migrateSpells.TabIndex = 3;
+            this.migrateSpells.Text = "Migrate Spells";
+            this.migrateSpells.UseVisualStyleBackColor = true;
+            this.migrateSpells.Click += new System.EventHandler(this.migrateSpells_Click);
+            // 
             // centerLayout
             // 
             this.centerLayout.ColumnCount = 3;
@@ -102,23 +114,13 @@
             this.centerLayout.Size = new System.Drawing.Size(800, 450);
             this.centerLayout.TabIndex = 2;
             // 
-            // migrateSpells
-            // 
-            this.migrateSpells.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.migrateSpells.Location = new System.Drawing.Point(3, 141);
-            this.migrateSpells.Name = "migrateSpells";
-            this.migrateSpells.Size = new System.Drawing.Size(628, 42);
-            this.migrateSpells.TabIndex = 3;
-            this.migrateSpells.Text = "Migrate Spells";
-            this.migrateSpells.UseVisualStyleBackColor = true;
-            this.migrateSpells.Click += new System.EventHandler(this.migrateSpells_Click);
-            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.centerLayout);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Menu";
             this.Text = "DOS2 Randomizer";
             this.layoutPanel.ResumeLayout(false);
