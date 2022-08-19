@@ -108,8 +108,9 @@ namespace DOS2Randomizer.Logic {
             var maxAttributeVal = _player.Attributes.Values.Max();
             return Weighting(spells, spell => {
                 var scalingAttr = GetScalingAttribute(spell);
-                if (scalingAttr != Attribute.None){
-                    return Gaussian(_player.Attributes[scalingAttr] - maxAttributeVal, importance * AttributeFactor);
+                if (scalingAttr != Attribute.None) {
+                    return Gaussian(_player.Attributes[scalingAttr] - maxAttributeVal,
+                        importance * AttributeFactor * _player.Level);
                 }
 
                 return NoWeightingLikelihood;
@@ -120,7 +121,8 @@ namespace DOS2Randomizer.Logic {
             int maxSkillVal = _player.SkillPoints.Values.Max();
             return Weighting(spells, spell => {
                 if (spell.Benefit != Spell.School.None) {
-                    return Gaussian(_player.SkillPoints[spell.Benefit] - maxSkillVal, importance * SkillPointFactor);
+                    return Gaussian(_player.SkillPoints[spell.Benefit] - maxSkillVal,
+                        importance * SkillPointFactor * _player.Level);
                 }
 
                 return NoWeightingLikelihood;
