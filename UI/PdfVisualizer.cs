@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Function = System.Func<double, double, double>;
 
@@ -20,11 +22,30 @@ namespace DOS2Randomizer.UI {
             importanceBar.ValueChanged += (_, _) => { SetImportance(); };
         }
 
+        private (double[], double[]) Sample(Function f) {
+            double[] x = Enumerable.Range(0, XRange).Select(v => (double)v).ToArray();
+            double[] y = x.Select(xVal => f(xVal, _importance)).ToArray();
+            return (x, y);
+        }
+
+        private void UpdatePlot() {
+            if (_func is null) {
+                return;
+            }
+
+            plotCanvas.Plot.Clear();
+            var (x, y) = Sample(_func);
+            plotCanvas.Plot.AddScatter(x, y);
+            plotCanvas.Plot.Legend();
+            plotCanvas.Plot.SetAxisLimits(0, XRange, 0, 1);
+            plotCanvas.Refresh();
+        }
+
         public double Std {
             get => _importance;
             set {
                 _importance = value;
-                plotCanvas.Refresh();
+                UpdatePlot();
             }
         }
         public string XLabel {
@@ -40,26 +61,21 @@ namespace DOS2Randomizer.UI {
             get => _xRange;
             set {
                 _xRange = value;
-                plotCanvas.Plot.SetAxisLimits(0, XRange, 0, 1);
-                plotCanvas.Refresh();
+                UpdatePlot();
             }
 
         }
 
         private void SetImportance() {
             _importance = Math.Exp((0.5 - importanceBar.Value / ImportanceBarFactor) * ImportanceScaling);
-            plotCanvas.Refresh();
+            UpdatePlot();
         }
 
         public Function? Function {
             get => _func;
             set {
                 _func = value;
-                if (_func is not null) {
-                    plotCanvas.Plot.AddFunction(x => _func(x, _importance));
-                    plotCanvas.Plot.SetAxisLimits(0, XRange, 0, 1);
-                    plotCanvas.Refresh();
-                }
+                UpdatePlot();
             }
         }
     }
