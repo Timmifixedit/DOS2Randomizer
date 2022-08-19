@@ -64,13 +64,15 @@ namespace DOS2Randomizer.UI {
             _attributeImportanceVisualizer = new PdfVisualizer (
                 function:(x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.AttributeFactor * std),
                 xLabel: "Attribute Difference",
-                xRange: 40
+                xRange: 40,
+                levelSamples: new []{1, 6, 11, 16, 21}
             );
 
             _skillPointImportanceVisualizer = new PdfVisualizer (
                 function: (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.SkillPointFactor * std),
                 xLabel: "Skill Points Difference",
-                xRange: 15
+                xRange: 15,
+                levelSamples: new []{1, 6, 11, 16, 21}
             );
 
             pdfLayout.Controls.Add(_levelImportanceVisualizer);

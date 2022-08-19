@@ -41,7 +41,7 @@ namespace DOS2Randomizer.UI {
             plotCanvas.Plot.Clear();
             foreach (int level in LevelSamples) {
                 var (xRange, y) = Sample((x, std) => _func(x, level * std));
-                plotCanvas.Plot.AddScatter(xRange, y);
+                plotCanvas.Plot.AddScatter(xRange, y, label:$"level {level}");
             }
 
             plotCanvas.Plot.Legend();
