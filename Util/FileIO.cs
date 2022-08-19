@@ -79,7 +79,7 @@ namespace DOS2Randomizer.Util {
 
             var mismatched = new List<Spell>();
             var spellNameUpdatedSpell = new Dictionary<string, Spell>();
-            foreach (var spell in spellList.Get) {
+            foreach (var spell in spellList.Spells) {
                 var spellFileName = Path.GetFileNameWithoutExtension(spell.ImagePath);
                 if (imageNamesPathMap.TryGetValue(spellFileName, out var newPath)) {
                     spell.ImagePath = newPath;
@@ -89,7 +89,7 @@ namespace DOS2Randomizer.Util {
                 }
             }
 
-            var updated = spellList.Get.Except(mismatched).ToArray();
+            var updated = spellList.Spells.Except(mismatched).ToArray();
             var mismatchedByDep = new List<Spell>();
             foreach (var spell in updated) {
                 var updatedDeps = new List<Spell>();
