@@ -7,6 +7,10 @@ using System.Text;
 using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
+    public record ImportanceValues(double Level, double Attribute, double SkillPoints, double SkillPointDiff) {
+        public ImportanceValues() : this(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity) {}
+    }
+
     /// <summary>
     /// Read-only view of properties of MatchConfig which are of interest when drawing new spells
     /// </summary>
@@ -33,6 +37,8 @@ namespace DOS2Randomizer.DataStructures {
         /// </summary>
         [JsonIgnore]
         public ImmutableArray<IConstSpell> CSpells { get; }
+
+        public ImportanceValues SpellWeights { get; }
     }
 
     /// <summary>
@@ -88,6 +94,8 @@ namespace DOS2Randomizer.DataStructures {
         /// </summary>
         public ImmutableArray<IMutablePlayer> Players { get; set; }
 
+        public ImportanceValues SpellWeights { get; set; }
+
         /// <summary>
         /// Creates a MatchConfig with no players or spells
         /// </summary>
@@ -97,17 +105,21 @@ namespace DOS2Randomizer.DataStructures {
             Name = "<Match config name>";
             Spells = ImmutableArray<Spell>.Empty;
             Players = ImmutableArray<IMutablePlayer>.Empty;
+            SpellWeights =
+                new ImportanceValues(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity,
+                    double.NegativeInfinity);
         }
 
         [JsonConstructor]
         public MatchConfig(string name, int maxNumMemSlots, int n, int k, ImmutableArray<OnLevelUp> levelSpecificEvents,
-            ImmutableArray<Spell> spells, ImmutableArray<Player> players) {
+            ImmutableArray<Spell> spells, ImmutableArray<Player> players, ImportanceValues? spellWeights) {
             Name = name;
             MaxNumMemSlots = maxNumMemSlots;
             N = n;
             K = k;
             LevelSpecificEvents = levelSpecificEvents;
             Spells = spells;
+            SpellWeights = spellWeights ?? new ImportanceValues();
             Players = players.CastArray<IMutablePlayer>();
             var missingIcons = SpellListWrapper.MissingIcons(Spells);
             if (missingIcons.Length > 0) {

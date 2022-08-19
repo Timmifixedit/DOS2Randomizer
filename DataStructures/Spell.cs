@@ -152,5 +152,9 @@ namespace DOS2Randomizer.DataStructures {
         public static bool operator !=(Spell? left, Spell? right) {
             return !Equals(left, right);
         }
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }

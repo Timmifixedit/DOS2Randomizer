@@ -62,11 +62,11 @@ namespace DOS2Randomizer.UI {
         /// <param name="numRerolls">number of times a reroll may be performed</param>
         public ChooseKDialog(Logic.SpellChooser spellChooser, int numSpellsToChoose, int numRerolls) {
             InitializeComponent();
-            _numToChoose = numSpellsToChoose;
             _spellChooser = spellChooser;
-            NumLeft = numSpellsToChoose;
-            NumRerolls = numRerolls;
             source.Spells = _spellChooser.GetSpells();
+            _numToChoose = Math.Min(numSpellsToChoose, source.Spells.Count());
+            NumLeft = _numToChoose;
+            NumRerolls = numRerolls;
             source.OnImageClick = spell => {
                 if (selection.Spells is null || selection.Spells.Count() < numSpellsToChoose) {
                     --NumLeft;

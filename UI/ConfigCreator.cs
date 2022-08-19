@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,6 +15,10 @@ namespace DOS2Randomizer.UI {
         #region Fields
 
         private MatchConfig _matchConfig;
+        private PdfVisualizer _levelImportanceVisualizer;
+        private PdfVisualizer _attributeImportanceVisualizer;
+        private PdfVisualizer _skillPointImportanceVisualizer;
+        private PdfVisualizer _skillPointDiffImportanceVisualizer;
 
         private MatchConfig Config {
             get => _matchConfig;
@@ -25,7 +30,9 @@ namespace DOS2Randomizer.UI {
                 k.Value = _matchConfig.K;
                 configName.Value = _matchConfig.Name;
                 memSlots.Value = _matchConfig.MaxNumMemSlots;
-
+                _levelImportanceVisualizer.Std = _matchConfig.SpellWeights.Level;
+                _attributeImportanceVisualizer.Std = _matchConfig.SpellWeights.Attribute;
+                _skillPointImportanceVisualizer.Std = _matchConfig.SpellWeights.SkillPoints;
             }
         }
 
@@ -48,11 +55,43 @@ namespace DOS2Randomizer.UI {
             n.OnValueChanged = value => _matchConfig.N = value;
             k.OnValueChanged = value => _matchConfig.K = value;
             levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents.ToArray();
+
+            _levelImportanceVisualizer = new PdfVisualizer (
+                function: (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.LevelFactor * std),
+                xLabel: "Level Difference",
+                xRange: MatchConfig.MaxLevel
+            );
+
+            _attributeImportanceVisualizer = new PdfVisualizer (
+                function:(x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.AttributeFactor * std),
+                xLabel: "Attribute Difference",
+                xRange: 40,
+                levelSamples: new []{1, 6, 11, 16, 21}
+            );
+
+            _skillPointImportanceVisualizer = new PdfVisualizer (
+                function: (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.SkillPointFactor * std),
+                xLabel: "Skill Points Difference",
+                xRange: 15,
+                levelSamples: new []{1, 6, 11, 16, 21}
+            );
+
+            _skillPointDiffImportanceVisualizer = new PdfVisualizer (
+                function: (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.SkillPointFactor * std),
+                xLabel: "Skill points to spend",
+                xRange: 10,
+                levelSamples: new []{1, 6, 11, 16, 21}
+            );
+
+            pdfLayout.Controls.Add(_levelImportanceVisualizer);
+            pdfLayout.Controls.Add(_attributeImportanceVisualizer);
+            pdfLayout.Controls.Add(_skillPointImportanceVisualizer);
+            pdfLayout.Controls.Add(_skillPointDiffImportanceVisualizer);
         }
 
         #region event handlers
         private void SaveButton_Click(object sender, System.EventArgs e) {
-            using var fileChooser = new SaveFileDialog {DefaultExt = Resources.Misc.JsonExtension, AddExtension = true};
+            using var fileChooser = new SaveFileDialog { DefaultExt = Resources.Misc.JsonExtension, AddExtension = true };
             if (fileChooser.ShowDialog() == DialogResult.OK) {
                 var spellLookup =
                     Config.Spells.ToImmutableDictionary(spell => spell.ImagePath, spell => (IConstSpell)spell);
@@ -63,12 +102,15 @@ namespace DOS2Randomizer.UI {
                         .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
                 }
 
+                Config.SpellWeights = new ImportanceValues(_levelImportanceVisualizer.Std,
+                    _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std,
+                    _skillPointDiffImportanceVisualizer.Std);
                 FileIo.SaveConfig(Config, fileChooser.FileName);
             }
         }
 
         private void import_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
+            using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} s) {
                 if (SpellListWrapper.MissingIcons(s.Spells) is { Length: > 0 } missing) {
@@ -80,7 +122,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void importButton_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
+            using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is { } config) {
                 Config = config;
