@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -78,6 +79,9 @@ namespace DOS2Randomizer.UI {
                 MessageBoxButtons.YesNo);
             if (confirmed == DialogResult.Yes) {
                 Spells = Spells.Except(new[] { spell }).ToArray();
+                foreach (var spell1 in Spells) {
+                    spell1.Dependencies = spell1.Dependencies.Except(new[] { spell }).ToImmutableArray();
+                }
             }
         }
 
