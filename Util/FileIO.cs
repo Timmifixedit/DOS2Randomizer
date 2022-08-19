@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace DOS2Randomizer.Util {
             }
         }
 
+
         public static SpellListWrapper? MigrateSpellConfig(SpellListWrapper spellList, string imageDirectory) {
             var fileTypes = new[] { "*.png", "*.jpg", "*.jpeg" };
             var imageNamesPathMap = new Dictionary<string, string>();
@@ -74,23 +76,50 @@ namespace DOS2Randomizer.Util {
             }
 
             var mismatched = new List<Spell>();
+            var spellNameUpdatedSpell = new Dictionary<string, Spell>();
             foreach (var spell in spellList.Spells) {
                 var spellFileName = Path.GetFileNameWithoutExtension(spell.ImagePath);
                 if (imageNamesPathMap.TryGetValue(spellFileName, out var newPath)) {
                     spell.ImagePath = newPath;
+                    spellNameUpdatedSpell.Add(spell.Name, spell);
                 } else {
                     mismatched.Add(spell);
                 }
             }
 
-            spellList = new SpellListWrapper(spellList.Spells.Except(mismatched));
+            var updated = spellList.Spells.Except(mismatched).ToArray();
+            var mismatchedByDep = new List<Spell>();
+            foreach (var spell in updated) {
+                var updatedDeps = new List<Spell>();
+                foreach (var dependency in spell.Dependencies) {
+                    if (spellNameUpdatedSpell.TryGetValue(dependency.Name, out var updatedSpell)) {
+                        updatedDeps.Add(updatedSpell);
+                    } else {
+                        mismatchedByDep.Add(spell);
+                    }
+                }
+
+                spell.Dependencies = updatedDeps.ToImmutableArray();
+            }
+
+            spellList = new SpellListWrapper(updated.Except(mismatched).Except(mismatchedByDep));
             var msg = new StringBuilder();
             foreach (var spell in mismatched) {
                 msg.AppendLine($"{spell.Name} => {spell.ImagePath}");
             }
 
-            if (msg.Length > 0) {
+            var depMsg = new StringBuilder();
+            foreach (var spell in mismatchedByDep) {
+                depMsg.AppendLine($"{spell.Name} depends on:");
+                foreach (var dependency in spell.Dependencies) {
+                    depMsg.AppendLine($"\t {dependency.Name} => {dependency.ImagePath}");
+                }
+            }
+
+            if (msg.Length > 0 || depMsg.Length > 0) {
                 MessageBox.Show(Resources.ErrorMessages.MismatchedSpells + Environment.NewLine + msg +
+                                Environment.NewLine + Environment.NewLine +
+                                Resources.ErrorMessages.CorruptDependencies + Environment.NewLine + depMsg +
                                 Environment.NewLine + Resources.Messages.SaveMigratedConfig);
             } else {
                 MessageBox.Show(Resources.Messages.MigrationSuccess + Environment.NewLine +

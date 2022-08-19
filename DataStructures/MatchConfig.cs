@@ -123,7 +123,7 @@ namespace DOS2Randomizer.DataStructures {
             var missingIcons = SpellListWrapper.MissingIcons(Spells);
             if (missingIcons.Length > 0) {
                 throw new FileNotFoundException(
-                    "Invalid Spells config. Could not find icon for the following spells" + Environment.NewLine +
+                    Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine +
                     missingIcons);
             }
         }

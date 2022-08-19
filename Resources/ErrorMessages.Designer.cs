@@ -61,6 +61,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some spell have dependencies that could not be matched against their image file names:.
+        /// </summary>
+        internal static string CorruptDependencies {
+            get {
+                return ResourceManager.GetString("CorruptDependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to open file &apos;&apos;{0}&apos;.
         /// </summary>
         internal static string FileOpenFailed {
@@ -84,6 +93,15 @@ namespace DOS2Randomizer.Resources {
         internal static string InvalidConfigValues {
             get {
                 return ResourceManager.GetString("InvalidConfigValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Spells config. Could not find icon for the following spells:.
+        /// </summary>
+        internal static string InvalidSpellConfig {
+            get {
+                return ResourceManager.GetString("InvalidSpellConfig", resourceCulture);
             }
         }
         
