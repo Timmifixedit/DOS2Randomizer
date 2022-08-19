@@ -54,8 +54,8 @@ namespace DOS2Randomizer.Logic {
                     _player.PossibleSkillTypes.Contains(Player.SkillType.Dagger));
         }
 
-        private bool Learnable(IConstSpell spell, int maxSkillDiff) {
-            return spell.Level <= _player.Level && SkillPointDifference(spell) < maxSkillDiff &&
+        private bool Learnable(IConstSpell spell) {
+            return spell.Level <= _player.Level &&
                    (spell.CDependencies.IsEmpty || spell.CDependencies.Intersect(_player.CKnownSpells).Any()) &&
                    PlayerCanWield(spell) && !_player.CKnownSpells.Contains(spell);
         }
@@ -129,6 +129,11 @@ namespace DOS2Randomizer.Logic {
             });
         }
 
+        private Pdf SkillPointsBudgetWeighting(IEnumerable<IConstSpell> spells, double importance) {
+            return Weighting(spells,
+                spell => Gaussian(SkillPointDifference(spell), importance * SkillPointFactor * _player.Level));
+        }
+
         //@TODO implementation
         private Pdf SkillTypeWeighting(IEnumerable<IConstSpell> spells, double importance) {
             var ret = spells.ToDictionary(spell => spell, _ => 1.0);
@@ -181,14 +186,14 @@ namespace DOS2Randomizer.Logic {
 
         public IConstSpell[] GetSpells() {
 
-            const int maxSkillPointDifference = 2;
-            var allPossibleSpells = _matchConfig.CSpells.Where(spell => Learnable(spell, maxSkillPointDifference))
+            var allPossibleSpells = _matchConfig.CSpells.Where(spell => Learnable(spell))
                 .ToArray();
             var spellPdf = PdfProduct(new[] {
                 LevelWeighting(allPossibleSpells, _matchConfig.SpellWeights.Level),
                 AttributeWeighting(allPossibleSpells, _matchConfig.SpellWeights.Attribute),
                 SkillPointsWeighting(allPossibleSpells, _matchConfig.SpellWeights.SkillPoints),
-                SkillTypeWeighting(allPossibleSpells, 0.5)
+                SkillTypeWeighting(allPossibleSpells, 0.5),
+                SkillPointsBudgetWeighting(allPossibleSpells, _matchConfig.SpellWeights.SkillPointDiff)
             });
 
             var cdf = GenerateCdf(spellPdf);
