@@ -55,23 +55,23 @@ namespace DOS2Randomizer.UI {
             k.OnValueChanged = value => _matchConfig.K = value;
             levelSpecificTable.LevelEvents = _matchConfig.LevelSpecificEvents.ToArray();
 
-            _levelImportanceVisualizer = new PdfVisualizer {
-                Function = (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.LevelFactor * std),
-                XLabel = "Level Difference",
-                XRange = MatchConfig.MaxLevel
-            };
+            _levelImportanceVisualizer = new PdfVisualizer (
+                function: (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.LevelFactor * std),
+                xLabel: "Level Difference",
+                xRange: MatchConfig.MaxLevel
+            );
 
-            _attributeImportanceVisualizer = new PdfVisualizer {
-                Function = (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.AttributeFactor * std),
-                XLabel = "Attribute Difference",
-                XRange = 40
-            };
+            _attributeImportanceVisualizer = new PdfVisualizer (
+                function:(x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.AttributeFactor * std),
+                xLabel: "Attribute Difference",
+                xRange: 40
+            );
 
-            _skillPointImportanceVisualizer = new PdfVisualizer {
-                Function = (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.SkillPointFactor * std),
-                XLabel = "Skill Points Difference",
-                XRange = 15
-            };
+            _skillPointImportanceVisualizer = new PdfVisualizer (
+                function: (x, std) => Logic.SpellChooser.Gaussian(x, Logic.SpellChooser.SkillPointFactor * std),
+                xLabel: "Skill Points Difference",
+                xRange: 15
+            );
 
             pdfLayout.Controls.Add(_levelImportanceVisualizer);
             pdfLayout.Controls.Add(_attributeImportanceVisualizer);
