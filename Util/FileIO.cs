@@ -54,6 +54,7 @@ namespace DOS2Randomizer.Util {
                 using var writer = new StreamWriter(file);
                 var json = JsonConvert.SerializeObject(config);
                 writer.Write(json);
+                MessageBox.Show(Resources.Messages.SaveSuccessful);
             } catch (IOException exception) {
                 MessageBox.Show(Resources.ErrorMessages.SaveError + exception.Message);
             } catch (JsonSerializationException e) {

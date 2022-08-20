@@ -178,6 +178,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config was saved successfully!.
+        /// </summary>
+        internal static string SaveSuccessful {
+            get {
+                return ResourceManager.GetString("SaveSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify where to look for spell icons.
         /// </summary>
         internal static string SelectImages {

@@ -74,7 +74,7 @@ namespace DOS2Randomizer.UI {
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 0;
-            this.save.Text = "Save";
+            this.save.Text = "Save as";
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 

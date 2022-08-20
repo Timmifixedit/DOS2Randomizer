@@ -156,6 +156,9 @@
   <data name="SaveMigratedConfig" xml:space="preserve">
     <value>You can now save the migrated config.</value>
   </data>
+  <data name="SaveSuccessful" xml:space="preserve">
+    <value>Config was saved successfully!</value>
+  </data>
   <data name="SelectImages" xml:space="preserve">
     <value>Specify where to look for spell icons</value>
   </data>
