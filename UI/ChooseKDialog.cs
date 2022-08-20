@@ -63,7 +63,7 @@ namespace DOS2Randomizer.UI {
         public ChooseKDialog(Logic.SpellChooser spellChooser, int numSpellsToChoose, int numRerolls) {
             InitializeComponent();
             _spellChooser = spellChooser;
-            source.Spells = _spellChooser.GetSpells();
+            source.Spells = _spellChooser.DrawSpells();
             _numToChoose = Math.Min(numSpellsToChoose, source.Spells.Count());
             NumLeft = _numToChoose;
             NumRerolls = numRerolls;
@@ -89,7 +89,7 @@ namespace DOS2Randomizer.UI {
             if (NumRerolls > 0) {
                 --NumRerolls;
                 reroll.Enabled = NumRerolls > 0;
-                source.Spells = _spellChooser.GetSpells();
+                source.Spells = _spellChooser.DrawSpells();
                 selection.Spells = null;
                 NumLeft = _numToChoose;
             }

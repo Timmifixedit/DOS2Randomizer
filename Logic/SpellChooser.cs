@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace DOS2Randomizer.Logic {
     internal static class RandomExtension {
         public static IEnumerable<T> ChooseRandom<T>(this IEnumerable<T> source, int num) {
             var rng = new Random();
-            return source.OrderBy(arg => rng.Next()).Take(num).ToList();
+            return source.OrderBy(arg => rng.Next()).Take(num);
         }
     }
 
@@ -184,7 +185,7 @@ namespace DOS2Randomizer.Logic {
         #endregion
 
 
-        public IConstSpell[] GetSpells() {
+        public IConstSpell[] DrawSpells() {
 
             var allPossibleSpells = _matchConfig.CSpells.Where(spell => Learnable(spell))
                 .ToArray();
@@ -209,6 +210,20 @@ namespace DOS2Randomizer.Logic {
             }
 
             return ret;
+        }
+
+        public List<IConstSpell> SelectEquippedSpells() {
+            var allPossibleSpells =
+                _player.CKnownSpells.Where(spell => PlayerCanWield(spell) && SkillPointDifference(spell) == 0);
+            var preSelection = new Queue<IConstSpell>(allPossibleSpells.ChooseRandom(_player.NumMemSlots));
+            int budget = _player.NumMemSlots;
+            var selection = new List<IConstSpell>();
+            while (preSelection.Count > 0 && preSelection.Peek().MemorySlots <= budget) {
+                budget -= preSelection.Peek().MemorySlots;
+                selection.Add(preSelection.Dequeue());
+            }
+
+            return selection;
         }
     }
 }
