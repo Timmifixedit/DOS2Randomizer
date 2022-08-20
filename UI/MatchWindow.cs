@@ -75,5 +75,11 @@ namespace DOS2Randomizer.UI {
                 addPlayer.Enabled = true;
             }
         }
+
+        private void MatchWindow_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.GetPath() is { } path) {
+                _config.Save(path);
+            }
+        }
     }
 }

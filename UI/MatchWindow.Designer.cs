@@ -95,8 +95,10 @@ namespace DOS2Randomizer.UI {
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.mainLayout);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "MatchWindow";
             this.Text = "MatchWindow";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MatchWindow_KeyDown);
             this.mainLayout.ResumeLayout(false);
             this.topLayout.ResumeLayout(false);
             this.ResumeLayout(false);
