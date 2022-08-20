@@ -93,15 +93,20 @@ namespace DOS2Randomizer.Util {
             var mismatchedByDep = new List<Spell>();
             foreach (var spell in updated) {
                 var updatedDeps = new List<Spell>();
+                bool success = true;
                 foreach (var dependency in spell.Dependencies) {
                     if (spellNameUpdatedSpell.TryGetValue(dependency.Name, out var updatedSpell)) {
                         updatedDeps.Add(updatedSpell);
                     } else {
                         mismatchedByDep.Add(spell);
+                        success = false;
+                        break;
                     }
                 }
 
-                spell.Dependencies = updatedDeps.ToImmutableArray();
+                if (success) {
+                    spell.Dependencies = updatedDeps.ToImmutableArray();
+                }
             }
 
             spellList = new SpellListWrapper(updated.Except(mismatched).Except(mismatchedByDep));
