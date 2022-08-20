@@ -63,7 +63,7 @@ namespace DOS2Randomizer.UI {
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 3;
-            this.save.Text = "Save";
+            this.save.Text = "Save as";
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
@@ -221,8 +221,10 @@ namespace DOS2Randomizer.UI {
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.mainLayout);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "SpellConfigurator";
             this.Text = "Spell Configurator";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SpellConfigurator_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.searchLayout.ResumeLayout(false);

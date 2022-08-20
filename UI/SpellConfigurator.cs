@@ -19,6 +19,7 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     public partial class SpellConfigurator : Form {
         private Spell[]? _spells;
+        private readonly SaveManager _saveManager;
 
         private Spell[] Spells {
             get => _spells ?? Array.Empty<Spell>();
@@ -30,6 +31,7 @@ namespace DOS2Randomizer.UI {
         }
         public SpellConfigurator() {
             InitializeComponent();
+            _saveManager = new SaveManager();
             spellList.OnImageClick = spell => { spellDesignPanel.Spell = spell; };
         }
 
@@ -41,6 +43,7 @@ namespace DOS2Randomizer.UI {
                     MessageBox.Show(Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missing);
                 } else {
                     Spells = spells.Spells.ToArray();
+                    _saveManager.Path = fileChooser.FileName;
                 }
             }
         }
@@ -51,9 +54,8 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
-            using var fileChooser = new SaveFileDialog { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension};
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                FileIo.SaveConfig(new SpellListWrapper(Spells), fileChooser.FileName);
+            if (_saveManager.GetNewPath() is { } file) {
+                FileIo.SaveConfig(new SpellListWrapper(Spells), file);
             }
         }
 
@@ -90,6 +92,12 @@ namespace DOS2Randomizer.UI {
             if (fileChooser.ShowDialog() == DialogResult.OK) {
                 var newSpell = new Spell(Resources.Misc.DefaultSpellName, fileChooser.FileName);
                 Spells = Spells.Concat(new[] { newSpell }).ToArray();
+            }
+        }
+
+        private void SpellConfigurator_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.Path is { } file) {
+                FileIo.SaveConfig(new SpellListWrapper(Spells), file);
             }
         }
     }

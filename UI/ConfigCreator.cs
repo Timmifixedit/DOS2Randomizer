@@ -15,10 +15,11 @@ namespace DOS2Randomizer.UI {
         #region Fields
 
         private MatchConfig _matchConfig;
-        private PdfVisualizer _levelImportanceVisualizer;
-        private PdfVisualizer _attributeImportanceVisualizer;
-        private PdfVisualizer _skillPointImportanceVisualizer;
-        private PdfVisualizer _skillPointDiffImportanceVisualizer;
+        private readonly PdfVisualizer _levelImportanceVisualizer;
+        private readonly PdfVisualizer _attributeImportanceVisualizer;
+        private readonly PdfVisualizer _skillPointImportanceVisualizer;
+        private readonly PdfVisualizer _skillPointDiffImportanceVisualizer;
+        private readonly SaveManager _saveManager;
 
         private MatchConfig Config {
             get => _matchConfig;
@@ -48,6 +49,7 @@ namespace DOS2Randomizer.UI {
         #endregion
         public ConfigCreator() {
             InitializeComponent();
+            _saveManager = new SaveManager();
             spellList.OnImageClick = spell => spellDesignPanel1.Spell = spell;
             _matchConfig = new MatchConfig();
             configName.OnValueChanged = value => _matchConfig.Name = value;
@@ -89,23 +91,26 @@ namespace DOS2Randomizer.UI {
             pdfLayout.Controls.Add(_skillPointDiffImportanceVisualizer);
         }
 
+        private void SaveConfig(string file) {
+            var spellLookup =
+                Config.Spells.ToImmutableDictionary(spell => spell.ImagePath, spell => (IConstSpell)spell);
+            foreach (var player in Config.Players) {
+                player.CKnownSpells = player.CKnownSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
+                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
+                player.CEquippedSpells = player.CEquippedSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
+                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
+            }
+
+            Config.SpellWeights = new ImportanceValues(_levelImportanceVisualizer.Std,
+                _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std,
+                _skillPointDiffImportanceVisualizer.Std);
+            FileIo.SaveConfig(Config, file);
+        }
+
         #region event handlers
         private void SaveButton_Click(object sender, System.EventArgs e) {
-            using var fileChooser = new SaveFileDialog { DefaultExt = Resources.Misc.JsonExtension, AddExtension = true };
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                var spellLookup =
-                    Config.Spells.ToImmutableDictionary(spell => spell.ImagePath, spell => (IConstSpell)spell);
-                foreach (var player in Config.Players) {
-                    player.CKnownSpells = player.CKnownSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                        .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
-                    player.CEquippedSpells = player.CEquippedSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                        .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
-                }
-
-                Config.SpellWeights = new ImportanceValues(_levelImportanceVisualizer.Std,
-                    _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std,
-                    _skillPointDiffImportanceVisualizer.Std);
-                FileIo.SaveConfig(Config, fileChooser.FileName);
+            if (_saveManager.GetNewPath() is {} file) {
+                SaveConfig(file);
             }
         }
 
@@ -125,10 +130,18 @@ namespace DOS2Randomizer.UI {
             using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is { } config) {
+                _saveManager.Path = fileChooser.FileName;
                 Config = config;
             }
         }
 
+        private void ConfigCreator_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.Path is { } file) {
+                SaveConfig(file);
+            }
+        }
+
         #endregion
+
     }
 }

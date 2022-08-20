@@ -88,6 +88,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Non of the following dependencies are satisfied: {0} Do you want to equip {1} anyway?.
+        /// </summary>
+        internal static string DependenciesSatisfied {
+            get {
+                return ResourceManager.GetString("DependenciesSatisfied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Equipped Spells ({0} / {1}).
         /// </summary>
         internal static string EquippedSpellsAndMem {
@@ -169,6 +178,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config was saved successfully!.
+        /// </summary>
+        internal static string SaveSuccessful {
+            get {
+                return ResourceManager.GetString("SaveSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify where to look for spell icons.
         /// </summary>
         internal static string SelectImages {
@@ -192,6 +210,15 @@ namespace DOS2Randomizer.Resources {
         internal static string ShuffleNoEffect {
             get {
                 return ResourceManager.GetString("ShuffleNoEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot equip {0} because skill point requirements are not met..
+        /// </summary>
+        internal static string SkillRequirementNotMet {
+            get {
+                return ResourceManager.GetString("SkillRequirementNotMet", resourceCulture);
             }
         }
         

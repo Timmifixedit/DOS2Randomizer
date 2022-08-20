@@ -126,6 +126,9 @@
   <data name="ConfirmDeletePlayer" xml:space="preserve">
     <value>Are you sure you want to remove {0} from squad?</value>
   </data>
+  <data name="DependenciesSatisfied" xml:space="preserve">
+    <value>Non of the following dependencies are satisfied: {0} Do you want to equip {1} anyway?</value>
+  </data>
   <data name="EquippedSpellsAndMem" xml:space="preserve">
     <value>Equipped Spells ({0} / {1})</value>
   </data>
@@ -153,6 +156,9 @@
   <data name="SaveMigratedConfig" xml:space="preserve">
     <value>You can now save the migrated config.</value>
   </data>
+  <data name="SaveSuccessful" xml:space="preserve">
+    <value>Config was saved successfully!</value>
+  </data>
   <data name="SelectImages" xml:space="preserve">
     <value>Specify where to look for spell icons</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="ShuffleNoEffect" xml:space="preserve">
     <value>{0} has a total of {1} memory slots and knows spells which require a total of {2} slots. Shuffeling equipped spells would have no effect.</value>
+  </data>
+  <data name="SkillRequirementNotMet" xml:space="preserve">
+    <value>Cannot equip {0} because skill point requirements are not met.</value>
   </data>
   <data name="TooFewMemSlots" xml:space="preserve">
     <value>{0} has {1} memory slots left but {2} requires {3} memory slots.</value>
