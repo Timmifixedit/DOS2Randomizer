@@ -39,10 +39,10 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public MatchWindow(MatchConfigGuard config) {
+        public MatchWindow(MatchConfigGuard config, string? savePath = null) {
             _config = config;
             InitializeComponent();
-            _saveManager = new SaveManager();
+            _saveManager = new SaveManager(savePath);
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
             }
