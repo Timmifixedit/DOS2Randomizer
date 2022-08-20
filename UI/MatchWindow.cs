@@ -19,6 +19,7 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     public partial class MatchWindow : Form {
         private readonly MatchConfigGuard _config;
+        private readonly SaveManager _saveManager;
 
         private ImmutableArray<IMutablePlayer> Players {
             get => _config.Get.Players;
@@ -41,6 +42,7 @@ namespace DOS2Randomizer.UI {
         public MatchWindow(MatchConfigGuard config) {
             _config = config;
             InitializeComponent();
+            _saveManager = new SaveManager();
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
             }
@@ -49,9 +51,8 @@ namespace DOS2Randomizer.UI {
         }
 
         private void save_Click(object sender, EventArgs e) {
-            using var fileChooser = new SaveFileDialog {AddExtension = true, DefaultExt = Resources.Misc.JsonExtension};
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                _config.Save(fileChooser.FileName);
+            if (_saveManager.GetNewPath() is {} path) {
+                _config.Save(path);
             }
         }
 
