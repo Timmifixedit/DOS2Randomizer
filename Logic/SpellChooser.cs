@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ABI.Windows.Data.Pdf;
 using DOS2Randomizer.DataStructures;
 using Attribute = DOS2Randomizer.DataStructures.Attribute;
 using Pdf = System.Collections.Generic.Dictionary<DOS2Randomizer.DataStructures.IConstSpell, double>;
@@ -13,7 +10,7 @@ namespace DOS2Randomizer.Logic {
     internal static class RandomExtension {
         public static IEnumerable<T> ChooseRandom<T>(this IEnumerable<T> source, int num) {
             var rng = new Random();
-            return source.OrderBy(arg => rng.Next()).Take(num).ToList();
+            return source.OrderBy(arg => rng.Next()).Take(num);
         }
     }
 
@@ -37,6 +34,15 @@ namespace DOS2Randomizer.Logic {
         }
 
         #region util
+
+        private static T DrawOne<T>(IEnumerable<T> collection, Random rng) {
+            var tmp = collection.ToArray();
+            if (!tmp.Any()) {
+                throw new InvalidOperationException("Collection is empty");
+            }
+
+            return tmp[rng.Next(0, tmp.Length)];
+        }
 
         private int SkillPointDifference(IConstSpell spell) {
             int ret = 0;
@@ -184,7 +190,7 @@ namespace DOS2Randomizer.Logic {
         #endregion
 
 
-        public IConstSpell[] GetSpells() {
+        public IConstSpell[] DrawSpells() {
 
             var allPossibleSpells = _matchConfig.CSpells.Where(spell => Learnable(spell))
                 .ToArray();
@@ -209,6 +215,41 @@ namespace DOS2Randomizer.Logic {
             }
 
             return ret;
+        }
+
+        public List<IConstSpell> SelectEquippedSpells() {
+            var allPossibleSpells =
+                _player.CKnownSpells.Where(spell => PlayerCanWield(spell) && SkillPointDifference(spell) == 0).ToArray();
+            var preSelection = allPossibleSpells.ChooseRandom(_player.NumMemSlots).ToList();
+            int budget = _player.NumMemSlots;
+            var selection = new List<IConstSpell>();
+            var rng = new Random();
+            while (preSelection.Count > 0 && preSelection.Last().MemorySlots <= budget) {
+                var newSpell = preSelection.Last();
+                preSelection.RemoveAt(preSelection.Count - 1);
+                bool dependenciesSatisfied =
+                    newSpell.CDependencies.IsEmpty || newSpell.CDependencies.Intersect(selection).Any();
+                if (!dependenciesSatisfied) {
+                    var possibleFixes = allPossibleSpells.Where(spell =>
+                            newSpell.CDependencies.Contains(spell) &&
+                            spell.MemorySlots <= budget - newSpell.MemorySlots)
+                        .ToArray();
+                    if (possibleFixes.Any()) {
+                        var depFix = DrawOne(possibleFixes, rng);
+                        preSelection.Remove(depFix);
+                        budget -= depFix.MemorySlots;
+                        selection.Add(depFix);
+
+                    } else {
+                        continue;
+                    }
+                } 
+
+                budget -= newSpell.MemorySlots;
+                selection.Add(newSpell);
+            }
+
+            return selection;
         }
     }
 }

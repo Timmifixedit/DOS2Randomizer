@@ -217,8 +217,8 @@ namespace DOS2Randomizer.UI {
                     requiredSlots));
             } else {
                 ++_player.NumShufflesExpended;
-                //@TODO this may choose a set of spells that violates spell dependencies or memory constraints
-                SetEquippedSpells(_player.CKnownSpells.ChooseRandom(_player.NumMemSlots));
+                var chooser = new SpellChooser(_matchConfig, _player);
+                SetEquippedSpells(chooser.SelectEquippedSpells());
             }
         }
 
