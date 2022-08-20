@@ -205,6 +205,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot equip {0} because skill point requirements are not met..
+        /// </summary>
+        internal static string SkillRequirementNotMet {
+            get {
+                return ResourceManager.GetString("SkillRequirementNotMet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} has {1} memory slots left but {2} requires {3} memory slots..
         /// </summary>
         internal static string TooFewMemSlots {

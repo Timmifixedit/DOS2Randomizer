@@ -165,6 +165,9 @@
   <data name="ShuffleNoEffect" xml:space="preserve">
     <value>{0} has a total of {1} memory slots and knows spells which require a total of {2} slots. Shuffeling equipped spells would have no effect.</value>
   </data>
+  <data name="SkillRequirementNotMet" xml:space="preserve">
+    <value>Cannot equip {0} because skill point requirements are not met.</value>
+  </data>
   <data name="TooFewMemSlots" xml:space="preserve">
     <value>{0} has {1} memory slots left but {2} requires {3} memory slots.</value>
   </data>

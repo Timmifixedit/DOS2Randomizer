@@ -148,6 +148,20 @@ namespace DOS2Randomizer.UI {
                 return;
             }
 
+            if (SpellChooser.NumSkillPointsNeeded(spell, _player) > 0) {
+                var sb = new StringBuilder();
+                foreach (var (school, value) in spell.SchoolRequirements) {
+                    var diff = value - _player.SkillPoints[school];
+                    if (diff > 0) {
+                        sb.AppendLine($"{school.ToString()}: +{diff}");
+                    }
+                }
+
+                MessageBox.Show(String.Format(Resources.Messages.SkillRequirementNotMet, spell.Name) +
+                                Environment.NewLine + sb);
+                return;
+            }
+
             string msg;
             if (!spell.CDependencies.IsEmpty && !spell.CDependencies.Intersect(_player.CEquippedSpells).Any()) {
                 var sb = new StringBuilder();

@@ -33,6 +33,22 @@ namespace DOS2Randomizer.Logic {
             _player = player;
         }
 
+        #region public util
+        public static double Gaussian(double x, double std) {
+            return Math.Exp(-Math.Pow(x, 2) / std);
+        }
+
+        public static int NumSkillPointsNeeded(IConstSpell spell, IConstPlayer player) {
+            int ret = 0;
+            foreach (var (school, val) in player.SkillPoints.Where(p => p.Key != Spell.School.None)) {
+                ret += Math.Max(spell.SchoolRequirements[school] - val, 0);
+            }
+
+            return ret;
+        }
+
+        #endregion
+
         #region util
 
         private static T DrawOne<T>(IEnumerable<T> collection, Random rng) {
@@ -45,12 +61,7 @@ namespace DOS2Randomizer.Logic {
         }
 
         private int SkillPointDifference(IConstSpell spell) {
-            int ret = 0;
-            foreach (var (school, val) in _player.SkillPoints.Where(p => p.Key != Spell.School.None)) {
-                ret += Math.Max(spell.SchoolRequirements[school] - val, 0);
-            }
-
-            return ret;
+            return NumSkillPointsNeeded(spell, _player);
         }
 
         private bool PlayerCanWield(IConstSpell spell) {
@@ -64,10 +75,6 @@ namespace DOS2Randomizer.Logic {
             return spell.Level <= _player.Level &&
                    (spell.CDependencies.IsEmpty || spell.CDependencies.Intersect(_player.CKnownSpells).Any()) &&
                    PlayerCanWield(spell) && !_player.CKnownSpells.Contains(spell);
-        }
-
-        public static double Gaussian(double x, double std) {
-            return Math.Exp(-Math.Pow(x, 2) / std);
         }
 
         private Attribute GetScalingAttribute(IConstSpell spell) {
@@ -190,6 +197,7 @@ namespace DOS2Randomizer.Logic {
         #endregion
 
 
+        #region public member functions
         public IConstSpell[] DrawSpells() {
 
             var allPossibleSpells = _matchConfig.CSpells.Where(spell => Learnable(spell))
@@ -251,5 +259,8 @@ namespace DOS2Randomizer.Logic {
 
             return selection;
         }
+
+        #endregion
+
     }
 }
