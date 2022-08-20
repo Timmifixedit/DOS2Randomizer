@@ -70,12 +70,23 @@ namespace DOS2Randomizer.UI {
             layout.View = View.LargeIcon;
             layout.LargeImageList = imageList;
             for (int index = 0; index < Spells.Count(); ++index) {
-                layout.Items.Add(Spells.ElementAt(index).Name, index);
+                var spell = Spells.ElementAt(index);
+                var sb = new StringBuilder();
+                foreach (var (school, value) in spell.SchoolRequirements) {
+                    if (value > 0) {
+                        sb.AppendLine($"{school.ToString()}: {value}");
+                    }
+                }
+
+                var item = new ListViewItem(spell.Name, index) { ToolTipText = sb.ToString() };
+                layout.Items.Add(item);
             }
+
         }
 
         public SpellListBase() {
             InitializeComponent();
+            layout.ShowItemToolTips = true;
             layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
             layout.KeyUp += (_, args) => {
                 if (args.KeyCode is Keys.Left or Keys.Right && layout.SelectedIndices.Count != 0) {
