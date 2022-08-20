@@ -88,6 +88,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Non of the following dependencies are satisfied: {0} Do you want to equip {1} anyway?.
+        /// </summary>
+        internal static string DependenciesSatisfied {
+            get {
+                return ResourceManager.GetString("DependenciesSatisfied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Equipped Spells ({0} / {1}).
         /// </summary>
         internal static string EquippedSpellsAndMem {

@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 using System.Linq;
+using System.Text;
 using DOS2Randomizer.Logic;
 using Attribute = DOS2Randomizer.DataStructures.Attribute;
 
@@ -144,11 +145,24 @@ namespace DOS2Randomizer.UI {
             if (spell.MemorySlots > slotsLeft) {
                 MessageBox.Show(string.Format(Resources.Messages.TooFewMemSlots, _player.Name, slotsLeft, spell.Name,
                     spell.MemorySlots));
-            } else {
-                if (MessageBox.Show(String.Format(Resources.Messages.EquipSpell, spell.Name), "",
-                        MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                    SetEquippedSpells(_player.CEquippedSpells.Add(spell));
+                return;
+            }
+
+            string msg;
+            if (!spell.CDependencies.IsEmpty && !spell.CDependencies.Intersect(_player.CEquippedSpells).Any()) {
+                var sb = new StringBuilder();
+                foreach (var dependency in spell.CDependencies) {
+                    sb.AppendLine(dependency.Name);
                 }
+
+                msg = String.Format(Resources.Messages.DependenciesSatisfied,
+                    Environment.NewLine + sb + Environment.NewLine, spell.Name);
+            } else {
+                msg = String.Format(Resources.Messages.EquipSpell, spell.Name);
+            }
+
+            if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                SetEquippedSpells(_player.CEquippedSpells.Add(spell));
             }
         }
 

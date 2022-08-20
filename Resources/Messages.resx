@@ -126,6 +126,9 @@
   <data name="ConfirmDeletePlayer" xml:space="preserve">
     <value>Are you sure you want to remove {0} from squad?</value>
   </data>
+  <data name="DependenciesSatisfied" xml:space="preserve">
+    <value>Non of the following dependencies are satisfied: {0} Do you want to equip {1} anyway?</value>
+  </data>
   <data name="EquippedSpellsAndMem" xml:space="preserve">
     <value>Equipped Spells ({0} / {1})</value>
   </data>
