@@ -41,5 +41,9 @@ namespace DOS2Randomizer.Util {
 
             return GetNewPath();
         }
+
+        public void SetPath(string path) {
+            _path = path;
+        }
     }
 }

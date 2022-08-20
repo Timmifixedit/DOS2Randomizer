@@ -149,7 +149,7 @@ namespace DOS2Randomizer.UI {
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 0;
-            this.saveButton.Text = "Save";
+            this.saveButton.Text = "Save as";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
@@ -352,8 +352,10 @@ namespace DOS2Randomizer.UI {
             this.ClientSize = new System.Drawing.Size(811, 468);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "ConfigCreator";
             this.Text = "Create Match Config";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConfigCreator_KeyDown);
             this.tabControl.ResumeLayout(false);
             this.general.ResumeLayout(false);
             this.generalLayout.ResumeLayout(false);
