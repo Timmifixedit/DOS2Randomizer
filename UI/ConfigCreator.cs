@@ -130,13 +130,13 @@ namespace DOS2Randomizer.UI {
             using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is { } config) {
-                _saveManager.SetPath(fileChooser.FileName);
+                _saveManager.Path = fileChooser.FileName;
                 Config = config;
             }
         }
 
         private void ConfigCreator_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.GetPath() is { } file) {
+            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.Path is { } file) {
                 SaveConfig(file);
             }
         }

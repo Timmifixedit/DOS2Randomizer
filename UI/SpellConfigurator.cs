@@ -43,7 +43,7 @@ namespace DOS2Randomizer.UI {
                     MessageBox.Show(Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missing);
                 } else {
                     Spells = spells.Spells.ToArray();
-                    _saveManager.SetPath(fileChooser.FileName);
+                    _saveManager.Path = fileChooser.FileName;
                 }
             }
         }
@@ -96,7 +96,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void SpellConfigurator_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.GetPath() is { } file) {
+            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.Path is { } file) {
                 FileIo.SaveConfig(new SpellListWrapper(Spells), file);
             }
         }

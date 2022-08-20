@@ -30,20 +30,18 @@ namespace DOS2Randomizer.Util {
         }
 
         /// <summary>
-        /// Get default save path. If not set, query user for new path
+        /// Gets or sets the default save path. If default path is not, queries user for new path
         /// </summary>
         /// <see cref="GetNewPath"/>
-        /// <returns>default path if not null. Otherwise calls GetNewPath</returns>
-        public string? GetPath() {
-            if (_path is not null) {
-                return _path;
+        public string? Path {
+            get {
+                if (_path is not null) {
+                    return _path;
+                }
+
+                return GetNewPath();
             }
-
-            return GetNewPath();
-        }
-
-        public void SetPath(string path) {
-            _path = path;
+            set => _path = value;
         }
     }
 }

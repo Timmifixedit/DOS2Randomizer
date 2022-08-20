@@ -77,7 +77,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void MatchWindow_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.GetPath() is { } path) {
+            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && _saveManager.Path is { } path) {
                 _config.Save(path);
             }
         }
