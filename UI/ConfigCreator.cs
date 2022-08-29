@@ -92,15 +92,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void SaveConfig(string file) {
-            var spellLookup =
-                Config.Spells.ToImmutableDictionary(spell => spell.ImagePath, spell => (IConstSpell)spell);
-            foreach (var player in Config.Players) {
-                player.CKnownSpells = player.CKnownSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
-                player.CEquippedSpells = player.CEquippedSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
-            }
-
+            ConfigUtils.OverwritePlayerSpells(Config, Config.Spells);
             Config.SpellWeights = new ImportanceValues(_levelImportanceVisualizer.Std,
                 _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std,
                 _skillPointDiffImportanceVisualizer.Std);

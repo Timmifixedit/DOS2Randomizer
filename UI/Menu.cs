@@ -43,7 +43,7 @@ namespace DOS2Randomizer.UI {
                     using var dirChooser = new FolderBrowserDialog { ShowNewFolderButton = false };
                     MessageBox.Show(Resources.Messages.SelectImages);
                     if (dirChooser.ShowDialog() == DialogResult.OK) {
-                        spells = FileIo.MigrateSpellConfig(spellList, dirChooser.SelectedPath);
+                        spells = ConfigUtils.MigrateSpellConfig(spellList, dirChooser.SelectedPath);
                     }
                 }
             }
