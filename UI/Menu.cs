@@ -24,32 +24,15 @@ namespace DOS2Randomizer.UI {
         }
 
         private void LoadConfig_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
-            if (fileChooser.ShowDialog() == DialogResult.OK && FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is
-                    { } config) {
-                if (config.Valid(out string? missing)) {
-                    var window = new MatchWindow(new MatchConfigGuard(config), fileChooser.FileName)
-                        { Visible = true, Text = config.Name };
-                    window.Activate();
-                } else {
-                    MessageBox.Show(missing);
-                }
+            if (ConfigUtils.LoadConfigOrMigrate<MatchConfig>() is { } config) {
+                var window = new MatchWindow(new MatchConfigGuard(config))
+                    { Visible = true, Text = config.Name };
+                window.Activate();
             }
         }
 
         private void migrateSpells_Click(object sender, EventArgs e) {
-            SpellListWrapper? spells = null;
-            using (var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter }) {
-                if (fileChooser.ShowDialog() == DialogResult.OK &&
-                    FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is { } spellList) {
-                    using var dirChooser = new FolderBrowserDialog { ShowNewFolderButton = false };
-                    MessageBox.Show(Resources.Messages.SelectImages);
-                    if (dirChooser.ShowDialog() == DialogResult.OK) {
-                        spells = ConfigUtils.MigrateSpellConfig(spellList, dirChooser.SelectedPath);
-                    }
-                }
-            }
-
+            var spells = ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>();
             if (spells is not null) {
                 using var fileChooser = new SaveFileDialog
                     { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension };

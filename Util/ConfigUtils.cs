@@ -12,12 +12,12 @@ namespace DOS2Randomizer.Util {
     internal static class ConfigUtils {
         public static void OverwritePlayerSpells(MatchConfig config, IEnumerable<Spell> spells) {
             var spellLookup =
-                spells.ToImmutableDictionary(spell => spell.ImagePath, spell => (IConstSpell)spell);
+                spells.ToImmutableDictionary(spell => spell.Name, spell => (IConstSpell)spell);
             foreach (var player in config.Players) {
-                player.CKnownSpells = player.CKnownSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
-                player.CEquippedSpells = player.CEquippedSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
+                player.CKnownSpells = player.CKnownSpells.Where(spell => spellLookup.ContainsKey(spell.Name))
+                    .Select(spell => spellLookup[spell.Name]).ToImmutableArray();
+                player.CEquippedSpells = player.CEquippedSpells.Where(spell => spellLookup.ContainsKey(spell.Name))
+                    .Select(spell => spellLookup[spell.Name]).ToImmutableArray();
             }
         }
 
@@ -43,8 +43,13 @@ namespace DOS2Randomizer.Util {
                     DialogResult.Yes) {
                     using var dirChooser = new FolderBrowserDialog { ShowNewFolderButton = false };
                     MessageBox.Show(Resources.Messages.SelectImages);
-                    if (dirChooser.ShowDialog() == DialogResult.OK) {
-                        return config.Migrate(dirChooser.SelectedPath) as T;
+                    if (dirChooser.ShowDialog() == DialogResult.OK && config.Migrate(dirChooser.SelectedPath) as T is
+                            { } migrated) {
+                        if (migrated.Valid(out var missing)) {
+                            return migrated;
+                        } else {
+                            MessageBox.Show(Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missing);
+                        }
                     }
                 }
             }
