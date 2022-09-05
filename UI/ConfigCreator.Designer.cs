@@ -161,7 +161,7 @@ namespace DOS2Randomizer.UI {
             this.importMatchConfig.TabIndex = 1;
             this.importMatchConfig.Text = "Import";
             this.importMatchConfig.UseVisualStyleBackColor = true;
-            this.importMatchConfig.Click += new System.EventHandler(this.importButton_Click);
+            this.importMatchConfig.Click += new System.EventHandler(this.importConfig_Click);
             // 
             // nChooseKLayout
             // 
@@ -319,7 +319,7 @@ namespace DOS2Randomizer.UI {
             this.importSpells.TabIndex = 1;
             this.importSpells.Text = "Import";
             this.importSpells.UseVisualStyleBackColor = true;
-            this.importSpells.Click += new System.EventHandler(this.import_Click);
+            this.importSpells.Click += new System.EventHandler(this.importSpells_Click);
             // 
             // spellSearch
             // 

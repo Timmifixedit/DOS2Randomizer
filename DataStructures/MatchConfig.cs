@@ -125,12 +125,22 @@ namespace DOS2Randomizer.DataStructures {
             Spells = spells;
             SpellWeights = spellWeights ?? new ImportanceValues();
             Players = players.CastArray<IMutablePlayer>();
+        }
+
+        /// <summary>
+        /// Checks if all spells are valid, i.e. have a valid icon
+        /// </summary>
+        /// <param name="missingFiles">string containing an error message and a list of missing file names</param>
+        /// <returns>true if all spells are valid, false otherwise</returns>
+        public bool Valid(out string? missingFiles) {
             var missingIcons = SpellListWrapper.MissingIcons(Spells);
             if (missingIcons.Length > 0) {
-                throw new FileNotFoundException(
-                    Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine +
-                    missingIcons);
+                missingFiles = Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missingIcons;
+                return false;
             }
+
+            missingFiles = null;
+            return true;
         }
     }
 

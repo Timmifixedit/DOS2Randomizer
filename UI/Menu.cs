@@ -25,12 +25,14 @@ namespace DOS2Randomizer.UI {
 
         private void LoadConfig_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
-            if (fileChooser.ShowDialog() == DialogResult.OK) {
-                var config = FileIo.ImportConfig<MatchConfig>(fileChooser.FileName);
-                if (config != null) {
+            if (fileChooser.ShowDialog() == DialogResult.OK && FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is
+                    { } config) {
+                if (config.Valid(out string? missing)) {
                     var window = new MatchWindow(new MatchConfigGuard(config), fileChooser.FileName)
                         { Visible = true, Text = config.Name };
                     window.Activate();
+                } else {
+                    MessageBox.Show(missing);
                 }
             }
         }

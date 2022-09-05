@@ -106,7 +106,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        private void import_Click(object sender, EventArgs e) {
+        private void importSpells_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} s) {
@@ -118,12 +118,16 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        private void importButton_Click(object sender, EventArgs e) {
+        private void importConfig_Click(object sender, EventArgs e) {
             using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
             if (fileChooser.ShowDialog() == DialogResult.OK &&
                 FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is { } config) {
-                _saveManager.Path = fileChooser.FileName;
-                Config = config;
+                if (config.Valid(out string? missing)) {
+                    _saveManager.Path = fileChooser.FileName;
+                    Config = config;
+                } else {
+                    MessageBox.Show(missing);
+                }
             }
         }
 
