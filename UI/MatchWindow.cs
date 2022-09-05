@@ -18,6 +18,14 @@ namespace DOS2Randomizer.UI {
     /// Form that is used during a match
     /// </summary>
     public partial class MatchWindow : Form {
+        #region Title bar hax
+
+        protected override void OnHandleCreated(EventArgs e) {
+            DarkModeHax.UseImmersiveDarkMode(Handle, true);
+        }
+
+        #endregion
+
         private readonly MatchConfigGuard _config;
         private readonly SaveManager _saveManager;
 
