@@ -88,6 +88,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ChooseKDialog";
+            this.ShowInTaskbar = false;
             this.Text = "Choose from randomly selected Spells";
             this.ResumeLayout(false);
             this.PerformLayout();
