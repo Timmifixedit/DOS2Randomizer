@@ -151,6 +151,15 @@ namespace DOS2Randomizer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some spells contained in this config are not valid on this machine. Do you want to try migrating the config to this computer?.
+        /// </summary>
+        internal static string PromptForMigration {
+            get {
+                return ResourceManager.GetString("PromptForMigration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to remove {0} from the list of spells?.
         /// </summary>
         internal static string RemoveSpell {

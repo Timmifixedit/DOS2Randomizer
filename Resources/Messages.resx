@@ -147,6 +147,9 @@
   <data name="NoShuffles" xml:space="preserve">
     <value>No shuffles left</value>
   </data>
+  <data name="PromptForMigration" xml:space="preserve">
+    <value>Some spells contained in this config are not valid on this machine. Do you want to try migrating the config to this computer?</value>
+  </data>
   <data name="RemoveSpell" xml:space="preserve">
     <value>Do you want to remove {0} from the list of spells?</value>
   </data>

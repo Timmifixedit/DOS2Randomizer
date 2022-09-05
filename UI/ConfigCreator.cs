@@ -92,15 +92,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void SaveConfig(string file) {
-            var spellLookup =
-                Config.Spells.ToImmutableDictionary(spell => spell.ImagePath, spell => (IConstSpell)spell);
-            foreach (var player in Config.Players) {
-                player.CKnownSpells = player.CKnownSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
-                player.CEquippedSpells = player.CEquippedSpells.Where(spell => spellLookup.ContainsKey(spell.ImagePath))
-                    .Select(spell => spellLookup[spell.ImagePath]).ToImmutableArray();
-            }
-
+            ConfigUtils.OverwritePlayerSpells(Config, Config.Spells);
             Config.SpellWeights = new ImportanceValues(_levelImportanceVisualizer.Std,
                 _attributeImportanceVisualizer.Std, _skillPointImportanceVisualizer.Std,
                 _skillPointDiffImportanceVisualizer.Std);
@@ -114,24 +106,16 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        private void import_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
-            if (fileChooser.ShowDialog() == DialogResult.OK &&
-                FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} s) {
-                if (SpellListWrapper.MissingIcons(s.Spells) is { Length: > 0 } missing) {
-                    MessageBox.Show(Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missing);
-                } else {
-                    Spells = s.Spells.ToArray();
-                }
+        private void importSpells_Click(object sender, EventArgs e) {
+            if (ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>(out _) is { } s) {
+                Spells = s.Spells.ToArray();
             }
         }
 
-        private void importButton_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
-            if (fileChooser.ShowDialog() == DialogResult.OK &&
-                FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is { } config) {
-                _saveManager.Path = fileChooser.FileName;
+        private void importConfig_Click(object sender, EventArgs e) {
+            if (ConfigUtils.LoadConfigOrMigrate<MatchConfig>(out var configPath) is { } config) {
                 Config = config;
+                _saveManager.Path = configPath;
             }
         }
 

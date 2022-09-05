@@ -58,7 +58,7 @@ namespace DOS2Randomizer.DataStructures {
     /// <summary>
     /// Contains all information about a match including participating players and available spells
     /// </summary>
-    public class MatchConfig : IConstMatchConfig, ISerilizable {
+    public class MatchConfig : IConstMatchConfig, IConfig {
         public const int MaxNumPlayers = 4;
         public const int MaxLevel = 21;
         public string Name { get; set; }
@@ -125,12 +125,14 @@ namespace DOS2Randomizer.DataStructures {
             Spells = spells;
             SpellWeights = spellWeights ?? new ImportanceValues();
             Players = players.CastArray<IMutablePlayer>();
-            var missingIcons = SpellListWrapper.MissingIcons(Spells);
-            if (missingIcons.Length > 0) {
-                throw new FileNotFoundException(
-                    Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine +
-                    missingIcons);
-            }
+        }
+
+        public bool Valid(out string? missingFiles) {
+            return new SpellListWrapper(Spells).Valid(out missingFiles);
+        }
+
+        public IConfig? Migrate(string imageDirectory) {
+            return Util.ConfigUtils.MigrateMatchConfig(this, imageDirectory);
         }
     }
 
