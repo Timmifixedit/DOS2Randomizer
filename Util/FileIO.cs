@@ -21,7 +21,7 @@ namespace DOS2Randomizer.Util {
         /// <typeparam name="T">type of config</typeparam>
         /// <param name="fileName">path to file</param>
         /// <returns>deserialized config or null if deserialization failed</returns>
-        public static T? ImportConfig<T>(string fileName) where T : class, ISerilizable {
+        public static T? ImportConfig<T>(string fileName) where T : class, IConfig {
             T? spells = null;
             try {
                 using var file = File.OpenRead(fileName);
@@ -48,7 +48,7 @@ namespace DOS2Randomizer.Util {
         /// <typeparam name="T">Type of config</typeparam>
         /// <param name="config">config to serialize</param>
         /// <param name="fileName">destination file</param>
-        public static void SaveConfig<T>(T config, string fileName) where T: ISerilizable {
+        public static void SaveConfig<T>(T config, string fileName) where T: IConfig {
             try {
                 using var file = File.Open(fileName, FileMode.Create);
                 using var writer = new StreamWriter(file);

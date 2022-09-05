@@ -7,9 +7,25 @@ using Newtonsoft.Json;
 
 namespace DOS2Randomizer.DataStructures {
     /// <summary>
-    /// This tag is used to mark classes as serializable
+    /// This interface is used to mark classes as serializable configs and provide additional utilities
     /// </summary>
-    interface ISerilizable { }
+    public interface IConfig {
+
+        /// <summary>
+        /// Checks if all spells are valid, i.e. have a valid icon
+        /// </summary>
+        /// <param name="missingFiles">string containing an error message and a list of missing file names</param>
+        /// <returns>true if all spells are valid, false otherwise</returns>
+        bool Valid(out string? missingFiles);
+
+        /// <summary>
+        /// Migrates all contained spells to the current machine
+        /// </summary>
+        /// <param name="imageDirectory">directory path where to look for spell icons</param>
+        /// <returns>migrated config, or null if failed</returns>
+        IConfig? Migrate(string imageDirectory);
+    }
+
     public record OnLevelUp(int Level, int NewSpells, int NewRerolls, int NewShuffles);
 
     /// <summary>
@@ -43,7 +59,7 @@ namespace DOS2Randomizer.DataStructures {
     /// <summary>
     /// Serializable wrapper for a list of spells
     /// </summary>
-    public class SpellListWrapper : ISerilizable {
+    public class SpellListWrapper : IConfig {
         public IEnumerable<Spell> Spells { get; }
 
         /// <summary>
@@ -62,6 +78,20 @@ namespace DOS2Randomizer.DataStructures {
 
         public SpellListWrapper(IEnumerable<Spell> spells) {
             Spells = spells.ToArray();
+        }
+
+        public bool Valid(out string? missingFiles) {
+            if (MissingIcons(Spells) is { Length: > 0 } missing) {
+                missingFiles = missing;
+                return false;
+            }
+
+            missingFiles = null;
+            return true;
+        }
+
+        public IConfig? Migrate(string imageDirectory) {
+           return Util.ConfigUtils.MigrateSpellConfig(this, imageDirectory);
         }
     }
 }
