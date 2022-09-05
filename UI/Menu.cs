@@ -30,16 +30,5 @@ namespace DOS2Randomizer.UI {
                 window.Activate();
             }
         }
-
-        private void migrateSpells_Click(object sender, EventArgs e) {
-            var spells = ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>(out _);
-            if (spells is not null) {
-                using var fileChooser = new SaveFileDialog
-                    { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension };
-                if (fileChooser.ShowDialog() == DialogResult.OK) {
-                    FileIo.SaveConfig(spells, fileChooser.FileName);
-                }
-            }
-        }
     }
 }

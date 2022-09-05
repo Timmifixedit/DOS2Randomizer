@@ -28,7 +28,6 @@
             this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CreateConfig = new System.Windows.Forms.Button();
             this.spellConfigurator = new System.Windows.Forms.Button();
-            this.migrateSpells = new System.Windows.Forms.Button();
             this.centerLayout = new System.Windows.Forms.TableLayoutPanel();
             this.layoutPanel.SuspendLayout();
             this.centerLayout.SuspendLayout();
@@ -37,7 +36,7 @@
             // LoadConfig
             // 
             this.LoadConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoadConfig.Location = new System.Drawing.Point(3, 3);
+            this.LoadConfig.Location = new System.Drawing.Point(3, 11);
             this.LoadConfig.Name = "LoadConfig";
             this.LoadConfig.Size = new System.Drawing.Size(628, 40);
             this.LoadConfig.TabIndex = 0;
@@ -52,12 +51,10 @@
             this.layoutPanel.Controls.Add(this.CreateConfig, 0, 1);
             this.layoutPanel.Controls.Add(this.LoadConfig, 0, 0);
             this.layoutPanel.Controls.Add(this.spellConfigurator, 0, 2);
-            this.layoutPanel.Controls.Add(this.migrateSpells, 0, 3);
             this.layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutPanel.Location = new System.Drawing.Point(83, 131);
             this.layoutPanel.Name = "layoutPanel";
-            this.layoutPanel.RowCount = 4;
-            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.layoutPanel.RowCount = 3;
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -67,7 +64,7 @@
             // CreateConfig
             // 
             this.CreateConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreateConfig.Location = new System.Drawing.Point(3, 49);
+            this.CreateConfig.Location = new System.Drawing.Point(3, 73);
             this.CreateConfig.Name = "CreateConfig";
             this.CreateConfig.Size = new System.Drawing.Size(628, 40);
             this.CreateConfig.TabIndex = 1;
@@ -78,24 +75,13 @@
             // spellConfigurator
             // 
             this.spellConfigurator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.spellConfigurator.Location = new System.Drawing.Point(3, 95);
+            this.spellConfigurator.Location = new System.Drawing.Point(3, 135);
             this.spellConfigurator.Name = "spellConfigurator";
             this.spellConfigurator.Size = new System.Drawing.Size(628, 40);
             this.spellConfigurator.TabIndex = 2;
             this.spellConfigurator.Text = "Configure Spells";
             this.spellConfigurator.UseVisualStyleBackColor = true;
             this.spellConfigurator.Click += new System.EventHandler(this.spellConfigurator_Click);
-            // 
-            // migrateSpells
-            // 
-            this.migrateSpells.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.migrateSpells.Location = new System.Drawing.Point(3, 141);
-            this.migrateSpells.Name = "migrateSpells";
-            this.migrateSpells.Size = new System.Drawing.Size(628, 42);
-            this.migrateSpells.TabIndex = 3;
-            this.migrateSpells.Text = "Migrate Spells";
-            this.migrateSpells.UseVisualStyleBackColor = true;
-            this.migrateSpells.Click += new System.EventHandler(this.migrateSpells_Click);
             // 
             // centerLayout
             // 
@@ -136,7 +122,6 @@
         private System.Windows.Forms.Button CreateConfig;
         private System.Windows.Forms.TableLayoutPanel centerLayout;
         private System.Windows.Forms.Button spellConfigurator;
-        private System.Windows.Forms.Button migrateSpells;
     }
 }
 
