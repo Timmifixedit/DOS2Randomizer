@@ -119,15 +119,8 @@ namespace DOS2Randomizer.UI {
         }
 
         private void importConfig_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog { Filter = Resources.Misc.JsonFilter };
-            if (fileChooser.ShowDialog() == DialogResult.OK &&
-                FileIo.ImportConfig<MatchConfig>(fileChooser.FileName) is { } config) {
-                if (config.Valid(out string? missing)) {
-                    _saveManager.Path = fileChooser.FileName;
-                    Config = config;
-                } else {
-                    MessageBox.Show(missing);
-                }
+            if (ConfigUtils.LoadConfigOrMigrate<MatchConfig>() is { } config) {
+                Config = config;
             }
         }
 
