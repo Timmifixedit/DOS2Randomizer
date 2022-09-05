@@ -93,32 +93,44 @@ namespace DOS2Randomizer.UI {
             // 
             // remove
             // 
+            this.remove.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.remove.FlatAppearance.BorderSize = 0;
+            this.remove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.remove.Location = new System.Drawing.Point(514, 4);
             this.remove.Name = "remove";
             this.remove.Size = new System.Drawing.Size(105, 23);
             this.remove.TabIndex = 8;
             this.remove.Text = "Remove";
-            this.remove.UseVisualStyleBackColor = true;
+            this.remove.UseVisualStyleBackColor = false;
             this.remove.Click += new System.EventHandler(this.remove_Click);
             // 
             // configureSpells
             // 
+            this.configureSpells.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.configureSpells.FlatAppearance.BorderSize = 0;
+            this.configureSpells.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.configureSpells.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.configureSpells.Location = new System.Drawing.Point(514, 350);
             this.configureSpells.Name = "configureSpells";
             this.configureSpells.Size = new System.Drawing.Size(105, 23);
             this.configureSpells.TabIndex = 9;
             this.configureSpells.Text = "Configure Spells";
-            this.configureSpells.UseVisualStyleBackColor = true;
+            this.configureSpells.UseVisualStyleBackColor = false;
             this.configureSpells.Click += new System.EventHandler(this.configureSpells_Click);
             // 
             // drawSpells
             // 
+            this.drawSpells.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.drawSpells.FlatAppearance.BorderSize = 0;
+            this.drawSpells.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.drawSpells.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.drawSpells.Location = new System.Drawing.Point(514, 379);
             this.drawSpells.Name = "drawSpells";
             this.drawSpells.Size = new System.Drawing.Size(105, 23);
             this.drawSpells.TabIndex = 10;
             this.drawSpells.Text = "Draw new Spells";
-            this.drawSpells.UseVisualStyleBackColor = true;
+            this.drawSpells.UseVisualStyleBackColor = false;
             this.drawSpells.Click += new System.EventHandler(this.drawSpells_Click);
             // 
             // equippedSpellList
@@ -143,12 +155,16 @@ namespace DOS2Randomizer.UI {
             // 
             // shuffle
             // 
+            this.shuffle.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.shuffle.FlatAppearance.BorderSize = 0;
+            this.shuffle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.shuffle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.shuffle.Location = new System.Drawing.Point(514, 409);
             this.shuffle.Name = "shuffle";
             this.shuffle.Size = new System.Drawing.Size(105, 23);
             this.shuffle.TabIndex = 13;
             this.shuffle.Text = "Shuffle equipped Spells";
-            this.shuffle.UseVisualStyleBackColor = true;
+            this.shuffle.UseVisualStyleBackColor = false;
             this.shuffle.Click += new System.EventHandler(this.shuffle_Click);
             // 
             // dmgType
