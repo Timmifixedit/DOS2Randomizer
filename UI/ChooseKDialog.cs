@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -89,11 +90,14 @@ namespace DOS2Randomizer.UI {
         }
 
         public void RollDice() {
+            const int maxDelay = 300;
+            const int initDelay = 30;
+            const double delayFactor = 1.1;
             DisableSpellTransfer();
-            for (int i = 0; i < 10; ++i) {
+            for (int delay = initDelay; delay < maxDelay; delay = (int)(delay * delayFactor)) {
                 source.Spells = _spellChooser.DrawSpells();
                 Refresh();
-                Thread.Sleep(100);
+                Thread.Sleep(delay);
             }
 
             EnableSpellTransfer();
