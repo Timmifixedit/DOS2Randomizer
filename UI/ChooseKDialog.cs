@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
@@ -69,14 +64,6 @@ namespace DOS2Randomizer.UI {
             NumLeft = _numToChoose;
             NumRerolls = numRerolls;
             Shown += (_, _) => RollDice();
-        }
-
-        public void DisableSpellTransfer() {
-            source.OnImageClick = null;
-            selection.OnImageClick = null;
-        }
-
-        private void EnableSpellTransfer() {
             source.OnImageClick = spell => {
                 if (selection.Spells is null || selection.Spells.Count() < _numToChoose) {
                     --NumLeft;
@@ -89,7 +76,19 @@ namespace DOS2Randomizer.UI {
             };
         }
 
-        public void RollDice() {
+        public void DisableSpellTransfer() {
+            reroll.Enabled = false;
+            source.Enabled = false;
+            selection.Enabled = false;
+        }
+
+        private void EnableSpellTransfer() {
+            reroll.Enabled = true;
+            source.Enabled = true;
+            selection.Enabled = true;
+        }
+
+        private async void RollDice() {
             const int maxDelay = 300;
             const int initDelay = 30;
             const double delayFactor = 1.1;
@@ -97,7 +96,7 @@ namespace DOS2Randomizer.UI {
             for (int delay = initDelay; delay < maxDelay; delay = (int)(delay * delayFactor)) {
                 source.Spells = _spellChooser.DrawSpells();
                 Refresh();
-                Thread.Sleep(delay);
+                await Task.Delay(delay);
             }
 
             EnableSpellTransfer();
