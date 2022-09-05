@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
@@ -31,7 +31,7 @@ namespace DOS2Randomizer.UI {
         #region fields
 
         public Action<IEnumerable<IConstSpell>, int>? OnConfirm;
-        private int _numToChoose;
+        private readonly int _numToChoose;
         private int _numLeftToChoose;
         private int _numRerolls;
         private readonly Logic.SpellChooser _spellChooser;
@@ -67,8 +67,17 @@ namespace DOS2Randomizer.UI {
             _numToChoose = Math.Min(numSpellsToChoose, source.Spells.Count());
             NumLeft = _numToChoose;
             NumRerolls = numRerolls;
+            Shown += (_, _) => RollDice();
+        }
+
+        public void DisableSpellTransfer() {
+            source.OnImageClick = null;
+            selection.OnImageClick = null;
+        }
+
+        private void EnableSpellTransfer() {
             source.OnImageClick = spell => {
-                if (selection.Spells is null || selection.Spells.Count() < numSpellsToChoose) {
+                if (selection.Spells is null || selection.Spells.Count() < _numToChoose) {
                     --NumLeft;
                     SpellChooseDialog.MoveSpellTo(spell, source, selection);
                 }
@@ -79,18 +88,30 @@ namespace DOS2Randomizer.UI {
             };
         }
 
+        public void RollDice() {
+            DisableSpellTransfer();
+            for (int i = 0; i < 10; ++i) {
+                source.Spells = _spellChooser.DrawSpells();
+                Refresh();
+                Thread.Sleep(100);
+            }
+
+            EnableSpellTransfer();
+        }
+
         #region event handlers
         private void confirm_Click(object sender, EventArgs e) {
             OnConfirm?.Invoke(selection.Spells ?? Array.Empty<Spell>(), NumRerolls);
             this.Close();
         }
 
+
         private void reroll_Click(object sender, EventArgs e) {
             if (NumRerolls > 0) {
                 --NumRerolls;
                 reroll.Enabled = NumRerolls > 0;
-                source.Spells = _spellChooser.DrawSpells();
                 selection.Spells = null;
+                RollDice();
                 NumLeft = _numToChoose;
             }
         }
