@@ -86,6 +86,7 @@ namespace DOS2Randomizer.UI {
 
         public SpellListBase() {
             InitializeComponent();
+            layout.BackColor = SystemColors.ControlDarkDark;
             layout.ShowItemToolTips = true;
             layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
             layout.KeyUp += (_, args) => {

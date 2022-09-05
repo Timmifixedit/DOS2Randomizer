@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -79,7 +80,11 @@ namespace DOS2Randomizer.UI {
         }
 
         public LabeledSelection() {
-            _listBox = new CheckedListBox {CheckOnClick = true, Dock = DockStyle.Fill};
+            _listBox = new CheckedListBox {
+                CheckOnClick = true, Dock = DockStyle.Fill,
+                BackColor = SystemColors.ControlDarkDark,
+                BorderStyle = BorderStyle.None,
+            };
             _listBox.ItemCheck += (sender, args) => HandleCheck(args);
             LayoutPanel.Controls.Add(_listBox, 1, 0);
         }

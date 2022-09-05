@@ -26,6 +26,8 @@ namespace DOS2Randomizer.UI {
         public LabeledEnum() {
             _comboBox = new ComboBox {
                 Anchor = (AnchorStyles.Left | AnchorStyles.Right), DataSource = Enum.GetValues(typeof(TEnum)),
+                BackColor = SystemColors.ControlDarkDark,
+                FlatStyle = FlatStyle.Flat
             };
 
             LayoutPanel.Controls.Add(_comboBox, 1, 0);

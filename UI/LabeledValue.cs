@@ -32,7 +32,11 @@ namespace DOS2Randomizer.UI {
 
         public LabeledValue() {
             InitializeComponent();
-            _val = new NumericUpDown{Anchor = AnchorStyles.Left}; 
+            _val = new NumericUpDown {
+                Anchor = AnchorStyles.Left,
+                BackColor = SystemColors.ControlDarkDark,
+                BorderStyle = BorderStyle.None,
+            }; 
             LayoutPanel.Controls.Add(_val, 1, 0);
             _val.ValueChanged += (_, _) => HandleValueChanged();
             Height = Math.Max(Height, _val.Height);

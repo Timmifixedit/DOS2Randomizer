@@ -31,6 +31,7 @@ namespace DOS2Randomizer.UI {
 
         public NamedValueTemplate() {
             InitializeComponent();
+            name.ForeColor = Color.LightGray;
             Height = name.Height;
         }
     }
