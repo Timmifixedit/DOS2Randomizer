@@ -107,14 +107,15 @@ namespace DOS2Randomizer.UI {
         }
 
         private void importSpells_Click(object sender, EventArgs e) {
-            if (ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>() is { } s) {
+            if (ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>(out _) is { } s) {
                 Spells = s.Spells.ToArray();
             }
         }
 
         private void importConfig_Click(object sender, EventArgs e) {
-            if (ConfigUtils.LoadConfigOrMigrate<MatchConfig>() is { } config) {
+            if (ConfigUtils.LoadConfigOrMigrate<MatchConfig>(out var configPath) is { } config) {
                 Config = config;
+                _saveManager.Path = configPath;
             }
         }
 

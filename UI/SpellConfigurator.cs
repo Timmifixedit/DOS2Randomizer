@@ -36,15 +36,9 @@ namespace DOS2Randomizer.UI {
         }
 
         private void import_Click(object sender, EventArgs e) {
-            using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
-            if (fileChooser.ShowDialog() == DialogResult.OK &&
-                FileIo.ImportConfig<SpellListWrapper>(fileChooser.FileName) is {} spells) {
-                if (SpellListWrapper.MissingIcons(spells.Spells) is { Length: > 0 } missing) {
-                    MessageBox.Show(Resources.ErrorMessages.InvalidSpellConfig + Environment.NewLine + missing);
-                } else {
-                    Spells = spells.Spells.ToArray();
-                    _saveManager.Path = fileChooser.FileName;
-                }
+            if (ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>(out var configPath) is { } spells) {
+                Spells = spells.Spells.ToArray();
+                _saveManager.Path = configPath;
             }
         }
 

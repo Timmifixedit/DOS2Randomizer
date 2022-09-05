@@ -31,11 +31,13 @@ namespace DOS2Randomizer.Util {
             return null;
         }
 
-        public static T? LoadConfigOrMigrate<T>() where T: class, IConfig{
+        public static T? LoadConfigOrMigrate<T>(out string? configPath) where T: class, IConfig{
+            configPath = null;
             using var fileChooser = new OpenFileDialog{Filter = Resources.Misc.JsonFilter};
             if (fileChooser.ShowDialog() == DialogResult.OK && FileIo.ImportConfig<T>(fileChooser.FileName) is
                     { } config) {
                 if (config.Valid(out _)) {
+                    configPath = fileChooser.FileName;
                     return config;
                 }
 

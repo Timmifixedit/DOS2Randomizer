@@ -24,15 +24,15 @@ namespace DOS2Randomizer.UI {
         }
 
         private void LoadConfig_Click(object sender, EventArgs e) {
-            if (ConfigUtils.LoadConfigOrMigrate<MatchConfig>() is { } config) {
-                var window = new MatchWindow(new MatchConfigGuard(config))
+            if (ConfigUtils.LoadConfigOrMigrate<MatchConfig>(out var configPath) is { } config) {
+                var window = new MatchWindow(new MatchConfigGuard(config), configPath)
                     { Visible = true, Text = config.Name };
                 window.Activate();
             }
         }
 
         private void migrateSpells_Click(object sender, EventArgs e) {
-            var spells = ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>();
+            var spells = ConfigUtils.LoadConfigOrMigrate<SpellListWrapper>(out _);
             if (spells is not null) {
                 using var fileChooser = new SaveFileDialog
                     { AddExtension = true, DefaultExt = Resources.Misc.JsonExtension };
