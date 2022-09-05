@@ -36,12 +36,16 @@
             // LoadConfig
             // 
             this.LoadConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoadConfig.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.LoadConfig.FlatAppearance.BorderSize = 0;
+            this.LoadConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.LoadConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoadConfig.Location = new System.Drawing.Point(3, 11);
             this.LoadConfig.Name = "LoadConfig";
             this.LoadConfig.Size = new System.Drawing.Size(628, 40);
             this.LoadConfig.TabIndex = 0;
             this.LoadConfig.Text = "Load Config";
-            this.LoadConfig.UseVisualStyleBackColor = true;
+            this.LoadConfig.UseVisualStyleBackColor = false;
             this.LoadConfig.Click += new System.EventHandler(this.LoadConfig_Click);
             // 
             // layoutPanel
@@ -64,27 +68,36 @@
             // CreateConfig
             // 
             this.CreateConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.CreateConfig.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.CreateConfig.FlatAppearance.BorderSize = 0;
+            this.CreateConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.CreateConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateConfig.Location = new System.Drawing.Point(3, 73);
             this.CreateConfig.Name = "CreateConfig";
             this.CreateConfig.Size = new System.Drawing.Size(628, 40);
             this.CreateConfig.TabIndex = 1;
             this.CreateConfig.Text = "Create Config";
-            this.CreateConfig.UseVisualStyleBackColor = true;
+            this.CreateConfig.UseVisualStyleBackColor = false;
             this.CreateConfig.Click += new System.EventHandler(this.CreateConfig_Click);
             // 
             // spellConfigurator
             // 
             this.spellConfigurator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellConfigurator.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.spellConfigurator.FlatAppearance.BorderSize = 0;
+            this.spellConfigurator.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.spellConfigurator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.spellConfigurator.Location = new System.Drawing.Point(3, 135);
             this.spellConfigurator.Name = "spellConfigurator";
             this.spellConfigurator.Size = new System.Drawing.Size(628, 40);
             this.spellConfigurator.TabIndex = 2;
             this.spellConfigurator.Text = "Configure Spells";
-            this.spellConfigurator.UseVisualStyleBackColor = true;
+            this.spellConfigurator.UseVisualStyleBackColor = false;
             this.spellConfigurator.Click += new System.EventHandler(this.spellConfigurator_Click);
             // 
             // centerLayout
             // 
+            this.centerLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.centerLayout.ColumnCount = 3;
             this.centerLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.centerLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
@@ -104,6 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.centerLayout);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
