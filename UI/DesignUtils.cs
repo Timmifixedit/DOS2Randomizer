@@ -35,7 +35,7 @@ namespace DOS2Randomizer.UI {
         }
     }
 
-    internal class Design {
+    public class Design {
         private static Design? _dark;
         private static Design? _light;
         private Design(Color backColor, Color controlColor, BorderStyle borderStyle, FlatStyle flatStyle,
@@ -70,7 +70,7 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        public Design Get(DesignType type) {
+        public static Design Get(DesignType type) {
             switch (type) {
                 case DesignType.Dark:
                     _dark ??= new Design(DesignType.Dark);
@@ -90,12 +90,12 @@ namespace DOS2Randomizer.UI {
         public FlatButtonAppearance FlatButtonAppearance { get; }
     }
 
-    internal enum DesignType {
+    public enum DesignType {
         Dark,
         Light
     }
 
-    internal interface IChoosableDesign {
+    public interface IChoosableDesign {
         public DesignType Design { get; set; }
     }
 }
