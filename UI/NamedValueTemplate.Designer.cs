@@ -1,4 +1,6 @@
 ﻿
+using DOS2Randomizer.UI.Components;
+
 namespace DOS2Randomizer.UI {
     partial class NamedValueTemplate<T> {
         /// <summary> 
@@ -25,7 +27,7 @@ namespace DOS2Randomizer.UI {
         /// </summary>
         private void InitializeComponent() {
             this.layout = new System.Windows.Forms.TableLayoutPanel();
-            this.name = new System.Windows.Forms.Label();
+            this.name = new Label();
             this.layout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +71,6 @@ namespace DOS2Randomizer.UI {
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel layout;
-        private System.Windows.Forms.Label name;
+        private DOS2Randomizer.UI.Components.Label name;
     }
 }
