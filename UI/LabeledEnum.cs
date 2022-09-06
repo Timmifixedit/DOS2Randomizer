@@ -15,7 +15,7 @@ namespace DOS2Randomizer.UI {
     /// <typeparam name="TEnum"></typeparam>
     public class LabeledEnum<TEnum> : NamedValueTemplate<TEnum> {
 
-        private readonly ComboBox _comboBox;
+        private readonly Components.ComboBox _comboBox;
 
         public override TEnum Value {
             get => (TEnum) _comboBox.SelectedItem;
@@ -24,11 +24,8 @@ namespace DOS2Randomizer.UI {
 
 
         public LabeledEnum() {
-            _comboBox = new ComboBox {
-                Anchor = (AnchorStyles.Left | AnchorStyles.Right), DataSource = Enum.GetValues(typeof(TEnum)),
-                BackColor = SystemColors.ControlDarkDark,
-                FlatStyle = FlatStyle.Flat
-            };
+            _comboBox = new Components.ComboBox
+                { Anchor = (AnchorStyles.Left | AnchorStyles.Right), DataSource = Enum.GetValues(typeof(TEnum)) };
 
             LayoutPanel.Controls.Add(_comboBox, 1, 0);
             _comboBox.SelectedValueChanged += (sender, args) => HandleValueChanged();

@@ -15,7 +15,7 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     class LabeledSelection<T> : NamedValueTemplate<IEnumerable<T>> {
-        private readonly CheckedListBox _listBox;
+        private readonly Components.CheckedListBox _listBox;
         private IEnumerable<T>? _items;
         private string? _displayMember;
 
@@ -80,11 +80,7 @@ namespace DOS2Randomizer.UI {
         }
 
         public LabeledSelection() {
-            _listBox = new CheckedListBox {
-                CheckOnClick = true, Dock = DockStyle.Fill,
-                BackColor = SystemColors.ControlDarkDark,
-                BorderStyle = BorderStyle.None,
-            };
+            _listBox = new Components.CheckedListBox { CheckOnClick = true, Dock = DockStyle.Fill };
             _listBox.ItemCheck += (sender, args) => HandleCheck(args);
             LayoutPanel.Controls.Add(_listBox, 1, 0);
         }
