@@ -14,6 +14,14 @@ namespace DOS2Randomizer.UI {
 
         private readonly Components.TextBox _text;
 
+        public override DesignType Design {
+            get => base.Design;
+            set {
+                base.Design = value;
+                _text.Design = value;
+            }
+        }
+
         public override string Value {
             get => _text.Text;
             set => _text.Text = value;
