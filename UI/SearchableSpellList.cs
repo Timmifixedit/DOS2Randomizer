@@ -13,7 +13,8 @@ namespace DOS2Randomizer.UI {
     /// Spell list with additional search function
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public partial class SearchableSpellListBase<T> : UserControl, ISplittableControl, ISpellCollection<T> where T: IConstSpell{
+    public partial class SearchableSpellListBase<T> : UserControl, IChoosableDesign, ISplittableControl,
+        ISpellCollection<T> where T : IConstSpell {
         public SearchableSpellListBase() {
             InitializeComponent();
             spellList.OnImageClick = spell => OnImageClick?.Invoke(spell);
@@ -38,7 +39,15 @@ namespace DOS2Randomizer.UI {
         /// Event that is triggered when a spell in the list is selected
         /// </summary>
         public Action<T>? OnImageClick;
+
         public TableLayoutPanel LayoutPanel => layout;
+        public DesignType Design {
+            get => spellList.Design;
+            set {
+                spellList.Design = value;
+                label.Design = value;
+            }
+        }
     }
 
     public class SearchableSpellList : SearchableSpellListBase<Spell> {}

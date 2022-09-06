@@ -13,14 +13,17 @@ namespace DOS2Randomizer.UI {
     /// User control that displays a list of spells
     /// </summary>
     /// <typeparam name="T">type of spell</typeparam>
-    public partial class SpellListBase<T> : UserControl, ISpellCollection<T> where T: DataStructures.IConstSpell {
+    public partial class SpellListBase<T> : UserControl, IChoosableDesign, ISpellCollection<T>
+        where T : DataStructures.IConstSpell {
 
         private IEnumerable<T>? _spells;
+        private DesignType _designType = DesignType.Dark;
 
         /// <summary>
         /// Event that is triggered when a spell is selected
         /// </summary>
         public Action<T>? OnImageClick;
+
         private int? _lastIndex;
 
         public void SelectNext() {
@@ -42,7 +45,7 @@ namespace DOS2Randomizer.UI {
             set {
                 _spells = value;
                 RefreshImages();
-            } 
+            }
         }
 
         private void HandleSelect(int index) {
@@ -65,7 +68,7 @@ namespace DOS2Randomizer.UI {
             }
 
             var images = Spells.Select(spell => Image.FromFile(spell.ImagePath)).ToArray();
-            var imageList = new ImageList{ImageSize = images[0].Size};
+            var imageList = new ImageList { ImageSize = images[0].Size };
             imageList.Images.AddRange(images);
             layout.View = View.LargeIcon;
             layout.LargeImageList = imageList;
@@ -78,7 +81,8 @@ namespace DOS2Randomizer.UI {
                     }
                 }
 
-                var item = new ListViewItem(spell.Name, index) { ToolTipText = sb.ToString() };
+                var item = new ListViewItem(spell.Name, index)
+                    { ToolTipText = sb.ToString(), ForeColor = UI.Design.Get(Design).TextColor };
                 layout.Items.Add(item);
             }
 
@@ -86,7 +90,6 @@ namespace DOS2Randomizer.UI {
 
         public SpellListBase() {
             InitializeComponent();
-            layout.BackColor = SystemColors.ControlDarkDark;
             layout.ShowItemToolTips = true;
             layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
             layout.KeyUp += (_, args) => {
@@ -94,6 +97,16 @@ namespace DOS2Randomizer.UI {
                     HandleSelect(layout.SelectedIndices[0]);
                 }
             };
+        }
+
+        public DesignType Design {
+            get => _designType;
+            set {
+                _designType = value;
+                var design = UI.Design.Get(_designType);
+                layout.BackColor = design.ControlColor;
+                RefreshImages();
+            }
         }
     }
 
