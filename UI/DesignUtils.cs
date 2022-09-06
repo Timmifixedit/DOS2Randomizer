@@ -38,14 +38,6 @@ namespace DOS2Randomizer.UI {
     public class Design {
         private static Design? _dark;
         private static Design? _light;
-        private Design(Color backColor, Color controlColor, BorderStyle borderStyle, FlatStyle flatStyle,
-            FlatButtonAppearance flatButtonAppearance) {
-            BackColor = backColor;
-            ControlColor = controlColor;
-            BorderStyle = borderStyle;
-            FlatStyle = flatStyle;
-            FlatButtonAppearance = flatButtonAppearance;
-        }
 
         private Design(DesignType type) {
             switch (type) {
@@ -57,6 +49,8 @@ namespace DOS2Randomizer.UI {
                     FlatButtonAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
                     FlatStyle = FlatStyle.Flat;
                     BorderStyle = BorderStyle.None;
+                    TextColor = Color.White;
+                    EditBackColor = ControlColor;
                     break;
                 case DesignType.Light:
                     BackColor = SystemColors.Control;
@@ -64,6 +58,8 @@ namespace DOS2Randomizer.UI {
                     FlatButtonAppearance = new Button{UseVisualStyleBackColor = true}.FlatAppearance;
                     FlatStyle = FlatStyle.Standard;
                     BorderStyle = BorderStyle.Fixed3D;
+                    TextColor = Color.Black;
+                    EditBackColor = Color.White;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -85,6 +81,8 @@ namespace DOS2Randomizer.UI {
 
         public Color BackColor { get; }
         public Color ControlColor { get; }
+        public Color TextColor { get; }
+        public Color EditBackColor { get; }
         public BorderStyle BorderStyle { get; }
         public FlatStyle FlatStyle { get; }
         public FlatButtonAppearance FlatButtonAppearance { get; }
