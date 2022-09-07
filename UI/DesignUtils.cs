@@ -96,4 +96,21 @@ namespace DOS2Randomizer.UI {
     public interface IChoosableDesign {
         public DesignType Design { get; set; }
     }
+
+    public static class DesignHelper {
+
+        public static void ApplyDesign(DesignType designType, Control.ControlCollection controls) {
+            foreach (Control control in controls) {
+                ApplyDesign(designType, control);
+            }
+        }
+
+        public static void ApplyDesign(DesignType designType, Control control) {
+            if (control is IChoosableDesign design) {
+                design.Design = designType;
+            } else if (control is Panel panel) {
+                ApplyDesign(designType, panel.Controls);
+            }
+        }
+    }
 }
