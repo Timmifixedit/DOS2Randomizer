@@ -9,7 +9,7 @@ namespace DOS2Randomizer.UI.Components {
     public class BaseControl : UserControl, IChoosableDesign {
         private DesignType _design = DesignType.Dark;
 
-        public DesignType Design {
+        public virtual DesignType Design {
             get => _design;
             set {
                 _design = value;

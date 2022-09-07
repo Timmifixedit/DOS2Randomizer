@@ -1,4 +1,6 @@
-﻿namespace DOS2Randomizer.UI {
+﻿using DOS2Randomizer.UI.Components;
+
+namespace DOS2Randomizer.UI {
     partial class Menu {
         /// <summary>
         ///  Required designer variable.
@@ -24,10 +26,10 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
-            this.LoadConfig = new System.Windows.Forms.Button();
+            this.LoadConfig = new DOS2Randomizer.UI.Components.Button();
             this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.CreateConfig = new System.Windows.Forms.Button();
-            this.spellConfigurator = new System.Windows.Forms.Button();
+            this.CreateConfig = new DOS2Randomizer.UI.Components.Button();
+            this.spellConfigurator = new DOS2Randomizer.UI.Components.Button();
             this.centerLayout = new System.Windows.Forms.TableLayoutPanel();
             this.layoutPanel.SuspendLayout();
             this.centerLayout.SuspendLayout();
@@ -37,9 +39,11 @@
             // 
             this.LoadConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LoadConfig.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.LoadConfig.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.LoadConfig.FlatAppearance.BorderSize = 0;
             this.LoadConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.LoadConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoadConfig.ForeColor = System.Drawing.Color.White;
             this.LoadConfig.Location = new System.Drawing.Point(3, 11);
             this.LoadConfig.Name = "LoadConfig";
             this.LoadConfig.Size = new System.Drawing.Size(628, 40);
@@ -69,9 +73,11 @@
             // 
             this.CreateConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CreateConfig.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.CreateConfig.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.CreateConfig.FlatAppearance.BorderSize = 0;
             this.CreateConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.CreateConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CreateConfig.ForeColor = System.Drawing.Color.White;
             this.CreateConfig.Location = new System.Drawing.Point(3, 73);
             this.CreateConfig.Name = "CreateConfig";
             this.CreateConfig.Size = new System.Drawing.Size(628, 40);
@@ -84,9 +90,11 @@
             // 
             this.spellConfigurator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.spellConfigurator.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.spellConfigurator.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.spellConfigurator.FlatAppearance.BorderSize = 0;
             this.spellConfigurator.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.spellConfigurator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.spellConfigurator.ForeColor = System.Drawing.Color.White;
             this.spellConfigurator.Location = new System.Drawing.Point(3, 135);
             this.spellConfigurator.Name = "spellConfigurator";
             this.spellConfigurator.Size = new System.Drawing.Size(628, 40);
@@ -117,7 +125,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.centerLayout);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -131,11 +138,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button LoadConfig;
+        private DOS2Randomizer.UI.Components.Button LoadConfig;
         private System.Windows.Forms.TableLayoutPanel layoutPanel;
-        private System.Windows.Forms.Button CreateConfig;
+        private DOS2Randomizer.UI.Components.Button CreateConfig;
         private System.Windows.Forms.TableLayoutPanel centerLayout;
-        private System.Windows.Forms.Button spellConfigurator;
+        private DOS2Randomizer.UI.Components.Button spellConfigurator;
     }
 }
 

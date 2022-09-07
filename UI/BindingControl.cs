@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
     public delegate void ValueChangedEvent<in T>(T value);
@@ -10,7 +11,7 @@ namespace DOS2Randomizer.UI {
     /// Base class for user control elements that manage a value
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BindingControl<T> : UserControl {
+    public abstract class BindingControl<T> : BaseControl {
         public ValueChangedEvent<T>? OnValueChanged;
 
         /// <summary>

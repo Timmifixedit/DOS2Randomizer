@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
 
@@ -13,7 +14,7 @@ namespace DOS2Randomizer.UI {
     /// User control that displays a list of spells
     /// </summary>
     /// <typeparam name="T">type of spell</typeparam>
-    public partial class SpellListBase<T> : UserControl, IChoosableDesign, ISpellCollection<T>
+    public partial class SpellListBase<T> : BaseControl, ISpellCollection<T>
         where T : DataStructures.IConstSpell {
 
         private IEnumerable<T>? _spells;
@@ -99,12 +100,13 @@ namespace DOS2Randomizer.UI {
             };
         }
 
-        public DesignType Design {
+        public override DesignType Design {
             get => _designType;
             set {
                 _designType = value;
                 var design = UI.Design.Get(_designType);
                 layout.BackColor = design.ControlColor;
+                layout.BorderStyle = design.BorderStyle;
                 RefreshImages();
             }
         }

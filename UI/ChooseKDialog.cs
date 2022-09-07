@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
     /// <summary>
     /// Dialog that requires the user to choose K spells from a randomly generated selection
     /// </summary>
-    public partial class ChooseKDialog : Form {
+    public partial class ChooseKDialog : BaseWindow {
         #region Hax
 
         // Hax to disable close button. Stolen from https://stackoverflow.com/questions/7301825/how-to-hide-only-the-close-x-button/7301828#7301828
@@ -95,7 +96,6 @@ namespace DOS2Randomizer.UI {
             DisableSpellTransfer();
             for (int delay = initDelay; delay < maxDelay; delay = (int)(delay * delayFactor)) {
                 source.Spells = _spellChooser.DrawSpells();
-                Refresh();
                 await Task.Delay(delay);
             }
 

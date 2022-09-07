@@ -2,10 +2,11 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DOS2Randomizer.UI.Components;
 using Function = System.Func<double, double, double>;
 
 namespace DOS2Randomizer.UI {
-    public partial class PdfVisualizer : UserControl {
+    public partial class PdfVisualizer : BaseControl {
         private Function _func;
         private double _importance = 1;
         private const double ImportanceBarFactor = 1000;

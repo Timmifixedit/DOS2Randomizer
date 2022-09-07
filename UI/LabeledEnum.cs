@@ -17,14 +17,6 @@ namespace DOS2Randomizer.UI {
 
         private readonly Components.ComboBox _comboBox;
 
-        public override DesignType Design {
-            get => base.Design;
-            set {
-                base.Design = value;
-                _comboBox.Design = value;
-            }
-        }
-
         public override TEnum Value {
             get => (TEnum) _comboBox.SelectedItem;
             set => _comboBox.SelectedItem = value;

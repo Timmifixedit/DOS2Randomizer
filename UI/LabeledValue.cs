@@ -16,14 +16,6 @@ namespace DOS2Randomizer.UI {
 
         private readonly IntegerField _val;
 
-        public override DesignType Design {
-            get => base.Design;
-            set {
-                base.Design = value;
-                _val.Design = value;
-            }
-        }
-
         public override int Value {
             get => Convert.ToInt32(_val.Value);
             set => _val.Value = value;
@@ -34,7 +26,7 @@ namespace DOS2Randomizer.UI {
             set => _val.Maximum = value;
         }
 
-        public int Min{
+        public int Min {
             get => Convert.ToInt32(_val.Minimum);
             set => _val.Minimum = value;
         }

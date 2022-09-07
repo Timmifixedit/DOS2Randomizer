@@ -6,6 +6,7 @@ using DOS2Randomizer.DataStructures;
 using System.Linq;
 using System.Text;
 using DOS2Randomizer.Logic;
+using DOS2Randomizer.UI.Components;
 using Attribute = DOS2Randomizer.DataStructures.Attribute;
 
 namespace DOS2Randomizer.UI {
@@ -13,7 +14,7 @@ namespace DOS2Randomizer.UI {
     /// <summary>
     /// User control that manages a player
     /// </summary>
-    public partial class PlayerPanel : UserControl {
+    public partial class PlayerPanel : BaseControl {
 
         #region fields
 

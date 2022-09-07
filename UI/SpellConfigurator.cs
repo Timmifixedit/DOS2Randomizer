@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 using DOS2Randomizer.Util;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -17,7 +18,7 @@ namespace DOS2Randomizer.UI {
     /// <summary>
     /// Form that is used to create and configure spells
     /// </summary>
-    public partial class SpellConfigurator : Form {
+    public partial class SpellConfigurator : BaseWindow {
         private Spell[]? _spells;
         private readonly SaveManager _saveManager;
 

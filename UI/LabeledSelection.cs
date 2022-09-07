@@ -19,14 +19,6 @@ namespace DOS2Randomizer.UI {
         private IEnumerable<T>? _items;
         private string? _displayMember;
 
-        public override DesignType Design {
-            get => base.Design;
-            set {
-                base.Design = value;
-                _listBox.Design = value;
-            }
-        }
-
         [AllowNull]
         public override IEnumerable<T> Value {
             get => _listBox.CheckedItems.Cast<T>().ToArray();

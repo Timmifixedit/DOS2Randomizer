@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
@@ -9,7 +8,7 @@ namespace DOS2Randomizer.UI {
     /// <summary>
     /// Main menu
     /// </summary>
-    public partial class Menu : Form {
+    public partial class Menu : BaseWindow {
         public Menu() {
             InitializeComponent();
         }
@@ -31,13 +30,5 @@ namespace DOS2Randomizer.UI {
                 window.Activate();
             }
         }
-
-        #region Title bar hax
-
-        protected override void OnHandleCreated(EventArgs e) {
-            DarkModeHax.UseImmersiveDarkMode(Handle, true);
-        }
-
-        #endregion
     }
 }

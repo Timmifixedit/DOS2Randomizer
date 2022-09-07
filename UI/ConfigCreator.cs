@@ -5,13 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
     /// <summary>
     /// Form used to create or adapt MatchConfigurations
     /// </summary>
-    public partial class ConfigCreator : Form {
+    public partial class ConfigCreator : BaseWindow {
         #region Fields
 
         private MatchConfig _matchConfig;
