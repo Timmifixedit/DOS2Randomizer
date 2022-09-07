@@ -254,7 +254,7 @@ namespace DOS2Randomizer.UI {
             this.levelSpecific.Location = new System.Drawing.Point(4, 24);
             this.levelSpecific.Name = "levelSpecific";
             this.levelSpecific.Padding = new System.Windows.Forms.Padding(3);
-            this.levelSpecific.Size = new System.Drawing.Size(192, 72);
+            this.levelSpecific.Size = new System.Drawing.Size(803, 440);
             this.levelSpecific.TabIndex = 1;
             this.levelSpecific.Text = "Level Specific";
             // 
@@ -263,7 +263,7 @@ namespace DOS2Randomizer.UI {
             this.levelSpecificTable.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.levelSpecificTable.Location = new System.Drawing.Point(3, 3);
             this.levelSpecificTable.Name = "levelSpecificTable";
-            this.levelSpecificTable.Size = new System.Drawing.Size(460, 416);
+            this.levelSpecificTable.Size = new System.Drawing.Size(420, 416);
             this.levelSpecificTable.TabIndex = 0;
             // 
             // spells
