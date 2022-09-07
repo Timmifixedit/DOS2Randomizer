@@ -50,14 +50,14 @@ namespace DOS2Randomizer.UI {
                     FlatStyle = FlatStyle.Flat;
                     BorderStyle = BorderStyle.None;
                     TextColor = Color.White;
-                    EditBackColor = ControlColor;
+                    EditBackColor = Color.FromArgb(16, 16, 16);
                     break;
                 case DesignType.Light:
                     BackColor = SystemColors.Control;
                     ControlColor = SystemColors.ControlLight;
                     FlatButtonAppearance = new Button{UseVisualStyleBackColor = true}.FlatAppearance;
                     FlatStyle = FlatStyle.Standard;
-                    BorderStyle = BorderStyle.Fixed3D;
+                    BorderStyle = BorderStyle.FixedSingle;
                     TextColor = Color.Black;
                     EditBackColor = Color.White;
                     break;

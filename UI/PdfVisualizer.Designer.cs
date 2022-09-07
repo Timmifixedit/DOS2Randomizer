@@ -1,4 +1,6 @@
-﻿namespace DOS2Randomizer.UI {
+﻿using DOS2Randomizer.UI.Components;
+
+namespace DOS2Randomizer.UI {
     partial class PdfVisualizer {
         /// <summary> 
         /// Required designer variable.
@@ -23,7 +25,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.plotCanvas = new ScottPlot.FormsPlot();
+            this.plotCanvas = new Plotter();
             this.importanceBar = new System.Windows.Forms.TrackBar();
             this.layout = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.importanceBar)).BeginInit();
@@ -79,7 +81,7 @@
 
         #endregion
 
-        private ScottPlot.FormsPlot plotCanvas;
+        private DOS2Randomizer.UI.Components.Plotter plotCanvas;
         private System.Windows.Forms.TrackBar importanceBar;
         private System.Windows.Forms.TableLayoutPanel layout;
     }
