@@ -44,9 +44,10 @@ namespace DOS2Randomizer.UI {
                 case DesignType.Dark:
                     BackColor = Color.FromArgb(32, 32, 32);
                     ControlColor = SystemColors.ControlDarkDark;
+                    SelectedColor = Color.FromArgb(205, 98, 0);
                     FlatButtonAppearance = new Button().FlatAppearance;
                     FlatButtonAppearance.BorderSize = 0;
-                    FlatButtonAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 0);
+                    FlatButtonAppearance.MouseOverBackColor = SelectedColor;
                     FlatStyle = FlatStyle.Flat;
                     BorderStyle = BorderStyle.None;
                     TextColor = Color.White;
@@ -54,6 +55,7 @@ namespace DOS2Randomizer.UI {
                     break;
                 case DesignType.Light:
                     BackColor = SystemColors.Control;
+                    SelectedColor = SystemColors.Highlight;
                     ControlColor = SystemColors.ControlLight;
                     FlatButtonAppearance = new Button{UseVisualStyleBackColor = true}.FlatAppearance;
                     FlatStyle = FlatStyle.Standard;
@@ -83,6 +85,7 @@ namespace DOS2Randomizer.UI {
         public Color ControlColor { get; }
         public Color TextColor { get; }
         public Color EditBackColor { get; }
+        public Color SelectedColor { get; }
         public BorderStyle BorderStyle { get; }
         public FlatStyle FlatStyle { get; }
         public FlatButtonAppearance FlatButtonAppearance { get; }
