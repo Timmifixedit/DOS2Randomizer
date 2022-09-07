@@ -16,6 +16,7 @@ namespace DOS2Randomizer.UI.Components {
                 var design = UI.Design.Get(_design);
                 BackColor = design.EditBackColor;
                 ForeColor = design.TextColor;
+                BorderStyle = design.BorderStyle;
             }
         }
     }
