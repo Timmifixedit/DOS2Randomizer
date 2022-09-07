@@ -79,14 +79,14 @@ namespace DOS2Randomizer.UI {
 
         public void DisableSpellTransfer() {
             reroll.Enabled = false;
-            source.Enabled = false;
-            selection.Enabled = false;
+            source.ClickEnabled = false;
+            selection.ClickEnabled = false;
         }
 
         private void EnableSpellTransfer() {
             reroll.Enabled = true;
-            source.Enabled = true;
-            selection.Enabled = true;
+            source.ClickEnabled = true;
+            selection.ClickEnabled = true;
         }
 
         private async void RollDice() {

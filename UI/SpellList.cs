@@ -27,20 +27,6 @@ namespace DOS2Randomizer.UI {
 
         private int? _lastIndex;
 
-        public void SelectNext() {
-            if (_lastIndex.HasValue && _lastIndex.Value < layout.Items.Count - 1) {
-                layout.Items[_lastIndex.Value + 1].Selected = true;
-                HandleSelect(_lastIndex.Value + 1);
-            }
-        }
-
-        public void SelectPrevious() {
-            if (_lastIndex.HasValue && _lastIndex.Value > 0) {
-                layout.Items[_lastIndex.Value - 1].Selected = true;
-                HandleSelect(_lastIndex.Value - 1);
-            }
-        }
-
         public IEnumerable<T>? Spells {
             get => _spells;
             set {
@@ -49,11 +35,12 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        private void HandleSelect(int index) {
-            if (Spells is null) {
+        private void HandleSelect() {
+            if (!ClickEnabled || Spells is null || layout.SelectedIndices.Count == 0) {
                 return;
             }
 
+            int index = layout.SelectedIndices[0];
             if (_lastIndex.HasValue && _lastIndex.Value < Spells.Count() && _lastIndex.Value < layout.Items.Count) {
                 layout.Items[_lastIndex.Value].Text = Spells.ElementAt(_lastIndex.Value).Name;
             }
@@ -92,10 +79,10 @@ namespace DOS2Randomizer.UI {
         public SpellListBase() {
             InitializeComponent();
             layout.ShowItemToolTips = true;
-            layout.Click += (_, _) => HandleSelect(layout.SelectedIndices[0]);
+            layout.Click += (_, _) => HandleSelect();
             layout.KeyUp += (_, args) => {
                 if (args.KeyCode is Keys.Left or Keys.Right && layout.SelectedIndices.Count != 0) {
-                    HandleSelect(layout.SelectedIndices[0]);
+                    HandleSelect();
                 }
             };
         }
@@ -110,6 +97,8 @@ namespace DOS2Randomizer.UI {
                 RefreshImages();
             }
         }
+
+        public bool ClickEnabled { get; set; } = true;
     }
 
     public class SpellList : SpellListBase<DataStructures.Spell> {}
