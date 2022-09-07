@@ -31,5 +31,13 @@ namespace DOS2Randomizer.UI {
             dataGridView.Columns[2].HeaderCell.Value = "New Rerolls";
             dataGridView.Columns[3].HeaderCell.Value = "New Shuffles";
         }
+
+        public override DesignType Design {
+            get => base.Design;
+            set {
+                base.Design = value;
+                dataGridView.Columns[0].DefaultCellStyle.BackColor = UI.Design.Get(value).BackColor;
+            }
+        }
     }
 }
