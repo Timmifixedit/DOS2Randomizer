@@ -15,7 +15,7 @@ namespace DOS2Randomizer.UI.Components {
         private Color _borderColor;
 
         public ComboBox() {
-            //DrawMode = DrawMode.OwnerDrawFixed;
+            DrawMode = DrawMode.OwnerDrawFixed;
         }
 
         public Color ButtonHighlightColor => UI.Design.Get(Design).SelectedColor;
@@ -27,7 +27,10 @@ namespace DOS2Randomizer.UI.Components {
             var state = selected ? e.State ^ DrawItemState.Selected : e.State;
             var eventArg = new DrawItemEventArgs(e.Graphics, e.Font, e.Bounds, e.Index,
                 state, e.ForeColor, selectColor);
-            base.OnDrawItem(e);
+            eventArg.DrawBackground();
+            using var textBrush = new SolidBrush(ForeColor);
+            eventArg.Graphics.DrawString(Items[eventArg.Index].ToString(), Font, textBrush, eventArg.Bounds.X,
+                eventArg.Bounds.Y);
         }
 
         public Color BorderColor {
@@ -60,15 +63,14 @@ namespace DOS2Randomizer.UI.Components {
         // stolen from https://stackoverflow.com/questions/65976232/how-to-change-the-combobox-dropdown-button-color/65976649#65976649
         protected override void WndProc(ref Message m) {
             if (m.Msg == DrawUtils.WM_PAINT && DropDownStyle != ComboBoxStyle.Simple) {
-                var dropDownButtonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
                 var outerBorder = new Rectangle(ClientRectangle.Location,
                     new Size(ClientRectangle.Width - 1, ClientRectangle.Height - 1));
                 var innerBorder = new Rectangle(outerBorder.X + 1, outerBorder.Y + 1,
-                    outerBorder.Width - dropDownButtonWidth - 2, outerBorder.Height - 2);
+                    outerBorder.Width - _buttonWidth- 2, outerBorder.Height - 2);
                 var innerInnerBorder = new Rectangle(innerBorder.X + 1, innerBorder.Y + 1,
                     innerBorder.Width - 2, innerBorder.Height - 2);
                 var dropDownRect = new Rectangle(innerBorder.Right + 1, innerBorder.Y,
-                    dropDownButtonWidth, innerBorder.Height + 1);
+                    _buttonWidth, innerBorder.Height + 1);
                 if (RightToLeft == RightToLeft.Yes) {
                     innerBorder.X = ClientRectangle.Width - innerBorder.Right;
                     innerInnerBorder.X = ClientRectangle.Width - innerInnerBorder.Right;
