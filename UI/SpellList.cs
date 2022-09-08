@@ -69,8 +69,9 @@ namespace DOS2Randomizer.UI {
                     }
                 }
 
+                var design = UI.Design.Get(Design);
                 var item = new ListViewItem(spell.Name, index)
-                    { ToolTipText = sb.ToString(), ForeColor = UI.Design.Get(Design).TextColor };
+                    { ToolTipText = sb.ToString(), ForeColor = design.TextColor, BackColor = layout.BackColor };
                 layout.Items.Add(item);
             }
 
