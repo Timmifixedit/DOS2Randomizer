@@ -16,7 +16,7 @@ namespace DOS2Randomizer.UI.Components {
                 var design = UI.Design.Get(value);
                 DefaultCellStyle.BackColor = design.EditBackColor;
                 DefaultCellStyle.ForeColor = design.TextColor;
-                DefaultCellStyle.SelectionBackColor = design.FlatButtonAppearance.MouseOverBackColor;
+                DefaultCellStyle.SelectionBackColor = design.SelectedColor;
                 ColumnHeadersDefaultCellStyle.BackColor = design.ControlColor;
                 ColumnHeadersDefaultCellStyle.ForeColor = design.TextColor;
                 EnableHeadersVisualStyles = false;
