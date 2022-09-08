@@ -8,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
 
     /// <summary>
     /// Dialog for choosing spells from a collection
     /// </summary>
-    public partial class SpellChooseDialog : Form {
+    public partial class SpellChooseDialog : BaseWindow {
 
         /// <summary>
         /// Event that is triggered when the selection is confirmed

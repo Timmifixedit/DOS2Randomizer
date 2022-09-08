@@ -12,7 +12,7 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     public partial class LabeledString : NamedValueTemplate<string> {
 
-        private readonly TextBox _text;
+        private readonly Components.TextBox _text;
 
         public override string Value {
             get => _text.Text;
@@ -21,7 +21,7 @@ namespace DOS2Randomizer.UI {
 
         public LabeledString() {
             InitializeComponent();
-            _text = new TextBox {Anchor = (AnchorStyles.Left | AnchorStyles.Right)};
+            _text = new Components.TextBox {Anchor = (AnchorStyles.Left | AnchorStyles.Right)};
             LayoutPanel.Controls.Add(_text, 1, 0);
             _text.TextChanged += (_, _) => HandleValueChanged();
             Height = Math.Max(Height, _text.Height);

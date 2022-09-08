@@ -20,6 +20,7 @@ namespace DOS2Randomizer.Logic {
         private readonly IMatchProperties _matchConfig;
         private readonly IConstPlayer _player;
         private readonly int _numSpellsToGenerate;
+        private readonly Random _rng;
         public const double LevelFactor = 1;
         public const double AttributeFactor = 2.5 * LevelFactor; // One level point is worth roughly <value> AttributePoints
         public const double SkillPointFactor = 0.8 * LevelFactor; // One level point is worth roughly <value> AttributePoints
@@ -28,6 +29,7 @@ namespace DOS2Randomizer.Logic {
         #endregion
 
         public SpellChooser(IMatchProperties matchConfig, IConstPlayer player) {
+            _rng = new Random();
             _matchConfig = matchConfig;
             _numSpellsToGenerate = _matchConfig.N;
             _player = player;
@@ -213,9 +215,8 @@ namespace DOS2Randomizer.Logic {
             var cdf = GenerateCdf(spellPdf);
             var numToGenerate = Math.Min(allPossibleSpells.Length, _numSpellsToGenerate);
             var ret = new IConstSpell[numToGenerate];
-            var rng = new Random();
             for (int i = 0; i < numToGenerate; ++i) {
-                var rn = rng.NextDouble();
+                var rn = _rng.NextDouble();
                 ret[i] = cdf.First(tuple => tuple.Item1 >= rn).Item2;
                 spellPdf.Remove(ret[i]);
                 Normalize(spellPdf);
@@ -231,7 +232,6 @@ namespace DOS2Randomizer.Logic {
             var preSelection = allPossibleSpells.ChooseRandom(_player.NumMemSlots).ToList();
             int budget = _player.NumMemSlots;
             var selection = new List<IConstSpell>();
-            var rng = new Random();
             while (preSelection.Count > 0 && preSelection.Last().MemorySlots <= budget) {
                 var newSpell = preSelection.Last();
                 preSelection.RemoveAt(preSelection.Count - 1);
@@ -243,7 +243,7 @@ namespace DOS2Randomizer.Logic {
                             spell.MemorySlots <= budget - newSpell.MemorySlots)
                         .ToArray();
                     if (possibleFixes.Any()) {
-                        var depFix = DrawOne(possibleFixes, rng);
+                        var depFix = DrawOne(possibleFixes, _rng);
                         preSelection.Remove(depFix);
                         budget -= depFix.MemorySlots;
                         selection.Add(depFix);

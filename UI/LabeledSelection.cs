@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -14,11 +15,10 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     class LabeledSelection<T> : NamedValueTemplate<IEnumerable<T>> {
-        private readonly CheckedListBox _listBox;
+        private readonly Components.CheckedListBox _listBox;
         private IEnumerable<T>? _items;
         private string? _displayMember;
 
-                
         [AllowNull]
         public override IEnumerable<T> Value {
             get => _listBox.CheckedItems.Cast<T>().ToArray();
@@ -79,7 +79,7 @@ namespace DOS2Randomizer.UI {
         }
 
         public LabeledSelection() {
-            _listBox = new CheckedListBox {CheckOnClick = true, Dock = DockStyle.Fill};
+            _listBox = new Components.CheckedListBox { CheckOnClick = true, Dock = DockStyle.Fill };
             _listBox.ItemCheck += (sender, args) => HandleCheck(args);
             LayoutPanel.Controls.Add(_listBox, 1, 0);
         }

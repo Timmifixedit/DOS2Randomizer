@@ -8,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
 
     /// <summary>
     /// User control used to configure a spell
     /// </summary>
-    public partial class SpellDesignPanel : UserControl {
+    public partial class SpellDesignPanel : BaseControl {
         private Spell? _spell;
         private Spell[]? _allSpells;
         public SpellDesignPanel() {

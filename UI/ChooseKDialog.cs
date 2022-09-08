@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
     /// <summary>
     /// Dialog that requires the user to choose K spells from a randomly generated selection
     /// </summary>
-    public partial class ChooseKDialog : Form {
+    public partial class ChooseKDialog : BaseWindow {
         #region Hax
 
         // Hax to disable close button. Stolen from https://stackoverflow.com/questions/7301825/how-to-hide-only-the-close-x-button/7301828#7301828
@@ -31,7 +28,7 @@ namespace DOS2Randomizer.UI {
         #region fields
 
         public Action<IEnumerable<IConstSpell>, int>? OnConfirm;
-        private int _numToChoose;
+        private readonly int _numToChoose;
         private int _numLeftToChoose;
         private int _numRerolls;
         private readonly Logic.SpellChooser _spellChooser;
@@ -67,8 +64,9 @@ namespace DOS2Randomizer.UI {
             _numToChoose = Math.Min(numSpellsToChoose, source.Spells.Count());
             NumLeft = _numToChoose;
             NumRerolls = numRerolls;
+            Shown += (_, _) => RollDice();
             source.OnImageClick = spell => {
-                if (selection.Spells is null || selection.Spells.Count() < numSpellsToChoose) {
+                if (selection.Spells is null || selection.Spells.Count() < _numToChoose) {
                     --NumLeft;
                     SpellChooseDialog.MoveSpellTo(spell, source, selection);
                 }
@@ -79,18 +77,44 @@ namespace DOS2Randomizer.UI {
             };
         }
 
+        public void DisableSpellTransfer() {
+            reroll.Enabled = false;
+            source.ClickEnabled = false;
+            selection.ClickEnabled = false;
+        }
+
+        private void EnableSpellTransfer() {
+            reroll.Enabled = true;
+            source.ClickEnabled = true;
+            selection.ClickEnabled = true;
+        }
+
+        private async void RollDice() {
+            const int maxDelay = 300;
+            const int initDelay = 30;
+            const double delayFactor = 1.1;
+            DisableSpellTransfer();
+            for (int delay = initDelay; delay < maxDelay; delay = (int)(delay * delayFactor)) {
+                source.Spells = _spellChooser.DrawSpells();
+                await Task.Delay(delay);
+            }
+
+            EnableSpellTransfer();
+        }
+
         #region event handlers
         private void confirm_Click(object sender, EventArgs e) {
             OnConfirm?.Invoke(selection.Spells ?? Array.Empty<Spell>(), NumRerolls);
             this.Close();
         }
 
+
         private void reroll_Click(object sender, EventArgs e) {
             if (NumRerolls > 0) {
                 --NumRerolls;
                 reroll.Enabled = NumRerolls > 0;
-                source.Spells = _spellChooser.DrawSpells();
                 selection.Spells = null;
+                RollDice();
                 NumLeft = _numToChoose;
             }
         }

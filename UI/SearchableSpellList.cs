@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
 
@@ -13,7 +14,8 @@ namespace DOS2Randomizer.UI {
     /// Spell list with additional search function
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public partial class SearchableSpellListBase<T> : UserControl, ISplittableControl, ISpellCollection<T> where T: IConstSpell{
+    public partial class SearchableSpellListBase<T> : BaseControl, ISplittableControl,
+        ISpellCollection<T> where T : IConstSpell {
         public SearchableSpellListBase() {
             InitializeComponent();
             spellList.OnImageClick = spell => OnImageClick?.Invoke(spell);
@@ -38,6 +40,7 @@ namespace DOS2Randomizer.UI {
         /// Event that is triggered when a spell in the list is selected
         /// </summary>
         public Action<T>? OnImageClick;
+
         public TableLayoutPanel LayoutPanel => layout;
     }
 

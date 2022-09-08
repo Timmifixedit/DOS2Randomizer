@@ -28,7 +28,7 @@ namespace DOS2Randomizer.UI {
             this.search = new DOS2Randomizer.UI.SpellSearchBase<T>();
             this.spellList = new DOS2Randomizer.UI.SpellListBase<T>();
             this.labelSearchLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.label = new System.Windows.Forms.Label();
+            this.label = new DOS2Randomizer.UI.Components.Label();
             this.layout.SuspendLayout();
             this.labelSearchLayout.SuspendLayout();
             this.SuspendLayout();
@@ -117,6 +117,6 @@ namespace DOS2Randomizer.UI {
         private SpellSearchBase<T> search;
         private SpellListBase<T> spellList;
         private System.Windows.Forms.TableLayoutPanel labelSearchLayout;
-        private System.Windows.Forms.Label label;
+        private DOS2Randomizer.UI.Components.Label label;
     }
 }

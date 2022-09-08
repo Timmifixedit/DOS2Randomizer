@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
 
@@ -13,7 +14,7 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     public partial class LabeledValue : NamedValueTemplate<int> {
 
-        private readonly NumericUpDown _val;
+        private readonly IntegerField _val;
 
         public override int Value {
             get => Convert.ToInt32(_val.Value);
@@ -25,14 +26,16 @@ namespace DOS2Randomizer.UI {
             set => _val.Maximum = value;
         }
 
-        public int Min{
+        public int Min {
             get => Convert.ToInt32(_val.Minimum);
             set => _val.Minimum = value;
         }
 
         public LabeledValue() {
             InitializeComponent();
-            _val = new NumericUpDown{Anchor = AnchorStyles.Left}; 
+            _val = new IntegerField {
+                Anchor = AnchorStyles.Left,
+            }; 
             LayoutPanel.Controls.Add(_val, 1, 0);
             _val.ValueChanged += (_, _) => HandleValueChanged();
             Height = Math.Max(Height, _val.Height);

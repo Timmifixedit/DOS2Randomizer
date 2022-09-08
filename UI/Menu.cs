@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
@@ -8,7 +8,7 @@ namespace DOS2Randomizer.UI {
     /// <summary>
     /// Main menu
     /// </summary>
-    public partial class Menu : Form {
+    public partial class Menu : BaseWindow {
         public Menu() {
             InitializeComponent();
         }

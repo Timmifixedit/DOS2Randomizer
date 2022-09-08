@@ -1,4 +1,6 @@
 ﻿
+using DOS2Randomizer.UI.Components;
+
 namespace DOS2Randomizer.UI {
     partial class MatchWindow {
         /// <summary>
@@ -28,8 +30,8 @@ namespace DOS2Randomizer.UI {
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.playersLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.topLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.save = new System.Windows.Forms.Button();
-            this.addPlayer = new System.Windows.Forms.Button();
+            this.save = new DOS2Randomizer.UI.Components.Button();
+            this.addPlayer = new DOS2Randomizer.UI.Components.Button();
             this.mainLayout.SuspendLayout();
             this.topLayout.SuspendLayout();
             this.SuspendLayout();
@@ -70,22 +72,34 @@ namespace DOS2Randomizer.UI {
             // 
             // save
             // 
+            this.save.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.save.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.save.FlatAppearance.BorderSize = 0;
+            this.save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.save.ForeColor = System.Drawing.Color.White;
             this.save.Location = new System.Drawing.Point(3, 3);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 0;
             this.save.Text = "Save as";
-            this.save.UseVisualStyleBackColor = true;
+            this.save.UseVisualStyleBackColor = false;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // addPlayer
             // 
+            this.addPlayer.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.addPlayer.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.addPlayer.FlatAppearance.BorderSize = 0;
+            this.addPlayer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.addPlayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addPlayer.ForeColor = System.Drawing.Color.White;
             this.addPlayer.Location = new System.Drawing.Point(84, 3);
             this.addPlayer.Name = "addPlayer";
             this.addPlayer.Size = new System.Drawing.Size(75, 23);
             this.addPlayer.TabIndex = 1;
             this.addPlayer.Text = "Add Player";
-            this.addPlayer.UseVisualStyleBackColor = true;
+            this.addPlayer.UseVisualStyleBackColor = false;
             this.addPlayer.Click += new System.EventHandler(this.addPlayer_Click);
             // 
             // MatchWindow
@@ -110,7 +124,7 @@ namespace DOS2Randomizer.UI {
         private System.Windows.Forms.TableLayoutPanel mainLayout;
         private System.Windows.Forms.FlowLayoutPanel playersLayout;
         private System.Windows.Forms.FlowLayoutPanel topLayout;
-        private System.Windows.Forms.Button save;
-        private System.Windows.Forms.Button addPlayer;
+        private DOS2Randomizer.UI.Components.Button save;
+        private DOS2Randomizer.UI.Components.Button addPlayer;
     }
 }

@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
+using DOS2Randomizer.UI.Components;
 
 namespace DOS2Randomizer.UI {
 
     /// <summary>
     /// User control that provides a table for designing level specific settings
     /// </summary>
-    public partial class LevelSpecificTable : UserControl {
+    public partial class LevelSpecificTable : BaseControl {
         private OnLevelUp[] _levelEvents = null!;
         public OnLevelUp[] LevelEvents {
             get => _levelEvents;
@@ -29,6 +30,14 @@ namespace DOS2Randomizer.UI {
             dataGridView.Columns[1].HeaderCell.Value = "New Spells";
             dataGridView.Columns[2].HeaderCell.Value = "New Rerolls";
             dataGridView.Columns[3].HeaderCell.Value = "New Shuffles";
+        }
+
+        public override DesignType Design {
+            get => base.Design;
+            set {
+                base.Design = value;
+                dataGridView.Columns[0].DefaultCellStyle.BackColor = UI.Design.Get(value).BackColor;
+            }
         }
     }
 }

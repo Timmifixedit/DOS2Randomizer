@@ -1,4 +1,6 @@
 ﻿
+using DOS2Randomizer.UI.Components;
+
 namespace DOS2Randomizer.UI {
     partial class SpellConfigurator {
         /// <summary>
@@ -25,17 +27,17 @@ namespace DOS2Randomizer.UI {
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpellConfigurator));
-            this.import = new System.Windows.Forms.Button();
-            this.save = new System.Windows.Forms.Button();
+            this.import = new DOS2Randomizer.UI.Components.Button();
+            this.save = new DOS2Randomizer.UI.Components.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.create = new System.Windows.Forms.Button();
+            this.create = new DOS2Randomizer.UI.Components.Button();
             this.searchLayout = new System.Windows.Forms.TableLayoutPanel();
             this.searchDeleteLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.remove = new System.Windows.Forms.Button();
+            this.remove = new DOS2Randomizer.UI.Components.Button();
             this.search = new DOS2Randomizer.UI.SpellSearch();
             this.spellList = new DOS2Randomizer.UI.SpellList();
-            this.add = new System.Windows.Forms.Button();
+            this.add = new DOS2Randomizer.UI.Components.Button();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.spellDesignPanel = new DOS2Randomizer.UI.SpellDesignPanel();
             this.tableLayoutPanel1.SuspendLayout();
@@ -48,23 +50,35 @@ namespace DOS2Randomizer.UI {
             // import
             // 
             this.import.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.import.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.import.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.import.FlatAppearance.BorderSize = 0;
+            this.import.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.import.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.import.ForeColor = System.Drawing.Color.White;
             this.import.Location = new System.Drawing.Point(77, 50);
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(75, 23);
             this.import.TabIndex = 0;
             this.import.Text = "Import";
-            this.import.UseVisualStyleBackColor = true;
+            this.import.UseVisualStyleBackColor = false;
             this.import.Click += new System.EventHandler(this.import_Click);
             // 
             // save
             // 
             this.save.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.save.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.save.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.save.FlatAppearance.BorderSize = 0;
+            this.save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.save.ForeColor = System.Drawing.Color.White;
             this.save.Location = new System.Drawing.Point(77, 91);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 3;
             this.save.Text = "Save as";
-            this.save.UseVisualStyleBackColor = true;
+            this.save.UseVisualStyleBackColor = false;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // tableLayoutPanel1
@@ -103,12 +117,18 @@ namespace DOS2Randomizer.UI {
             // create
             // 
             this.create.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.create.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.create.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.create.FlatAppearance.BorderSize = 0;
+            this.create.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.create.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.create.ForeColor = System.Drawing.Color.White;
             this.create.Location = new System.Drawing.Point(77, 9);
             this.create.Name = "create";
             this.create.Size = new System.Drawing.Size(75, 23);
             this.create.TabIndex = 4;
             this.create.Text = "Create";
-            this.create.UseVisualStyleBackColor = true;
+            this.create.UseVisualStyleBackColor = false;
             this.create.Click += new System.EventHandler(this.create_Click);
             // 
             // searchLayout
@@ -147,12 +167,18 @@ namespace DOS2Randomizer.UI {
             // remove
             // 
             this.remove.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.remove.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.remove.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.remove.FlatAppearance.BorderSize = 0;
+            this.remove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.remove.ForeColor = System.Drawing.Color.White;
             this.remove.Location = new System.Drawing.Point(55, 9);
             this.remove.Name = "remove";
             this.remove.Size = new System.Drawing.Size(108, 23);
             this.remove.TabIndex = 0;
             this.remove.Text = "Remove Spell";
-            this.remove.UseVisualStyleBackColor = true;
+            this.remove.UseVisualStyleBackColor = false;
             this.remove.Click += new System.EventHandler(this.remove_Click);
             // 
             // search
@@ -160,6 +186,7 @@ namespace DOS2Randomizer.UI {
             this.search.AllSpells = null;
             this.search.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.search.CaseSensitive = false;
+            this.search.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.search.Label = "Search";
             this.search.Location = new System.Drawing.Point(3, 90);
             this.search.ManagedCollection = this.spellList;
@@ -172,6 +199,7 @@ namespace DOS2Randomizer.UI {
             // spellList
             // 
             this.spellList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellList.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.spellList.Location = new System.Drawing.Point(175, 3);
             this.spellList.Name = "spellList";
             this.spellList.Size = new System.Drawing.Size(449, 127);
@@ -181,12 +209,18 @@ namespace DOS2Randomizer.UI {
             // add
             // 
             this.add.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.add.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.add.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.add.FlatAppearance.BorderSize = 0;
+            this.add.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.add.ForeColor = System.Drawing.Color.White;
             this.add.Location = new System.Drawing.Point(55, 51);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(108, 23);
             this.add.TabIndex = 8;
             this.add.Text = "Add Spell";
-            this.add.UseVisualStyleBackColor = true;
+            this.add.UseVisualStyleBackColor = false;
             this.add.Click += new System.EventHandler(this.add_Click);
             // 
             // mainLayout
@@ -207,6 +241,7 @@ namespace DOS2Randomizer.UI {
             // spellDesignPanel
             // 
             this.spellDesignPanel.AllSpells = null;
+            this.spellDesignPanel.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.spellDesignPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spellDesignPanel.Location = new System.Drawing.Point(3, 148);
             this.spellDesignPanel.Name = "spellDesignPanel";
@@ -236,18 +271,18 @@ namespace DOS2Randomizer.UI {
 
         #endregion
 
-        private System.Windows.Forms.Button import;
-        private System.Windows.Forms.Button save;
+        private DOS2Randomizer.UI.Components.Button import;
+        private DOS2Randomizer.UI.Components.Button save;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel mainLayout;
         private SpellDesignPanel spellDesignPanel;
-        private System.Windows.Forms.Button create;
+        private DOS2Randomizer.UI.Components.Button create;
         private System.Windows.Forms.TableLayoutPanel searchLayout;
         private System.Windows.Forms.TableLayoutPanel searchDeleteLayout;
         private SpellList spellList;
-        private System.Windows.Forms.Button remove;
+        private DOS2Randomizer.UI.Components.Button remove;
         private SpellSearch search;
-        private System.Windows.Forms.Button add;
+        private DOS2Randomizer.UI.Components.Button add;
     }
 }

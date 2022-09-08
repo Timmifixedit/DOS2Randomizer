@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 using DOS2Randomizer.Logic;
+using DOS2Randomizer.UI.Components;
 using DOS2Randomizer.Util;
 
 namespace DOS2Randomizer.UI {
@@ -17,7 +18,7 @@ namespace DOS2Randomizer.UI {
     /// <summary>
     /// Form that is used during a match
     /// </summary>
-    public partial class MatchWindow : Form {
+    public partial class MatchWindow : BaseWindow {
         private readonly MatchConfigGuard _config;
         private readonly SaveManager _saveManager;
 
@@ -42,6 +43,9 @@ namespace DOS2Randomizer.UI {
         public MatchWindow(MatchConfigGuard config, string? savePath = null) {
             _config = config;
             InitializeComponent();
+            designButton.Location = designButton.Location with {
+                X = designButton.Location.X - 20, Y = designButton.Location.Y - 20
+            };
             _saveManager = new SaveManager(savePath);
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
