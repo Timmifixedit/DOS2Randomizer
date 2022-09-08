@@ -14,6 +14,18 @@ namespace DOS2Randomizer.UI.Components {
         [DllImport("user32.dll", ExactSpelling = true, EntryPoint = "BeginPaint", CharSet = CharSet.Auto)]
         public static extern IntPtr IntBeginPaint(IntPtr hWnd, [In, Out] ref Paintstruct lpPaint);
 
+        [DllImport("user32.dll", ExactSpelling = true, EntryPoint = "EndPaint", CharSet = CharSet.Auto)]
+        public static extern bool IntEndPaint(IntPtr hWnd, ref Paintstruct lpPaint);
+
+        [DllImport("gdi32.dll")]
+        public static extern int SelectClipRgn(IntPtr hDC, IntPtr hRgn);
+
+        [DllImport("gdi32.dll")]
+        internal static extern bool DeleteObject(IntPtr hObject);
+
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateRectRgn(int x1, int y1, int x2, int y2);
+
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct Paintstruct {
             public readonly IntPtr hdc;
@@ -33,9 +45,6 @@ namespace DOS2Randomizer.UI.Components {
             private readonly int reserved7;
             private readonly int reserved8;
         }
-
-        [DllImport("user32.dll", ExactSpelling = true, EntryPoint = "EndPaint", CharSet = CharSet.Auto)]
-        public static extern bool IntEndPaint(IntPtr hWnd, ref Paintstruct lpPaint);
 
         public static Point[] GetDownArrow(Rectangle r) {
             var middle = new Point(r.Left + r.Width / 2, r.Top + r.Height / 2);

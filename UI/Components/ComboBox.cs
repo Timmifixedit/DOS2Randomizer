@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,52 +38,6 @@ namespace DOS2Randomizer.UI.Components {
             }
         }
 
-        protected override void WndProc(ref Message m) {
-            if (m.Msg == DrawUtils.WM_PAINT && DropDownStyle != ComboBoxStyle.Simple) {
-                const int borderSize = 2;
-                // draws background and text
-                base.WndProc(ref m);
-                var s = new DrawUtils.Paintstruct();
-                DrawUtils.IntBeginPaint(Handle, ref s);
-                using var g = Graphics.FromHwnd(Handle);
-                var d = FlatStyle == FlatStyle.Popup ? 1 : 0;
-                var dropButtonRect =
-                    new Rectangle(Width - _buttonWidth - d, 0, _buttonWidth, Height);
-                // Draw border
-                using (var borderPen = new Pen(BorderColor, borderSize)) {
-                    g.DrawRectangle(borderPen, ClientRectangle);
-                    g.DrawLine(borderPen, Width - _buttonWidth - d, 0, Width - _buttonWidth - d, Height);
-                }
-
-                var pointer = PointToClient(MousePosition);
-                if (Enabled) {
-                    // Draw button background
-                    using var highlightBrush =
-                        new SolidBrush(ClientRectangle.Contains(pointer) ? ButtonHighlightColor : BackColor);
-                    g.FillRectangle(highlightBrush, dropButtonRect);
-                }
-
-                using (var borderPen = new Pen(BorderColor, 2)) {
-                    g.DrawRectangle(borderPen, dropButtonRect);
-                }
-
-                // draw arrow button
-                using var arrowBrush = new SolidBrush(ForeColor);
-                g.FillPolygon(arrowBrush, DrawUtils.GetDownArrow(dropButtonRect));
-                m.Result = (IntPtr)1;
-                DrawUtils.IntEndPaint(Handle, ref s);
-            } else if (m.Msg == DrawUtils.WM_ERASEBKGND) {
-                using (var g = Graphics.FromHdcInternal(m.WParam)) {
-                    using var backBrush = new SolidBrush(BackColor);
-                    g.FillRectangle(backBrush, ClientRectangle);
-                }
-
-                m.Result = (IntPtr)1;
-            } else {
-                base.WndProc(ref m);
-            }
-        }
-
         public DesignType Design {
             get => _design;
             set {
@@ -91,6 +47,84 @@ namespace DOS2Randomizer.UI.Components {
                 ForeColor = design.TextColor;
                 FlatStyle = design.FlatStyle;
                 BorderColor = design.BorderStyle == BorderStyle.FixedSingle ? design.ControlColor : design.BackColor;
+            }
+        }
+
+        public Color ButtonColor {
+            get {
+                var pointer = PointToClient(MousePosition);
+                return ClientRectangle.Contains(pointer) ? ButtonHighlightColor : BackColor;
+            }
+        }
+
+        // stolen from https://stackoverflow.com/questions/65976232/how-to-change-the-combobox-dropdown-button-color/65976649#65976649
+        protected override void WndProc(ref Message m) {
+            if (m.Msg == DrawUtils.WM_PAINT && DropDownStyle != ComboBoxStyle.Simple) {
+                var dropDownButtonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
+                var outerBorder = new Rectangle(ClientRectangle.Location,
+                    new Size(ClientRectangle.Width - 1, ClientRectangle.Height - 1));
+                var innerBorder = new Rectangle(outerBorder.X + 1, outerBorder.Y + 1,
+                    outerBorder.Width - dropDownButtonWidth - 2, outerBorder.Height - 2);
+                var innerInnerBorder = new Rectangle(innerBorder.X + 1, innerBorder.Y + 1,
+                    innerBorder.Width - 2, innerBorder.Height - 2);
+                var dropDownRect = new Rectangle(innerBorder.Right + 1, innerBorder.Y,
+                    dropDownButtonWidth, innerBorder.Height + 1);
+                if (RightToLeft == RightToLeft.Yes) {
+                    innerBorder.X = ClientRectangle.Width - innerBorder.Right;
+                    innerInnerBorder.X = ClientRectangle.Width - innerInnerBorder.Right;
+                    dropDownRect.X = ClientRectangle.Width - dropDownRect.Right;
+                    dropDownRect.Width += 1;
+                }
+
+                var innerBorderColor = Enabled ? BackColor : SystemColors.Control;
+                var outerBorderColor = Enabled ? BorderColor : SystemColors.ControlDark;
+                var buttonColor = Enabled ? ButtonColor : SystemColors.Control;
+                var arrow = DrawUtils.GetDownArrow(dropDownRect);
+                var ps = new DrawUtils.Paintstruct();
+                bool shouldEndPaint = false;
+                IntPtr dc;
+                if (m.WParam == IntPtr.Zero) {
+                    dc = DrawUtils.IntBeginPaint(Handle, ref ps);
+                    m.WParam = dc;
+                    shouldEndPaint = true;
+                } else {
+                    dc = m.WParam;
+                }
+
+                var rgn = DrawUtils.CreateRectRgn(innerInnerBorder.Left, innerInnerBorder.Top,
+                    innerInnerBorder.Right, innerInnerBorder.Bottom);
+                DrawUtils.SelectClipRgn(dc, rgn);
+                DefWndProc(ref m);
+                DrawUtils.DeleteObject(rgn);
+                rgn = DrawUtils.CreateRectRgn(ClientRectangle.Left, ClientRectangle.Top,
+                    ClientRectangle.Right, ClientRectangle.Bottom);
+                DrawUtils.SelectClipRgn(dc, rgn);
+                using (var g = Graphics.FromHdc(dc)) {
+                    using (var b = new SolidBrush(buttonColor)) {
+                        g.FillRectangle(b, dropDownRect);
+                    }
+
+                    using (var b = new SolidBrush(ForeColor)) {
+                        g.FillPolygon(b, arrow);
+                    }
+
+                    using (var p = new Pen(innerBorderColor)) {
+                        g.DrawRectangle(p, innerBorder);
+                        g.DrawRectangle(p, innerInnerBorder);
+                    }
+
+                    using (var p = new Pen(outerBorderColor)) {
+                        g.DrawRectangle(p, outerBorder);
+                    }
+                }
+
+                if (shouldEndPaint) {
+                    DrawUtils.IntEndPaint(Handle, ref ps);
+                }
+
+                DrawUtils.DeleteObject(rgn);
+            } else {
+                base.WndProc(ref m);
             }
         }
     }
