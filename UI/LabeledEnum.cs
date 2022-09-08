@@ -24,8 +24,10 @@ namespace DOS2Randomizer.UI {
 
 
         public LabeledEnum() {
-            _comboBox = new Components.ComboBox
-                { Anchor = (AnchorStyles.Left | AnchorStyles.Right), DataSource = Enum.GetValues(typeof(TEnum)) };
+            _comboBox = new Components.ComboBox {
+                Anchor = (AnchorStyles.Left | AnchorStyles.Right), DataSource = Enum.GetValues(typeof(TEnum)),
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
 
             LayoutPanel.Controls.Add(_comboBox, 1, 0);
             _comboBox.SelectedValueChanged += (sender, args) => HandleValueChanged();

@@ -61,31 +61,6 @@ namespace DOS2Randomizer.UI.Components {
 
         // Stolen from https://github.com/r-aghaei/FlatNumericUpDownExample/tree/master/FlatNumericUpDownExample
         private class UpDownButtonRenderer : NativeWindow {
-            [DllImport("user32.dll", ExactSpelling = true, EntryPoint = "BeginPaint", CharSet = CharSet.Auto)]
-            private static extern IntPtr IntBeginPaint(IntPtr hWnd, [In, Out] ref Paintstruct lpPaint);
-
-            [StructLayout(LayoutKind.Sequential)]
-            private readonly struct Paintstruct {
-                public readonly IntPtr hdc;
-                private readonly bool fErase;
-                private readonly int rcPaint_left;
-                private readonly int rcPaint_top;
-                private readonly int rcPaint_right;
-                private readonly int rcPaint_bottom;
-                private readonly bool fRestore;
-                private readonly bool fIncUpdate;
-                private readonly int reserved1;
-                private readonly int reserved2;
-                private readonly int reserved3;
-                private readonly int reserved4;
-                private readonly int reserved5;
-                private readonly int reserved6;
-                private readonly int reserved7;
-                private readonly int reserved8;
-            }
-
-            [DllImport("user32.dll", ExactSpelling = true, EntryPoint = "EndPaint", CharSet = CharSet.Auto)]
-            private static extern bool IntEndPaint(IntPtr hWnd, ref Paintstruct lpPaint);
 
             readonly Control _updown;
 
@@ -98,30 +73,12 @@ namespace DOS2Randomizer.UI.Components {
                 }
             }
 
-            private static Point[] GetDownArrow(Rectangle r) {
-                var middle = new Point(r.Left + r.Width / 2, r.Top + r.Height / 2);
-                return new[] {
-                    new(middle.X - 3, middle.Y - 2),
-                    new(middle.X + 4, middle.Y - 2),
-                    middle with { Y = middle.Y + 2 }
-                };
-            }
-
-            private static Point[] GetUpArrow(Rectangle r) {
-                var middle = new Point(r.Left + r.Width / 2, r.Top + r.Height / 2);
-                return new[] {
-                    new(middle.X - 4, middle.Y + 2),
-                    new(middle.X + 4, middle.Y + 2),
-                    middle with { Y = middle.Y - 3 }
-                };
-            }
-
             protected override void WndProc(ref Message m) {
                 var iField = (IntegerField)_updown.Parent;
-                if (m.Msg == 0xF /*WM_PAINT*/ &&
+                if (m.Msg == DrawUtils.WM_PAINT &&
                     iField.FlatStyle == FlatStyle.Flat) {
-                    var s = new Paintstruct();
-                    IntBeginPaint(_updown.Handle, ref s);
+                    var s = new DrawUtils.Paintstruct();
+                    DrawUtils.IntBeginPaint(_updown.Handle, ref s);
                     using (var g = Graphics.FromHdc(s.hdc)) {
                         var enabled = _updown.Enabled;
                         using (var backBrush = new SolidBrush(enabled
@@ -153,14 +110,14 @@ namespace DOS2Randomizer.UI.Components {
 
                         // Draw Arrows
                         using var brush = new SolidBrush(iField.ForeColor);
-                        g.FillPolygon(brush, GetUpArrow(r1));
-                        g.FillPolygon(brush, GetDownArrow(r2));
+                        g.FillPolygon(brush, DrawUtils.GetUpArrow(r1));
+                        g.FillPolygon(brush, DrawUtils.GetDownArrow(r2));
                     }
 
                     m.Result = (IntPtr)1;
                     base.WndProc(ref m);
-                    IntEndPaint(_updown.Handle, ref s);
-                } else if (m.Msg == 0x0014 /*WM_ERASEBKGND*/) {
+                    DrawUtils.IntEndPaint(_updown.Handle, ref s);
+                } else if (m.Msg == DrawUtils.WM_ERASEBKGND) {
                     using (var g = Graphics.FromHdcInternal(m.WParam)) {
                         g.FillRectangle(Brushes.White, _updown.ClientRectangle);
                     }
