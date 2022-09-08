@@ -28,12 +28,21 @@ namespace DOS2Randomizer.UI.Components {
             BackColor = colors.BackColor;
             DarkModeHax.UseImmersiveDarkMode(Handle, type == DesignType.Dark);
             DesignHelper.ApplyDesign(type, Controls);
+            designButton.Text = type == DesignType.Dark ? "Light" : "Dark";
+        }
+
+        private void SwitchDesign() {
+            Design = Design == DesignType.Dark ? DesignType.Light : DesignType.Dark;
         }
 
         private void BaseWindow_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.D && e.Modifiers == Keys.Control) {
-                Design = Design == DesignType.Dark ? DesignType.Light : DesignType.Dark;
+                SwitchDesign();
             }
+        }
+
+        private void designButton_Click(object sender, EventArgs e) {
+            SwitchDesign();
         }
     }
 }

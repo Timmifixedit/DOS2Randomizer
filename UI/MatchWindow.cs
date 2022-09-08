@@ -43,6 +43,9 @@ namespace DOS2Randomizer.UI {
         public MatchWindow(MatchConfigGuard config, string? savePath = null) {
             _config = config;
             InitializeComponent();
+            designButton.Location = designButton.Location with {
+                X = designButton.Location.X - 20, Y = designButton.Location.Y - 20
+            };
             _saveManager = new SaveManager(savePath);
             if (Players.Length >= MatchConfig.MaxNumPlayers) {
                 addPlayer.Enabled = false;
