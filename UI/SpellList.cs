@@ -93,7 +93,7 @@ namespace DOS2Randomizer.UI {
             set {
                 _designType = value;
                 var design = UI.Design.Get(_designType);
-                layout.BackColor = design.ControlColor;
+                layout.BackColor = design.EditBackColor;
                 layout.BorderStyle = design.BorderStyle;
                 RefreshImages();
             }
