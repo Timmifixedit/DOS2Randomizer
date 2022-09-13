@@ -35,15 +35,15 @@ namespace DOS2Randomizer.DataStructures {
         /// </summary>
         public enum School {
             Aero,
-            Hydro,
-            Pyro,
             Geo,
-            Scoundrel,
-            Warfare,
-            Poly,
             Huntsman,
+            Hydro,
             Necro,
+            Poly,
+            Pyro,
+            Scoundrel,
             Summoning,
+            Warfare,
             None
         }
 
