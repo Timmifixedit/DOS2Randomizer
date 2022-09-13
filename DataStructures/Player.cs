@@ -10,13 +10,13 @@ namespace DOS2Randomizer.DataStructures {
     /// </summary>
     public enum Attribute {
         Strength,
-        Int,
         Finesse,
+        Int,
         Con,
         Mem,
         Wit,
-        None,
-        Weapon
+        Weapon,
+        None
     }
 
     public interface IConstPlayer {
