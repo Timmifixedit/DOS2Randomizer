@@ -22,7 +22,7 @@ namespace DOS2Randomizer.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Misc {
+    public class Misc {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DOS2Randomizer.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DOS2Randomizer.Resources.Misc", typeof(Misc).Assembly);
@@ -51,7 +51,7 @@ namespace DOS2Randomizer.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace DOS2Randomizer.Resources {
         /// <summary>
         ///   Looks up a localized string similar to &lt;unknown&gt;.
         /// </summary>
-        internal static string DefaultSpellName {
+        public static string DefaultSpellName {
             get {
                 return ResourceManager.GetString("DefaultSpellName", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace DOS2Randomizer.Resources {
         /// <summary>
         ///   Looks up a localized string similar to image files (*png, *jpg, ...) | *.png;*jpg;*jpeg.
         /// </summary>
-        internal static string ImageFilter {
+        public static string ImageFilter {
             get {
                 return ResourceManager.GetString("ImageFilter", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace DOS2Randomizer.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .json.
         /// </summary>
-        internal static string JsonExtension {
+        public static string JsonExtension {
             get {
                 return ResourceManager.GetString("JsonExtension", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace DOS2Randomizer.Resources {
         /// <summary>
         ///   Looks up a localized string similar to json files (*.json) | *.json.
         /// </summary>
-        internal static string JsonFilter {
+        public static string JsonFilter {
             get {
                 return ResourceManager.GetString("JsonFilter", resourceCulture);
             }

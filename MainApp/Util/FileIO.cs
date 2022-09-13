@@ -13,7 +13,7 @@ namespace DOS2Randomizer.Util {
     /// <summary>
     /// static class used for (de-)serializing configs
     /// </summary>
-    static class FileIo {
+    public static class FileIo {
 
         /// <summary>
         /// Deserialize a config

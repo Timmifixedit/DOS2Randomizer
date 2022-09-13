@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using DOS2Randomizer.DataStructures;
 
 namespace DOS2Randomizer.Util {
-    internal static class ConfigUtils {
+    public static class ConfigUtils {
         public static void OverwritePlayerSpells(MatchConfig config, IEnumerable<Spell> spells) {
             var spellLookup =
                 spells.ToImmutableDictionary(spell => spell.Name, spell => (IConstSpell)spell);
