@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29920.165
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DOS2Randomizer", "DOS2Randomizer.csproj", "{58D3762E-01D5-4D80-9C12-47047F7075EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellAttributeSwap", "SpellAttributeSwap\SpellAttributeSwap.csproj", "{55167C7C-2B75-4C29-B12F-2D54BAAB2390}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DOS2Randomizer", "MainApp\DOS2Randomizer.csproj", "{9DECCC3A-1167-47EE-9252-1B50BB237B36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{58D3762E-01D5-4D80-9C12-47047F7075EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58D3762E-01D5-4D80-9C12-47047F7075EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58D3762E-01D5-4D80-9C12-47047F7075EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58D3762E-01D5-4D80-9C12-47047F7075EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55167C7C-2B75-4C29-B12F-2D54BAAB2390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55167C7C-2B75-4C29-B12F-2D54BAAB2390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55167C7C-2B75-4C29-B12F-2D54BAAB2390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55167C7C-2B75-4C29-B12F-2D54BAAB2390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DECCC3A-1167-47EE-9252-1B50BB237B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DECCC3A-1167-47EE-9252-1B50BB237B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DECCC3A-1167-47EE-9252-1B50BB237B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DECCC3A-1167-47EE-9252-1B50BB237B36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
