@@ -63,8 +63,9 @@ namespace DOS2Randomizer.UI {
             equippedSpellList.Spells = _player.CEquippedSpells;
             equippedSpellList.Label = String.Format(Resources.Messages.EquippedSpellsAndMem, _player.NumMemorySlotsUsed,
                 _player.NumMemSlots);
-            shuffle.Text = String.Format(Resources.Messages.Shuffle, NumShuffles);
-            shuffle.Enabled = NumShuffles > 0;
+            string numShuffleText = _matchConfig.UnlimitedShuffles ? "∞" : NumShuffles.ToString();
+            shuffle.Text = String.Format(Resources.Messages.Shuffle, numShuffleText);
+            shuffle.Enabled = _matchConfig.UnlimitedShuffles || NumShuffles > 0;
             dmgType.Value = _player.DmgType;
         }
         private void RefreshUi() {
@@ -235,7 +236,7 @@ namespace DOS2Randomizer.UI {
         }
 
         private void shuffle_Click(object sender, EventArgs e) {
-            if (NumShuffles <= 0) {
+            if (!_matchConfig.UnlimitedShuffles && NumShuffles <= 0) {
                 MessageBox.Show(Resources.Messages.NoShuffles);
                 return;
             }
@@ -245,7 +246,10 @@ namespace DOS2Randomizer.UI {
                 MessageBox.Show(String.Format(Resources.Messages.ShuffleNoEffect, _player.Name, _player.NumMemSlots,
                     requiredSlots));
             } else {
-                ++_player.NumShufflesExpended;
+                if (!_matchConfig.UnlimitedShuffles) {
+                    ++_player.NumShufflesExpended;
+                }
+
                 var chooser = new SpellChooser(_matchConfig, _player);
                 SetEquippedSpells(chooser.SelectEquippedSpells());
             }
