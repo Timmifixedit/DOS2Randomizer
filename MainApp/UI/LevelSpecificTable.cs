@@ -16,6 +16,7 @@ namespace DOS2Randomizer.UI {
     /// </summary>
     public partial class LevelSpecificTable : BaseControl {
         private OnLevelUp[] _levelEvents = null!;
+        private bool _shufflesEnabled = true;
         public OnLevelUp[] LevelEvents {
             get => _levelEvents;
             set {
@@ -37,6 +38,20 @@ namespace DOS2Randomizer.UI {
             set {
                 base.Design = value;
                 dataGridView.Columns[0].DefaultCellStyle.BackColor = UI.Design.Get(value).BackColor;
+                ShufflesEnabled = ShufflesEnabled;
+            }
+        }
+
+        public bool ShufflesEnabled {
+            get => _shufflesEnabled;
+            set {
+                _shufflesEnabled = value;
+                dataGridView.Columns[3].ReadOnly = !_shufflesEnabled;
+                var design = UI.Design.Get(Design);
+                dataGridView.Columns[3].DefaultCellStyle.BackColor =
+                    _shufflesEnabled ? design.EditBackColor : design.DisabledBackColor;
+                dataGridView.Columns[3].DefaultCellStyle.ForeColor =
+                    _shufflesEnabled ? design.TextColor : design.DisabledTextColor;
             }
         }
     }
