@@ -35,6 +35,9 @@ namespace DOS2Randomizer.UI {
                 _levelImportanceVisualizer.Std = _matchConfig.SpellWeights.Level;
                 _attributeImportanceVisualizer.Std = _matchConfig.SpellWeights.Attribute;
                 _skillPointImportanceVisualizer.Std = _matchConfig.SpellWeights.SkillPoints;
+                unlimShuffles.DataBindings.Clear();
+                unlimShuffles.DataBindings.Add(nameof(unlimShuffles.Checked), _matchConfig,
+                    nameof(_matchConfig.UnlimitedShuffles), false, DataSourceUpdateMode.OnPropertyChanged);
             }
         }
 

@@ -39,6 +39,8 @@ namespace DOS2Randomizer.DataStructures {
         public ImmutableArray<IConstSpell> CSpells { get; }
 
         public ImportanceValues SpellWeights { get; }
+
+        public bool UnlimitedShuffles { get; }
     }
 
     /// <summary>
@@ -96,6 +98,8 @@ namespace DOS2Randomizer.DataStructures {
 
         public ImportanceValues SpellWeights { get; set; }
 
+        public bool UnlimitedShuffles { get; set; }
+
         /// <summary>
         /// Creates a MatchConfig with no players or spells
         /// </summary>
@@ -108,11 +112,12 @@ namespace DOS2Randomizer.DataStructures {
             SpellWeights =
                 new ImportanceValues(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity,
                     double.NegativeInfinity);
+            UnlimitedShuffles = false;
         }
 
         [JsonConstructor]
         public MatchConfig(string name, int maxNumMemSlots, int n, int k, ImmutableArray<OnLevelUp> levelSpecificEvents,
-            ImmutableArray<Spell> spells, ImmutableArray<Player> players, ImportanceValues? spellWeights) {
+            ImmutableArray<Spell> spells, ImmutableArray<Player> players, ImportanceValues? spellWeights, bool unlimitedShuffles) {
             if (name == null || levelSpecificEvents == null || spells == null || players == null) {
                 throw new ArgumentException("encountered null values in match config ctor");
             } 
@@ -125,6 +130,7 @@ namespace DOS2Randomizer.DataStructures {
             Spells = spells;
             SpellWeights = spellWeights ?? new ImportanceValues();
             Players = players.CastArray<IMutablePlayer>();
+            UnlimitedShuffles = unlimitedShuffles;
         }
 
         public bool Valid(out string? missingFiles) {

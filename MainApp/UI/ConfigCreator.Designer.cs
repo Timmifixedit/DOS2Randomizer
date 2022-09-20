@@ -41,6 +41,7 @@ namespace DOS2Randomizer.UI {
             this.memSlots = new DOS2Randomizer.UI.LabeledValue();
             this.pdfLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.levelSpecific = new System.Windows.Forms.TabPage();
+            this.unlimShuffles = new DOS2Randomizer.UI.Components.CheckBox();
             this.levelSpecificTable = new DOS2Randomizer.UI.LevelSpecificTable();
             this.spells = new System.Windows.Forms.TabPage();
             this.spellMainLayout = new System.Windows.Forms.TableLayoutPanel();
@@ -62,6 +63,12 @@ namespace DOS2Randomizer.UI {
             this.spellListLayout.SuspendLayout();
             this.spellSearchLayout.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // designButton
+            // 
+            this.designButton.FlatAppearance.BorderSize = 0;
+            this.designButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(98)))), ((int)(((byte)(0)))));
+            this.designButton.UseVisualStyleBackColor = false;
             // 
             // tabControl
             // 
@@ -152,7 +159,7 @@ namespace DOS2Randomizer.UI {
             this.saveButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.saveButton.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.saveButton.FlatAppearance.BorderSize = 0;
-            this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(98)))), ((int)(((byte)(0)))));
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.Color.White;
             this.saveButton.Location = new System.Drawing.Point(3, 3);
@@ -168,7 +175,7 @@ namespace DOS2Randomizer.UI {
             this.importMatchConfig.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.importMatchConfig.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.importMatchConfig.FlatAppearance.BorderSize = 0;
-            this.importMatchConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.importMatchConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(98)))), ((int)(((byte)(0)))));
             this.importMatchConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.importMatchConfig.ForeColor = System.Drawing.Color.White;
             this.importMatchConfig.Location = new System.Drawing.Point(3, 33);
@@ -250,6 +257,7 @@ namespace DOS2Randomizer.UI {
             // levelSpecific
             // 
             this.levelSpecific.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.levelSpecific.Controls.Add(this.unlimShuffles);
             this.levelSpecific.Controls.Add(this.levelSpecificTable);
             this.levelSpecific.Location = new System.Drawing.Point(4, 24);
             this.levelSpecific.Name = "levelSpecific";
@@ -257,6 +265,22 @@ namespace DOS2Randomizer.UI {
             this.levelSpecific.Size = new System.Drawing.Size(803, 440);
             this.levelSpecific.TabIndex = 1;
             this.levelSpecific.Text = "Level Specific";
+            // 
+            // unlimShuffles
+            // 
+            this.unlimShuffles.AutoSize = true;
+            this.unlimShuffles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.unlimShuffles.Design = DOS2Randomizer.UI.DesignType.Dark;
+            this.unlimShuffles.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(98)))), ((int)(((byte)(0)))));
+            this.unlimShuffles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(98)))), ((int)(((byte)(0)))));
+            this.unlimShuffles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.unlimShuffles.ForeColor = System.Drawing.Color.White;
+            this.unlimShuffles.Location = new System.Drawing.Point(429, 6);
+            this.unlimShuffles.Name = "unlimShuffles";
+            this.unlimShuffles.Size = new System.Drawing.Size(118, 19);
+            this.unlimShuffles.TabIndex = 1;
+            this.unlimShuffles.Text = "unlimited shuffles";
+            this.unlimShuffles.UseVisualStyleBackColor = false;
             // 
             // levelSpecificTable
             // 
@@ -272,7 +296,7 @@ namespace DOS2Randomizer.UI {
             this.spells.Controls.Add(this.spellMainLayout);
             this.spells.Location = new System.Drawing.Point(4, 24);
             this.spells.Name = "spells";
-            this.spells.Size = new System.Drawing.Size(803, 440);
+            this.spells.Size = new System.Drawing.Size(192, 72);
             this.spells.TabIndex = 2;
             this.spells.Text = "Spells";
             // 
@@ -288,7 +312,7 @@ namespace DOS2Randomizer.UI {
             this.spellMainLayout.RowCount = 2;
             this.spellMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.46445F));
             this.spellMainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.53555F));
-            this.spellMainLayout.Size = new System.Drawing.Size(803, 440);
+            this.spellMainLayout.Size = new System.Drawing.Size(192, 72);
             this.spellMainLayout.TabIndex = 2;
             // 
             // spellListLayout
@@ -303,16 +327,17 @@ namespace DOS2Randomizer.UI {
             this.spellListLayout.Name = "spellListLayout";
             this.spellListLayout.RowCount = 1;
             this.spellListLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.spellListLayout.Size = new System.Drawing.Size(797, 136);
+            this.spellListLayout.Size = new System.Drawing.Size(186, 17);
             this.spellListLayout.TabIndex = 0;
             // 
             // spellList
             // 
             this.spellList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.spellList.ClickEnabled = true;
             this.spellList.Design = DOS2Randomizer.UI.DesignType.Dark;
-            this.spellList.Location = new System.Drawing.Point(224, 3);
+            this.spellList.Location = new System.Drawing.Point(54, 3);
             this.spellList.Name = "spellList";
-            this.spellList.Size = new System.Drawing.Size(570, 130);
+            this.spellList.Size = new System.Drawing.Size(129, 11);
             this.spellList.Spells = null;
             this.spellList.TabIndex = 0;
             // 
@@ -328,7 +353,7 @@ namespace DOS2Randomizer.UI {
             this.spellSearchLayout.RowCount = 2;
             this.spellSearchLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.spellSearchLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.spellSearchLayout.Size = new System.Drawing.Size(215, 130);
+            this.spellSearchLayout.Size = new System.Drawing.Size(45, 11);
             this.spellSearchLayout.TabIndex = 1;
             // 
             // importSpells
@@ -337,12 +362,12 @@ namespace DOS2Randomizer.UI {
             this.importSpells.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.importSpells.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.importSpells.FlatAppearance.BorderSize = 0;
-            this.importSpells.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.importSpells.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(98)))), ((int)(((byte)(0)))));
             this.importSpells.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.importSpells.ForeColor = System.Drawing.Color.White;
-            this.importSpells.Location = new System.Drawing.Point(137, 21);
+            this.importSpells.Location = new System.Drawing.Point(3, 3);
             this.importSpells.Name = "importSpells";
-            this.importSpells.Size = new System.Drawing.Size(75, 23);
+            this.importSpells.Size = new System.Drawing.Size(39, 1);
             this.importSpells.TabIndex = 1;
             this.importSpells.Text = "Import";
             this.importSpells.UseVisualStyleBackColor = false;
@@ -355,10 +380,10 @@ namespace DOS2Randomizer.UI {
             this.spellSearch.CaseSensitive = false;
             this.spellSearch.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.spellSearch.Label = "Search";
-            this.spellSearch.Location = new System.Drawing.Point(3, 82);
+            this.spellSearch.Location = new System.Drawing.Point(3, 8);
             this.spellSearch.ManagedCollection = this.spellList;
             this.spellSearch.Name = "spellSearch";
-            this.spellSearch.Size = new System.Drawing.Size(209, 30);
+            this.spellSearch.Size = new System.Drawing.Size(39, 1);
             this.spellSearch.SplitPercentage = 30;
             this.spellSearch.TabIndex = 2;
             this.spellSearch.Value = "";
@@ -368,9 +393,9 @@ namespace DOS2Randomizer.UI {
             this.spellDesignPanel1.AllSpells = null;
             this.spellDesignPanel1.Design = DOS2Randomizer.UI.DesignType.Dark;
             this.spellDesignPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 145);
+            this.spellDesignPanel1.Location = new System.Drawing.Point(3, 26);
             this.spellDesignPanel1.Name = "spellDesignPanel1";
-            this.spellDesignPanel1.Size = new System.Drawing.Size(797, 292);
+            this.spellDesignPanel1.Size = new System.Drawing.Size(186, 43);
             this.spellDesignPanel1.Spell = null;
             this.spellDesignPanel1.TabIndex = 1;
             // 
@@ -381,10 +406,11 @@ namespace DOS2Randomizer.UI {
             this.ClientSize = new System.Drawing.Size(811, 468);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
             this.Name = "ConfigCreator";
             this.Text = "Create Match Config";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConfigCreator_KeyDown);
+            this.Controls.SetChildIndex(this.tabControl, 0);
+            this.Controls.SetChildIndex(this.designButton, 0);
             this.tabControl.ResumeLayout(false);
             this.general.ResumeLayout(false);
             this.generalLayout.ResumeLayout(false);
@@ -392,6 +418,7 @@ namespace DOS2Randomizer.UI {
             this.tableLayoutPanel1.ResumeLayout(false);
             this.nChooseKLayout.ResumeLayout(false);
             this.levelSpecific.ResumeLayout(false);
+            this.levelSpecific.PerformLayout();
             this.spells.ResumeLayout(false);
             this.spellMainLayout.ResumeLayout(false);
             this.spellListLayout.ResumeLayout(false);
@@ -425,5 +452,6 @@ namespace DOS2Randomizer.UI {
         private DOS2Randomizer.UI.Components.Button saveButton;
         private DOS2Randomizer.UI.Components.Button importMatchConfig;
         private System.Windows.Forms.FlowLayoutPanel pdfLayout;
+        private CheckBox unlimShuffles;
     }
 }
