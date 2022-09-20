@@ -129,7 +129,10 @@ namespace DOS2Randomizer.UI {
             }
         }
 
-        #endregion
+        private void unlimShuffles_CheckedChanged(object sender, EventArgs e) {
+            levelSpecificTable.ShufflesEnabled = !((Components.CheckBox)sender).Checked;
+        }
 
+        #endregion
     }
 }

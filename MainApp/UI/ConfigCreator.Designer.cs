@@ -281,6 +281,7 @@ namespace DOS2Randomizer.UI {
             this.unlimShuffles.TabIndex = 1;
             this.unlimShuffles.Text = "unlimited shuffles";
             this.unlimShuffles.UseVisualStyleBackColor = false;
+            this.unlimShuffles.CheckedChanged += new System.EventHandler(this.unlimShuffles_CheckedChanged);
             // 
             // levelSpecificTable
             // 

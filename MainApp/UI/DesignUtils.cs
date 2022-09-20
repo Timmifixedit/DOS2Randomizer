@@ -52,6 +52,8 @@ namespace DOS2Randomizer.UI {
                     BorderStyle = BorderStyle.None;
                     TextColor = Color.White;
                     EditBackColor = Color.FromArgb(16, 16, 16);
+                    DisabledBackColor = SystemColors.ControlDarkDark;
+                    DisabledTextColor = SystemColors.ControlDark;
                     break;
                 case DesignType.Light:
                     BackColor = SystemColors.Control;
@@ -62,6 +64,8 @@ namespace DOS2Randomizer.UI {
                     BorderStyle = BorderStyle.FixedSingle;
                     TextColor = Color.Black;
                     EditBackColor = Color.White;
+                    DisabledBackColor = SystemColors.Control;
+                    DisabledTextColor = SystemColors.ControlDark;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -89,6 +93,8 @@ namespace DOS2Randomizer.UI {
         public BorderStyle BorderStyle { get; }
         public FlatStyle FlatStyle { get; }
         public FlatButtonAppearance FlatButtonAppearance { get; }
+        public Color DisabledBackColor { get; }
+        public Color DisabledTextColor { get; }
     }
 
     public enum DesignType {
